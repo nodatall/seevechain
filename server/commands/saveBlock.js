@@ -5,9 +5,9 @@ module.exports = async function({ client, block }) {
     await client.query(
       `
         INSERT INTO
-          blocks (id, number, parent_id, timestamp, gas_used, signer)
+          blocks (id, number, parent_id, timestamp, gas_used, signer, number_of_transactions)
         values
-          ($1, $2, $3, $4, $5, $6)
+          ($1, $2, $3, $4, $5, $6, $7)
       `,
       [
         block.id,
@@ -16,6 +16,7 @@ module.exports = async function({ client, block }) {
         moment.unix(block.timestamp).toDate().toISOString(),
         block.gasUsed,
         block.signer,
+        block.transactions.length,
       ]
     )
   } catch(error) {

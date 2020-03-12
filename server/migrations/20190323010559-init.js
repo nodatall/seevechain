@@ -7,7 +7,8 @@ exports.up = db => {
         parent_id text NOT NULL,
         timestamp timestamp with time zone NOT NULL,
         gas_used integer NOT NULL,
-        signer text NOT NULL
+        signer text NOT NULL,
+        number_of_transactions integer
       );
 
       CREATE TABLE transactions (
