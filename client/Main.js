@@ -30,7 +30,7 @@ export default function Main() {
     getLatest()
     setInterval(() => {
       getLatest()
-    }, 7000)
+    }, 10000)
   }, [])
 
   function getLatest() {
