@@ -97,6 +97,6 @@ function setStatsOnIntervals(stats, setStats, transactions) {
         dailyClauses: stats.dailyClauses + clauses,
         dailyVTHOBurn:  stats.dailyVTHOBurn + vtho
       })
-    }, (interval * (index + 1)) + 100)
+    }, (interval * index) + 100)
   }
 }

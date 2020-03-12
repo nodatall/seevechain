@@ -23,7 +23,7 @@ const xyMemo = {}
 export default function Transactions({ transactions = [] }) {
   const interval = calculateInterval(transactions.length)
   return transactions.map((transaction, index) => {
-    const delay = (index + 1) * interval
+    const delay = index * interval
     return <Transaction transaction={transaction} delay={delay} key={transaction.id} />
   })
 }
