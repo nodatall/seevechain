@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+const app = require('../server/app')
+const { subscribeToVechainBlocks } = require('../server/lib/connex')
+const port = process.env.PORT
+const path = require('path')
+const childProcess = require('child_process')
+const logger = require('../server/lib/logger')
+
+app.listen(port, async () => {
+  console.log(`server started on port ${port}`)
+  await startVechainConnection()
+})
+
+async function startVechainConnection() {
+  try {
+    setInterval(() => {
+      childProcess.fork(path.join(__dirname, './getMissingBlocks'))
+    }, 20000)
+    await subscribeToVechainBlocks()
+  } catch(error) {
+    logger.error(`[startVechainConnection]: ${error.message}`)
+    setTimeout(async () => {
+      await startVechainConnection()
+    }, 500)
+  }
+}

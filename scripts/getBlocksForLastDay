@@ -1,0 +1,44 @@
+#!/usr/bin/env node
+
+const { Framework } = require('@vechain/connex-framework')
+const { Driver, SimpleNet } = require('@vechain/connex.driver-nodejs')
+const moment = require('moment')
+
+const { getBlock } = require('../server/lib/connex')
+const client = require('../server/database')
+
+;(async function getBlocksForLastDay() {
+  const driver = await Driver.connect(new SimpleNet('https://vethor-node.vechain.com/'))
+  const thor = new Framework(driver).thor
+
+  const oneDayAgo = moment()
+    .subtract((+process.env.TIME_DIFFERENCE + +moment().format('HH')) % 24, 'hours')
+    .subtract(+moment().format('mm'), 'minutes')
+    .toDate()
+
+  const oneDayAgoMinusAMinute = moment(oneDayAgo)
+    .subtract(5, 'minutes')
+    .toDate()
+
+  const recordsFromADayAgo = await client.any(
+    `
+      SELECT * FROM blocks WHERE timestamp BETWEEN $1 AND $2;
+    `,
+    [oneDayAgoMinusAMinute, oneDayAgo]
+  )
+  if (!recordsFromADayAgo.length) {
+    const oldestBlockNumber = await client.one(
+      `
+        SELECT number FROM blocks ORDER BY number LIMIT 1;
+      `
+    )
+    let blockNum = oldestBlockNumber.number - 1
+    while(true) {
+      console.log(`-:: getting block ${blockNum} ::-`)
+      const block = await getBlock(thor, blockNum--, client)
+      if (moment.unix(block.timestamp).toDate() < moment(oneDayAgoMinusAMinute).toDate()) break
+    }
+  }
+
+  process.exit(1)
+})()

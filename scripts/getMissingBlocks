@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+
+const { Framework } = require('@vechain/connex-framework')
+const { Driver, SimpleNet } = require('@vechain/connex.driver-nodejs')
+const moment = require('moment')
+
+const { getBlock } = require('../server/lib/connex')
+const client = require('../server/database')
+
+;(async function getBlocksForLastDay() {
+  const driver = await Driver.connect(new SimpleNet('https://vethor-node.vechain.com/'))
+  const thor = new Framework(driver).thor
+
+  const oneDayAgo = moment()
+    .subtract((+process.env.TIME_DIFFERENCE + +moment().format('HH')) % 24, 'hours')
+    .subtract(+moment().format('mm'), 'minutes')
+    .toDate()
+    .toISOString()
+
+  const oneDayAgoMinusAMinute = moment(oneDayAgo)
+    .subtract(1, 'minutes')
+    .toDate()
+    .toISOString()
+
+  const blockRecords = await client.any(
+    `
+      SELECT * FROM blocks WHERE blocks.timestamp > $1 ORDER BY number;
+    `,
+    [oneDayAgoMinusAMinute]
+  )
+  if (!blockRecords) process.exit(1)
+
+  const missingBlocks = []
+  blockRecords.forEach((record, index) => {
+    if (!blockRecords[index + 1]) return
+    const nextNumber = blockRecords[index + 1].number
+    let cur  = record.number + 1
+    if (cur === nextNumber) return
+    while (nextNumber > cur) {
+      missingBlocks.push(cur++)
+    }
+  })
+
+  if (!missingBlocks.length) {
+    process.exit(1)
+  }
+
+  for (const num of missingBlocks) {
+    console.log(`getting missing block -->`, num)
+    await getBlock(thor, num, client)
+  }
+  process.exit(1)
+})()
