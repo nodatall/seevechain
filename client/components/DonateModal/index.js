@@ -1,6 +1,8 @@
 import React from 'react'
+import { useRef } from 'preact/hooks'
 
 import qrCode from 'assets/donate_qr_code.png'
+import xIcon from 'assets/greyxicon.png'
 import Header from 'components/Header'
 import CopyButton from 'components/CopyButton'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
@@ -8,14 +10,19 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.sass'
 
 export default function DonateModal({ toggleModalVisibility, open }) {
+  const shroud = useRef(null)
+  function onShroudClick(event) {
+    if (shroud.current === event.target) toggleModalVisibility()
+  }
+
   let modal
   if (open) modal = <CSSTransition
     timeout={300}
     classNames="DonateModal-animation"
   >
-    <div className="DonateModal">
+    <div className="DonateModal" ref={shroud} onClick={onShroudClick}>
       <div className="DonateModal-window">
-        <div className="DonateModal-close" onClick={toggleModalVisibility}>x</div>
+        <img src={xIcon} className="DonateModal-close" onClick={toggleModalVisibility} />
         <Header size="md">Donate</Header>
         <div>
           Contributions will keep this site running and fund the development of additional awesome VeChain apps. Thank you!

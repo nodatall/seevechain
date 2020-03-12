@@ -66,7 +66,6 @@ export default function Main() {
   </div>
 
   return <Div100vh className="Main">
-    <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
     <Stars />
     <img className="Main-donate" src={donate} onClick={() => { toggleModalVisibility(!modalVisible) }} />
     <div className="Main-blockNumber">Block: {numberWithCommas(block.number)}</div>
@@ -75,6 +74,7 @@ export default function Main() {
     <Transactions transactions={transactionsBlock2} />
     <Transactions transactions={transactionsBlock3} />
     <Transactions transactions={transactionsBlock4} />
+    <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
   </Div100vh>
 }
 
