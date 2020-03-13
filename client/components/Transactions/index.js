@@ -109,12 +109,21 @@ function calculateCoordinates(size, transaction, bottomBarHeight, attempts = 0) 
   const xCoordinate = `${xPlusOrMinus}${x}`
   const yCoordinate = `${yPlusOrMinus}${y}`
 
-  if (attempts > 20) return {
+  if (attempts > 50) return {
     xCoordinate,
     yCoordinate,
   }
 
-  if (!validCoordinates(xCoordinate, yCoordinate)) {
+  const valid = attempts < 10
+    ? 100
+    : attempts < 20
+      ? 50
+      : attempts < 30
+        ? 25
+        : attempts < 40
+          ? 10
+          : 5
+  if (!validCoordinates(xCoordinate, yCoordinate, valid)) {
     return calculateCoordinates(size, transaction, bottomBarHeight, attempts + 1)
   }
 
@@ -126,10 +135,10 @@ function calculateCoordinates(size, transaction, bottomBarHeight, attempts = 0) 
   }
 }
 
-function validCoordinates(xCoordinate, yCoordinate) {
+function validCoordinates(xCoordinate, yCoordinate, valid = 50) {
   return Object.values(xyMemo).every(([x,y]) => {
-    return getDifference(x, xCoordinate) > 50
-      && getDifference(y, yCoordinate) > 50
+    return getDifference(x, xCoordinate) > valid
+      && getDifference(y, yCoordinate) > valid
   })
 }
 
