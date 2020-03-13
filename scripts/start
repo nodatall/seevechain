@@ -15,7 +15,7 @@ app.listen(port, async () => {
 async function startVechainConnection() {
   try {
     setInterval(() => {
-      childProcess.fork(path.join(__dirname, './getMissingBlocks'))
+      childProcess.fork(path.join(__dirname, './getMissingBlocksAndTransactions'))
     }, 20000)
     await subscribeToVechainBlocks()
   } catch(error) {

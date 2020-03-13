@@ -41,13 +41,25 @@ const client = require('../server/database')
     }
   })
 
-  if (!missingBlocks.length) {
-    process.exit(1)
-  }
-
   for (const num of missingBlocks) {
     console.log(`getting missing block -->`, num)
     await getBlock(thor, num, client)
   }
+
+  const blocksWithMissingTransactions = await client.query(
+    `
+      SELECT count(transactions.id) AS count, blocks.number_of_transactions, blocks.number
+      FROM transactions
+      JOIN blocks
+      ON transactions.block_number = blocks.number
+      GROUP BY blocks.number_of_transactions, blocks.number
+      HAVING count(transactions.id) < blocks.number_of_transactions;
+    `
+  )
+  for (const block of blocksWithMissingTransactions) {
+    console.log(`block ${block.number} missing transactions`)
+    await getBlock(thor, block.number, client)
+  }
+
   process.exit(1)
 })()

@@ -14,9 +14,9 @@ module.exports = async function(client) {
   const transactionsRecords = await client.query(
     `
       SELECT * FROM transactions
-      WHERE block_id = $1;
+      WHERE block_number = $1;
     `,
-    [blockRecord.id]
+    [blockRecord.number]
   )
 
   const now = moment()
@@ -35,7 +35,7 @@ module.exports = async function(client) {
         sum(transactions.clauses) AS dailyClauses
       FROM blocks
       JOIN transactions
-      ON blocks.id = transactions.block_id
+      ON blocks.number = transactions.block_number
       WHERE blocks.timestamp > $1;
     `,
     [before]
@@ -52,7 +52,7 @@ module.exports = async function(client) {
     },
     transactions: transactionsRecords.map(transaction => ({
       id: transaction.id,
-      blockId: transaction.block_id,
+      blockNumber: transaction.block_number,
       contract: transaction.contract,
       delegator: transaction.delegator,
       origin: transaction.origin,

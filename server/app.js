@@ -14,8 +14,7 @@ app.use(function(req, res, next) {
 require('./routes.js')(app)
 
 app.use(function (err, req, res, next) {
-  res.status(500)
-  res.render('error', { error: err })
+  res.status(500).json({ error: err.message })
 })
 
 module.exports = app

@@ -2,7 +2,7 @@ exports.up = db => {
   return db.runSql(
     `
       CREATE TABLE blocks (
-        id text UNIQUE,
+        id text,
         number integer NOT NULL UNIQUE,
         parent_id text NOT NULL,
         timestamp timestamp with time zone NOT NULL,
@@ -13,7 +13,7 @@ exports.up = db => {
 
       CREATE TABLE transactions (
         id text UNIQUE,
-        block_id text REFERENCES blocks(id) ON DELETE CASCADE,
+        block_number integer REFERENCES blocks(number) ON DELETE CASCADE,
         contract text,
         origin text,
         delegator text,
