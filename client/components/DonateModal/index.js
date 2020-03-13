@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRef } from 'preact/hooks'
+import { useRef, useEffect } from 'preact/hooks'
 
 import qrCode from 'assets/donate_qr_code.png'
 import xIcon from 'assets/greyxicon.png'
@@ -10,6 +10,13 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './index.sass'
 
 export default function DonateModal({ toggleModalVisibility, open }) {
+  useEffect(() => {
+    [qrCode, xIcon].forEach(imageSrc => {
+      const image = new Image()
+      image.src = imageSrc
+    })
+  }, [])
+
   const shroud = useRef(null)
   function onShroudClick(event) {
     if (shroud.current === event.target) toggleModalVisibility()
