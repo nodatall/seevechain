@@ -23,7 +23,7 @@ const xyMemo = {}
 export default function Transactions({ transactions = [] }) {
   const interval = calculateInterval(transactions.length)
   return transactions.map((transaction, index) => {
-    const delay = index * interval
+    const delay = (index + 1) * interval
     return <Transaction transaction={transaction} delay={delay} key={transaction.id} />
   })
 }
@@ -38,18 +38,17 @@ function Transaction({ transaction, delay }) {
   const colorIndex = getTransactionColorIndex(transaction.vthoBurn)
   defaultStyle.background = `radial-gradient(circle, ${LIGHT_RANGE[Math.floor(colorIndex)]} 0%, ${DARK_RANGE[Math.floor(colorIndex)]} 100%)`
 
-  const bottomBarHeight = (document.querySelector('.BottomBar') || {}).clientHeight || 0
-  const { xCoordinate, yCoordinate } = calculateCoordinates(size, transaction, bottomBarHeight)
-
-  const [style, setStyle] = useState({
-    ...defaultStyle,
-    transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(0)`,
-  })
+  const [style, setStyle] = useState()
 
   useEffect(() => {
+    const bottomBarHeight = (document.querySelector('.BottomBar') || {}).clientHeight || 0
+    const { xCoordinate, yCoordinate } = calculateCoordinates(size, transaction, bottomBarHeight)
+    setStyle({
+      ...defaultStyle,
+      transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(0)`,
+    })
+
     setTimeout(() => {
-
-
       setStyle({
         ...defaultStyle,
         transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(1)`,
@@ -72,6 +71,8 @@ function Transaction({ transaction, delay }) {
       }, 4500)
     }, delay)
   }, [])
+
+  if (!style) return
 
   const VTHOBurn = Math.round((transaction.vthoBurn) * 100) / 100
   const contract = KNOWN_ADDRESSES[transaction.contract]
@@ -108,13 +109,12 @@ function calculateCoordinates(size, transaction, bottomBarHeight, attempts = 0) 
   const xCoordinate = `${xPlusOrMinus}${x}`
   const yCoordinate = `${yPlusOrMinus}${y}`
 
-  if (attempts > 10) return {
+  if (attempts > 20) return {
     xCoordinate,
     yCoordinate,
   }
 
   if (!validCoordinates(xCoordinate, yCoordinate)) {
-    // if (attempts === 10) console.log(`-:: got to 10 attempts ::-`)
     return calculateCoordinates(size, transaction, bottomBarHeight, attempts + 1)
   }
 
@@ -128,9 +128,19 @@ function calculateCoordinates(size, transaction, bottomBarHeight, attempts = 0) 
 
 function validCoordinates(xCoordinate, yCoordinate) {
   return Object.values(xyMemo).every(([x,y]) => {
-    return Math.abs(x - xCoordinate) > 5
-      && Math.abs(y - yCoordinate) > 5
+    return getDifference(x, xCoordinate) > 50
+      && getDifference(y, yCoordinate) > 50
   })
+}
+
+function getDifference(p1, p2) {
+  let difference
+  if ((p1 < 0 && p2 > 0) || (p1 > 0 && p2 < 0)) {
+    difference = Math.abs(p1) + Math.abs(p2)
+  } else {
+    difference = Math.abs(p1 - p2)
+  }
+  return difference
 }
 
 function randomNumber(min, max) {
