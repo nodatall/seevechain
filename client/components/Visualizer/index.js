@@ -11,7 +11,7 @@ import Stars from 'components/Stars'
 import DonateModal from 'components/DonateModal'
 import numberWithCommas from 'lib/numberWithCommas'
 import donate from 'assets/donate.png'
-import { getRandomTransactions } from 'lib/testData'
+// import { getRandomTransactions } from 'lib/testData'
 
 import './index.sass'
 
@@ -45,10 +45,10 @@ export default function Visualizer() {
           currentBlock = data.block.number
           setStats(data.stats)
           setBlock(data.block)
-          data.transactions = [
-            ...data.transactions,
-            ...getRandomTransactions(),
-          ]
+          // data.transactions = [
+          //   ...data.transactions,
+          //   ...getRandomTransactions(),
+          // ]
           if (data.block.number % 4 === 1) {
             setTransactionsBlock1(data.transactions)
           } else if (data.block.number % 4 === 2) {
