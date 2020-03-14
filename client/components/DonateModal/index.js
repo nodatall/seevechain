@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRef, useEffect } from 'preact/hooks'
 
-import qrCode from 'assets/donate_qr_code.png'
+import qrCode from 'assets/donate_qr_code.jpg'
 import xIcon from 'assets/greyxicon.png'
 import Header from 'components/Header'
 import CopyButton from 'components/CopyButton'
