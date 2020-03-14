@@ -1,8 +1,16 @@
-const getLatest = require('./actions/getLatest')
+const actions = require('./actions')
+const path = require('path')
 
 module.exports = function(app) {
-  app.get('/latest', (req, res, next) => {
-    getLatest().then(
+  app.use(function (req, res, next) {
+    if (req.cookies.seeVechainUid) {
+      actions.recordUniqueVisitor(req.cookies.seeVechainUid)
+    }
+    next()
+  })
+
+  app.get('/api/latest', (req, res, next) => {
+    actions.getLatest().then(
       ({ block, transactions, stats }) => {
         res.json({
           block,
@@ -12,5 +20,18 @@ module.exports = function(app) {
       },
       error => { next(error) },
     )
+  })
+
+  app.get('/api/analytics', (req, res, next) => {
+    actions.getAnalytics().then(
+      analytics => {
+        res.json(analytics)
+      },
+      error => { next(error) },
+    )
+  })
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'))
   })
 }

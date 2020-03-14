@@ -1,10 +1,13 @@
 require('../environment')
 
 const express = require('express')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
 app.use(express.static('client/dist'))
+
+app.use(cookieParser())
 
 app.use(function(req, res, next) {
   res.header('Cache-Control', 'no-cache, no-store, must-revalidate')
