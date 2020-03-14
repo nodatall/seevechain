@@ -22,7 +22,7 @@ module.exports = function(app) {
     )
   })
 
-  app.get('/api/analytics', (req, res, next) => {
+  app.get('/api/visitor_analytics', (req, res, next) => {
     actions.getAnalytics().then(
       analytics => {
         res.json(analytics)

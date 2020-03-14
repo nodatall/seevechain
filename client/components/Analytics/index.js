@@ -11,7 +11,7 @@ export default function Analytics() {
   const [analytics, setAnalytics] = useState(null)
 
   useEffect(() => {
-    axios.get('/api/analytics').then(({data}) => {
+    axios.get('/api/visitor_analytics').then(({data}) => {
       setAnalytics({ uniqueVisits: data.uniqueVisits })
     })
   }, [])
@@ -25,7 +25,6 @@ export default function Analytics() {
     series.push(count)
   })
   const chartData = { labels, series: [series] }
-  console.log(`chartData -->`, chartData)
 
   return <div className="Analytics">
     <Chart data={chartData} type="Line" />
