@@ -14,6 +14,7 @@
   right: 50%
   font-size: 20px
   backface-visibility: hidden
+  -webkit-backface-visibility: hidden
   -webkit-transform-style: preserve-3d
   -webkit-font-smoothing: subpixel-antialiased
   box-sizing: border-box
@@ -23,3 +24,5 @@
   justify-content: center;
   &-contract
     font-size: 14px
+  > *
+    -webkit-transform: translate3d(0,0,0)
