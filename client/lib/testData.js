@@ -1507,6 +1507,11 @@ function getRandomTransactions(num = 100) {
       return 0.5 - Math.random()
     })
     .slice(0, num)
+    .map(tx => {
+      const newTx = { ...tx}
+      newTx.id += Math.round(Math.random() * 10000)
+      return newTx
+    })
 }
 
 module.exports = {
