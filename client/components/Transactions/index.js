@@ -40,6 +40,8 @@ function Transaction({ transaction, delay }) {
 
   const [style, setStyle] = useState()
 
+  const maxScale = window.innerWidth <= 760 ? .6 : 1
+
   useEffect(() => {
     const bottomBarHeight = (document.querySelector('.BottomBar') || {}).clientHeight || 0
     const { xCoordinate, yCoordinate } = calculateCoordinates(size, transaction, bottomBarHeight)
@@ -51,19 +53,19 @@ function Transaction({ transaction, delay }) {
     setTimeout(() => {
       setStyle({
         ...defaultStyle,
-        transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(1)`,
+        transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale})`,
       })
       setTimeout(() => {
         setStyle({
           ...defaultStyle,
-          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(1)`,
+          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale})`,
           transition: `transform 4s ease-out, opacity 300ms`,
         })
       }, 1050)
       setTimeout(() => {
         setStyle({
           ...defaultStyle,
-          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(1)`,
+          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale})`,
           opacity: 0,
         })
         delete xyMemo[transaction.id]
