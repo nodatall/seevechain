@@ -47,25 +47,25 @@ function Transaction({ transaction, delay }) {
     const { xCoordinate, yCoordinate } = calculateCoordinates(size, transaction, bottomBarHeight)
     setStyle({
       ...defaultStyle,
-      transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(0)`,
+      transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(0) perspective(1px)`,
     })
 
     setTimeout(() => {
       setStyle({
         ...defaultStyle,
-        transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale})`,
+        transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale}) perspective(1px)`,
       })
       setTimeout(() => {
         setStyle({
           ...defaultStyle,
-          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale})`,
+          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale}) perspective(1px)`,
           transition: `transform 4s ease-out, opacity 300ms`,
         })
       }, 1050)
       setTimeout(() => {
         setStyle({
           ...defaultStyle,
-          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale})`,
+          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale}) perspective(1px)`,
           opacity: 0,
         })
         delete xyMemo[transaction.id]
