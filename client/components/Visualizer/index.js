@@ -35,7 +35,7 @@ export default function Visualizer() {
     getLatest()
     setInterval(() => {
       getLatest()
-    }, 7000)
+    }, 4900)
   }, [])
 
   function getLatest() {
