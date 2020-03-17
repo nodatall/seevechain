@@ -26,7 +26,13 @@ export default function Analytics() {
   })
   const chartData = { labels, series: [series] }
 
+  const options = {
+    width: '1000px',
+    height: '500px',
+    showArea: true,
+  }
+
   return <div className="Analytics">
-    <Chart data={chartData} type="Line" />
+    <Chart data={chartData} options={options} type="Line" responsiveOptions />
   </div>
 }
