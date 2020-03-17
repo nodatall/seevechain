@@ -7,11 +7,18 @@ import './index.sass'
 
 export default function BottomBar({ stats }) {
   const [numberClass, setNumberClass] = useState('BottomBar-number')
+  const [initialState, setInitialState] = useState(0)
+
   useEffect(() => {
-    setNumberClass('BottomBar-number BottomBar-number-changing')
-    setTimeout(() => {
-      setNumberClass('BottomBar-number')
-    }, 300)
+    if (initialState === 0) {
+      setInitialState(1)
+    } else {
+      setNumberClass('BottomBar-number BottomBar-number-changing')
+      setTimeout(() => {
+        setNumberClass('BottomBar-number')
+      }, 300)
+    }
+
   }, [stats.dailyVTHOBurn])
 
   if (!stats || Object.keys(stats).length === 0) return <div className="BottomBar" />
