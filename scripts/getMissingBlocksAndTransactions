@@ -28,7 +28,6 @@ const client = require('../server/database')
     `,
     [oneDayAgoMinusAMinute]
   )
-  if (!blockRecords) process.exit(1)
 
   const missingBlocks = []
   blockRecords.forEach((record, index) => {
@@ -50,11 +49,13 @@ const client = require('../server/database')
     `
       SELECT count(transactions.id) AS count, blocks.number_of_transactions, blocks.number
       FROM transactions
-      JOIN blocks
+      RIGHT JOIN blocks
       ON transactions.block_number = blocks.number
+      WHERE blocks.timestamp > $1
       GROUP BY blocks.number_of_transactions, blocks.number
       HAVING count(transactions.id) < blocks.number_of_transactions;
-    `
+    `,
+    [oneDayAgoMinusAMinute]
   )
   for (const block of blocksWithMissingTransactions) {
     console.log(`block ${block.number} missing transactions`)
