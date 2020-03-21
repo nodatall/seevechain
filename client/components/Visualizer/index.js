@@ -44,7 +44,7 @@ export default function Visualizer() {
           setBlock(data.block)
           // data.transactions = [
           //   ...data.transactions,
-          //   ...getRandomTransactions(),
+          //   ...getRandomTransactions(20),
           // ]
           setTransactions(data.transactions)
         }
