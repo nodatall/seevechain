@@ -19,10 +19,7 @@ let currentBlock
 
 export default function Visualizer() {
   const [block, setBlock] = useState()
-  const [transactionsBlock1, setTransactionsBlock1] = useState()
-  const [transactionsBlock2, setTransactionsBlock2] = useState()
-  const [transactionsBlock3, setTransactionsBlock3] = useState()
-  const [transactionsBlock4, setTransactionsBlock4] = useState()
+  const [transactions, setTransactions] = useState()
   const [stats, setStats] = useState({})
   const [modalVisible, toggleModalVisibility] = useState(false)
 
@@ -49,15 +46,7 @@ export default function Visualizer() {
           //   ...data.transactions,
           //   ...getRandomTransactions(),
           // ]
-          if (data.block.number % 4 === 1) {
-            setTransactionsBlock1(data.transactions)
-          } else if (data.block.number % 4 === 2) {
-            setTransactionsBlock2(data.transactions)
-          } else if (data.block.number % 4 === 3) {
-            setTransactionsBlock3(data.transactions)
-          } else {
-            setTransactionsBlock4(data.transactions)
-          }
+          setTransactions(data.transactions)
         }
       })
   }
@@ -71,10 +60,7 @@ export default function Visualizer() {
     <img className="Visualizer-donate" src={donate} onClick={() => { toggleModalVisibility(!modalVisible) }} />
     <div className="Visualizer-blockNumber">Block: {numberWithCommas(block.number)}</div>
     <BottomBar stats={stats} />
-    <Transactions transactions={transactionsBlock1} />
-    <Transactions transactions={transactionsBlock2} />
-    <Transactions transactions={transactionsBlock3} />
-    <Transactions transactions={transactionsBlock4} />
+    <Transactions transactions={transactions} />
     <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
   </Div100vh>
 }

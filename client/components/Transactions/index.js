@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { useEffect, useState } from 'preact/hooks'
 import numberWithCommas from '../../lib/numberWithCommas'
 import calculateInterval from '../../lib/calculateInterval'
@@ -20,15 +20,65 @@ const KNOWN_ADDRESSES = {
 
 const xyMemo = {}
 
-export default function Transactions({ transactions = [] }) {
-  const interval = calculateInterval(transactions.length)
-  return transactions.map((transaction, index) => {
-    const delay = (index + 1) * interval
-    return <Transaction transaction={transaction} delay={delay} key={transaction.id} />
-  })
+export default class Transactions extends Component {
+
+  state = {
+    renderableTransactions: [],
+    transactionTimestamps: {},
+  }
+
+  componentDidMount = () => {
+    this.setRenderableTransactions(this.props.transactions)
+  }
+
+  setRenderableTransactions = transactions => {
+    const oldTransactionTimestamps = {...this.state.transactionTimestamps}
+    Object.entries(oldTransactionTimestamps).forEach(([key, value]) => {
+      if (Date.now() - value > 40000) delete oldTransactionTimestamps[key]
+    })
+
+    let newTransactions = []
+    const transactionTimestamps = { ...oldTransactionTimestamps }
+    transactions.forEach(transaction => {
+      if (!transactionTimestamps[transaction.id]) {
+        transactionTimestamps[transaction.id] = Date.now()
+        newTransactions.push(transaction)
+      }
+    })
+
+    const interval = calculateInterval(newTransactions.length)
+    newTransactions = newTransactions.map((transaction, index) => {
+      transaction.delay = (index + 1) * interval
+      return transaction
+    })
+
+    const renderableTransactions = [
+      ...newTransactions,
+      ...this.state.renderableTransactions.filter(transaction => transactionTimestamps[transaction.id])
+    ]
+
+    this.setState({
+      transactionTimestamps,
+      renderableTransactions,
+    })
+  }
+
+  componentWillReceiveProps = nextProps => {
+    this.setRenderableTransactions(nextProps.transactions)
+  }
+
+  render() {
+    const { renderableTransactions } = this.state
+    if (!renderableTransactions.length) return
+    return renderableTransactions.map(transaction => {
+      return <Transaction transaction={transaction} key={transaction.id} />
+    })
+  }
+
 }
 
-function Transaction({ transaction, delay }) {
+function Transaction({ transaction }) {
+  const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
   const defaultStyle = {
     width: `${size}px`,

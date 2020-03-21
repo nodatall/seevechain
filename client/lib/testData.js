@@ -25,6 +25,31 @@ const TRANSACTIONS_SET = [
     contract: '0xbdccecf078f27cc9bf7a18b4cc2c25068a616fb4',
   },
   {
+    id: '0xea0ff98d3ce7eedfa7254ce234a7e0e7be5740c87cb639822bca542e8bb6f2b9',
+    vthoBurn: 1608.7119999999998,
+    contract: '0x12124026445aaebf0d3c49fdca3995263e5a7b0a',
+  },
+  {
+    id: '0xe77666f4f799a4e4c9a3d13c7eaf32eb13004cc2b8dd7ea0865ee0c236825b24',
+    vthoBurn: 263.1748,
+    contract: '0x12124026445aaebf0d3c49fdca3995263e5a7b0a',
+  },
+  {
+    id: '0x460af82f8b419da52fab8f761481037d1f41296e63ad636bd5e411428deea25b',
+    vthoBurn: 1042.6024,
+    contract: '0x12124026445aaebf0d3c49fdca3995263e5a7b0a',
+  },
+  {
+    id: '0xa31793d46abbab88f28e59e566bd83eccc3eec3ec6aeea8daffa2047a66e9eb0',
+    vthoBurn: 263.354,
+    contract: '0x12124026445aaebf0d3c49fdca3995263e5a7b0a',
+  },
+  {
+    id: '0x84037461065f46ee2b3c4ffcfdeac5d098cd5b66a255deef6a72e62857123b85',
+    vthoBurn: 1608.5775999999998,
+    contract: '0x06e4fbbe48c5aa363a5da1343bb56d66f4883606',
+  },
+  {
     id: '0xe3e1a31e79d4603911ed3f0eea2d99a43e612db4a89236c8b96b30d86b1a77ca',
     vthoBurn: 42.375899999999994,
     contract: '0xbdccecf078f27cc9bf7a18b4cc2c25068a616fb4',
@@ -708,31 +733,6 @@ const TRANSACTIONS_SET = [
     id: '0x9d2ba559239051343e60bdac1859e24646acfb87afab4156f178484b439b043d',
     vthoBurn: 404.76939999999996,
     contract: '0x12124026445aaebf0d3c49fdca3995263e5a7b0a',
-  },
-  {
-    id: '0xea0ff98d3ce7eedfa7254ce234a7e0e7be5740c87cb639822bca542e8bb6f2b9',
-    vthoBurn: 1608.7119999999998,
-    contract: '0x12124026445aaebf0d3c49fdca3995263e5a7b0a',
-  },
-  {
-    id: '0xe77666f4f799a4e4c9a3d13c7eaf32eb13004cc2b8dd7ea0865ee0c236825b24',
-    vthoBurn: 263.1748,
-    contract: '0x12124026445aaebf0d3c49fdca3995263e5a7b0a',
-  },
-  {
-    id: '0x460af82f8b419da52fab8f761481037d1f41296e63ad636bd5e411428deea25b',
-    vthoBurn: 1042.6024,
-    contract: '0x12124026445aaebf0d3c49fdca3995263e5a7b0a',
-  },
-  {
-    id: '0xa31793d46abbab88f28e59e566bd83eccc3eec3ec6aeea8daffa2047a66e9eb0',
-    vthoBurn: 263.354,
-    contract: '0x12124026445aaebf0d3c49fdca3995263e5a7b0a',
-  },
-  {
-    id: '0x84037461065f46ee2b3c4ffcfdeac5d098cd5b66a255deef6a72e62857123b85',
-    vthoBurn: 1608.5775999999998,
-    contract: '0x06e4fbbe48c5aa363a5da1343bb56d66f4883606',
   },
   {
     id: '0x628adc29f7a6ce0f5df8d7aea08f33ed8e42ecd44e6f17f8cff5e51792b94e92',
