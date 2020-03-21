@@ -29,26 +29,34 @@ export default function Visualizer() {
       Cookies.set('seeVechainUid', createUid())
     }
 
-    getLatest()
-    setInterval(() => {
-      getLatest()
-    }, 1000)
+    getLatest(2000)
   }, [])
 
-  function getLatest() {
+  function getLatest(interval) {
     return axios.get('/api/latest')
-      .then(({data}) => {
-        if (data.block.number !== currentBlock) {
-          currentBlock = data.block.number
-          setStats(data.stats)
-          setBlock(data.block)
-          // data.transactions = [
-          //   ...data.transactions,
-          //   ...getRandomTransactions(20),
-          // ]
-          setTransactions(data.transactions)
+      .then(
+        ({data}) => {
+          if (data.block.number !== currentBlock) {
+            currentBlock = data.block.number
+            setStats(data.stats)
+            setBlock(data.block)
+            // data.transactions = [
+            //   ...data.transactions,
+            //   ...getRandomTransactions(20),
+            // ]
+            setTransactions(data.transactions)
+          }
+          setTimeout(() => {
+            getLatest(interval)
+          }, interval)
+        },
+        error => {
+          console.log('error getting latest', error)
+          setTimeout(() => {
+            getLatest(interval)
+          }, interval)
         }
-      })
+      )
   }
 
   if (!block) return <div className="Visualizer">
