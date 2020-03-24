@@ -48,7 +48,7 @@ export default class Transactions extends Component {
 
     const interval = calculateInterval(newTransactions.length)
     newTransactions = newTransactions.map((transaction, index) => {
-      transaction.delay = (index * interval) + 25
+      transaction.delay = (index * interval) + 50
       return transaction
     })
 
