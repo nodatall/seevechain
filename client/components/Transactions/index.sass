@@ -8,20 +8,21 @@
   color: white
   transition: transform 1s ease-out, opacity 500ms, scale 1s
   opacity: 1
-  will-change: transform
   position: absolute
   top: 50%
   right: 50%
   font-size: 20px
-  backface-visibility: hidden
+  box-sizing: border-box
+  box-shadow: 0 0 3px 1px #fff, 0 0 5px 2px #f0f, 0 0 4px 3px #0ff
+  white-space: nowrap
+  display: flex
+  justify-content: center
+  will-change: transform
   -webkit-backface-visibility: hidden
   -webkit-transform-style: preserve-3d
   -webkit-font-smoothing: subpixel-antialiased
-  box-sizing: border-box
-  box-shadow: 0 0 3px 1px #fff, 0 0 5px 2px #f0f, 0 0 4px 3px #0ff
-  white-space: nowrap;
-  display: flex;
-  justify-content: center;
+  backface-visibility: hidden
+  perspective: 1000
   &-contract
     font-size: 14px
   > *
