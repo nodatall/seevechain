@@ -18,8 +18,6 @@ import './index.sass'
 let currentBlock
 
 export default function Visualizer() {
-  const [block, setBlock] = useState()
-  const [transactions, setTransactions] = useState()
   const [stats, setStats] = useState({})
   const [modalVisible, toggleModalVisibility] = useState(false)
 
@@ -38,13 +36,15 @@ export default function Visualizer() {
         ({data}) => {
           if (data.block.number !== currentBlock) {
             currentBlock = data.block.number
-            setStats(data.stats)
-            setBlock(data.block)
             // data.transactions = [
             //   ...data.transactions,
             //   ...getRandomTransactions(20),
             // ]
-            setTransactions(data.transactions)
+            setStats({
+              stats: data.stats,
+              block: data.block,
+              transactions: data.transactions,
+            })
           }
           setTimeout(() => {
             getLatest(interval)
@@ -59,16 +59,16 @@ export default function Visualizer() {
       )
   }
 
-  if (!block) return <div className="Visualizer">
+  if (!stats.block) return <div className="Visualizer">
     <Spinner />
   </div>
 
   return <Div100vh className="Visualizer">
     <Stars />
     <img className="Visualizer-donate" src={donate} onClick={() => { toggleModalVisibility(!modalVisible) }} />
-    <div className="Visualizer-blockNumber">Block: {numberWithCommas(block.number)}</div>
-    <BottomBar stats={stats} />
-    <Transactions transactions={transactions} />
+    <div className="Visualizer-blockNumber">Block: {numberWithCommas(stats.block.number)}</div>
+    <BottomBar stats={stats.stats} />
+    <Transactions transactions={stats.transactions} />
     <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
   </Div100vh>
 }
