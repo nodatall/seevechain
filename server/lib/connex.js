@@ -33,7 +33,7 @@ async function getTransaction(thor, txId, block, client) {
     const receipt = await thor.transaction(txId).getReceipt()
 
     if (!receipt || !transaction) {
-      await getTransaction(thor, txId, block)
+      await getTransaction(thor, txId, block, client)
     } else {
       await commands.saveTransaction({ client, transaction, receipt, block })
     }
