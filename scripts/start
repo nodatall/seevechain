@@ -24,7 +24,7 @@ async function startVechainConnection() {
           gettingMissingInProgress = false
         })
       }
-    }, 1000)
+    }, 5000)
     await subscribeToVechainBlocks()
   } catch(error) {
     logger.error(`[startVechainConnection]: ${error.message}`)
