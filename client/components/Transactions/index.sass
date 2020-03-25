@@ -6,7 +6,7 @@
   align-items: center
   flex-direction: column
   color: white
-  transition: transform 1s ease-out, opacity 500ms, scale 1s
+  transition: transform 1s ease-out, opacity 500ms
   opacity: 1
   position: absolute
   top: 50%
@@ -18,12 +18,9 @@
   display: flex
   justify-content: center
   will-change: transform
+  backface-visibility: hidden
   -webkit-backface-visibility: hidden
   -webkit-transform-style: preserve-3d
   -webkit-font-smoothing: subpixel-antialiased
-  backface-visibility: hidden
-  perspective: 1000
   &-contract
     font-size: 14px
-  > *
-    -webkit-transform: translate3d(0,0,0)
