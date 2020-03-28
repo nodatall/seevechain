@@ -2,8 +2,9 @@ const { Framework } = require('@vechain/connex-framework')
 const { Driver, SimpleNet } = require('@vechain/connex.driver-nodejs')
 const commands = require('../commands')
 const client = require('../database')
+const actions = require('../actions')
 
-async function subscribeToVechainBlocks() {
+async function subscribeToVechainBlocks(io) {
   const driver = await Driver.connect(new SimpleNet('https://vethor-node.vechain.com/'))
   const thor = new Framework(driver).thor
   const tick = thor.ticker()
@@ -11,6 +12,7 @@ async function subscribeToVechainBlocks() {
   while (true) {
     const head = await tick.next()
     await getBlock(thor, head.number, client)
+    io.emit('serverSendLatest', await actions.getLatest())
   }
 }
 

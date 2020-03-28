@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const app = require('../server/app')
+const { server, io } = require('../server/app')
 const { subscribeToVechainBlocks } = require('../server/lib/connex')
 const port = process.env.PORT
 const path = require('path')
@@ -9,12 +9,12 @@ const logger = require('../server/lib/logger')
 
 let gettingMissingInProgress = false
 
-app.listen(port, async () => {
+server.listen(port, async () => {
   console.log(`server started on port ${port}`)
-  await startVechainConnection()
+  await startVechainConnection(io)
 })
 
-async function startVechainConnection() {
+async function startVechainConnection(io) {
   try {
     setInterval(() => {
       if (!gettingMissingInProgress) {
@@ -25,7 +25,7 @@ async function startVechainConnection() {
         })
       }
     }, 5000)
-    await subscribeToVechainBlocks()
+    await subscribeToVechainBlocks(io)
   } catch(error) {
     logger.error(`[startVechainConnection]: ${error.message}`)
     setTimeout(async () => {

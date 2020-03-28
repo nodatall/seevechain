@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'preact/hooks'
 import Div100vh from 'react-div-100vh'
 import Cookies from 'js-cookie'
+import ioClient from 'socket.io-client'
 
 import Transactions from 'components/Transactions'
 import BottomBar from 'components/BottomBar'
@@ -15,8 +16,6 @@ import donate from 'assets/donate.png'
 
 import './index.sass'
 
-let currentBlock
-
 export default function Visualizer() {
   const [stats, setStats] = useState({})
   const [modalVisible, toggleModalVisibility] = useState(false)
@@ -26,38 +25,16 @@ export default function Visualizer() {
     if (!vechainIdCookie) {
       Cookies.set('seeVechainUid', createUid())
     }
-
-    getLatest(2000)
+    const socket = ioClient(window.location.origin)
+    socket.emit('clientAskForLatest', {})
+    socket.on('serverSendLatest', function(data) {
+      // data.transactions = [
+      //   ...data.transactions,
+      //   ...getRandomTransactions(20),
+      // ]
+      setStats(data)
+    })
   }, [])
-
-  function getLatest(interval) {
-    return axios.get('/api/latest')
-      .then(
-        ({data}) => {
-          if (data.block.number !== currentBlock) {
-            currentBlock = data.block.number
-            // data.transactions = [
-            //   ...data.transactions,
-            //   ...getRandomTransactions(20),
-            // ]
-            setStats({
-              stats: data.stats,
-              block: data.block,
-              transactions: data.transactions,
-            })
-          }
-          setTimeout(() => {
-            getLatest(interval)
-          }, interval)
-        },
-        error => {
-          console.log('error getting latest', error)
-          setTimeout(() => {
-            getLatest(interval)
-          }, interval)
-        }
-      )
-  }
 
   if (!stats.block) return <div className="Visualizer">
     <Spinner />

@@ -56,6 +56,8 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "sass-loader": "^7.1.0",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "webpack": "^4.29.6"
   },
   "devDependencies": {
