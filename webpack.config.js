@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 const ROOT = path.resolve(__dirname, '.')
 const srcPath = `${ROOT}/client`
@@ -93,6 +94,7 @@ const config = {
       chunkFilename: '[id].[hash].css',
     }),
     new CleanWebpackPlugin(),
+    new Dotenv(),
   ]
 }
 

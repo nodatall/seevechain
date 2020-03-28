@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV='production' webpack --colors --progress",
+    "build": "webpack --colors --progress",
     "build:dev": "webpack --colors --progress -w",
     "start:dev": "npm run build:dev & nodemon ./scripts/start",
     "start": "./scripts/db-migrate up && npm run build && ./scripts/start"
@@ -33,6 +33,7 @@
     "db-migrate": "^0.11.5",
     "db-migrate-pg": "^0.5.0",
     "dotenv": "^6.2.0",
+    "dotenv-webpack": "^1.7.0",
     "eslint": "^6.6.0",
     "eslint-config-react": "^1.1.7",
     "eslint-plugin-react": "^7.19.0",
