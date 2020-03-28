@@ -80,9 +80,11 @@ export default class Transactions extends Component {
 function Transaction({ transaction }) {
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
+  const transitionDuration = getNumberInRange(700, 1300)
   const defaultStyle = {
     width: `${size}px`,
     height: `${size}px`,
+    transition: `transform ${transitionDuration}ms ease-out, opacity 500ms`,
   }
 
   const colorIndex = getTransactionColorIndex(transaction.vthoBurn)
@@ -139,6 +141,10 @@ function Transaction({ transaction }) {
     </div>
     <div>{numberWithCommas(VTHOBurn)}</div>
   </div>
+}
+
+function getNumberInRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 function calculateCoordinates(size, transaction, bottomBarHeight, attempts = 0) {

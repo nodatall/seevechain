@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { useEffect, useState } from 'preact/hooks'
 import Div100vh from 'react-div-100vh'
 import Cookies from 'js-cookie'
