@@ -25,7 +25,9 @@ export default function Visualizer() {
       Cookies.set('seeVechainUid', createUid())
     }
     const socket = ioClient(window.location.origin)
-    socket.emit('clientAskForLatest', {})
+    socket.emit('clientAskForLatest', {
+      seeVechainUid: Cookies.get('seeVechainUid'),
+    })
     socket.on('serverSendLatest', function(data) {
       // data.transactions = [
       //   ...data.transactions,

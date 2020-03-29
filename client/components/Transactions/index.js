@@ -91,7 +91,7 @@ export default class Transactions extends Component {
 function Transaction({ transaction }) {
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
-  const transitionDuration = getNumberInRange(700, 1300)
+  const transitionDuration = getNumberInRange(700, 1100)
   const defaultStyle = {
     width: `${size}px`,
     height: `${size}px`,
@@ -234,8 +234,8 @@ function randomPlusMinus() {
 }
 
 function getTransactionSize(burn) {
-  const TRANSACTION_VTHO_BURN_RANGE = [14, 100]
-  const TRANSACTION_SIZE_RANGE = [85, 130]
+  const TRANSACTION_VTHO_BURN_RANGE = [14, 500]
+  const TRANSACTION_SIZE_RANGE = [75, 150]
   let size = getRangeEquivalent(TRANSACTION_VTHO_BURN_RANGE, TRANSACTION_SIZE_RANGE, burn)
   if (size < TRANSACTION_SIZE_RANGE[0]) size = TRANSACTION_SIZE_RANGE[0]
   if (size > TRANSACTION_SIZE_RANGE[1]) size = TRANSACTION_SIZE_RANGE[1] + (size / 100)

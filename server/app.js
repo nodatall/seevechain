@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser')
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-const actions = require('./actions')
 
 app.use(express.static('client/dist'))
 
@@ -17,16 +16,10 @@ app.use(function(req, res, next) {
   next()
 })
 
-require('./routes.js')(app)
+require('./routes.js')(app, io)
 
 app.use(function (err, req, res, next) {
   res.status(500).json({ error: err.message })
-})
-
-io.on('connection', function (socket) {
-  socket.on('clientAskForLatest', async function () {
-    socket.emit('serverSendLatest', await actions.getLatest())
-  })
 })
 
 module.exports = {
