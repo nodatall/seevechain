@@ -47,8 +47,20 @@ export default class Transactions extends Component {
     })
 
     const interval = calculateInterval(newTransactions.length)
+    const intervals = []
+    let difference
+    for (let i = 0; i < newTransactions.length; i++) {
+      const tmpInterval = (i * interval) + 150
+      if (!difference) intervals.push(tmpInterval)
+      else if (i % 2 === 1) {
+        difference = getNumberInRange(tmpInterval * .75, tmpInterval)
+        intervals.push(tmpInterval - difference)
+      } else {
+        intervals.push(tmpInterval + difference)
+      }
+    }
     newTransactions = newTransactions.map((transaction, index) => {
-      transaction.delay = (index * interval) + 150
+      transaction.delay = intervals[index]
       return transaction
     })
 
@@ -74,7 +86,6 @@ export default class Transactions extends Component {
       return <Transaction transaction={transaction} key={transaction.id} />
     })
   }
-
 }
 
 function Transaction({ transaction }) {
