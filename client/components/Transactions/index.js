@@ -15,6 +15,7 @@ const KNOWN_ADDRESSES = {
   '0xc89dcd4b36b5182f974c556408681cd035be18e4': 'FoodGates',
   '0xecc159751f9aed21399d5e3ce72bc9d4fccb9ccc': 'MyStory',
   '0xfbc5c4e371164e3f1dc5d1760a98f3d227ba7e3b': 'Reebonz (2)',
+  '0x9bcb81a9eadd1457ee9729365f9a77d190670ab2': 'Shanghai Gas',
   'New Contract': 'New Contract',
 }
 
