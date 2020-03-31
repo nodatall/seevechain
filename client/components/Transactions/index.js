@@ -236,7 +236,7 @@ function randomPlusMinus() {
 
 function getTransactionSize(burn) {
   const TRANSACTION_VTHO_BURN_RANGE = [14, 500]
-  const TRANSACTION_SIZE_RANGE = [75, 150]
+  const TRANSACTION_SIZE_RANGE = [75, 135]
   let size = getRangeEquivalent(TRANSACTION_VTHO_BURN_RANGE, TRANSACTION_SIZE_RANGE, burn)
   if (size < TRANSACTION_SIZE_RANGE[0]) size = TRANSACTION_SIZE_RANGE[0]
   if (size > TRANSACTION_SIZE_RANGE[1]) size = TRANSACTION_SIZE_RANGE[1] + (size / 100)
