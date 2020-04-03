@@ -24,14 +24,14 @@ export default function Visualizer() {
     if (!vechainIdCookie) {
       Cookies.set('seeVechainUid', createUid())
     }
-    const socket = ioClient(window.location.origin)
+    const socket = ioClient(window.origin.replace(/^(https|http)/, 'ws'))
     socket.emit('clientAskForLatest', {
       seeVechainUid: Cookies.get('seeVechainUid'),
     })
     socket.on('serverSendLatest', function(data) {
       // data.transactions = [
       //   ...data.transactions,
-      //   ...getRandomTransactions(20),
+      //   ...getRandomTransactions(10),
       // ]
       setStats(data)
     })
