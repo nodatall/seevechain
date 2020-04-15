@@ -6,15 +6,16 @@ const port = process.env.PORT
 const path = require('path')
 const childProcess = require('child_process')
 const logger = require('../server/lib/logger')
+const client = require('../server/database')
 
 let gettingMissingInProgress = false
 
 server.listen(port, async () => {
   console.log(`server started on port ${port}`)
-  await startVechainConnection(io)
+  await startVechainConnection(io, client)
 })
 
-async function startVechainConnection(io) {
+async function startVechainConnection(io, client) {
   try {
     setInterval(() => {
       if (!gettingMissingInProgress) {
@@ -24,12 +25,12 @@ async function startVechainConnection(io) {
           gettingMissingInProgress = false
         })
       }
-    }, 5000)
-    await subscribeToVechainBlocks(io)
+    }, 10000)
+    await subscribeToVechainBlocks(io, client)
   } catch(error) {
     logger.error(`[startVechainConnection]: ${error.message}`)
     setTimeout(async () => {
-      await startVechainConnection()
+      await startVechainConnection(io, client)
     }, 500)
   }
 }
