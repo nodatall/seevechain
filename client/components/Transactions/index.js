@@ -184,13 +184,13 @@ function calculateCoordinates(size, transaction, bottomBarHeight, attempts = 0) 
     yCoordinate,
   }
 
-  const valid = attempts < 10
+  const valid = attempts < 40
     ? 100
-    : attempts < 20
+    : attempts < 60
       ? 50
-      : attempts < 30
+      : attempts < 80
         ? 25
-        : attempts < 40
+        : attempts < 100
           ? 10
           : 5
   if (!validCoordinates(xCoordinate, yCoordinate, valid)) {

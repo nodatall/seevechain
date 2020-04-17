@@ -27,15 +27,15 @@ export default function BottomBar({ stats }) {
     <div className="BottomBar-wrapper">
       <div>
         <span className="BottomBar-header">VTHO Burn: </span>
-        <span className={numberClass}>{numberWithCommas(Math.floor(+stats.dailyVTHOBurn))}</span>
+        <span className={numberClass}>{numberWithCommas(Math.floor(+stats.dailyVTHOBurn)) || 0}</span>
       </div>
       <div>
         <span className="BottomBar-header">Txs: </span>
-        <span className={numberClass}>{numberWithCommas(stats.dailyTransactions)}</span>
+        <span className={numberClass}>{numberWithCommas(stats.dailyTransactions) || 0}</span>
       </div>
       <div>
         <span className="BottomBar-header">Clauses: </span>
-        <span className={numberClass}>{numberWithCommas(stats.dailyClauses)}</span>
+        <span className={numberClass}>{numberWithCommas(stats.dailyClauses) || 0}</span>
       </div>
     </div>
   </div>
