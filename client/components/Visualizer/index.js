@@ -44,7 +44,9 @@ export default function Visualizer() {
   return <Div100vh className="Visualizer">
     <Stars />
     <img className="Visualizer-donate" src={donate} onClick={() => { toggleModalVisibility(!modalVisible) }} />
-    <div className="Visualizer-blockNumber">Block: {numberWithCommas(stats.block.number)}</div>
+    <div className="Visualizer-blockNumber">
+      Block: {numberWithCommas(stats.block.number)} – {stats.transactions.length} txs
+    </div>
     <BottomBar stats={stats.stats} />
     <Transactions transactions={stats.transactions} />
     <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
