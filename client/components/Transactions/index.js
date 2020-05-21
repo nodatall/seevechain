@@ -97,7 +97,7 @@ export default class Transactions extends Component {
 function Transaction({ transaction }) {
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
-  const transitionDuration = getNumberInRange(700, 1100)
+  const transitionDuration = getNumberInRange(900, 1100)
   const defaultStyle = {
     width: `${size}px`,
     height: `${size}px`,
