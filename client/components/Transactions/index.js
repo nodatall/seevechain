@@ -56,7 +56,7 @@ export default class Transactions extends Component {
     const intervals = []
     let difference
     for (let i = 0; i < newTransactions.length; i++) {
-      const tmpInterval = (i * interval) + 50
+      const tmpInterval = (i * interval) + 150
       if (!difference) intervals.push(tmpInterval)
       else if (i % 2 === 1) {
         difference = getNumberInRange(tmpInterval * .90, tmpInterval)
