@@ -86,15 +86,16 @@ export default class Transactions extends Component {
   }
 
   render() {
+    const { setStats, statsRef } = this.props
     const { renderableTransactions } = this.state
     if (!renderableTransactions.length) return
     return renderableTransactions.map(transaction => {
-      return <Transaction transaction={transaction} key={transaction.id} />
+      return <Transaction transaction={transaction} key={transaction.id} setStats={setStats} statsRef={statsRef} />
     })
   }
 }
 
-function Transaction({ transaction }) {
+function Transaction({ transaction, setStats, statsRef }) {
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
   const transitionDuration = getNumberInRange(900, 1100)
@@ -120,6 +121,15 @@ function Transaction({ transaction }) {
     })
 
     setTimeout(() => {
+      statsRef.current = {
+        ...statsRef.current,
+        stats: {
+          dailyVTHOBurn: +statsRef.current.stats.dailyVTHOBurn + +transaction.vthoBurn,
+          dailyTransactions: statsRef.current.stats.dailyTransactions + 1,
+          dailyClauses: statsRef.current.stats.dailyClauses + transaction.clauses,
+        },
+      }
+      setStats(statsRef.current)
       setStyle({
         ...defaultStyle,
         transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale}) perspective(1px) translate3d(0,0,0)`,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect, useState, useRef } from 'preact/hooks'
 import Div100vh from 'react-div-100vh'
 import Cookies from 'js-cookie'
 import ioClient from 'socket.io-client'
@@ -18,6 +18,8 @@ import './index.sass'
 export default function Visualizer() {
   const [stats, setStats] = useState({})
   const [modalVisible, toggleModalVisibility] = useState(false)
+  const initialized = useRef()
+  const statsRef = useRef()
 
   useEffect(() => {
     const vechainIdCookie = Cookies.get('seeVechainUid')
@@ -29,11 +31,19 @@ export default function Visualizer() {
       seeVechainUid: Cookies.get('seeVechainUid'),
     })
     socket.on('serverSendLatest', function(data) {
-      // data.transactions = [
-      //   ...data.transactions,
-      //   ...getRandomTransactions(10),
-      // ]
-      setStats(data)
+
+      if (!initialized.current) {
+        statsRef.current = data
+        initialized.current = true
+        setStats(getStatsBeforeBatchOfTransactions(data))
+      } else {
+        const newData = {
+          ...data,
+          stats: statsRef.current.stats,
+        }
+        statsRef.current = newData
+        setStats(newData)
+      }
     })
   }, [])
 
@@ -48,7 +58,7 @@ export default function Visualizer() {
       Block: {numberWithCommas(stats.block.number)} – {stats.transactions.length} txs
     </div>
     <BottomBar stats={stats.stats} />
-    <Transactions transactions={stats.transactions} />
+    <Transactions transactions={stats.transactions} setStats={setStats} statsRef={statsRef} />
     <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
   </Div100vh>
 }
@@ -56,4 +66,25 @@ export default function Visualizer() {
 function createUid() {
   return (new Date().getUTCMilliseconds().toString() + new Date().getTime().toString()).toString()
     + Math.random().toString(36).substr(2, 9)
+}
+
+function getStatsBeforeBatchOfTransactions(data) {
+  let dailyVTHOBurn = data.stats.dailyVTHOBurn
+  let dailyTransactions = data.stats.dailyTransactions
+  let dailyClauses = data.stats.dailyClauses
+
+  data.transactions.forEach(transaction => {
+    dailyTransactions--
+    dailyVTHOBurn -= transaction.vthoBurn
+    dailyClauses -= transaction.clauses
+  })
+
+  return {
+    ...data,
+    stats: {
+      dailyVTHOBurn,
+      dailyTransactions,
+      dailyClauses,
+    }
+  }
 }
