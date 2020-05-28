@@ -69,7 +69,7 @@ export default class Transactions extends Component {
   }
 
   render() {
-    const { setStats, statsRef, animatingTxsRef } = this.props
+    const { setStats, statsRef, hasTxStatsBeenCountedRef } = this.props
     const { renderableTransactions } = this.state
     if (!renderableTransactions.length) return
     return renderableTransactions.map(transaction => {
@@ -78,13 +78,13 @@ export default class Transactions extends Component {
         key={transaction.id}
         setStats={setStats}
         statsRef={statsRef}
-        animatingTxsRef={animatingTxsRef}
+        hasTxStatsBeenCountedRef={hasTxStatsBeenCountedRef}
       />
     })
   }
 }
 
-function Transaction({ transaction, setStats, statsRef, animatingTxsRef }) {
+function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef }) {
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
   const transitionDuration = getNumberInRange(900, 1100)
@@ -102,7 +102,7 @@ function Transaction({ transaction, setStats, statsRef, animatingTxsRef }) {
   const maxScale = window.innerWidth <= 760 ? .6 : 1
 
   useEffect(() => {
-    animatingTxsRef.current[transaction.id] = transaction
+    hasTxStatsBeenCountedRef.current[transaction.id] = transaction
     const bottomBarHeight = (document.querySelector('.BottomBar') || {}).clientHeight || 0
     const { xCoordinate, yCoordinate } = calculateCoordinates(size, transaction, bottomBarHeight)
     setStyle({
@@ -120,6 +120,7 @@ function Transaction({ transaction, setStats, statsRef, animatingTxsRef }) {
         },
       }
       setStats(statsRef.current)
+      delete hasTxStatsBeenCountedRef.current[transaction.id]
       setStyle({
         ...defaultStyle,
         transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale}) perspective(1px) translate3d(0,0,0)`,
@@ -138,7 +139,6 @@ function Transaction({ transaction, setStats, statsRef, animatingTxsRef }) {
           opacity: 0,
         })
         delete xyMemo[transaction.id]
-        delete animatingTxsRef.current[transaction.id]
       }, 4500)
     }, delay)
   }, [])
