@@ -21,5 +21,14 @@
   -webkit-backface-visibility: hidden
   -webkit-transform-style: preserve-3d
   -webkit-font-smoothing: subpixel-antialiased
+  animation: flicker 6s linear infinite
   &-contract
     font-size: 12px
+
+@keyframes flicker
+  0%
+    box-shadow: 0 0 3px 1px #fff, 0 0 5px 2px #f0f, 0 0 4px 3px #0ff
+  50%
+    box-shadow: 0 0 4px 1px #fff, 0 0 5px 3px #f0f, 0 0 5px 4px #0ff
+  100%
+    box-shadow: 0 0 3px 1px #fff, 0 0 5px 2px #f0f, 0 0 4px 3px #0ff
