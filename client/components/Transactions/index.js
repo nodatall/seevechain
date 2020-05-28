@@ -69,16 +69,22 @@ export default class Transactions extends Component {
   }
 
   render() {
-    const { setStats, statsRef } = this.props
+    const { setStats, statsRef, animatingTxsRef } = this.props
     const { renderableTransactions } = this.state
     if (!renderableTransactions.length) return
     return renderableTransactions.map(transaction => {
-      return <Transaction transaction={transaction} key={transaction.id} setStats={setStats} statsRef={statsRef} />
+      return <Transaction
+        transaction={transaction}
+        key={transaction.id}
+        setStats={setStats}
+        statsRef={statsRef}
+        animatingTxsRef={animatingTxsRef}
+      />
     })
   }
 }
 
-function Transaction({ transaction, setStats, statsRef }) {
+function Transaction({ transaction, setStats, statsRef, animatingTxsRef }) {
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
   const transitionDuration = getNumberInRange(900, 1100)
@@ -96,6 +102,7 @@ function Transaction({ transaction, setStats, statsRef }) {
   const maxScale = window.innerWidth <= 760 ? .6 : 1
 
   useEffect(() => {
+    animatingTxsRef.current[transaction.id] = transaction
     const bottomBarHeight = (document.querySelector('.BottomBar') || {}).clientHeight || 0
     const { xCoordinate, yCoordinate } = calculateCoordinates(size, transaction, bottomBarHeight)
     setStyle({
@@ -127,11 +134,11 @@ function Transaction({ transaction, setStats, statsRef }) {
       setTimeout(() => {
         setStyle({
           ...defaultStyle,
-          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale}) perspective(1px) translate3d(0,0,0)`,
+          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(0) perspective(1px) translate3d(0,0,0)`,
           opacity: 0,
         })
         delete xyMemo[transaction.id]
-
+        delete animatingTxsRef.current[transaction.id]
       }, 4500)
     }, delay)
   }, [])

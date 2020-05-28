@@ -20,6 +20,7 @@ export default function Visualizer() {
   const [modalVisible, toggleModalVisibility] = useState(false)
   const initialized = useRef()
   const statsRef = useRef()
+  const animatingTxsRef = useRef({})
 
   useEffect(() => {
     const vechainIdCookie = Cookies.get('seeVechainUid')
@@ -37,9 +38,17 @@ export default function Visualizer() {
         initialized.current = true
         setStats(getStatsBeforeBatchOfTransactions(data))
       } else {
+        const lessData = getStatsBeforeBatchOfTransactions(data)
+        const stats = lessData.stats
+        for (const key in animatingTxsRef.current) {
+          const { vthoBurn, clauses } = animatingTxsRef.current[key]
+          stats.vthoBurn -= vthoBurn
+          stats.clauses -= clauses
+          stats.transactions -= 1
+        }
         const newData = {
-          ...data,
-          stats: statsRef.current.stats,
+          ...lessData,
+          stats,
         }
         statsRef.current = newData
         setStats(newData)
@@ -58,7 +67,12 @@ export default function Visualizer() {
       Block: {numberWithCommas(stats.block.number)} – {stats.transactions.length} txs
     </div>
     <BottomBar stats={stats.stats} />
-    <Transactions transactions={stats.transactions} setStats={setStats} statsRef={statsRef} />
+    <Transactions
+      transactions={stats.transactions}
+      setStats={setStats}
+      statsRef={statsRef}
+      animatingTxsRef={animatingTxsRef}
+    />
     <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
   </Div100vh>
 }
