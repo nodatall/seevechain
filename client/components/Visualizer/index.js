@@ -63,9 +63,9 @@ export default function Visualizer() {
   return <Div100vh className="Visualizer">
     <Stars />
     <img className="Visualizer-donate" src={donate} onClick={() => { toggleModalVisibility(!modalVisible) }} />
-    <div className="Visualizer-blockNumber">
+    <a href={`https://insight.vecha.in/#/main/blocks/${stats.block.id}`} target="_blank" className="Visualizer-blockNumber">
       Block: {numberWithCommas(stats.block.number)} – {stats.transactions.length} txs
-    </div>
+    </a>
     <BottomBar stats={stats.stats} />
     <Transactions
       transactions={stats.transactions}

@@ -149,7 +149,7 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
   const contract = KNOWN_ADDRESSES[transaction.contract]
     || `${transaction.contract.slice(2,6)}..${transaction.contract.slice(-4)}`
 
-  return <a href={`https://explore.vechain.org/transactions/${transaction.id}#info`} target="_blank">
+  return <a href={`https://insight.vecha.in/#/main/txs/${transaction.id}`} target="_blank">
     <div className="Transaction" style={style}>
       <div className="Transaction-contract">
         {contract}
