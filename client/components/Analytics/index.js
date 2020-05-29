@@ -20,7 +20,7 @@ export default function Analytics() {
 
   const labels = []
   const series = []
-  analytics.uniqueVisits.forEach(({ count, date }) => {
+  analytics.uniqueVisits.reverse().forEach(({ count, date }) => {
     labels.push(date)
     series.push(count)
   })
@@ -33,6 +33,7 @@ export default function Analytics() {
   }
 
   return <div className="Analytics">
+    <p>Last {analytics.uniqueVisits.length} days:</p>
     <Chart data={chartData} options={options} type="Line" responsiveOptions />
   </div>
 }
