@@ -149,15 +149,14 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
   const contract = KNOWN_ADDRESSES[transaction.contract]
     || `${transaction.contract.slice(2,6)}..${transaction.contract.slice(-4)}`
 
-  return <div
-    className="Transaction"
-    style={style}
-  >
-    <div className="Transaction-contract">
-      {contract}
+  return <a href={`https://explore.vechain.org/transactions/${transaction.id}#info`} target="_blank">
+    <div className="Transaction" style={style}>
+      <div className="Transaction-contract">
+        {contract}
+      </div>
+      <div>{numberWithCommas(VTHOBurn)}</div>
     </div>
-    <div>{numberWithCommas(VTHOBurn)}</div>
-  </div>
+  </a>
 }
 
 function getNumberInRange(min, max) {
