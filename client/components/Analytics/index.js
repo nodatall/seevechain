@@ -33,6 +33,7 @@ export default function Analytics() {
   }
 
   return <div className="Analytics">
+    <p>Today: {analytics.uniqueVisits[analytics.uniqueVisits.length - 1].count}</p>
     <p>Last {analytics.uniqueVisits.length} days:</p>
     <Chart data={chartData} options={options} type="Line" responsiveOptions />
   </div>
