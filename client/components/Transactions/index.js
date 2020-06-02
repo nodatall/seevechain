@@ -139,6 +139,14 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
           opacity: 0,
         })
         delete xyMemo[transaction.id]
+        setTimeout(() => {
+          setStyle({
+            ...defaultStyle,
+            transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(0) perspective(1px) translate3d(0,0,0)`,
+            transition: `transform 1ms ease-out, opacity 500ms`,
+            opacity: 0,
+          })
+        }, 50)
       }, 4500)
     }, delay)
   }, [])
