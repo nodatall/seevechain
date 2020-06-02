@@ -1,5 +1,7 @@
+@import "../../style"
+
 .Transaction
-  background: #182024
+  background: $background-color
   border-radius: 50%
   display: flex
   justify-content: center
@@ -20,5 +22,8 @@
   -webkit-backface-visibility: hidden
   -webkit-transform-style: preserve-3d
   -webkit-font-smoothing: subpixel-antialiased
+  &:hover
+    background: lighten($background-color, 2%)
+    box-shadow: 0 0 1px 1px #fff, 0 0 2px 1px #0ff
   &-contract
     font-size: 12px
