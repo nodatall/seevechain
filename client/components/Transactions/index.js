@@ -95,7 +95,7 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
   }
 
   const colorIndex = getTransactionColorIndex(transaction.vthoBurn)
-  defaultStyle.background = `radial-gradient(circle, ${LIGHT_RANGE[Math.floor(colorIndex)]} 0%, ${DARK_RANGE[Math.floor(colorIndex)]} 100%)`
+  defaultStyle.border = `2px solid ${LIGHT_RANGE[Math.floor(colorIndex)]}`
 
   const [style, setStyle] = useState()
 
@@ -135,7 +135,7 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
       setTimeout(() => {
         setStyle({
           ...defaultStyle,
-          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(0) perspective(1px) translate3d(0,0,0)`,
+          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(.7) perspective(1px) translate3d(0,0,0)`,
           opacity: 0,
         })
         delete xyMemo[transaction.id]

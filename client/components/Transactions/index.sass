@@ -1,5 +1,5 @@
 .Transaction
-  background: rgb(8,0,136)
+  background: #182024
   border-radius: 50%
   display: flex
   justify-content: center
@@ -12,7 +12,6 @@
   right: 50%
   font-size: 20px
   box-sizing: border-box
-  box-shadow: 0 0 3px 1px #fff, 0 0 5px 2px #f0f, 0 0 4px 3px #0ff
   white-space: nowrap
   display: flex
   justify-content: center
@@ -21,14 +20,5 @@
   -webkit-backface-visibility: hidden
   -webkit-transform-style: preserve-3d
   -webkit-font-smoothing: subpixel-antialiased
-  animation: flicker 6s linear infinite
   &-contract
     font-size: 12px
-
-@keyframes flicker
-  0%
-    box-shadow: 0 0 3px 1px #fff, 0 0 5px 2px #f0f, 0 0 4px 3px #0ff
-  50%
-    box-shadow: 0 0 4px 1px #fff, 0 0 5px 3px #f0f, 0 0 5px 4px #0ff
-  100%
-    box-shadow: 0 0 3px 1px #fff, 0 0 5px 2px #f0f, 0 0 4px 3px #0ff
