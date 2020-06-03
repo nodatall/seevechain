@@ -146,7 +146,7 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
             transition: `transform 1ms ease-out, opacity 500ms`,
             opacity: 0,
           })
-        }, 50)
+        }, 1000)
       }, 4500)
     }, delay)
   }, [])
