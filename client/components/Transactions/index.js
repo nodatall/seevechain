@@ -74,8 +74,14 @@ export default class Transactions extends Component {
     const { setStats, statsRef, hasTxStatsBeenCountedRef } = this.props
     const { renderableTransactions } = this.state
     if (!renderableTransactions.length) return
+    const animationDuration = renderableTransactions.length < 5
+      ? [1500, 5175]
+      : renderableTransactions.length < 5
+        ? [1323, 4312]
+        : [1050, 3450]
     return renderableTransactions.map(transaction => {
       return <Transaction
+        animationDuration={animationDuration}
         transaction={transaction}
         key={transaction.id}
         setStats={setStats}
@@ -86,7 +92,7 @@ export default class Transactions extends Component {
   }
 }
 
-function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef }) {
+function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef, animationDuration }) {
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
   const transitionDuration = getNumberInRange(900, 1100)
@@ -116,21 +122,21 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
       })
     }
 
-    async function animate() {
+    async function animate([secondDelay, thirdDelay]) {
       updateStyle(0)
       await waitFor(delay)
       updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef})
       updateStyle(maxScale)
-      await waitFor(1050)
+      await waitFor(secondDelay)
       updateStyle(maxScale, { transition: `transform 4s ease-out, opacity 300ms` })
-      await waitFor(3450)
+      await waitFor(thirdDelay)
       updateStyle(.7, { opacity: 0 })
       delete xyMemo[transaction.id]
       await waitFor(400)
       updateStyle(0, { transition: `transform 1ms ease-out, opacity 500ms`, opacity: 0 })
     }
 
-    animate()
+    animate(animationDuration)
   }, [])
 
   if (!style) return
