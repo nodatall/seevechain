@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { useEffect, useState } from 'preact/hooks'
+import waitFor from 'delay'
+
 import numberWithCommas from '../../lib/numberWithCommas'
 import calculateInterval from '../../lib/calculateInterval'
 import { LIGHT_RANGE, DARK_RANGE } from '../../lib/colors'
@@ -105,50 +107,30 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
     hasTxStatsBeenCountedRef.current[transaction.id] = transaction
     const bottomBarHeight = (document.querySelector('.BottomBar') || {}).clientHeight || 0
     const { xCoordinate, yCoordinate } = calculateCoordinates(size, transaction, bottomBarHeight)
-    setStyle({
-      ...defaultStyle,
-      transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(0) perspective(1px) translate3d(0,0,0)`,
-    })
 
-    setTimeout(() => {
-      statsRef.current = {
-        ...statsRef.current,
-        stats: {
-          dailyVTHOBurn: +statsRef.current.stats.dailyVTHOBurn + +transaction.vthoBurn,
-          dailyTransactions: statsRef.current.stats.dailyTransactions + 1,
-          dailyClauses: statsRef.current.stats.dailyClauses + transaction.clauses,
-        },
-      }
-      setStats(statsRef.current)
-      delete hasTxStatsBeenCountedRef.current[transaction.id]
+    function updateStyle(scale, style = {}) {
       setStyle({
         ...defaultStyle,
-        transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale}) perspective(1px) translate3d(0,0,0)`,
+        transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${scale}) perspective(1px) translate3d(0,0,0)`,
+        ...style,
       })
-      setTimeout(() => {
-        setStyle({
-          ...defaultStyle,
-          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${maxScale}) perspective(1px) translate3d(0,0,0)`,
-          transition: `transform 4s ease-out, opacity 300ms`,
-        })
-      }, 1050)
-      setTimeout(() => {
-        setStyle({
-          ...defaultStyle,
-          transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(.7) perspective(1px) translate3d(0,0,0)`,
-          opacity: 0,
-        })
-        delete xyMemo[transaction.id]
-        setTimeout(() => {
-          setStyle({
-            ...defaultStyle,
-            transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(0) perspective(1px) translate3d(0,0,0)`,
-            transition: `transform 1ms ease-out, opacity 500ms`,
-            opacity: 0,
-          })
-        }, 1000)
-      }, 4500)
-    }, delay)
+    }
+
+    async function animate() {
+      updateStyle(0)
+      await waitFor(delay)
+      updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef})
+      updateStyle(maxScale)
+      await waitFor(1050)
+      updateStyle(maxScale, { transition: `transform 4s ease-out, opacity 300ms` })
+      await waitFor(3450)
+      updateStyle(.7, { opacity: 0 })
+      delete xyMemo[transaction.id]
+      await waitFor(400)
+      updateStyle(0, { transition: `transform 1ms ease-out, opacity 500ms`, opacity: 0 })
+    }
+
+    animate()
   }, [])
 
   if (!style) return
@@ -165,6 +147,19 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
       <div>{numberWithCommas(VTHOBurn)}</div>
     </div>
   </a>
+}
+
+function updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef}) {
+  statsRef.current = {
+    ...statsRef.current,
+    stats: {
+      dailyVTHOBurn: +statsRef.current.stats.dailyVTHOBurn + +transaction.vthoBurn,
+      dailyTransactions: statsRef.current.stats.dailyTransactions + 1,
+      dailyClauses: statsRef.current.stats.dailyClauses + transaction.clauses,
+    },
+  }
+  setStats(statsRef.current)
+  delete hasTxStatsBeenCountedRef.current[transaction.id]
 }
 
 function getNumberInRange(min, max) {
