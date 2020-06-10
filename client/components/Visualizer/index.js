@@ -32,27 +32,7 @@ export default function Visualizer() {
       seeVechainUid: Cookies.get('seeVechainUid'),
     })
     socket.on('serverSendLatest', function(data) {
-
-      if (!initialized.current) {
-        statsRef.current = data
-        initialized.current = true
-        setStats(getStatsBeforeBatchOfTransactions(data))
-      } else {
-        const lessData = getStatsBeforeBatchOfTransactions(data)
-        const stats = lessData.stats
-        for (const key in hasTxStatsBeenCountedRef.current) {
-          const { vthoBurn, clauses } = hasTxStatsBeenCountedRef.current[key]
-          stats.vthoBurn -= vthoBurn
-          stats.clauses -= clauses
-          stats.transactions -= 1
-        }
-        const newData = {
-          ...lessData,
-          stats,
-        }
-        statsRef.current = newData
-        setStats(newData)
-      }
+      handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef })
     })
   }, [])
 
@@ -75,6 +55,34 @@ export default function Visualizer() {
     />
     <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
   </Div100vh>
+}
+
+function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef }){
+  document.title = `${data.stats.dailyClauses} Clauses | See VeChain`
+  data.transactions = [
+    ...data.transactions,
+    // ...getRandomTransactions(4),
+  ]
+  if (!initialized.current) {
+    statsRef.current = data
+    initialized.current = true
+    setStats(getStatsBeforeBatchOfTransactions(data))
+  } else {
+    const lessData = getStatsBeforeBatchOfTransactions(data)
+    const stats = lessData.stats
+    for (const key in hasTxStatsBeenCountedRef.current) {
+      const { vthoBurn, clauses } = hasTxStatsBeenCountedRef.current[key]
+      stats.vthoBurn -= vthoBurn
+      stats.clauses -= clauses
+      stats.transactions -= 1
+    }
+    const newData = {
+      ...lessData,
+      stats,
+    }
+    statsRef.current = newData
+    setStats(newData)
+  }
 }
 
 function createUid() {
