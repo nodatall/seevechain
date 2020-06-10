@@ -64,6 +64,7 @@ function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCou
   ]
   if (!initialized.current) {
     statsRef.current = data
+    document.title = `${numberWithCommas(+statsRef.current.stats.dailyClauses)} Clauses | See VeChain`
     initialized.current = true
     setStats(getStatsBeforeBatchOfTransactions(data))
   } else {
