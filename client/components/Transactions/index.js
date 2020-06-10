@@ -166,6 +166,7 @@ function updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef}
   }
   setStats(statsRef.current)
   delete hasTxStatsBeenCountedRef.current[transaction.id]
+  document.title = `${numberWithCommas(+statsRef.current.stats.dailyClauses)} Clauses | See VeChain`
 }
 
 function getNumberInRange(min, max) {

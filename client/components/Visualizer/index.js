@@ -58,7 +58,6 @@ export default function Visualizer() {
 }
 
 function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef }){
-  document.title = `${numberWithCommas(data.stats.dailyClauses)} Clauses | See VeChain`
   data.transactions = [
     ...data.transactions,
     // ...getRandomTransactions(4),
