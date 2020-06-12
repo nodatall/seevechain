@@ -1,4 +1,5 @@
 const moment = require('moment')
+const numeral = require('numeral')
 
 module.exports = async function(client) {
   const blockRecord = await client.one(
@@ -63,7 +64,7 @@ module.exports = async function(client) {
       paid: transaction.paid,
       reward: transaction.reward,
       types: transaction.types,
-      transfers: transaction.transfers,
+      transfers: numeral(transaction.transfers).format('0.00a'),
     })),
     stats: {
       dailyTransactions: +stats.dailytransactions,

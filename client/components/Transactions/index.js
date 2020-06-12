@@ -2,7 +2,6 @@ import { Fragment } from 'preact'
 import React, { Component } from 'react'
 import { useEffect, useState } from 'preact/hooks'
 import waitFor from 'delay'
-import numeral from 'numeral'
 
 import numberWithCommas from '../../lib/numberWithCommas'
 import calculateInterval from '../../lib/calculateInterval'
@@ -152,7 +151,7 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
   const types = transaction.types
   return <a href={`https://insight.vecha.in/#/main/txs/${transaction.id}`} target="_blank">
     <div className="Transaction" style={style}>
-      {transaction.transfers > 0 && transaction.types.indexOf('Data') === -1
+      {transaction.transfers !== '0.00' && transaction.types.indexOf('Data') === -1
         ? <TransferTransaction transfers={transaction.transfers} VTHOBurn={VTHOBurn} types={types} />
         : <DataTransaction contracts={contracts} VTHOBurn={VTHOBurn} types={types} />
       }
@@ -163,7 +162,7 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
 function TransferTransaction({transfers, VTHOBurn, types}) {
   return <Fragment>
     <TypeTag types={types} />
-    {numeral(transfers).format('0.00a')} VET
+    {transfers} VET
     <div className="Transaction-small">
       {numberWithCommas(VTHOBurn)} Burn
     </div>
