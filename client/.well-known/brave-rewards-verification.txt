@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: seevechain.com
+Token: ca2965fe1a3e1a6bb9e768ae1862c5ed2df6051d8dd9b0534a55a5b0a9036a9f
