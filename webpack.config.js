@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const ROOT = path.resolve(__dirname, '.')
 const srcPath = `${ROOT}/client`
@@ -26,7 +27,7 @@ const config = {
   entry: ['@babel/polyfill', `${srcPath}/index.js`],
   output: {
     path: outputPath,
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     publicPath: '/',
   },
   context: srcPath,
@@ -95,7 +96,8 @@ const config = {
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
-  ]
+    // new BundleAnalyzerPlugin(),
+  ],
 }
 
 if (production) {

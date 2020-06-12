@@ -1,7 +1,8 @@
 import React from 'react'
+import loadable from '@loadable/component'
 
 import Visualizer from 'components/Visualizer'
-import Analytics from 'components/Analytics'
+const Analytics = loadable(() => import('components/Analytics'))
 
 import './index.sass'
 

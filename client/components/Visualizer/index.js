@@ -3,14 +3,15 @@ import { useEffect, useState, useRef } from 'preact/hooks'
 import Div100vh from 'react-div-100vh'
 import Cookies from 'js-cookie'
 import ioClient from 'socket.io-client'
+import loadable from '@loadable/component'
 
 import Transactions from 'components/Transactions'
 import BottomBar from 'components/BottomBar'
 import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
-import DonateModal from 'components/DonateModal'
 import numberWithCommas from 'lib/numberWithCommas'
 import donate from 'assets/donate.png'
+const DonateModal = loadable(() => import('components/DonateModal'))
 // import { getRandomTransactions } from 'lib/testData'
 
 import './index.sass'
@@ -53,7 +54,9 @@ export default function Visualizer() {
       statsRef={statsRef}
       hasTxStatsBeenCountedRef={hasTxStatsBeenCountedRef}
     />
-    <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
+    { modalVisible &&
+      <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
+    }
   </Div100vh>
 }
 

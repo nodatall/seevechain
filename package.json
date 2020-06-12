@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --colors --progress",
+    "build": "webpack --colors --progress --mode production",
     "build:dev": "webpack --colors --progress -w",
     "start:dev": "npm run build:dev & nodemon ./scripts/start",
     "start": "./scripts/db-migrate up && npm run build && ./scripts/start"
@@ -21,6 +21,7 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
+    "@loadable/component": "^5.12.0",
     "@vechain/connex-framework": "^1.1.2",
     "@vechain/connex.driver-nodejs": "^1.2.0-beta6",
     "axios": "^0.19.2",
@@ -65,7 +66,8 @@
     "sass-loader": "^7.1.0",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
-    "webpack": "^4.29.6"
+    "webpack": "^4.29.6",
+    "webpack-bundle-analyzer": "^3.8.0"
   },
   "devDependencies": {
     "webpack-cli": "^3.3.0"
