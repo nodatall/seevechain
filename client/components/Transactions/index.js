@@ -163,7 +163,7 @@ function TransferTransaction({transfers, VTHOBurn, types}) {
   return <Fragment>
     <TypeTag types={types} />
     {transfers === '0.00' ? '< 1' : transfers} VET
-    <div className="Transaction-small">
+    <div className="Transaction-burn">
       {numberWithCommas(VTHOBurn)} Burn
     </div>
   </Fragment>
@@ -173,14 +173,17 @@ function DataTransaction({contracts, VTHOBurn, types}) {
   return <Fragment>
     <TypeTag types={types} />
     {contracts.join(', ')}
-    <div className="Transaction-small">
+    <div className="Transaction-burn">
       {numberWithCommas(VTHOBurn)} Burn
     </div>
   </Fragment>
 }
 
 function TypeTag({types}) {
-  return <div className="Transaction-TypeTag">{types}</div>
+  let className = 'Transaction-TypeTag'
+  if (types.indexOf('Data') === -1) className += ' Transaction-TypeTag-transfer'
+  else className += ' Transaction-TypeTag-data'
+  return <div className={className}>{types}</div>
 }
 
 function updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef}) {
