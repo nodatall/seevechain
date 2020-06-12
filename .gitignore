@@ -1,4 +1,5 @@
 node_modules
-client/dist
+client/dist/*
+!client/dist/.well-known
 .env
 logs.txt
