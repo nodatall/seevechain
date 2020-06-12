@@ -12,7 +12,7 @@
   position: absolute
   top: 50%
   right: 50%
-  font-size: 20px
+  font-size: 15px
   box-sizing: border-box
   white-space: nowrap
   display: flex
@@ -25,5 +25,16 @@
   &:hover
     background: lighten($background-color, 2%)
     box-shadow: 0 0 1px 1px #fff, 0 0 2px 1px #0ff
-  &-contract
+  > *
+    margin-bottom: 2px
+  &-small
     font-size: 12px
+    margin-top: 2px
+    text-align: center
+  &-TypeTag
+    margin-top: -5px
+    font-size: 13px
+    padding: 3px 5px
+    border-radius: 3px
+    border: 1px solid #464646
+    color: lighten($grey-text, 25%)

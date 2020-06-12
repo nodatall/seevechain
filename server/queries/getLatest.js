@@ -53,7 +53,7 @@ module.exports = async function(client) {
     transactions: transactionsRecords.map(transaction => ({
       id: transaction.id,
       blockNumber: transaction.block_number,
-      contract: transaction.contract,
+      contracts: transaction.contracts,
       delegator: transaction.delegator,
       origin: transaction.origin,
       gas: transaction.gas,
@@ -62,6 +62,8 @@ module.exports = async function(client) {
       gasUsed: transaction.gas_used,
       paid: transaction.paid,
       reward: transaction.reward,
+      types: transaction.types,
+      transfers: transaction.transfers,
     })),
     stats: {
       dailyTransactions: +stats.dailytransactions,

@@ -1,10 +1,12 @@
+import { Fragment } from 'preact'
 import React, { Component } from 'react'
 import { useEffect, useState } from 'preact/hooks'
 import waitFor from 'delay'
+import numeral from 'numeral'
 
 import numberWithCommas from '../../lib/numberWithCommas'
 import calculateInterval from '../../lib/calculateInterval'
-import { LIGHT_RANGE, DARK_RANGE } from '../../lib/colors'
+import { LIGHT_RANGE } from '../../lib/colors'
 import KNOWN_ADDRESSES from '../../lib/knownAddresses'
 
 import './index.sass'
@@ -142,17 +144,44 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
   if (!style) return
 
   const VTHOBurn = Math.round((transaction.vthoBurn) * 100) / 100
-  const contract = KNOWN_ADDRESSES[transaction.contract]
-    || `${transaction.contract.slice(2,6)}..${transaction.contract.slice(-4)}`
+  const contracts = []
+  transaction.contracts.split(', ').forEach(contract => {
+    contracts.push(KNOWN_ADDRESSES[contract] || `${contract.slice(2,6)}..${contract.slice(-4)}`)
+  })
 
+  const types = transaction.types
   return <a href={`https://insight.vecha.in/#/main/txs/${transaction.id}`} target="_blank">
     <div className="Transaction" style={style}>
-      <div className="Transaction-contract">
-        {contract}
-      </div>
-      <div>{numberWithCommas(VTHOBurn)}</div>
+      {transaction.transfers > 0 && transaction.types.indexOf('Data') === -1
+        ? <TransferTransaction transfers={transaction.transfers} VTHOBurn={VTHOBurn} types={types} />
+        : <DataTransaction contracts={contracts} VTHOBurn={VTHOBurn} types={types} />
+      }
     </div>
   </a>
+}
+
+function TransferTransaction({transfers, VTHOBurn, types}) {
+  return <Fragment>
+    <TypeTag types={types} />
+    {numeral(transfers).format('0.00a')} VET
+    <div className="Transaction-small">
+      {numberWithCommas(VTHOBurn)} Burn
+    </div>
+  </Fragment>
+}
+
+function DataTransaction({contracts, VTHOBurn, types}) {
+  return <Fragment>
+    <TypeTag types={types} />
+    {contracts.join(', ')}
+    <div className="Transaction-small">
+      {numberWithCommas(VTHOBurn)} Burn
+    </div>
+  </Fragment>
+}
+
+function TypeTag({types}) {
+  return <div className="Transaction-TypeTag">{types}</div>
 }
 
 function updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef}) {
@@ -250,7 +279,7 @@ function randomPlusMinus() {
 
 function getTransactionSize(burn) {
   const TRANSACTION_VTHO_BURN_RANGE = [14, 1000]
-  const TRANSACTION_SIZE_RANGE = [80, 110]
+  const TRANSACTION_SIZE_RANGE = [95, 120]
   let size = getRangeEquivalent(TRANSACTION_VTHO_BURN_RANGE, TRANSACTION_SIZE_RANGE, burn)
   if (size < TRANSACTION_SIZE_RANGE[0]) size = TRANSACTION_SIZE_RANGE[0]
   if (size > TRANSACTION_SIZE_RANGE[1]) size = TRANSACTION_SIZE_RANGE[1] + (size / 100)
