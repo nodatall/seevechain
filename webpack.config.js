@@ -3,7 +3,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
 const ROOT = path.resolve(__dirname, '.')
@@ -96,11 +95,6 @@ const config = {
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: `${srcPath}/.well-known`, to: `${srcPath}/dist/.well-known` }
-      ]
-    })
   ]
 }
 
