@@ -51,19 +51,20 @@ export default class Transactions extends Component {
         intervals.push(tmpInterval + difference)
       }
     }
-    newTransactions = newTransactions.map((transaction, index) => {
-      transaction.delay = intervals[index]
-      return transaction
-    })
+    newTransactions = newTransactions
+      .map((transaction, index) => {
+        transaction.delay = intervals[index]
+        return transaction
+      })
 
     const renderableTransactions = [
+      ...this.state.renderableTransactions.filter(transaction => transactionTimestamps[transaction.id]),
       ...newTransactions,
-      ...this.state.renderableTransactions.filter(transaction => transactionTimestamps[transaction.id])
     ]
 
     this.setState({
       transactionTimestamps,
-      renderableTransactions: renderableTransactions.sort((a, b) => a.timestamp - b.timestamp),
+      renderableTransactions,
     })
   }
 
