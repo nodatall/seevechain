@@ -63,7 +63,7 @@ export default class Transactions extends Component {
 
     this.setState({
       transactionTimestamps,
-      renderableTransactions,
+      renderableTransactions: renderableTransactions.sort((a, b) => a.timestamp - b.timestamp),
     })
   }
 
