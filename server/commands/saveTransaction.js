@@ -23,7 +23,7 @@ module.exports = async function({ client, transaction, block, receipt }) {
   SORTED_TYPES.forEach(type => {
     if (types.has(type)) sortedTypes.push(type)
   })
-  if (!sortedTypes.length) sortedTypes.push('Unknown... New Wallet?')
+  if (!sortedTypes.length) sortedTypes.push('Unknown')
 
   const vthoBurn = ((receipt.gasUsed + (receipt.gasUsed * ((transaction.gasPriceCoef || 0) / 255))) / 1000) * .7
 
