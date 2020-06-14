@@ -77,10 +77,10 @@ export default class Transactions extends Component {
     const { renderableTransactions } = this.state
     if (!renderableTransactions.length) return
     const animationDuration = renderableTransactions.length < 5
-      ? [1800, 5475]
+      ? [1300, 5175]
       : renderableTransactions.length < 5
-        ? [1623, 4612]
-        : [1350, 3750]
+        ? [1323, 4312]
+        : [1050, 3450]
     return renderableTransactions.map(transaction => {
       return <Transaction
         animationDuration={animationDuration}
