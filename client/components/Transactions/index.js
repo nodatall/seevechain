@@ -58,8 +58,8 @@ export default class Transactions extends Component {
       })
 
     const renderableTransactions = [
-      ...this.state.renderableTransactions.filter(transaction => transactionTimestamps[transaction.id]),
       ...newTransactions,
+      ...this.state.renderableTransactions.filter(transaction => transactionTimestamps[transaction.id]),
     ]
 
     this.setState({
