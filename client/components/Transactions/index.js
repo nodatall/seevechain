@@ -161,9 +161,10 @@ function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef
 }
 
 function TransferTransaction({transfers, VTHOBurn, types}) {
+  const transfer = transfers === '0.00' ? '< 1' : `${transfers} VET`
   return <Fragment>
     <TypeTag types={types} />
-    {transfers === '0.00' ? '< 1' : transfers} VET
+    {(types.indexOf('Transfer') !== -1) && transfer}
     <div className="Transaction-burn">
       {numberWithCommas(VTHOBurn)} Burn
     </div>
