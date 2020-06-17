@@ -1,7 +1,6 @@
 @import "../../style"
 
 .Transaction
-  background: $background-color
   border-radius: 50%
   display: flex
   justify-content: center
@@ -25,6 +24,18 @@
   &:hover
     background: lighten($background-color, 2%)
     box-shadow: 0 0 1px 1px #fff, 0 0 2px 1px #0ff
+  &-background
+    border-radius: 50%
+    position: absolute
+    animation: spin 3s linear 0s infinite
+  &-foreground
+    background: $background-color
+    border-radius: 50%
+    position: absolute
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
   &-burn
     font-size: 12px
     margin-top: 3px
@@ -42,3 +53,9 @@
       color: #5dc8e2
     &-data
       color: #A2A9F3
+
+@keyframes spin
+  from
+    transform: rotate(0)
+  to
+    transform: rotate(359deg)
