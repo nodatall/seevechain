@@ -62,27 +62,24 @@ function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCou
     ...data.transactions,
     // ...getRandomTransactions(4),
   ]
+  const lessData = getStatsBeforeBatchOfTransactions(data)
   if (!initialized.current) {
-    statsRef.current = data
-    document.title = `${numberWithCommas(+statsRef.current.stats.dailyClauses)} Clauses | See VeChain`
+    document.title = `${numberWithCommas(+lessData.stats.dailyClauses)} Clauses | See VeChain`
     initialized.current = true
-    setStats(getStatsBeforeBatchOfTransactions(data))
-  } else {
-    const lessData = getStatsBeforeBatchOfTransactions(data)
-    const stats = lessData.stats
-    for (const key in hasTxStatsBeenCountedRef.current) {
-      const { vthoBurn, clauses } = hasTxStatsBeenCountedRef.current[key]
-      stats.vthoBurn -= vthoBurn
-      stats.clauses -= +clauses
-      stats.transactions -= 1
-    }
-    const newData = {
-      ...lessData,
-      stats,
-    }
-    statsRef.current = newData
-    setStats(newData)
   }
+  const stats = lessData.stats
+  for (const key in hasTxStatsBeenCountedRef.current) {
+    const { vthoBurn, clauses } = hasTxStatsBeenCountedRef.current[key]
+    stats.vthoBurn -= vthoBurn
+    stats.clauses -= +clauses
+    stats.transactions -= 1
+  }
+  const newData = {
+    ...lessData,
+    stats,
+  }
+  statsRef.current = newData
+  setStats(newData)
 }
 
 function createUid() {
@@ -96,7 +93,7 @@ function getStatsBeforeBatchOfTransactions(data) {
   let dailyClauses = +data.stats.dailyClauses
 
   data.transactions.forEach(transaction => {
-    dailyTransactions--
+    dailyTransactions -= 1
     dailyVTHOBurn -= transaction.vthoBurn
     dailyClauses -= +transaction.clauses
   })
