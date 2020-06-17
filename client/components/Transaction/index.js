@@ -124,7 +124,7 @@ function updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef}
     stats: {
       dailyVTHOBurn: +statsRef.current.stats.dailyVTHOBurn + +transaction.vthoBurn,
       dailyTransactions: statsRef.current.stats.dailyTransactions + 1,
-      dailyClauses: statsRef.current.stats.dailyClauses + transaction.clauses,
+      dailyClauses: +statsRef.current.stats.dailyClauses + +transaction.clauses,
     },
   }
   setStats(statsRef.current)

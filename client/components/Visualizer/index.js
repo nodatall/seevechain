@@ -73,7 +73,7 @@ function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCou
     for (const key in hasTxStatsBeenCountedRef.current) {
       const { vthoBurn, clauses } = hasTxStatsBeenCountedRef.current[key]
       stats.vthoBurn -= vthoBurn
-      stats.clauses -= clauses
+      stats.clauses -= +clauses
       stats.transactions -= 1
     }
     const newData = {
@@ -93,12 +93,12 @@ function createUid() {
 function getStatsBeforeBatchOfTransactions(data) {
   let dailyVTHOBurn = data.stats.dailyVTHOBurn
   let dailyTransactions = data.stats.dailyTransactions
-  let dailyClauses = data.stats.dailyClauses
+  let dailyClauses = +data.stats.dailyClauses
 
   data.transactions.forEach(transaction => {
     dailyTransactions--
     dailyVTHOBurn -= transaction.vthoBurn
-    dailyClauses -= transaction.clauses
+    dailyClauses -= +transaction.clauses
   })
 
   return {
