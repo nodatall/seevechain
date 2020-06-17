@@ -8,9 +8,9 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
+app.use(compression())
 app.use(express.static('client/dist'))
 
-app.use(compression())
 app.use(cookieParser())
 
 app.use(function(req, res, next) {
