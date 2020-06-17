@@ -10,7 +10,7 @@ module.exports = async function({ client, transaction, block, receipt }) {
     if (clause.to) {
       if (clause.data === '0x') {
         types.add('Transfer')
-        transfers += bigNumber(clause.value, 16).dividedBy(Math.pow(10, 18)).toNumber()
+        transfers += bigNumber(clause.value, 16).dividedBy(Math.pow(10, 18)).toFixed(0)
       } else {
         types.add('Data')
         contracts.add(clause.to)
