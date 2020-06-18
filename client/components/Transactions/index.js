@@ -29,19 +29,7 @@ export default class Transactions extends Component {
       }
     })
 
-    const interval = calculateInterval(newTransactions.length)
-    const intervals = []
-    let difference
-    for (let i = 0; i < newTransactions.length; i++) {
-      const tmpInterval = (i * interval) + 150
-      if (!difference) intervals.push(tmpInterval)
-      else if (i % 2 === 1) {
-        difference = getNumberInRange(tmpInterval * .90, tmpInterval)
-        intervals.push(tmpInterval - difference)
-      } else {
-        intervals.push(tmpInterval + difference)
-      }
-    }
+    const intervals = getIntervals(newTransactions)
     newTransactions = newTransactions
       .map((transaction, index) => {
         transaction.delay = intervals[index]
@@ -69,7 +57,7 @@ export default class Transactions extends Component {
     if (!renderableTransactions.length) return
     const animationDuration = renderableTransactions.length < 5
       ? [1800, 5475]
-      : renderableTransactions.length < 5
+      : renderableTransactions.length < 10
         ? [1623, 4612]
         : [1350, 3750]
     return renderableTransactions.map(transaction => {
@@ -83,4 +71,21 @@ export default class Transactions extends Component {
       />
     })
   }
+}
+
+function getIntervals(newTransactions) {
+  const interval = calculateInterval(newTransactions.length)
+  const intervals = []
+  let difference
+  for (let i = 0; i < newTransactions.length; i++) {
+    const tmpInterval = (i * interval) + 150
+    if (!difference) intervals.push(tmpInterval)
+    else if (i % 2 === 1) {
+      difference = getNumberInRange(tmpInterval * .90, tmpInterval)
+      intervals.push(tmpInterval - difference)
+    } else {
+      intervals.push(tmpInterval + difference)
+    }
+  }
+  return intervals
 }
