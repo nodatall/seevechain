@@ -12,6 +12,7 @@ const KNOWN_ADDRESSES = {
   '0xf9f99f982f3ea9020f0a0afd4d4679dfee1b63cf': 'vexchange.io',
   '0xf306dfc3c4a276ac4c1795c5896e9f4a967341b6': 'realitems.io',
   '0xa7f8b361060222b3aee75f4b457ba0353cf10998': 'Cyprus E-HCert',
+  '0xa9f3c1bd52c3a506cecbb8cbca562ef26c833175': 'Yuhongtai Foods',
   'New Contract': 'Contract Creation',
 }
 
