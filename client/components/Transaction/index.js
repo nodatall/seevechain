@@ -11,7 +11,11 @@ import { LIGHT_RANGE } from '../../lib/colors'
 
 import './index.sass'
 
-const xyMemo = {}
+const bubbleGrid = {
+  windowHeight: 0,
+  windowWidth: 0,
+  grid: [],
+}
 
 export default function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef, animationDuration }) {
   const delay = transaction.delay
@@ -21,7 +25,6 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
     width: `${size}px`,
     height: `${size}px`,
     transition: `transform ${transitionDuration}ms ease-out, opacity 500ms`,
-    zIndex: transaction.num,
   }
   const backgroundStyle = {
     width: `${size}px`,
@@ -35,15 +38,15 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
     height: `${size - 3}px`,
   }
 
-
   const [style, setStyle] = useState()
 
-  const maxScale = window.innerWidth <= 760 ? .6 : 1
+  const isMobile = window.innerWidth <= 760
+  const maxScale = isMobile ? .8 : 1
 
   useEffect(() => {
     hasTxStatsBeenCountedRef.current[transaction.id] = transaction
     const bottomBarHeight = (document.querySelector('.BottomBar') || {}).clientHeight || 0
-    const { xCoordinate, yCoordinate } = calculateCoordinates(size, transaction, bottomBarHeight)
+    const { xCoordinate, yCoordinate, row, col } = calculateCoordinates(size, transaction, bottomBarHeight, isMobile)
 
     function updateStyle(scale, style = {}) {
       setStyle({
@@ -62,7 +65,7 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
       updateStyle(maxScale, { transition: `transform 4s ease-out, opacity 300ms` })
       await waitFor(thirdDelay)
       updateStyle(.7, { opacity: 0 })
-      delete xyMemo[transaction.id]
+      bubbleGrid.grid[row][col] -= 1
       await waitFor(400)
       updateStyle(0, { transition: `transform 1ms ease-out, opacity 500ms`, opacity: 0 })
     }
@@ -79,7 +82,11 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
   })
 
   const types = transaction.types
-  return <a href={`https://insight.vecha.in/#/main/txs/${transaction.id}`} target="_blank">
+  return <a
+    href={`https://insight.vecha.in/#/main/txs/${transaction.id}`}
+    target="_blank"
+    style={{zIndex: transaction.num}}
+  >
     <div className="Transaction" style={style}>
       <div className="Transaction-background" style={backgroundStyle} />
       <div className="Transaction-foreground" style={foregroundStyle}>
@@ -137,67 +144,66 @@ function getNumberInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-function calculateCoordinates(size, transaction, bottomBarHeight, attempts = 0) {
-  const windowHeight = window.innerHeight
-  const windowWidth = window.innerWidth
+const MAX_TRANSACTION_SIZE = 115
 
-  const xPlusOrMinus = randomPlusMinus()
-  const maxX = xPlusOrMinus === '-'
-    ? (windowWidth / 2) - size
-    : windowWidth / 2
-
-  const yPlusOrMinus = randomPlusMinus()
-  const maxY = yPlusOrMinus === '-'
-    ? (windowHeight / 2)
-    : (windowHeight / 2) - size - bottomBarHeight
-
-  const x = randomNumber(0, maxX)
-  const y = randomNumber(0, maxY)
-
-  const xCoordinate = `${xPlusOrMinus}${x}`
-  const yCoordinate = `${yPlusOrMinus}${y}`
-
-  if (attempts > 50) return {
-    xCoordinate,
-    yCoordinate,
+function calculateCoordinates(size, transaction, bottomBarHeight, isMobile) {
+  const windowHeight = window.innerHeight - bottomBarHeight - 50
+  const windowWidth = window.innerWidth - 70
+  const rowNum = Math.floor(windowWidth / (MAX_TRANSACTION_SIZE + 10))
+  const colNum = Math.floor(windowHeight / (MAX_TRANSACTION_SIZE + 10))
+  if (windowHeight !== bubbleGrid.windowHeight || windowWidth !== bubbleGrid.windowWidth) {
+    bubbleGrid.windowHeight = windowHeight
+    bubbleGrid.windowWidth = windowWidth
+    bubbleGrid.grid = Array(rowNum).fill().map(() =>
+      Array(colNum).fill().map(() => 0)
+    )
   }
 
-  const valid = attempts < 40
-    ? 100
-    : attempts < 60
-      ? 50
-      : attempts < 80
-        ? 25
-        : attempts < 100
-          ? 10
-          : 5
-  if (!validCoordinates(xCoordinate, yCoordinate, valid)) {
-    return calculateCoordinates(size, transaction, bottomBarHeight, attempts + 1)
+  const isolatedSpots = []
+  const openSpots = []
+  bubbleGrid.grid.forEach((row, rowIndex) => {
+    bubbleGrid.grid[rowIndex].forEach((col, colIndex) => {
+      if (
+        !!isMobile &&
+        !col &&
+        bubbleGrid.grid[rowIndex + 1] && !bubbleGrid.grid[rowIndex + 1][colIndex] &&
+        bubbleGrid.grid[rowIndex + 1] && !bubbleGrid.grid[rowIndex + 1][colIndex + 1] &&
+        bubbleGrid.grid[rowIndex] && !bubbleGrid.grid[rowIndex][colIndex + 1] &&
+        bubbleGrid.grid[rowIndex - 1] && !bubbleGrid.grid[rowIndex - 1][colIndex + 1] &&
+        bubbleGrid.grid[rowIndex - 1] && !bubbleGrid.grid[rowIndex - 1][colIndex] &&
+        bubbleGrid.grid[rowIndex - 1] && !bubbleGrid.grid[rowIndex - 1][colIndex - 1]
+      ) isolatedSpots.push([rowIndex, colIndex])
+      if (!col) openSpots.push([rowIndex, colIndex])
+    })
+  })
+
+  const spots = isolatedSpots.length > 0 ? isolatedSpots : openSpots
+  let row
+  let col
+  if (spots.length === 0) {
+    row = randomNumber(1, rowNum + 1)
+    col = randomNumber(0, colNum)
+  } else {
+    const spot = spots[randomNumber(0, spots.length - 1)]
+    row = spot[0] + 1
+    col = spot[1]
+    bubbleGrid.grid[row - 1][col]+= 1
   }
 
-  xyMemo[transaction.id] = [xCoordinate, yCoordinate]
+  const extra = (MAX_TRANSACTION_SIZE + 10 - size)
+  const startX = isMobile ? Math.floor((-30 - extra) * 1.2) : (-30 - extra)
+  const endX = isMobile ? Math.floor(30 * 1.2) : 30
+  const startY = isMobile ? Math.floor((-28) * 1.2) : -28
+  const endY = isMobile ? Math.floor((28 + extra) * 1.2) : (28 + extra)
+  const xCoordinate = ((((windowWidth / rowNum) * row) - (windowWidth / 2)) - 5) + randomNumber(startX, endX)
+  const yCoordinate = (((windowHeight / colNum) * col) - (windowHeight / 2) - 12) + randomNumber(startY, endY)
 
   return {
-    xCoordinate,
-    yCoordinate,
+    xCoordinate: Math.floor(xCoordinate),
+    yCoordinate: Math.floor(yCoordinate),
+    row: row - 1,
+    col,
   }
-}
-
-function validCoordinates(xCoordinate, yCoordinate, valid = 50) {
-  return Object.values(xyMemo).every(([x,y]) => {
-    return getDifference(x, xCoordinate) > valid
-      && getDifference(y, yCoordinate) > valid
-  })
-}
-
-function getDifference(p1, p2) {
-  let difference
-  if ((p1 < 0 && p2 > 0) || (p1 > 0 && p2 < 0)) {
-    difference = Math.abs(p1) + Math.abs(p2)
-  } else {
-    difference = Math.abs(p1 - p2)
-  }
-  return difference
 }
 
 function randomNumber(min, max) {
@@ -206,15 +212,9 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min)) + min
 }
 
-function randomPlusMinus() {
-  return Math.random() >= .5
-    ? '-'
-    : '+'
-}
-
 function getTransactionSize(burn) {
   const TRANSACTION_VTHO_BURN_RANGE = [14, 1000]
-  const TRANSACTION_SIZE_RANGE = [95, 115]
+  const TRANSACTION_SIZE_RANGE = [95, MAX_TRANSACTION_SIZE]
   let size = getRangeEquivalent(TRANSACTION_VTHO_BURN_RANGE, TRANSACTION_SIZE_RANGE, burn)
   if (size < TRANSACTION_SIZE_RANGE[0]) size = TRANSACTION_SIZE_RANGE[0]
   if (size > TRANSACTION_SIZE_RANGE[1]) size = TRANSACTION_SIZE_RANGE[1]
