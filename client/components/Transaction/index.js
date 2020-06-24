@@ -21,6 +21,7 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
     width: `${size}px`,
     height: `${size}px`,
     transition: `transform ${transitionDuration}ms ease-out, opacity 500ms`,
+    zIndex: transaction.num,
   }
   const backgroundStyle = {
     width: `${size}px`,
