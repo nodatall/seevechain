@@ -40,11 +40,13 @@ export default function Visualizer() {
     <Spinner />
   </div>
 
+  const clausesInBlock = stats.transactions.reduce((clauses, tx) => clauses + tx.clauses, 0)
+
   return <Div100vh className="Visualizer">
     <Stars />
     <img className="Visualizer-donate" src={donate} onClick={() => { toggleModalVisibility(!modalVisible) }} />
     <a href={`https://insight.vecha.in/#/main/blocks/${stats.block.id}`} target="_blank" className="Visualizer-blockNumber">
-      Block: {numberWithCommas(stats.block.number)} – {stats.transactions.length} txs
+      Block: {numberWithCommas(stats.block.number)} – {clausesInBlock} {clausesInBlock === 1 ? 'clause' : 'clauses'}
     </a>
     <BottomBar stats={stats.stats} />
     <Transactions
