@@ -41,7 +41,7 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
   const [style, setStyle] = useState()
 
   const isMobile = window.innerWidth <= 760
-  const maxScale = isMobile ? .8 : 1
+  const maxScale = isMobile ? .7 : 1
 
   useEffect(() => {
     hasTxStatsBeenCountedRef.current[transaction.id] = transaction
@@ -191,10 +191,10 @@ function calculateCoordinates(size, transaction, bottomBarHeight, isMobile) {
   }
 
   const extra = (MAX_TRANSACTION_SIZE + 10 - size)
-  const startX = isMobile ? Math.floor((-30 - extra) * 1.2) : (-30 - extra)
-  const endX = isMobile ? Math.floor(30 * 1.2) : 30
-  const startY = isMobile ? Math.floor((-28) * 1.2) : -28
-  const endY = isMobile ? Math.floor((28 + extra) * 1.2) : (28 + extra)
+  const startX = isMobile ? Math.floor((-30 - extra) * 1.3) : (-30 - extra)
+  const endX = isMobile ? Math.floor(30 * 1.3) : 30
+  const startY = isMobile ? Math.floor((-28) * 1.3) : -28
+  const endY = isMobile ? Math.floor((28 + extra) * 1.3) : (28 + extra)
   const xCoordinate = ((((windowWidth / rowNum) * row) - (windowWidth / 2)) - 5) + randomNumber(startX, endX)
   const yCoordinate = (((windowHeight / colNum) * col) - (windowHeight / 2) - 12) + randomNumber(startY, endY)
 
