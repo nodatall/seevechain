@@ -40,14 +40,10 @@ export default function Visualizer() {
     <Spinner />
   </div>
 
-  const clausesInBlock = stats.transactions.reduce((clauses, tx) => clauses + tx.clauses, 0)
-
   return <Div100vh className="Visualizer">
     <Stars />
     <img className="Visualizer-donate" src={donate} onClick={() => { toggleModalVisibility(!modalVisible) }} />
-    <a href={`https://insight.vecha.in/#/main/blocks/${stats.block.id}`} target="_blank" className="Visualizer-blockNumber">
-      Block: {numberWithCommas(stats.block.number)} – {clausesInBlock} {clausesInBlock === 1 ? 'clause' : 'clauses'}
-    </a>
+    <BlockNumber stats={stats} />
     <BottomBar stats={stats.stats} />
     <Transactions
       transactions={stats.transactions}
@@ -57,6 +53,17 @@ export default function Visualizer() {
     />
     <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
   </Div100vh>
+}
+
+function BlockNumber({stats}) {
+  const clausesInBlock = stats.transactions.reduce((clauses, tx) => clauses + tx.clauses, 0)
+  return <a
+    href={`https://insight.vecha.in/#/main/blocks/${stats.block.id}`}
+    target="_blank"
+    className="Visualizer-blockNumber"
+  >
+    Block: {numberWithCommas(stats.block.number)} – {clausesInBlock} {clausesInBlock === 1 ? 'clause' : 'clauses'}
+  </a>
 }
 
 function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef }){
