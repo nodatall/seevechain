@@ -1,6 +1,6 @@
 const KNOWN_ADDRESSES = {
   '0x505b95e128e403634fe6090472485341905fc0f9': `Yunnan Pu'er Tea`,
-  '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': 'DNVGL',
+  '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': 'DNV-GL',
   '0xbb763cea82127548c465f6ad83a297f292e5c2fb': 'Reebonz',
   '0xfbc5c4e371164e3f1dc5d1760a98f3d227ba7e3b': 'Reebonz 2',
   '0x9ee753d070c1fd42d715e951bd8d5441e6c7d052': 'Reebonz 3',

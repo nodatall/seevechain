@@ -17,6 +17,8 @@ const bubbleGrid = {
   grid: [],
 }
 
+const txCount = { count: 1 }
+
 export default function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef, animationDuration }) {
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
@@ -59,14 +61,16 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
     async function animate([secondDelay, thirdDelay]) {
       updateStyle(0)
       await waitFor(delay)
-      updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef})
-      updateStyle(.1, { boxShadow: BOX_SHADOWS[randomNumber(0, BOX_SHADOWS.length)] })
+      const zIndex = txCount.count
+      txCount.count += 1
+      updateStyle(.1, { boxShadow: BOX_SHADOWS[randomNumber(0, BOX_SHADOWS.length)], zIndex })
       await waitFor(600)
-      updateStyle(maxScale)
+      updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef})
+      updateStyle(maxScale, { zIndex })
       await waitFor(secondDelay)
-      updateStyle(maxScale, { transition: `transform 4s ease-out, opacity 300ms` })
+      updateStyle(maxScale, { transition: `transform 4s ease-out, opacity 300ms`, zIndex })
       await waitFor(thirdDelay)
-      updateStyle(.7, { opacity: 0 })
+      updateStyle(.7, { opacity: 0, zIndex })
       bubbleGrid.grid[row][col] -= 1
       await waitFor(400)
       updateStyle(0, { transition: `transform 1ms ease-out, opacity 500ms`, opacity: 0 })
@@ -84,21 +88,20 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
   })
 
   const types = transaction.types
-  return <a
-    href={`https://insight.vecha.in/#/main/txs/${transaction.id}`}
-    target="_blank"
-    style={{zIndex: transaction.num}}
+  return <div
+    className="Transaction"
+    style={style}
+    onClick={() => { openInNewTab(`https://insight.vecha.in/#/main/txs/${transaction.id}`) }}
   >
-    <div className="Transaction" style={style}>
-      <div className="Transaction-background" style={backgroundStyle} />
-      <div className="Transaction-foreground" style={foregroundStyle}>
-        {transaction.types.indexOf('Data') === -1
-          ? <TransferTransaction transfers={transaction.transfers} VTHOBurn={VTHOBurn} types={types} />
-          : <DataTransaction contracts={contracts} VTHOBurn={VTHOBurn} types={types} />
-        }
-      </div>
+    <div className="Transaction-background" style={backgroundStyle} />
+    <div className="Transaction-foreground" style={foregroundStyle}>
+      {transaction.types.indexOf('Data') === -1
+        ? <TransferTransaction transfers={transaction.transfers} VTHOBurn={VTHOBurn} types={types} />
+        : <DataTransaction contracts={contracts} VTHOBurn={VTHOBurn} types={types} />
+      }
     </div>
-  </a>
+  </div>
+
 }
 
 function TransferTransaction({transfers, VTHOBurn, types}) {
@@ -234,4 +237,11 @@ function getTransactionColorIndex(burn) {
 function getRangeEquivalent(r1, r2, num) {
   const ratio = num / (r1[0] + r1[1])
   return (r2[0] + r2[1]) * ratio
+}
+
+function openInNewTab(href) {
+  Object.assign(document.createElement('a'), {
+    target: '_blank',
+    href,
+  }).click()
 }

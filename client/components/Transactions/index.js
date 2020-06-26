@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 import Transaction from 'components/Transaction'
 import calculateInterval from '../../lib/calculateInterval'
 
-const txCount = { count: 1 }
-
 export default class Transactions extends Component {
 
   state = {
@@ -27,8 +25,6 @@ export default class Transactions extends Component {
     transactions.forEach(transaction => {
       if (!transactionTimestamps[transaction.id]) {
         transactionTimestamps[transaction.id] = Date.now()
-        transaction.num = txCount.count
-        txCount.count += 1
         newTransactions.push(transaction)
       }
     })
