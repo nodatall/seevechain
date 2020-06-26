@@ -7,7 +7,7 @@ import waitFor from 'delay'
 import numberWithCommas from '../../lib/numberWithCommas'
 import KNOWN_ADDRESSES from '../../lib/knownAddresses'
 import lightenDarkenColor from '../../lib/lightenDarkenColor'
-import { LIGHT_RANGE } from '../../lib/colors'
+import { LIGHT_RANGE, BOX_SHADOWS } from '../../lib/colors'
 
 import './index.sass'
 
@@ -24,7 +24,7 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
   const defaultStyle = {
     width: `${size}px`,
     height: `${size}px`,
-    transition: `transform ${transitionDuration}ms ease-out, opacity 500ms`,
+    transition: `transform ${transitionDuration}ms ease-out, opacity 500ms, box-shadow 800ms`,
   }
   const backgroundStyle = {
     width: `${size}px`,
@@ -60,6 +60,8 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
       updateStyle(0)
       await waitFor(delay)
       updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef})
+      updateStyle(.1, { boxShadow: BOX_SHADOWS[randomNumber(0, BOX_SHADOWS.length)] })
+      await waitFor(600)
       updateStyle(maxScale)
       await waitFor(secondDelay)
       updateStyle(maxScale, { transition: `transform 4s ease-out, opacity 300ms` })

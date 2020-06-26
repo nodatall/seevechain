@@ -85,7 +85,7 @@ function getIntervals(newTransactions) {
     const tmpInterval = (i * interval) + 150
     if (!difference) intervals.push(tmpInterval)
     else if (i % 2 === 1) {
-      difference = getNumberInRange(tmpInterval * .90, tmpInterval)
+      difference = getNumberInRange(tmpInterval * .8, tmpInterval)
       intervals.push(tmpInterval - difference)
     } else {
       intervals.push(tmpInterval + difference)
