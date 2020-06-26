@@ -240,8 +240,10 @@ function getRangeEquivalent(r1, r2, num) {
 }
 
 function openInNewTab(href) {
-  Object.assign(document.createElement('a'), {
-    target: '_blank',
-    href,
-  }).click()
+  Object.assign(
+    document.createElement('a'), {
+      target: '_blank',
+      href,
+    }
+  ).click().remove()
 }
