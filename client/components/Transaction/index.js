@@ -40,12 +40,17 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
   const colorIndex = getTransactionColorIndex(transaction.vthoBurn)
   const color = LIGHT_RANGE[Math.floor(colorIndex)]
   backgroundStyle.background = `linear-gradient(90deg, ${lightenDarkenColor(color, 40)}, ${lightenDarkenColor(color, -60)})`
-  const foregroundStyle = {
+
+  const [style, setStyle] = useState()
+  const defaultForegroundStyle = {
     width: `${size - 3}px`,
     height: `${size - 3}px`,
   }
-
-  const [style, setStyle] = useState()
+  const [foregroundStyle, setForegroundStyle] = useState({
+    ...defaultForegroundStyle,
+    background: 'white',
+    transition: 'background-color 200ms linear',
+  })
 
   const isMobile = window.innerWidth <= 760
   const maxScale = isMobile ? MOBILE_RATIO : 1
@@ -67,11 +72,21 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
 
     async function animate([secondDelay, thirdDelay]) {
       updateStyle(0)
-      await waitFor(delay)
+      const miniDelay = delay / 10
+      await waitFor(miniDelay)
+      updateStyle(.05, {
+        zIndex,
+        transition: `transform ${delay}ms ease-out, box-shadow 800ms`,
+      })
+      await waitFor(delay - miniDelay)
       const zIndex = txCount.count
       txCount.count += 1
+      setForegroundStyle({
+        ...defaultForegroundStyle,
+        background: '#182024',
+      })
       updateStyle(.1, { boxShadow: BOX_SHADOWS[randomNumber(0, BOX_SHADOWS.length)], zIndex })
-      await waitFor(600)
+      await waitFor(530)
       updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef})
       updateStyle(maxScale, { zIndex })
       await waitFor(secondDelay)
