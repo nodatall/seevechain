@@ -1,11 +1,10 @@
 import React from 'react'
 import { useRef, useEffect } from 'preact/hooks'
-import loadable from '@loadable/component'
 
 import qrCode from 'assets/donate_qr_code.jpg'
 import xIcon from 'assets/greyxicon.png'
 import Header from 'components/Header'
-const CopyButton = loadable(() => import('components/CopyButton'))
+import CopyButton from 'components/CopyButton'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import './index.sass'
