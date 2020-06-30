@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'preact/hooks'
 
-import numberWithCommas from '../../lib/numberWithCommas'
+import numberWithCommas from 'lib/numberWithCommas'
 
 import './index.sass'
 

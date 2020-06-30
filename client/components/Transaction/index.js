@@ -4,10 +4,10 @@ import { Fragment } from 'preact'
 import { useEffect, useState } from 'preact/hooks'
 import waitFor from 'delay'
 
-import numberWithCommas from '../../lib/numberWithCommas'
-import KNOWN_ADDRESSES from '../../lib/knownAddresses'
-import lightenDarkenColor from '../../lib/lightenDarkenColor'
-import { LIGHT_RANGE, BOX_SHADOWS } from '../../lib/colors'
+import numberWithCommas from 'lib/numberWithCommas'
+import KNOWN_ADDRESSES from 'lib/knownAddresses'
+import lightenDarkenColor from 'lib/lightenDarkenColor'
+import { LIGHT_RANGE, BOX_SHADOWS } from 'lib/colors'
 import {
   calculateCoordinates, getTransactionColorIndex, getTransactionSize, randomNumber,
 } from '../../lib/transactionHelpers'

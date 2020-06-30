@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Transaction from 'components/Transaction'
-import calculateInterval from '../../lib/calculateInterval'
+import calculateInterval from 'lib/calculateInterval'
 
 export default class Transactions extends Component {
 
