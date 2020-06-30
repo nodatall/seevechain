@@ -176,5 +176,5 @@ function openInNewTab(href) {
       target: '_blank',
       href,
     }
-  ).click().remove()
+  ).click()
 }
