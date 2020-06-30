@@ -10,6 +10,7 @@ import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
 import DonateModal from 'components/DonateModal'
 import numberWithCommas from 'lib/numberWithCommas'
+import KNOWN_ADDRESSES from 'lib/knownAddresses'
 import donate from 'assets/donate.png'
 // import { getRandomTransactions } from 'lib/testData'
 
@@ -115,4 +116,11 @@ function getStatsBeforeBatchOfTransactions(data) {
       dailyClauses,
     }
   }
+}
+
+console.info('To see a list of labelled addresses, type `getFriendlyNames()` in the console below.')
+window.getFriendlyNames = printFriendlyNames
+
+function printFriendlyNames() {
+  console.table(KNOWN_ADDRESSES)
 }
