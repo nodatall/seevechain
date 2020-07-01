@@ -1,38 +1,4 @@
 .DonateModal
-  position: fixed
-  top: 0
-  left: 0
-  bottom: 0
-  right: 0
-  width: 100vw
-  overflow-y: scroll
-  overflow-x: auto
-  display: flex
-  align-items: center
-  justify-content: center
-  background-color: rgba(0,0,0,0.5)
-  z-index: 2147483601
-  touch-action: auto
-  &-window
-    margin-top: -68px
-    max-width: 430px
-    position: relative
-    padding: 20px
-    margin: 0 20px
-    display: flex
-    flex-direction: column
-    box-shadow: 0 12px 30px 0 rgba(0,0,0,0.5), inset 0 1px 0 0 rgba(0,0,0,0.65)
-    background-color: #182024
-    border: 1px solid #3e4050
-    border-radius: 3px
-    font-size: 15px
-    line-height: 20px
-    align-items: center
-    overflow: hidden
-    max-height: calc(100vh - 90px)
-    overflow-y: scroll
-    > div
-      width: 100%
   &-address
     margin-top: 10px
     display: flex
@@ -56,42 +22,9 @@
       img
         height: 25px
         width: 25px
-  &-close
-    position: absolute
-    top: 7px
-    right: 8px
-    height: 14px
-    width: 14px
-    cursor: pointer
-    filter: invert(.8)
-    &:hover
-      filter: invert(1)
   &-currencyMessage
     margin-top: 10px
   &-qrCode
     margin-top: 10px
     width: 150px
     height: 150px
-  &-animation
-    &-enter
-      opacity: 0
-      transition: opacity 200ms ease-in-out
-      .DonateModal-window
-        transform: scale(0.90)
-        transition: transform 200ms ease-out 50ms
-    &-enter-active
-      opacity: 1
-      .DonateModal-window
-        transform: scale(1)
-    &-exit
-      opacity: 1
-      transition: opacity 200ms ease-in-out 100ms
-      .DonateModal-window
-        transform: scale(1)
-        opacity: 1
-        transition: transform 200ms ease-out, opacity 200ms
-    &-exit-active
-      opacity: 0
-      .DonateModal-window
-        opacity: 0
-        transform: scale(0.90)
