@@ -9,13 +9,8 @@ module.exports = function(app, io) {
     next()
   })
 
-  app.get('/api/visitor_analytics', (req, res, next) => {
-    actions.getAnalytics().then(
-      analytics => {
-        res.json(analytics)
-      },
-      error => { next(error) },
-    )
+  app.promiseRoute('get', '/api/visitor_analytics', async () => {
+    return await actions.getAnalytics()
   })
 
   app.get('*', (req, res) => {

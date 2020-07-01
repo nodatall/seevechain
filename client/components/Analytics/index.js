@@ -13,6 +13,7 @@ export default function Analytics() {
 
   useEffect(() => {
     axios.get('/api/visitor_analytics').then(({data}) => {
+      if (data.error) console.error('error get /api/visitor_analytics', data.error)
       setAnalytics({ uniqueVisits: data.uniqueVisits })
     })
   }, [])
