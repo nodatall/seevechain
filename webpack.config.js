@@ -91,8 +91,8 @@ const config = {
       }
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: production ? '[name].[hash].css' : '[name].css',
+      chunkFilename: production ? '[id].[hash].css' :'[id].css',
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
