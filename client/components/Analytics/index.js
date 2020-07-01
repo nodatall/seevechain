@@ -2,6 +2,7 @@ import React from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import Spinner from 'components/Spinner'
+import Header from 'components/Header'
 import LineChart from 'components/LineChart'
 import { useEffect, useState } from 'preact/hooks'
 
@@ -26,15 +27,16 @@ export default function Analytics() {
   })
 
   return <div className="Analytics">
-    <div>
+    <Header>Today: {analytics.uniqueVisits[analytics.uniqueVisits.length - 1].count}</Header>
+    <div className="Analytics-chartContainer">
       <LineChart
         labels={labels}
         datasets={[
           {
-            label: `Visits: ${analytics.uniqueVisits[analytics.uniqueVisits.length - 1].count}`,
             data: series,
           }
         ]}
+        options={{legend: { display: false}}}
       />
     </div>
   </div>
