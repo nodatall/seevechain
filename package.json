@@ -1,7 +1,7 @@
 {
   "name": "seevechain",
   "version": "1.0.0",
-  "description": "",
+  "description": "Real time visualizer for the VeChain public blockchain",
   "main": "index.js",
   "engines": {
     "node": "12.16.x"
@@ -21,7 +21,6 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
-    "@loadable/component": "^5.12.0",
     "@vechain/connex-framework": "^1.1.2",
     "@vechain/connex.driver-nodejs": "^1.2.0-beta6",
     "axios": "^0.19.2",
@@ -29,7 +28,7 @@
     "babel-loader": "^8.0.5",
     "bignumber.js": "^9.0.0",
     "chai": "^4.2.0",
-    "chartist": "^0.11.4",
+    "chart.js": "^2.9.3",
     "clean-webpack-plugin": "^3.0.0",
     "clipboard": "^2.0.6",
     "compression": "^1.7.4",
@@ -59,7 +58,7 @@
     "pino": "^5.17.0",
     "pino-pretty": "^3.6.1",
     "preact": "^10.0.0",
-    "react-chartist": "^0.14.3",
+    "react-chartjs-2": "^2.9.0",
     "react-div-100vh": "^0.3.8",
     "react-transition-group": "^4.3.0",
     "request": "^2.88.0",
