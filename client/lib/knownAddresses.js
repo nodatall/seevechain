@@ -14,6 +14,7 @@ const KNOWN_ADDRESSES = {
   '0xa7f8b361060222b3aee75f4b457ba0353cf10998': 'Cyprus E-HCert',
   '0xa9f3c1bd52c3a506cecbb8cbca562ef26c833175': 'Yuhongtai Foods',
   '0x040093ab307f5acb4ae3afb0fb31de0ec46d62f9': 'safehaven.io',
+  '0x1111111111111111111111111111111111111111': 've-name.web.app',
 }
 
 export default KNOWN_ADDRESSES
