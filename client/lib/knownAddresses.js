@@ -15,6 +15,7 @@ const KNOWN_ADDRESSES = {
   '0xa9f3c1bd52c3a506cecbb8cbca562ef26c833175': 'Yuhongtai Foods',
   '0x040093ab307f5acb4ae3afb0fb31de0ec46d62f9': 'safehaven.io',
   '0x1111111111111111111111111111111111111111': 've-name.web.app',
+  '0x1Cc13a24b1F73288cc7791C2c8Fd428357405226': 'MyCare',
 }
 
 export default KNOWN_ADDRESSES
