@@ -17,7 +17,7 @@ export default function Analytics() {
         if (data.error) console.error('error get /api/visitor_analytics', data.error)
         setAnalytics({ uniqueVisits: data.uniqueVisits })
       })
-    }, 1000)
+    }, 10000)
   }, [])
   if (!Cookies.get('seeVechainAuthorized')) return <div className="Analytics">Unauthorized</div>
   if (!analytics) return <div className="Analytics"><Spinner /></div>
