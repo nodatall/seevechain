@@ -12,10 +12,12 @@ export default function Analytics() {
   const [analytics, setAnalytics] = useState(null)
 
   useEffect(() => {
-    axios.get('/api/visitor_analytics').then(({data}) => {
-      if (data.error) console.error('error get /api/visitor_analytics', data.error)
-      setAnalytics({ uniqueVisits: data.uniqueVisits })
-    })
+    setInterval(() => {
+      axios.get('/api/visitor_analytics').then(({data}) => {
+        if (data.error) console.error('error get /api/visitor_analytics', data.error)
+        setAnalytics({ uniqueVisits: data.uniqueVisits })
+      })
+    }, 1000)
   }, [])
   if (!Cookies.get('seeVechainAuthorized')) return <div className="Analytics">Unauthorized</div>
   if (!analytics) return <div className="Analytics"><Spinner /></div>
