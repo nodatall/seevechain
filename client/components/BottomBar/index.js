@@ -5,7 +5,7 @@ import numberWithCommas from 'lib/numberWithCommas'
 
 import './index.sass'
 
-export default function BottomBar({ stats }) {
+export default function BottomBar({ stats, toggleStatsModalVisibility }) {
   const [numberClass, setNumberClass] = useState('BottomBar-number')
   const [initialState, setInitialState] = useState(0)
 
@@ -23,7 +23,14 @@ export default function BottomBar({ stats }) {
 
   if (!stats || Object.keys(stats).length === 0) return <div className="BottomBar" />
 
-  return <div className="BottomBar">
+  return <div className="BottomBar" onClick={toggleStatsModalVisibility}>
+    { window.innerWidth > 500 &&
+      <svg height="37" width="33" xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <circle cx="16" cy="10" r="2" fill="grey" />
+        <circle cx="16" cy="18" r="2" fill="grey" />
+        <circle cx="16" cy="26" r="2" fill="grey" />
+      </svg>
+    }
     <div className="BottomBar-wrapper">
       <div>
         <span className="BottomBar-header">Txs </span>

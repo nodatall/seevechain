@@ -7,8 +7,10 @@ const path = require('path')
 const childProcess = require('child_process')
 const logger = require('../server/lib/logger')
 const client = require('../server/database')
+const commands = require('../server/commands')
 
 let gettingMissingInProgress = false
+let savingDailyStats = false
 
 server.listen(port, async () => {
   console.log(`server started on port ${port}`)
@@ -17,13 +19,16 @@ server.listen(port, async () => {
 
 async function startVechainConnection(io, client) {
   try {
-    setInterval(() => {
+    setInterval(async () => {
       if (!gettingMissingInProgress) {
         gettingMissingInProgress = true
-        const gettingMissing = childProcess.fork(path.join(__dirname, './getMissingBlocksAndTransactions'))
-        gettingMissing.on('exit', function() {
-          gettingMissingInProgress = false
-        })
+        childProcess.fork(path.join(__dirname, './getMissingBlocksAndTransactions'))
+          .on('exit', function() { gettingMissingInProgress = false })
+      }
+      if (!savingDailyStats) {
+        savingDailyStats = true
+        await commands.saveDailyStats({client})
+        savingDailyStats = false
       }
     }, 10000)
     await subscribeToVechainBlocks(io, client)

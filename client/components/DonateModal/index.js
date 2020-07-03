@@ -8,7 +8,7 @@ import Modal from 'components/Modal'
 
 import './index.sass'
 
-export default function DonateModal({ toggleModalVisibility, open }) {
+export default function DonateModal({ setVisibility, open }) {
   useEffect(() => {
     const image = new Image()
     image.src = qrCode
@@ -16,7 +16,7 @@ export default function DonateModal({ toggleModalVisibility, open }) {
 
   const qrCodeImage = <img className="DonateModal-qrCode" src={qrCode} />
 
-  return <Modal open={open} toggleVisibility={toggleModalVisibility}>
+  return <Modal open={open} setVisibility={setVisibility} className="DonateModal">
     <Header size="md">Donate</Header>
     <div>
       Contributions will keep this site running and fund the development of additional awesome VeChain apps. Thank you!

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2'
+import numberWithCommas from '../../lib/numberWithCommas'
 
 import './index.sass'
 
@@ -27,7 +28,6 @@ export default function LineChart({ labels, datasets, options = {} }) {
   }
 
   options = {
-    maintainAspectRatio: false,
     scales: {
       yAxes: [{
         gridLines: {
@@ -36,6 +36,8 @@ export default function LineChart({ labels, datasets, options = {} }) {
         },
         ticks: {
           fontColor: '#bfbfc9',
+          userCallback: numberWithCommas,
+          lineHeight: 2,
         },
       }],
       xAxes: [{
@@ -47,6 +49,17 @@ export default function LineChart({ labels, datasets, options = {} }) {
           fontColor: '#bfbfc9',
         },
       }]
+    },
+    tooltips: {
+      titleFontSize: 16,
+      bodyFontSize: 14,
+      xPadding: 12,
+      yPadding: 12,
+      displayColors: false,
+      bodyAlign: 'center',
+      backgroundColor: '#182024',
+      borderColor: '#bfbfc9',
+      borderWidth: .5,
     },
     ...options,
   }

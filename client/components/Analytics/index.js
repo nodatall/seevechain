@@ -36,10 +36,11 @@ export default function Analytics() {
         labels={labels}
         datasets={[
           {
+            label: 'VTHO Burn',
             data: series,
           }
         ]}
-        options={{legend: { display: false}}}
+        options={{legend: { display: false }, maintainAspectRatio: false }}
       />
     </div>
   </div>

@@ -3,12 +3,14 @@ import { useEffect, useState, useRef } from 'preact/hooks'
 import Div100vh from 'react-div-100vh'
 import Cookies from 'js-cookie'
 import ioClient from 'socket.io-client'
+import moment from 'moment'
 
 import Transactions from 'components/Transactions'
 import BottomBar from 'components/BottomBar'
 import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
 import DonateModal from 'components/DonateModal'
+import StatsModal from 'components/StatsModal'
 import numberWithCommas from 'lib/numberWithCommas'
 import KNOWN_ADDRESSES from 'lib/knownAddresses'
 import donate from 'assets/donate.png'
@@ -18,7 +20,10 @@ import './index.sass'
 
 export default function Visualizer() {
   const [stats, setStats] = useState({})
-  const [modalVisible, toggleModalVisibility] = useState(false)
+  const [monthlyStats, setMonthlyStats] = useState()
+  const [serverTime, setServerTime] = useState()
+  const [donateModalVisible, toggleDonateModalVisibility] = useState(false)
+  const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
   const initialized = useRef()
   const statsRef = useRef()
   const hasTxStatsBeenCountedRef = useRef({})
@@ -32,8 +37,11 @@ export default function Visualizer() {
     socket.emit('clientAskForLatest', {
       seeVechainUid: Cookies.get('seeVechainUid'),
     })
+    socket.emit('clientAskForWeekly', {
+      seeVechainUid: Cookies.get('seeVechainUid'),
+    })
     socket.on('serverSendLatest', function(data) {
-      handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef })
+      handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef, setMonthlyStats, setServerTime })
     })
   }, [])
 
@@ -43,16 +51,22 @@ export default function Visualizer() {
 
   return <Div100vh className="Visualizer">
     <Stars />
-    <img className="Visualizer-donate" src={donate} onClick={() => { toggleModalVisibility(!modalVisible) }} />
+    <img className="Visualizer-donate" src={donate} onClick={() => { toggleDonateModalVisibility(!donateModalVisible) }} />
     <BlockNumber stats={stats} />
-    <BottomBar stats={stats.stats} />
+    <BottomBar stats={stats.stats} toggleStatsModalVisibility={toggleStatsModalVisibility} />
     <Transactions
       transactions={stats.transactions}
       setStats={setStats}
       statsRef={statsRef}
       hasTxStatsBeenCountedRef={hasTxStatsBeenCountedRef}
     />
-    <DonateModal open={modalVisible} toggleModalVisibility={() => { toggleModalVisibility(!modalVisible) }} />
+    <DonateModal open={donateModalVisible} setVisibility={() => { toggleDonateModalVisibility(!donateModalVisible) }} />
+    <StatsModal
+      open={statsModalVisible}
+      setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
+      monthlyStats={monthlyStats}
+      serverTime={serverTime}
+    />
   </Div100vh>
 }
 
@@ -67,7 +81,7 @@ function BlockNumber({stats}) {
   </a>
 }
 
-function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef }){
+function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef, setMonthlyStats, setServerTime }){
   data.transactions = [
     ...data.transactions,
     // ...getRandomTransactions(4),
@@ -90,6 +104,18 @@ function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCou
   }
   statsRef.current = newData
   setStats(newData)
+  setMonthlyStats(
+    [
+      {
+        day: moment(data.monthlyStats[0].day).add(24, 'hours').format('YYYY-MM-DD'),
+        vthoBurn: Math.round(data.stats.dailyVTHOBurn),
+        transactionCount: data.stats.dailyTransactions,
+        clauseCount: data.stats.dailyClauses,
+      },
+      ...data.monthlyStats,
+    ]
+  )
+  setServerTime(data.serverTime)
 }
 
 function createUid() {

@@ -6,23 +6,18 @@ const moment = require('moment')
 
 const { getBlock } = require('../server/lib/connex')
 const client = require('../server/database')
+const { oneDayAgo } = require('../server/lib/dateHelpers')
 
 ;(async function getBlocksForLastDay() {
   const driver = await Driver.connect(new SimpleNet('https://vethor-node.vechain.com/'))
   const thor = new Framework(driver).thor
 
-  const oneDayAgo = moment()
-    .subtract((+process.env.TIME_DIFFERENCE + +moment().format('HH')) % 24, 'hours')
-    .subtract(+moment().format('mm'), 'minutes')
-    .toDate()
-    .toISOString()
-
-  const oneDayAgoMinusAMinute = moment(oneDayAgo)
+  const oneDayAgoMinusAMinute = moment(oneDayAgo())
     .subtract(1, 'minutes')
     .toDate()
     .toISOString()
 
-  const blockRecords = await client.any(
+  const blockRecords = await client.query(
     `
       SELECT * FROM blocks WHERE blocks.timestamp > $1 ORDER BY number;
     `,
