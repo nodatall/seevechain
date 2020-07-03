@@ -21,7 +21,7 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
 
   return <Modal open={open} setVisibility={setVisibility} className="StatsModal">
     <span className="StatsModal-serverTime">
-      Server time: {serverTime} (UTC + 2)
+      Server time: {serverTime} (UTC+2)
     </span>
     <Header size="md">Last 30 days</Header>
     <LineChart

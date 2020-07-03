@@ -47,7 +47,7 @@ module.exports = async function(client) {
 
 
   const now = moment()
-  const serverTime = now.add((+process.env.TIME_DIFFERENCE), 'hours').format('MM/DD/YY, k:mm')
+  const serverTime = now.add((+process.env.TIME_DIFFERENCE), 'hours').format('HH:mm MM/DD/YY')
 
   cache[0] = blockRecord.number
   cache[1] = {
