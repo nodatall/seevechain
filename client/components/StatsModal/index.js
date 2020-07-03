@@ -20,9 +20,9 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
   })
 
   return <Modal open={open} setVisibility={setVisibility} className="StatsModal">
-    <div className="StatsModal-serverTime">
+    <span className="StatsModal-serverTime">
       Server time: {serverTime} (UTC + 2)
-    </div>
+    </span>
     <Header size="md">Last 30 days</Header>
     <LineChart
       labels={labels}
