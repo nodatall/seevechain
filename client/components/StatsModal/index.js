@@ -1,19 +1,22 @@
 import React from 'react'
+import moment from 'moment'
+import { useState } from 'preact/hooks'
 
-import Header from 'components/Header'
 import Modal from 'components/Modal'
 import LineChart from 'components/LineChart'
 
 import './index.sass'
 
 export default function StatsModal({ setVisibility, open, monthlyStats, serverTime }) {
+  const [range, setRange] = useState(30)
+
   const labels = []
   const vthoBurnSeries = []
   const txSeries = []
   const clauseSeries = []
 
-  ;[...monthlyStats].reverse().forEach(dayStat => {
-    labels.push(dayStat.day)
+  ;[...monthlyStats].slice(0,range).reverse().forEach(dayStat => {
+    labels.push(moment(dayStat.day).format('MM/DD'))
     vthoBurnSeries.push(dayStat.vthoBurn)
     txSeries.push(dayStat.transactionCount)
     clauseSeries.push(dayStat.clauseCount)
@@ -23,7 +26,6 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
     <span className="StatsModal-serverTime">
       Server time: {serverTime} (UTC+2)
     </span>
-    <Header size="md">Last 30 days</Header>
     <LineChart
       labels={labels}
       datasets={[
@@ -47,5 +49,21 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
         },
       ]}
     />
+    <Slider name="StatsModalSlider" value={range} rangeStart={4} rangeEnd={monthlyStats.length} onChange={setRange} />
   </Modal>
+}
+
+function Slider({ name, className = '', value, rangeStart, rangeEnd, onChange }) {
+  return <div className={`Slider ${className}`}>
+    <input
+      type="range"
+      step={1}
+      name={name}
+      min={rangeStart}
+      max={rangeEnd}
+      onChange={e => { onChange(e.target.value) }}
+      value={value}
+    />
+    <label for={name}>{value} Days</label>
+  </div>
 }

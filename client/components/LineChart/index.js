@@ -1,6 +1,7 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2'
 import numberWithCommas from '../../lib/numberWithCommas'
+import numeral from 'numeral'
 
 import './index.sass'
 
@@ -17,6 +18,7 @@ export default function LineChart({ labels, datasets, options = {} }) {
     pointHoverBorderColor: 'rgba(220,220,220,1)',
     pointHoverBorderWidth: 2,
     pointHitRadius: 10,
+    lineTension: .2,
   }
 
   const data = {
@@ -36,7 +38,7 @@ export default function LineChart({ labels, datasets, options = {} }) {
         },
         ticks: {
           fontColor: '#bfbfc9',
-          userCallback: numberWithCommas,
+          userCallback: num => window.innerWidth > 760 ? numberWithCommas(num) : numeral(num).format('0.0a'),
           lineHeight: 2,
         },
       }],
@@ -60,6 +62,9 @@ export default function LineChart({ labels, datasets, options = {} }) {
       backgroundColor: '#182024',
       borderColor: '#bfbfc9',
       borderWidth: .5,
+      callbacks: {
+        label: item => numberWithCommas(item.value),
+      },
     },
     ...options,
   }

@@ -8,12 +8,12 @@ module.exports = async function({ client }) {
     `
     SELECT * FROM daily_stats
     ORDER BY day DESC
-    LIMIT 30
+    LIMIT 60
     `
   )
 
   let end = oneDayAgo()
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 60; i++) {
     const start = moment(end).subtract('24', 'hours').toDate().toISOString()
     if (!last30Records.find(record => moment(record.day).format('YYYY-MM-DD') === moment(end).format('YYYY-MM-DD'))) {
       const stats = await client.one(
