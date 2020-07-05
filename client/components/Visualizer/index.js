@@ -24,6 +24,7 @@ export default function Visualizer() {
   const [serverTime, setServerTime] = useState()
   const [donateModalVisible, toggleDonateModalVisibility] = useState(false)
   const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
+  const [prices, setPrices] = useState()
   const initialized = useRef()
   const statsRef = useRef()
   const hasTxStatsBeenCountedRef = useRef({})
@@ -41,7 +42,16 @@ export default function Visualizer() {
       seeVechainUid: Cookies.get('seeVechainUid'),
     })
     socket.on('serverSendLatest', function(data) {
-      handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef, setMonthlyStats, setServerTime })
+      handleLatest({
+        data,
+        statsRef,
+        initialized,
+        setStats,
+        hasTxStatsBeenCountedRef,
+        setMonthlyStats,
+        setServerTime,
+        setPrices,
+      })
     })
   }, [])
 
@@ -66,6 +76,7 @@ export default function Visualizer() {
       setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
       monthlyStats={monthlyStats}
       serverTime={serverTime}
+      prices={prices}
     />
   </Div100vh>
 }
@@ -77,11 +88,13 @@ function BlockNumber({stats}) {
     target="_blank"
     className="Visualizer-blockNumber"
   >
-    Block: {numberWithCommas(stats.block.number)} – {clausesInBlock} {clausesInBlock === 1 ? 'clause' : 'clauses'}
+    {numberWithCommas(stats.block.number)} – {clausesInBlock} {clausesInBlock === 1 ? 'clause' : 'clauses'}
   </a>
 }
 
-function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef, setMonthlyStats, setServerTime }){
+function handleLatest({
+  data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef, setMonthlyStats, setServerTime, setPrices,
+}){
   data.transactions = [
     ...data.transactions,
     // ...getRandomTransactions(4),
@@ -116,6 +129,7 @@ function handleLatest({ data, statsRef, initialized, setStats, hasTxStatsBeenCou
     ]
   )
   setServerTime(data.serverTime)
+  setPrices(data.prices)
 }
 
 function createUid() {

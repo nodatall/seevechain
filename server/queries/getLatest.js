@@ -1,6 +1,8 @@
 const numeral = require('numeral')
 const moment = require('moment')
 const { oneDayAgo } = require('../lib/dateHelpers')
+const CoinGecko = require('coingecko-api')
+const CoinGeckoClient = new CoinGecko()
 
 const cache = []
 
@@ -45,6 +47,7 @@ module.exports = async function(client) {
 
   const monthlyStatsRecords = await client.query(`SELECT * FROM daily_stats ORDER BY day DESC LIMIT 59`)
 
+  const prices = await CoinGeckoClient.simple.price({ ids: ['vechain', 'vethor-token']})
 
   const now = moment()
   const serverTime = now.add((+process.env.TIME_DIFFERENCE), 'hours').format('HH:mm MM/DD/YY')
@@ -86,6 +89,10 @@ module.exports = async function(client) {
       clauseCount: record.clause_count,
     })),
     serverTime,
+    prices: {
+      vet: prices.data.vechain,
+      vtho: prices.data['vethor-token'],
+    }
   }
 
   return cache[1]

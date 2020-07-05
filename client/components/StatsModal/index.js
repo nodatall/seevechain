@@ -7,7 +7,7 @@ import LineChart from 'components/LineChart'
 
 import './index.sass'
 
-export default function StatsModal({ setVisibility, open, monthlyStats, serverTime }) {
+export default function StatsModal({ setVisibility, open, monthlyStats, serverTime, prices }) {
   const [range, setRange] = useState(30)
 
   const labels = []
@@ -26,6 +26,16 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
     <span className="StatsModal-serverTime">
       Server time: {serverTime} (UTC+2)
     </span>
+    <div className="StatsModal-prices">
+      <span>
+        VET
+        <span className="StatsModal-prices-price">${prices.vet.usd.toFixed(5)}</span>
+      </span>
+      <span>
+        VTHO
+        <span className="StatsModal-prices-price">${prices.vtho.usd.toFixed(5)}</span>
+      </span>
+    </div>
     <LineChart
       labels={labels}
       datasets={[
