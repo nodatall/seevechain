@@ -11,12 +11,17 @@ import './index.sass'
 export default function Analytics() {
   const [analytics, setAnalytics] = useState(null)
 
+  function getAnalytics() {
+    axios.get('/api/visitor_analytics').then(({data}) => {
+      if (data.error) console.error('error get /api/visitor_analytics', data.error)
+      setAnalytics({ uniqueVisits: data.uniqueVisits })
+    })
+  }
+
   useEffect(() => {
+    getAnalytics()
     setInterval(() => {
-      axios.get('/api/visitor_analytics').then(({data}) => {
-        if (data.error) console.error('error get /api/visitor_analytics', data.error)
-        setAnalytics({ uniqueVisits: data.uniqueVisits })
-      })
+      getAnalytics()
     }, 10000)
   }, [])
   if (!Cookies.get('seeVechainAuthorized')) return <div className="Analytics">Unauthorized</div>
