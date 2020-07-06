@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import { useState } from 'preact/hooks'
+import { useLocalStorage } from 'lib/storageHooks'
 
 import Modal from 'components/Modal'
 import LineChart from 'components/LineChart'
@@ -8,7 +8,7 @@ import LineChart from 'components/LineChart'
 import './index.sass'
 
 export default function StatsModal({ setVisibility, open, monthlyStats, serverTime, prices }) {
-  const [range, setRange] = useState(30)
+  const [range, setRange] = useLocalStorage('statsRange')
 
   const labels = []
   const vthoBurnSeries = []
@@ -59,7 +59,13 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
         },
       ]}
     />
-    <Slider name="StatsModalSlider" value={range} rangeStart={4} rangeEnd={monthlyStats.length} onChange={setRange} />
+    <Slider
+      name="StatsModalSlider"
+      value={range || monthlyStats.length}
+      rangeStart={4}
+      rangeEnd={monthlyStats.length}
+      onChange={setRange}
+    />
   </Modal>
 }
 
@@ -71,7 +77,7 @@ function Slider({ name, className = '', value, rangeStart, rangeEnd, onChange })
       name={name}
       min={rangeStart}
       max={rangeEnd}
-      onChange={e => { onChange(e.target.value) }}
+      onInput={e => { onChange(e.target.value) }}
       value={value}
     />
     <label for={name}>{value} Days</label>
