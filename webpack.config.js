@@ -88,7 +88,10 @@ const config = {
         minifyJS: production,
         minifyCSS: production,
         minifyURLs: production,
-      }
+      },
+      meta: {
+        description: 'Real-time visualizer of the VeChain blockchain',
+      },
     }),
     new MiniCssExtractPlugin({
       filename: production ? '[name].[hash].css' : '[name].css',
