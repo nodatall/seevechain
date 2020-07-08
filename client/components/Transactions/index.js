@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Transaction from 'components/Transaction'
 import calculateInterval from 'lib/calculateInterval'
+import { randomNumber } from 'lib/transactionHelpers'
 
 export default class Transactions extends Component {
 
@@ -17,7 +18,7 @@ export default class Transactions extends Component {
   setRenderableTransactions = transactions => {
     const oldTransactionTimestamps = {...this.state.transactionTimestamps}
     Object.entries(oldTransactionTimestamps).forEach(([key, value]) => {
-      if (Date.now() - value > 40000) delete oldTransactionTimestamps[key]
+      if (Date.now() - value > 20000) delete oldTransactionTimestamps[key]
     })
 
     let newTransactions = []
@@ -76,16 +77,9 @@ export default class Transactions extends Component {
 function getIntervals(newTransactions) {
   const interval = calculateInterval(newTransactions.length)
   const intervals = []
-  let difference
-  for (let i = 0; i < newTransactions.length; i++) {
-    const tmpInterval = (i * interval) + 150
-    if (!difference) intervals.push(tmpInterval)
-    else if (i % 2 === 1) {
-      difference = getNumberInRange(tmpInterval * .8, tmpInterval)
-      intervals.push(tmpInterval - difference)
-    } else {
-      intervals.push(tmpInterval + difference)
-    }
+  for (let i = 1; i <= newTransactions.length; i++) {
+    const tmpInterval = randomNumber((i * interval) - (interval / 1.35), (i * interval))
+    intervals.push(tmpInterval)
   }
   return intervals
 }

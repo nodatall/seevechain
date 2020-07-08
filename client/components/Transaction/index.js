@@ -31,7 +31,7 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
   const defaultStyle = {
     width: `${size}px`,
     height: `${size}px`,
-    transition: `transform ${transitionDuration}ms ease-out, opacity 500ms, box-shadow 800ms`,
+    transition: `transform ${transitionDuration}ms ease-out, opacity 500ms, box-shadow 850ms`,
   }
   const backgroundStyle = {
     width: `${size}px`,
@@ -71,22 +71,18 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
     }
 
     async function animate([secondDelay, thirdDelay]) {
-      updateStyle(0)
-      const miniDelay = delay / 10
-      await waitFor(miniDelay)
-      updateStyle(.05, {
+      updateStyle(0, {
         zIndex,
         transition: `transform ${delay}ms ease-out, box-shadow 800ms`,
+        boxShadow: BOX_SHADOWS[randomNumber(0, BOX_SHADOWS.length)],
       })
-      await waitFor(delay - miniDelay)
+      await waitFor(delay)
       const zIndex = txCount.count
       txCount.count += 1
       setForegroundStyle({
         ...defaultForegroundStyle,
         background: '#182024',
       })
-      updateStyle(.1, { boxShadow: BOX_SHADOWS[randomNumber(0, BOX_SHADOWS.length)], zIndex })
-      await waitFor(530)
       updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef})
       updateStyle(maxScale, { zIndex })
       await waitFor(secondDelay)
@@ -94,7 +90,7 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
       await waitFor(thirdDelay)
       updateStyle(.7, { opacity: 0, zIndex })
       bubbleGrid.grid[row][col] -= 1
-      await waitFor(400)
+      await waitFor(300)
       updateStyle(0, { transition: `transform 1ms ease-out, opacity 500ms`, opacity: 0 })
     }
 
