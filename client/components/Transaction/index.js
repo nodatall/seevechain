@@ -13,6 +13,7 @@ import {
 } from '../../lib/transactionHelpers'
 import ding_low from 'assets/ding_low.mp3'
 import ding_high from 'assets/ding_high.mp3'
+import { Howl } from 'howler'
 
 import './index.sass'
 
@@ -25,6 +26,20 @@ const bubbleGrid = {
 const MOBILE_RATIO = .7
 
 const txCount = { count: 1 }
+
+const lowDing = new Howl({
+  src: [ding_low],
+  format: ['mp3'],
+  html5: true,
+  autoplay: false,
+})
+
+const highDing = new Howl({
+  src: [ding_high],
+  format: ['mp3'],
+  html5: true,
+  autoplay: false,
+})
 
 export default function Transaction({
   transaction,
@@ -93,8 +108,8 @@ export default function Transaction({
       })
       await waitFor(delay)
       if (shouldPlaySound.current) {
-        const sound = new Audio(VTHOBurn > 1000 ? ding_low : ding_high)
-        sound.play()
+        if (VTHOBurn > 1000) lowDing.play()
+        else highDing.play()
       }
       const zIndex = txCount.count
       txCount.count += 1
