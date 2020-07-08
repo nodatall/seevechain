@@ -1,4 +1,4 @@
-module.exports = async function(client, limit = 30) {
+module.exports = async function(client, limit = 60) {
   const uniqueVisits = await client.many(
     `
       SELECT count(*), date FROM unique_visitors GROUP BY date ORDER BY date DESC LIMIT $1;
