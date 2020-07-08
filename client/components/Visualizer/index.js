@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState, useRef } from 'preact/hooks'
+import { Suspense, lazy } from 'preact/compat'
 import Div100vh from 'react-div-100vh'
 import Cookies from 'js-cookie'
 import ioClient from 'socket.io-client'
@@ -11,15 +12,15 @@ import BottomBar from 'components/BottomBar'
 import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
 import DonateModal from 'components/DonateModal'
-import StatsModal from 'components/StatsModal'
 import numberWithCommas from 'lib/numberWithCommas'
 import KNOWN_ADDRESSES from 'lib/knownAddresses'
 import donate from 'assets/donate.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp, faVolumeOff, faStar } from '@fortawesome/free-solid-svg-icons'
 import { faStar as emptyStar } from '@fortawesome/free-regular-svg-icons'
-// import { getRandomTransactions } from 'lib/testData'
+const StatsModal = lazy(() => import('components/StatsModal'))
 
+// import { getRandomTransactions } from 'lib/testData'
 import './index.sass'
 
 export default function Visualizer() {
@@ -82,13 +83,16 @@ export default function Visualizer() {
       soundOn={soundOn}
     />
     <DonateModal open={controlsModalVisible} setVisibility={() => { toggleDonateModalVisibility(!controlsModalVisible) }} />
-    <StatsModal
-      open={statsModalVisible}
-      setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
-      monthlyStats={monthlyStats}
-      serverTime={serverTime}
-      prices={prices}
-    />
+    {statsModalVisible && <Suspense fallback={<Spinner />}>
+      <StatsModal
+        open={statsModalVisible}
+        setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
+        monthlyStats={monthlyStats}
+        serverTime={serverTime}
+        prices={prices}
+      />
+    </Suspense>
+    }
   </Div100vh>
 }
 

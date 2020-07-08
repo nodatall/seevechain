@@ -1,10 +1,11 @@
 const path = require('path')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const webpack = require('webpack')
 
 const ROOT = path.resolve(__dirname, '.')
 const srcPath = `${ROOT}/client`
@@ -104,6 +105,7 @@ const config = {
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     // new BundleAnalyzerPlugin(),
   ],
 }

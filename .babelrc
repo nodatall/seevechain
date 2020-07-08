@@ -1,4 +1,16 @@
 {
   "presets": ["@babel/env", "@babel/react"],
-  "plugins": ["@babel/plugin-proposal-class-properties"]
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    ["transform-imports", {
+      "@fortawesome/free-solid-svg-icons": {
+        "transform": "@fortawesome/free-solid-svg-icons/${member}",
+        "skipDefaultConversion": true
+      },
+      "@fortawesome/free-regular-svg-icons": {
+        "transform": "@fortawesome/free-regular-svg-icons/${member}",
+        "skipDefaultConversion": true
+      }
+    }]
+  ]
 }
