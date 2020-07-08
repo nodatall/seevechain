@@ -4,6 +4,7 @@ import Div100vh from 'react-div-100vh'
 import Cookies from 'js-cookie'
 import ioClient from 'socket.io-client'
 import moment from 'moment'
+import { useLocalStorage } from 'lib/storageHooks'
 
 import Transactions from 'components/Transactions'
 import BottomBar from 'components/BottomBar'
@@ -14,6 +15,9 @@ import StatsModal from 'components/StatsModal'
 import numberWithCommas from 'lib/numberWithCommas'
 import KNOWN_ADDRESSES from 'lib/knownAddresses'
 import donate from 'assets/donate.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faVolumeUp, faVolumeOff, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStar as emptyStar } from '@fortawesome/free-regular-svg-icons'
 // import { getRandomTransactions } from 'lib/testData'
 
 import './index.sass'
@@ -22,12 +26,14 @@ export default function Visualizer() {
   const [stats, setStats] = useState({})
   const [monthlyStats, setMonthlyStats] = useState()
   const [serverTime, setServerTime] = useState()
-  const [donateModalVisible, toggleDonateModalVisibility] = useState(false)
+  const [controlsModalVisible, toggleDonateModalVisibility] = useState(false)
   const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
   const [prices, setPrices] = useState()
+  const [soundOn, setSoundOn] = useState(false)
   const initialized = useRef()
   const statsRef = useRef()
   const hasTxStatsBeenCountedRef = useRef({})
+  const [starsHidden, setStarsHidden] = useLocalStorage('starsVisible')
 
   useEffect(() => {
     const vechainIdCookie = Cookies.get('seeVechainUid')
@@ -60,8 +66,12 @@ export default function Visualizer() {
   </div>
 
   return <Div100vh className="Visualizer">
-    <Stars />
-    <img className="Visualizer-donate" src={donate} onClick={() => { toggleDonateModalVisibility(!donateModalVisible) }} />
+    {!starsHidden && <Stars />}
+    <div className="Visualizer-rightControls">
+      <img className="Visualizer-rightControls-donateIcon" src={donate} onClick={() => { toggleDonateModalVisibility(!controlsModalVisible) }} />
+      <FontAwesomeIcon icon={soundOn ? faVolumeUp : faVolumeOff} size="23px" onClick={() => { setSoundOn(!soundOn) }} />
+      <FontAwesomeIcon icon={starsHidden ? emptyStar : faStar} size="23px" onClick={() => { setStarsHidden(!starsHidden) }} />
+    </div>
     <BlockNumber stats={stats} />
     <BottomBar stats={stats.stats} toggleStatsModalVisibility={toggleStatsModalVisibility} />
     <Transactions
@@ -69,8 +79,9 @@ export default function Visualizer() {
       setStats={setStats}
       statsRef={statsRef}
       hasTxStatsBeenCountedRef={hasTxStatsBeenCountedRef}
+      soundOn={soundOn}
     />
-    <DonateModal open={donateModalVisible} setVisibility={() => { toggleDonateModalVisibility(!donateModalVisible) }} />
+    <DonateModal open={controlsModalVisible} setVisibility={() => { toggleDonateModalVisibility(!controlsModalVisible) }} />
     <StatsModal
       open={statsModalVisible}
       setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
@@ -97,7 +108,7 @@ function handleLatest({
 }){
   data.transactions = [
     ...data.transactions,
-    // ...getRandomTransactions(4),
+    // ...getRandomTransactions(5),
   ]
   const lessData = getStatsBeforeBatchOfTransactions(data)
   if (!initialized.current) {

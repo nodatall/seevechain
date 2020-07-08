@@ -1,7 +1,7 @@
 import React from 'react'
 import { Fragment } from 'preact'
 
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect, useState, useRef } from 'preact/hooks'
 import waitFor from 'delay'
 
 import numberWithCommas from 'lib/numberWithCommas'
@@ -11,6 +11,8 @@ import { LIGHT_RANGE, BOX_SHADOWS } from 'lib/colors'
 import {
   calculateCoordinates, getTransactionColorIndex, getTransactionSize, randomNumber,
 } from '../../lib/transactionHelpers'
+import ding_low from 'assets/ding_low.mp3'
+import ding_high from 'assets/ding_high.mp3'
 
 import './index.sass'
 
@@ -24,7 +26,15 @@ const MOBILE_RATIO = .7
 
 const txCount = { count: 1 }
 
-export default function Transaction({ transaction, setStats, statsRef, hasTxStatsBeenCountedRef, animationDuration }) {
+export default function Transaction({
+  transaction,
+  setStats,
+  statsRef,
+  hasTxStatsBeenCountedRef,
+  animationDuration,
+  soundOn,
+}) {
+  const shouldPlaySound = useRef()
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
   const transitionDuration = getNumberInRange(900, 1100)
@@ -54,6 +64,11 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
 
   const isMobile = window.innerWidth <= 760
   const maxScale = isMobile ? MOBILE_RATIO : 1
+  const VTHOBurn = Math.round((transaction.vthoBurn) * 100) / 100
+
+  useEffect(() => {
+    shouldPlaySound.current = soundOn
+  }, [soundOn])
 
   useEffect(() => {
     hasTxStatsBeenCountedRef.current[transaction.id] = transaction
@@ -77,6 +92,10 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
         boxShadow: BOX_SHADOWS[randomNumber(0, BOX_SHADOWS.length)],
       })
       await waitFor(delay)
+      if (shouldPlaySound.current) {
+        const sound = new Audio(VTHOBurn > 1000 ? ding_low : ding_high)
+        sound.play()
+      }
       const zIndex = txCount.count
       txCount.count += 1
       setForegroundStyle({
@@ -99,7 +118,6 @@ export default function Transaction({ transaction, setStats, statsRef, hasTxStat
 
   if (!style) return
 
-  const VTHOBurn = Math.round((transaction.vthoBurn) * 100) / 100
   const contracts = []
   transaction.contracts.split(', ').forEach(contract => {
     contracts.push(KNOWN_ADDRESSES[contract] || `${contract.slice(2,6)}..${contract.slice(-4)}`)

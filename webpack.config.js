@@ -69,6 +69,10 @@ const config = {
           name: 'assets/[name].[ext]'
         }
       },
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader',
+      },
     ],
   },
   plugins: [
@@ -92,6 +96,7 @@ const config = {
       meta: {
         description: 'Real-time visualizer of the VeChain blockchain',
       },
+      cache: false,
     }),
     new MiniCssExtractPlugin({
       filename: production ? '[name].[hash].css' : '[name].css',
