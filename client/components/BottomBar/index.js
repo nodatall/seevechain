@@ -37,7 +37,7 @@ export default function BottomBar({ stats, toggleStatsModalVisibility }) {
         <span className={numberClass}>{numberWithCommas(stats.dailyTransactions) || 0}</span>
       </div>
       <div className="BottomBar-vtho">
-        <span className="BottomBar-header">VTHO {window.innerWidth < 400 ? '🔥' : 'Burn'} </span>
+        <span className="BottomBar-header">{window.innerWidth < 400 ? '🔥' : 'VTHO Burn'} </span>
         <span className={numberClass}>{numberWithCommas(Math.floor(+stats.dailyVTHOBurn)) || 0}</span>
       </div>
       <div>
