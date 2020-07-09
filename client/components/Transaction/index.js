@@ -122,8 +122,8 @@ export default function Transaction({
       await waitFor(secondDelay)
       updateStyle(maxScale, { transition: `transform 4s ease-out, opacity 300ms`, zIndex })
       await waitFor(thirdDelay)
+      bubbleGrid.grid[row][col] = 0
       updateStyle(.7, { opacity: 0, zIndex })
-      bubbleGrid.grid[row][col] -= 1
       await waitFor(300)
       updateStyle(0, { transition: `transform 1ms ease-out, opacity 500ms`, opacity: 0 })
     }

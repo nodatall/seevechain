@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp, faVolumeOff, faStar } from '@fortawesome/free-solid-svg-icons'
 import { faStar as emptyStar } from '@fortawesome/free-regular-svg-icons'
 const StatsModal = lazy(() => import('components/StatsModal'))
+import { randomNumber } from 'lib/transactionHelpers'
 
 // import { getRandomTransactions } from 'lib/testData'
 import './index.sass'
@@ -112,7 +113,7 @@ function handleLatest({
 }){
   data.transactions = [
     ...data.transactions,
-    // ...getRandomTransactions(5),
+    // ...getRandomTransactions(randomNumber(5, 15)),
   ]
   const lessData = getStatsBeforeBatchOfTransactions(data)
   if (!initialized.current) {
