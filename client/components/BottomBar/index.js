@@ -19,7 +19,7 @@ export default function BottomBar({ stats, toggleStatsModalVisibility }) {
       }, 300)
     }
 
-  }, [stats.dailyVTHOBurn])
+  }, [stats.dailyTransactions])
 
   if (!stats || Object.keys(stats).length === 0) return <div className="BottomBar" />
 
