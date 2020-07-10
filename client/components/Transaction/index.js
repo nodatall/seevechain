@@ -146,7 +146,7 @@ export default function Transaction({
   >
     <div className="Transaction-background" style={backgroundStyle} />
     <div className="Transaction-foreground" style={foregroundStyle}>
-      {transaction.types.indexOf('Data') === -1
+      {types.indexOf('Transfer') !== -1
         ? <TransferTransaction transfers={transaction.transfers} VTHOBurn={VTHOBurn} types={types} />
         : <DataTransaction contracts={contracts} VTHOBurn={VTHOBurn} types={types} />
       }
