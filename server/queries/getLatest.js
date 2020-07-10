@@ -47,7 +47,17 @@ module.exports = async function(client) {
 
   const monthlyStatsRecords = await client.query(`SELECT * FROM daily_stats ORDER BY day DESC LIMIT 59`)
 
-  const prices = await CoinGeckoClient.simple.price({ ids: ['vechain', 'vethor-token']})
+  let prices
+  try {
+    prices = await CoinGeckoClient.simple.price({ ids: ['vechain', 'vethor-token']})
+  } catch(error) {
+    prices = {
+      data: {
+        ['vethor-token']: { usd: 0 },
+        vechain: { usd: 0 },
+      }
+    }
+  }
 
   const now = moment()
   const serverTime = now.add((+process.env.TIME_DIFFERENCE), 'hours').format('HH:mm MM/DD/YY')
