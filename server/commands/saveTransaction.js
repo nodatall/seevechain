@@ -5,12 +5,20 @@ const bigNumber = require('bignumber.js')
 module.exports = async function({ client, transaction, block, receipt }) {
   const contracts = new Set()
   const types = new Set()
+  const to = new Set()
+  const from = new Set()
   let transfers = 0
   transaction.clauses.forEach(clause => {
     if (clause.to) {
       if (clause.data === '0x') {
         types.add('Transfer')
         transfers += +(bigNumber(clause.value, 16).dividedBy(Math.pow(10, 18)).toFixed(0))
+        receipt.outputs.forEach(o => {
+          o.transfers.forEach(t => {
+            to.add(t.recipient)
+            from.add(t.sender)
+          })
+        })
       } else {
         types.add('Data')
         contracts.add(clause.to)
@@ -46,10 +54,12 @@ module.exports = async function({ client, transaction, block, receipt }) {
           paid,
           reward,
           types,
-          transfers
+          transfers,
+          transfer_to,
+          transfer_from
         )
       VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
         ON CONFLICT (id) DO UPDATE
         SET
           block_number = EXCLUDED.block_number,
@@ -78,6 +88,8 @@ module.exports = async function({ client, transaction, block, receipt }) {
       receipt.reward,
       sortedTypes.join(', '),
       transfers,
+      [...to].join(', '),
+      [...from].join(', '),
     ]
   )
 }

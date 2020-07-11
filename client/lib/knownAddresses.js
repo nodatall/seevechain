@@ -1,4 +1,4 @@
-const KNOWN_ADDRESSES = {
+const KNOWN_CONTRACTS = {
   '0x505b95e128e403634fe6090472485341905fc0f9': `Yunnan Pu'er Tea`,
   '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': 'DNVGL',
   '0xbb763cea82127548c465f6ad83a297f292e5c2fb': 'Reebonz',
@@ -18,4 +18,40 @@ const KNOWN_ADDRESSES = {
   '0x1Cc13a24b1F73288cc7791C2c8Fd428357405226': 'DNVGL MyCare',
 }
 
-export default KNOWN_ADDRESSES
+const EXCHANGE_ADDRESSES = {
+  '0xa4adafaef9ec07bc4dc6de146934c7119341ee25': 'Binance',
+  '0xd0d9cd5aa98efcaeee2e065ddb8538fa977bc8eb': 'Binance Cold',
+  '0x1263c741069eda8056534661256079d485e111eb': 'Binance Warm',
+  '0xd7dd13a54755cb68859eec0cac24144aafb8c881': 'Huobi',
+  '0xfe64e37dfc7d64743d9351260fa99073c840452b': 'Binance US',
+  '0xb73554767983dc5aaeac2b948e407f57e8e9dea1': 'Bittrex',
+  '0xcaca08a5053604bb9e9715ed78102dbb392f21ee': 'Bittrex Cold',
+  '0xe13322e57366a4dff3a3a32b33355ff2bd2c4dbd': 'Bitvavo',
+  '0x6c61974835b4b8fcde83f74e7e5abc470662b3bc': 'Bitvavo Cold',
+  '0xfa4b22b75ae0900e88b640175ae0cd1896ec251a': 'HitBTC',
+  '0x48728dcafa1afaeb79c6d7249b6b4a3868ce5c12': 'OceanEx',
+  '0xd96ae915d6e28640c373640fd57fad8022c53965': 'OceanEx Custodian',
+  '0x9037aa63d3860b708a31df9d372709322d6a2911': 'KuCoin',
+  '0xda4d4530d856623dc820427f71e9aa601075f02d': 'KuCoin',
+  '0x832fbebb667acc410b434ecfebcbb841cb7c864c': 'Upbit Cold',
+  '0xea09214d6509aa4681ba469dbccfbc89c525c5b7': 'Upbit Hot',
+  '0x511513c6e60c347402b57f3b13c3a8e994188cab': 'Crypto.com Cold',
+  '0x1c4b70a3968436b9a0a9cf5205c787eb81bb558c': 'Gate.io Cold',
+  '0x0f53ec6bbd2b6712c07d8880e5c8f08753d0d5d5': 'BigONE',
+  '0x003bfdd8117f9388f82a1101a2c6f4745803c350': 'Bithumb Cold',
+  '0xe401984ab34bae9f6c9128e50b57e7988ba815c7': 'Bitfinex',
+  '0x01d1aec89781056ae69ee7381e8e237b5c0b6a64': 'Bitrue',
+  '0xa4adafaef9ec07bc4dc6de146934c7119341ee25': 'Coinmerce',
+  '0x284b9e222c461e32c2fa17053e2ea207041cffa0': 'OceanEx',
+  '0x0d0707963952f2fba59dd06f2b425ace40b492fe': 'Gate.io',
+  '0xf9f99f982f3ea9020f0a0afd4d4679dfee1b63cf': 'vexchange.io',
+  '0x9a107a75cff525b033a3e53cadafe3d193b570ec': 'MXC',
+  '0xfa02e5f286f635df9378395f4be54647e73a66a0': 'Lbank',
+  '0xfe3baf051e7957393d4bedd14447851946163a74': 'CoinEx',
+  '0xfbc6013ee8891ddc86d850fb8bac99b4d14c8405': 'Coinsuper',
+}
+
+export {
+  KNOWN_CONTRACTS,
+  EXCHANGE_ADDRESSES,
+}

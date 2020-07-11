@@ -13,7 +13,7 @@ import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
 import DonateModal from 'components/DonateModal'
 import numberWithCommas from 'lib/numberWithCommas'
-import KNOWN_ADDRESSES from 'lib/knownAddresses'
+import { KNOWN_CONTRACTS } from 'lib/knownAddresses'
 import donate from 'assets/donate.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp, faVolumeOff, faStar } from '@fortawesome/free-solid-svg-icons'
@@ -70,9 +70,23 @@ export default function Visualizer() {
   return <Div100vh className="Visualizer">
     {!starsHidden && <Stars />}
     <div className="Visualizer-rightControls">
-      <img className="Visualizer-rightControls-donateIcon" src={donate} onClick={() => { toggleDonateModalVisibility(!controlsModalVisible) }} />
-      <FontAwesomeIcon icon={soundOn ? faVolumeUp : faVolumeOff} size="23px" onClick={() => { setSoundOn(!soundOn) }} />
-      <FontAwesomeIcon icon={starsHidden ? emptyStar : faStar} size="23px" onClick={() => { setStarsHidden(!starsHidden) }} />
+      <img
+        className="Visualizer-rightControls-donateIcon"
+        src={donate}
+        onClick={() => { toggleDonateModalVisibility(!controlsModalVisible) }}
+      />
+      <FontAwesomeIcon
+        color="#a1a1aa"
+        icon={soundOn ? faVolumeUp : faVolumeOff}
+        size="23px"
+        onClick={() => { setSoundOn(!soundOn) }}
+      />
+      <FontAwesomeIcon
+        color="#a1a1aa"
+        icon={starsHidden ? emptyStar : faStar}
+        size="23px"
+        onClick={() => { setStarsHidden(!starsHidden) }}
+      />
     </div>
     <BlockNumber stats={stats} />
     <BottomBar stats={stats.stats} toggleStatsModalVisibility={toggleStatsModalVisibility} />
@@ -178,5 +192,5 @@ console.info('To see a list of labelled addresses, type `getFriendlyNames()` in 
 window.getFriendlyNames = printFriendlyNames
 
 function printFriendlyNames() {
-  console.table(KNOWN_ADDRESSES)
+  console.table(KNOWN_CONTRACTS)
 }

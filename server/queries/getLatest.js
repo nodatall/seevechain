@@ -86,6 +86,8 @@ module.exports = async function(client) {
       reward: transaction.reward,
       types: transaction.types,
       transfers: numeral(transaction.transfers).format('0.00a'),
+      transferTo: transaction.transfer_to,
+      transferFrom: transaction.transfer_from,
     })),
     stats: {
       dailyTransactions: +todaysStatsRecord.dailytransactions,

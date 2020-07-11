@@ -11,7 +11,8 @@
     "build": "webpack --colors --progress --mode production",
     "build:dev": "webpack --colors --progress -w",
     "start:dev": "npm run build:dev & nodemon ./scripts/start",
-    "start": "./scripts/db-migrate up && npm run build && ./scripts/start"
+    "start": "./scripts/db-migrate up && npm run build && ./scripts/start",
+    "db:migrate": "./scripts/db-migrate"
   },
   "author": "",
   "license": "ISC",

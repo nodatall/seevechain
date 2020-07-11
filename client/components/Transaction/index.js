@@ -5,15 +5,15 @@ import { useEffect, useState, useRef } from 'preact/hooks'
 import waitFor from 'delay'
 
 import numberWithCommas from 'lib/numberWithCommas'
-import KNOWN_ADDRESSES from 'lib/knownAddresses'
+import { KNOWN_CONTRACTS, EXCHANGE_ADDRESSES } from 'lib/knownAddresses'
 import lightenDarkenColor from 'lib/lightenDarkenColor'
 import { LIGHT_RANGE, BOX_SHADOWS } from 'lib/colors'
+import { lowDing, highDing } from 'lib/sounds'
 import {
   calculateCoordinates, getTransactionColorIndex, getTransactionSize, randomNumber,
 } from '../../lib/transactionHelpers'
-import ding_low from 'assets/ding_low.mp3'
-import ding_high from 'assets/ding_high.mp3'
-import { Howl } from 'howler'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import './index.sass'
 
@@ -26,20 +26,6 @@ const bubbleGrid = {
 const MOBILE_RATIO = .7
 
 const txCount = { count: 1 }
-
-const lowDing = new Howl({
-  src: [ding_low],
-  format: ['mp3'],
-  html5: true,
-  autoplay: false,
-})
-
-const highDing = new Howl({
-  src: [ding_high],
-  format: ['mp3'],
-  html5: true,
-  autoplay: false,
-})
 
 export default function Transaction({
   transaction,
@@ -135,7 +121,7 @@ export default function Transaction({
 
   const contracts = []
   transaction.contracts.split(', ').forEach(contract => {
-    contracts.push(KNOWN_ADDRESSES[contract] || `${contract.slice(2,6)}..${contract.slice(-4)}`)
+    contracts.push(KNOWN_CONTRACTS[contract] || formatAddress(contract))
   })
 
   const types = transaction.types
@@ -147,19 +133,62 @@ export default function Transaction({
     <div className="Transaction-background" style={backgroundStyle} />
     <div className="Transaction-foreground" style={foregroundStyle}>
       {types.indexOf('Transfer') !== -1
-        ? <TransferTransaction transfers={transaction.transfers} VTHOBurn={VTHOBurn} types={types} />
+        ? <TransferTransaction
+          transfers={transaction.transfers}
+          types={types}
+          transferTo={transaction.transferTo}
+          transferFrom={transaction.transferFrom}
+        />
         : <DataTransaction contracts={contracts} VTHOBurn={VTHOBurn} types={types} />
       }
     </div>
   </div>
 }
 
-function TransferTransaction({transfers, VTHOBurn, types}) {
+function TransferTransaction({transfers, types, transferTo = '', transferFrom = ''}) {
+  const toArray = transferTo.split(', ')
+  const fromArray = transferFrom.split(', ')
+  let toExchangeLabel
+  let toLabel
+  let fromExchangeLabel
+  toArray.forEach(address => {
+    if (EXCHANGE_ADDRESSES[address] && !toExchangeLabel) toExchangeLabel = EXCHANGE_ADDRESSES[address]
+    else if (!toLabel) toLabel = formatAddress(address)
+  })
+  fromArray.forEach(address => {
+    if (!fromExchangeLabel && EXCHANGE_ADDRESSES[address]) fromExchangeLabel = EXCHANGE_ADDRESSES[address]
+  })
+
+  let type
+  let label
+  if (toExchangeLabel) {
+    type = 'to'
+    label = toExchangeLabel
+  } else if (fromExchangeLabel) {
+    type = 'from'
+    label = fromExchangeLabel
+  } else {
+    type = 'to'
+    label = toLabel
+  }
+
+  const arrow = type === 'to'
+    ? <FontAwesomeIcon
+      color="green"
+      icon={faArrowRight}
+      size="13px"
+    />
+    : <FontAwesomeIcon
+      color="red"
+      icon={faArrowLeft}
+      size="13px"
+    />
+
   return <Fragment>
     <TypeTag types={types} />
     {transfers === '0.00' ? '< 1' : transfers} VET
-    <div className="Transaction-burn">
-      {numberWithCommas(VTHOBurn)} Burn
+    <div className="Transaction-subText">
+      <div><span>{arrow}</span> {label}</div>
     </div>
   </Fragment>
 }
@@ -167,8 +196,8 @@ function TransferTransaction({transfers, VTHOBurn, types}) {
 function DataTransaction({contracts, VTHOBurn, types}) {
   return <Fragment>
     <TypeTag types={types} />
-    {contracts.join(', ')}
-    <div className="Transaction-burn">
+    {contracts[0]}
+    <div className="Transaction-subText">
       {numberWithCommas(VTHOBurn)} Burn
     </div>
   </Fragment>
@@ -206,4 +235,8 @@ function openInNewTab(href) {
       href,
     }
   ).click()
+}
+
+function formatAddress(address) {
+  return `${address.slice(2,6)}..${address.slice(-4)}`
 }
