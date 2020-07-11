@@ -41,7 +41,6 @@ const EXCHANGE_ADDRESSES = {
   '0x003bfdd8117f9388f82a1101a2c6f4745803c350': 'Bithumb Cold',
   '0xe401984ab34bae9f6c9128e50b57e7988ba815c7': 'Bitfinex',
   '0x01d1aec89781056ae69ee7381e8e237b5c0b6a64': 'Bitrue',
-  '0xa4adafaef9ec07bc4dc6de146934c7119341ee25': 'Coinmerce',
   '0x284b9e222c461e32c2fa17053e2ea207041cffa0': 'OceanEx',
   '0x0d0707963952f2fba59dd06f2b425ace40b492fe': 'Gate.io',
   '0xf9f99f982f3ea9020f0a0afd4d4679dfee1b63cf': 'vexchange.io',
