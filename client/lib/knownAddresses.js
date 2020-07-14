@@ -30,6 +30,7 @@ const EXCHANGE_ADDRESSES = {
   '0x6c61974835b4b8fcde83f74e7e5abc470662b3bc': 'Bitvavo Cold',
   '0xfa4b22b75ae0900e88b640175ae0cd1896ec251a': 'HitBTC',
   '0x48728dcafa1afaeb79c6d7249b6b4a3868ce5c12': 'OceanEx',
+  '0x15bccf377f1a9bbd0cd8e24d031c9451326f29a0': 'OceanEx',
   '0xd96ae915d6e28640c373640fd57fad8022c53965': 'OceanEx Custodian',
   '0x9037aa63d3860b708a31df9d372709322d6a2911': 'KuCoin',
   '0xda4d4530d856623dc820427f71e9aa601075f02d': 'KuCoin',
