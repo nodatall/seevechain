@@ -13,7 +13,7 @@ import {
   calculateCoordinates, getTransactionColorIndex, getTransactionSize, randomNumber,
 } from '../../lib/transactionHelpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 import './index.sass'
 
@@ -172,23 +172,27 @@ function TransferTransaction({transfers, types, transferTo = '', transferFrom = 
     label = toLabel
   }
 
-  const arrow = type === 'to'
-    ? <FontAwesomeIcon
-      color="green"
-      icon={faArrowRight}
-      size="13px"
-    />
-    : <FontAwesomeIcon
-      color="red"
-      icon={faArrowLeft}
-      size="13px"
-    />
-
   return <Fragment>
     <TypeTag types={types} />
     {transfers === '0.00' ? '< 1' : transfers} VET
     <div className="Transaction-subText">
-      <div><span>{arrow}</span> {label}</div>
+      <div>
+        {type === 'to' && <span>
+          <FontAwesomeIcon
+            color="green"
+            icon={faArrowRight}
+            size="13px"
+          />&nbsp;
+        </span>}
+        {label}
+        {type === 'from' && <span>&nbsp;
+          <FontAwesomeIcon
+            color="red"
+            icon={faArrowRight}
+            size="13px"
+          />
+        </span>}
+      </div>
     </div>
   </Fragment>
 }
