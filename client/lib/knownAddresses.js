@@ -16,6 +16,8 @@ const KNOWN_CONTRACTS = {
   '0x040093ab307f5acb4ae3afb0fb31de0ec46d62f9': 'safehaven.io',
   '0x1111111111111111111111111111111111111111': 've-name.web.app',
   '0x1Cc13a24b1F73288cc7791C2c8Fd428357405226': 'DNVGL MyCare',
+  '0xcd01241c39d2a503aa4ac083fd2563556af9fe56': 'Vulcan',
+  '0x4a2d83a3d5b81566f1318d9e39fce6de5ee23bae': 'Vulcan',
 }
 
 const EXCHANGE_ADDRESSES = {
