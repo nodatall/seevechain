@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from 'preact/hooks'
 import waitFor from 'delay'
 
 import numberWithCommas from 'lib/numberWithCommas'
-import { KNOWN_CONTRACTS, EXCHANGE_ADDRESSES } from 'lib/knownAddresses'
+import { KNOWN_CONTRACTS, KNOWN_ADDRESSES, TOKEN_CONTRACTS } from 'lib/knownAddresses'
 import lightenDarkenColor from 'lib/lightenDarkenColor'
 import { LIGHT_RANGE, BOX_SHADOWS } from 'lib/colors'
 import { lowDing, highDing } from 'lib/sounds'
@@ -121,7 +121,7 @@ export default function Transaction({
 
   const contracts = []
   transaction.contracts.split(', ').forEach(contract => {
-    contracts.push(KNOWN_CONTRACTS[contract] || formatAddress(contract))
+    contracts.push({...KNOWN_CONTRACTS, ...TOKEN_CONTRACTS}[contract] || formatAddress(contract))
   })
 
   const types = transaction.types
@@ -152,11 +152,11 @@ function TransferTransaction({transfers, types, transferTo = '', transferFrom = 
   let toLabel
   let fromExchangeLabel
   toArray.forEach(address => {
-    if (EXCHANGE_ADDRESSES[address] && !toExchangeLabel) toExchangeLabel = EXCHANGE_ADDRESSES[address]
+    if (KNOWN_ADDRESSES[address] && !toExchangeLabel) toExchangeLabel = KNOWN_ADDRESSES[address]
     else if (!toLabel) toLabel = formatAddress(address)
   })
   fromArray.forEach(address => {
-    if (!fromExchangeLabel && EXCHANGE_ADDRESSES[address]) fromExchangeLabel = EXCHANGE_ADDRESSES[address]
+    if (!fromExchangeLabel && KNOWN_ADDRESSES[address]) fromExchangeLabel = KNOWN_ADDRESSES[address]
   })
 
   let type
