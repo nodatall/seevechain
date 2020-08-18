@@ -18,6 +18,7 @@ const KNOWN_CONTRACTS = {
   '0x1Cc13a24b1F73288cc7791C2c8Fd428357405226': 'DNVGL MyCare',
   '0xcd01241c39d2a503aa4ac083fd2563556af9fe56': 'Vulcan',
   '0x4a2d83a3d5b81566f1318d9e39fce6de5ee23bae': 'Vulcan',
+  '0x27b508dba99a05c7810d4956d74daa71bac0d969': 'VIMworld',
 }
 
 const EXCHANGE_ADDRESSES = {
