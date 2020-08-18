@@ -13,7 +13,7 @@ import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
 import DonateModal from 'components/DonateModal'
 import numberWithCommas from 'lib/numberWithCommas'
-import { KNOWN_CONTRACTS } from 'lib/knownAddresses'
+import { KNOWN_CONTRACTS, EXCHANGE_ADDRESSES } from 'lib/knownAddresses'
 import donate from 'assets/donate.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp, faVolumeOff, faStar } from '@fortawesome/free-solid-svg-icons'
@@ -192,5 +192,8 @@ console.info('To see a list of labelled addresses, type `getFriendlyNames()` in 
 window.getFriendlyNames = printFriendlyNames
 
 function printFriendlyNames() {
+  console.log('Contract Addresses')
   console.table(KNOWN_CONTRACTS)
+  console.log('Exchange Addresses')
+  console.table(EXCHANGE_ADDRESSES)
 }
