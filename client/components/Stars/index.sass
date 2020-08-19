@@ -1,9 +1,20 @@
 @function multiple-box-shadow ($n, $px)
   $value: '#{random($px)}px #{random($px)}px #FFF'
   @for $i from 2 through $n
-    $value: '#{$value} , #{random($px)}px #{random($px)}px #FFF'
+    $value: '#{$value} , #{random($px)}px #{random($px)}px #{random-color()})'
 
   @return unquote($value)
+
+@function random-color ()
+  $min-saturation: 160 // A number between 1 and 255. Lower means more color saturation.
+  $max-variable-saturation: 255 - $min-saturation
+
+  $red: $min-saturation + random($max-variable-saturation)
+  $green: $min-saturation + random($max-variable-saturation)
+  $blue: $min-saturation + random($max-variable-saturation)
+  $opacity: random()
+
+  @return 'rgba(#{$red},#{$green},#{$blue},#{$opacity}'
 
 $shadows-small-4000:  multiple-box-shadow(1400, 4000)
 $shadows-small-2000:  multiple-box-shadow(700, 2000)
