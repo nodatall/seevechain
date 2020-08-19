@@ -6,12 +6,15 @@
   @return unquote($value)
 
 @function random-color ()
-  $min-saturation: 160 // A number between 1 and 255. Lower means more color saturation.
-  $max-variable-saturation: 255 - $min-saturation
+  // min-value can be adjusted to give the stars more or less color.
+  // A lower value means more color saturation.
+  // It should be between 0 and 255.
+  $min-value: 160
+  $max-variable-value: 255 - $min-value
 
-  $red: $min-saturation + random($max-variable-saturation)
-  $green: $min-saturation + random($max-variable-saturation)
-  $blue: $min-saturation + random($max-variable-saturation)
+  $red: $min-value + random($max-variable-value)
+  $green: $min-value + random($max-variable-value)
+  $blue: $min-value + random($max-variable-value)
   $opacity: random()
 
   @return 'rgba(#{$red},#{$green},#{$blue},#{$opacity}'
