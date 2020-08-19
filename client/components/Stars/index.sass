@@ -15,7 +15,8 @@
   $red: $min-value + random($max-variable-value)
   $green: $min-value + random($max-variable-value)
   $blue: $min-value + random($max-variable-value)
-  $opacity: random()
+  $opacity-seed: random()
+  $opacity: 1 - ($opacity-seed * $opacity-seed)
 
   @return 'rgba(#{$red},#{$green},#{$blue},#{$opacity}'
 
