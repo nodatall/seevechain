@@ -212,7 +212,7 @@ function TypeTag({types, clauses}) {
   let className = 'Transaction-TypeTag'
   if (types.indexOf('Data') === -1) className += ' Transaction-TypeTag-transfer'
   else className += ' Transaction-TypeTag-data'
-  return <div className={className}>{types} • {clauses}</div>
+  return <div className={className}>{types}: {clauses}</div>
 }
 
 function updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef}) {
