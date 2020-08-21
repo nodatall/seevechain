@@ -135,17 +135,18 @@ export default function Transaction({
       {types.indexOf('Transfer') !== -1
         ? <TransferTransaction
           transfers={transaction.transfers}
+          clauses={transaction.clauses}
           types={types}
           transferTo={transaction.transferTo}
           transferFrom={transaction.transferFrom}
         />
-        : <DataTransaction contracts={contracts} VTHOBurn={VTHOBurn} types={types} />
+        : <DataTransaction contracts={contracts} VTHOBurn={VTHOBurn} types={types} clauses={transaction.clauses} />
       }
     </div>
   </div>
 }
 
-function TransferTransaction({transfers, types, transferTo = '', transferFrom = ''}) {
+function TransferTransaction({transfers, types, transferTo = '', transferFrom = '', clauses }) {
   const toArray = transferTo.split(', ')
   const fromArray = transferFrom.split(', ')
   let toExchangeLabel
@@ -173,7 +174,7 @@ function TransferTransaction({transfers, types, transferTo = '', transferFrom = 
   }
 
   return <Fragment>
-    <TypeTag types={types} />
+    <TypeTag types={types} clauses={clauses}/>
     {transfers === '0.00' ? '< 1' : transfers} VET
     <div className="Transaction-subText">
       <div>
@@ -197,9 +198,9 @@ function TransferTransaction({transfers, types, transferTo = '', transferFrom = 
   </Fragment>
 }
 
-function DataTransaction({contracts, VTHOBurn, types}) {
+function DataTransaction({contracts, VTHOBurn, types, clauses}) {
   return <Fragment>
-    <TypeTag types={types} />
+    <TypeTag types={types} clauses={clauses}/>
     {contracts[0]}
     <div className="Transaction-subText">
       {numberWithCommas(VTHOBurn)} Burn
@@ -207,11 +208,11 @@ function DataTransaction({contracts, VTHOBurn, types}) {
   </Fragment>
 }
 
-function TypeTag({types}) {
+function TypeTag({types, clauses}) {
   let className = 'Transaction-TypeTag'
   if (types.indexOf('Data') === -1) className += ' Transaction-TypeTag-transfer'
   else className += ' Transaction-TypeTag-data'
-  return <div className={className}>{types}</div>
+  return <div className={className}>{types} • {clauses}</div>
 }
 
 function updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef}) {
