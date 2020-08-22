@@ -23,6 +23,8 @@ const KNOWN_CONTRACTS = {
   '0xe28ce32d637eb93cbda105f87fbb829e9ef8540b': 'VeChain Auction',
   '0xdbaec4165a6cff07901c41d3561eefdcfbc20cb6': 'Steering Committee Vote',
   '0x0000000000000000000000417574686f72697479': 'VeChain Authority Node',
+  '0x030c9268b1e5822acde1a0d353bd51df8d7f47b5': 'VIM Dispenser',
+  '0xc96b1e1a436c5ecf150ac7a7de64c0eec73883e0': 'VIM Feeding',
 }
 
 const TOKEN_CONTRACTS = {

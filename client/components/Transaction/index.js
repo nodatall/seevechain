@@ -199,9 +199,12 @@ function TransferTransaction({transfers, types, transferTo = '', transferFrom = 
 }
 
 function DataTransaction({contracts, VTHOBurn, types, clauses}) {
+  let contract = contracts[0]
+  if (contracts.includes('VIM Feeding')) contract = 'VIM Feeding'
+  if (contracts.includes('VIM Dispenser')) contract = 'VIM Dispenser'
   return <Fragment>
     <TypeTag types={types} clauses={clauses}/>
-    {contracts[0]}
+    {contract}
     <div className="Transaction-subText">
       {numberWithCommas(VTHOBurn)} Burn
     </div>
