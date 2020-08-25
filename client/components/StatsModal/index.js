@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import numberWithCommas from 'lib/numberWithCommas'
 import { useLocalStorage } from 'lib/storageHooks'
 
 import Modal from 'components/Modal'
@@ -45,6 +46,24 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
           borderColor: '#ffa600',
           backgroundColor: 'rgba(255, 166, 0, .1)',
         },
+      ]}
+    />
+    <div className="StatsModal-avgBurn">
+      Avg. VTHO Burn:
+      <span>
+        &nbsp;{numberWithCommas((vthoBurnSeries.reduce((acc, cur) => acc + cur) / vthoBurnSeries.length).toFixed())}
+      </span>
+    </div>
+    <Slider
+      name="StatsModalSlider"
+      value={range || monthlyStats.length}
+      rangeStart={4}
+      rangeEnd={monthlyStats.length}
+      onChange={setRange}
+    />
+    <LineChart
+      labels={labels}
+      datasets={[
         {
           borderColor: '#665191',
           backgroundColor: 'rgba(102, 81, 145, .1)',
@@ -58,13 +77,6 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
           data: clauseSeries,
         },
       ]}
-    />
-    <Slider
-      name="StatsModalSlider"
-      value={range || monthlyStats.length}
-      rangeStart={4}
-      rangeEnd={monthlyStats.length}
-      onChange={setRange}
     />
   </Modal>
 }
