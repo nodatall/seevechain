@@ -45,7 +45,7 @@ module.exports = async function(client) {
     [before]
   )
 
-  const monthlyStatsRecords = await client.query(`SELECT * FROM daily_stats ORDER BY day DESC LIMIT 101`)
+  const monthlyStatsRecords = await client.query(`SELECT * FROM daily_stats ORDER BY day DESC LIMIT 99`)
 
   let prices
   try {
