@@ -5,18 +5,21 @@ import { useLocalStorage } from 'lib/storageHooks'
 
 import Modal from 'components/Modal'
 import LineChart from 'components/LineChart'
+import Checkbox from 'components/Checkbox'
 
 import './index.sass'
 
 export default function StatsModal({ setVisibility, open, monthlyStats, serverTime, prices }) {
   const [range, setRange] = useLocalStorage('statsRange')
+  const [includeToday, setIncludeToday] = useLocalStorage('includeTodayInStats')
 
   const labels = []
   const vthoBurnSeries = []
   const txSeries = []
   const clauseSeries = []
 
-  ;[...monthlyStats].slice(0,range).reverse().forEach(dayStat => {
+  const rangeStart = includeToday ? 0 : 1
+  ;[...monthlyStats].slice(rangeStart, range + 1).reverse().forEach(dayStat => {
     labels.push(moment(dayStat.day).format('MM/DD'))
     vthoBurnSeries.push(dayStat.vthoBurn)
     txSeries.push(dayStat.transactionCount)
@@ -54,13 +57,20 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
         &nbsp;{numberWithCommas((vthoBurnSeries.reduce((acc, cur) => acc + cur) / vthoBurnSeries.length).toFixed())}
       </span>
     </div>
-    <Slider
-      name="StatsModalSlider"
-      value={range || monthlyStats.length}
-      rangeStart={4}
-      rangeEnd={monthlyStats.length}
-      onChange={setRange}
-    />
+    <div className="StatsModal-sliderRow">
+      <Slider
+        name="StatsModalSlider"
+        value={range || monthlyStats.length}
+        rangeStart={4}
+        rangeEnd={monthlyStats.length}
+        onChange={setRange}
+      />
+      <Checkbox
+        label="Include Today"
+        checked={includeToday}
+        onChange={setIncludeToday}
+      />
+    </div>
     <LineChart
       labels={labels}
       datasets={[
