@@ -19,7 +19,7 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
   const clauseSeries = []
 
   const rangeStart = includeToday ? 0 : 1
-  ;[...monthlyStats].slice(rangeStart, range + 1).reverse().forEach(dayStat => {
+  ;[...monthlyStats].slice(rangeStart, Number(range) + 1).reverse().forEach(dayStat => {
     labels.push(moment(dayStat.day).format('MM/DD'))
     vthoBurnSeries.push(dayStat.vthoBurn)
     txSeries.push(dayStat.transactionCount)
