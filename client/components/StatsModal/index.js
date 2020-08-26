@@ -62,7 +62,7 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
         name="StatsModalSlider"
         value={range || monthlyStats.length}
         rangeStart={4}
-        rangeEnd={monthlyStats.length}
+        rangeEnd={monthlyStats.length - 1}
         onChange={setRange}
       />
       <Checkbox
