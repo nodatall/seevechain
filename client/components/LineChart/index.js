@@ -6,6 +6,7 @@ import numeral from 'numeral'
 import './index.sass'
 
 export default function LineChart({ labels, datasets, options = {} }) {
+  const onMobile = window.innerWidth < 600
   const defaultDataset = {
     fill: true,
     backgroundColor: '#363c4f',
@@ -13,12 +14,12 @@ export default function LineChart({ labels, datasets, options = {} }) {
     borderWidth: 1.5,
     pointBorderColor: '#bfbfc9',
     pointBackgroundColor: '#bfbfc9',
-    pointRadius: window.innerWidth < 600 ? .5 : 2,
+    pointRadius: onMobile ? .5 : 2,
     pointHoverRadius: 4,
     pointHoverBackgroundColor: '#bfbfc9',
     pointHoverBorderColor: 'rgba(220,220,220,1)',
     pointHoverBorderWidth: .2,
-    pointHitRadius: window.innerWidth < 600 ? 5 : 10,
+    pointHitRadius: onMobile ? 5 : 10,
     lineTension: .2,
   }
 
