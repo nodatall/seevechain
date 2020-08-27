@@ -13,12 +13,12 @@ export default function LineChart({ labels, datasets, options = {} }) {
     borderWidth: 1.5,
     pointBorderColor: '#bfbfc9',
     pointBackgroundColor: '#bfbfc9',
-    pointRadius: 2,
+    pointRadius: window.innerWidth < 600 ? .5 : 2,
     pointHoverRadius: 4,
     pointHoverBackgroundColor: '#bfbfc9',
     pointHoverBorderColor: 'rgba(220,220,220,1)',
     pointHoverBorderWidth: .2,
-    pointHitRadius: 10,
+    pointHitRadius: window.innerWidth < 600 ? 5 : 10,
     lineTension: .2,
   }
 
