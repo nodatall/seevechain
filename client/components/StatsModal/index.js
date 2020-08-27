@@ -54,7 +54,7 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
     <div className="StatsModal-avgBurn">
       Avg. VTHO Burn:
       <span>
-        &nbsp;{numberWithCommas((vthoBurnSeries.reduce((acc, cur) => acc + cur) / vthoBurnSeries.length).toFixed())}
+        &nbsp;{numberWithCommas((vthoBurnSeries.reduce((acc, cur) => acc + cur, 0) / vthoBurnSeries.length).toFixed())}
       </span>
     </div>
     <div className="StatsModal-sliderRow">
