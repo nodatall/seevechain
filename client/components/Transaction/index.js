@@ -31,7 +31,6 @@ export default function Transaction({
   transaction,
   setStats,
   statsRef,
-  hasTxStatsBeenCountedRef,
   animationDuration,
   soundOn,
 }) {
@@ -72,7 +71,6 @@ export default function Transaction({
   }, [soundOn])
 
   useEffect(() => {
-    hasTxStatsBeenCountedRef.current[transaction.id] = transaction
     const bottomBarHeight = (document.querySelector('.BottomBar') || {}).clientHeight || 0
     const { xCoordinate, yCoordinate, row, col } = calculateCoordinates({
       size, bottomBarHeight, isMobile, bubbleGrid, mobileRatio: MOBILE_RATIO,
@@ -103,7 +101,7 @@ export default function Transaction({
         ...defaultForegroundStyle,
         background: '#182024',
       })
-      updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef})
+      updateStats({setStats, statsRef, transaction})
       updateStyle(maxScale, { zIndex })
       await waitFor(secondDelay)
       updateStyle(maxScale, { transition: `transform 4s ease-out, opacity 300ms`, zIndex })
@@ -220,7 +218,7 @@ function TypeTag({types, clauses}) {
   </div>
 }
 
-function updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef}) {
+function updateStats({setStats, statsRef, transaction}) {
   statsRef.current = {
     ...statsRef.current,
     stats: {
@@ -230,7 +228,6 @@ function updateStats({setStats, statsRef, transaction, hasTxStatsBeenCountedRef}
     },
   }
   setStats(statsRef.current)
-  delete hasTxStatsBeenCountedRef.current[transaction.id]
   document.title = `${numberWithCommas(+statsRef.current.stats.dailyClauses)} Clauses | See VeChain`
 }
 

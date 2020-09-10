@@ -53,7 +53,7 @@ export default class Transactions extends Component {
   }
 
   render() {
-    const { setStats, statsRef, hasTxStatsBeenCountedRef, soundOn } = this.props
+    const { setStats, statsRef, soundOn } = this.props
     const { renderableTransactions } = this.state
     if (!renderableTransactions.length) return
     const animationDuration = renderableTransactions.length < 5
@@ -68,7 +68,6 @@ export default class Transactions extends Component {
         key={transaction.id}
         setStats={setStats}
         statsRef={statsRef}
-        hasTxStatsBeenCountedRef={hasTxStatsBeenCountedRef}
         soundOn={soundOn}
       />
     })

@@ -19,7 +19,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp, faVolumeOff, faStar } from '@fortawesome/free-solid-svg-icons'
 import { faStar as emptyStar } from '@fortawesome/free-regular-svg-icons'
 const StatsModal = lazy(() => import('components/StatsModal'))
-import { randomNumber } from 'lib/transactionHelpers'
+// import { randomNumber } from 'lib/transactionHelpers'
 
 // import { getRandomTransactions } from 'lib/testData'
 import './index.sass'
@@ -34,7 +34,6 @@ export default function Visualizer() {
   const [soundOn, setSoundOn] = useState(false)
   const initialized = useRef()
   const statsRef = useRef()
-  const hasTxStatsBeenCountedRef = useRef({})
   const [starsHidden, setStarsHidden] = useLocalStorage('starsVisible')
 
   useEffect(() => {
@@ -55,7 +54,6 @@ export default function Visualizer() {
         statsRef,
         initialized,
         setStats,
-        hasTxStatsBeenCountedRef,
         setMonthlyStats,
         setServerTime,
         setPrices,
@@ -94,7 +92,6 @@ export default function Visualizer() {
       transactions={stats.transactions}
       setStats={setStats}
       statsRef={statsRef}
-      hasTxStatsBeenCountedRef={hasTxStatsBeenCountedRef}
       soundOn={soundOn}
     />
     <DonateModal open={controlsModalVisible} setVisibility={() => { toggleDonateModalVisibility(!controlsModalVisible) }} />
@@ -123,30 +120,26 @@ function BlockNumber({stats}) {
 }
 
 function handleLatest({
-  data, statsRef, initialized, setStats, hasTxStatsBeenCountedRef, setMonthlyStats, setServerTime, setPrices,
+  data, statsRef, initialized, setStats, setMonthlyStats, setServerTime, setPrices,
 }){
   data.transactions = [
     ...data.transactions,
     // ...getRandomTransactions(randomNumber(5, 15)),
   ]
-  const lessData = getStatsBeforeBatchOfTransactions(data)
   if (!initialized.current) {
+    const lessData = getStatsBeforeBatchOfTransactions(data)
     document.title = `${numberWithCommas(+lessData.stats.dailyClauses)} Clauses | See VeChain`
     initialized.current = true
+
+    statsRef.current = lessData
+    setStats(statsRef.current)
+  } else {
+    statsRef.current = {
+      ...data,
+      stats: statsRef.current.stats,
+    }
+    setStats(statsRef.current)
   }
-  const stats = lessData.stats
-  for (const key in hasTxStatsBeenCountedRef.current) {
-    const { vthoBurn, clauses } = hasTxStatsBeenCountedRef.current[key]
-    stats.vthoBurn -= vthoBurn
-    stats.clauses -= +clauses
-    stats.transactions -= 1
-  }
-  const newData = {
-    ...lessData,
-    stats,
-  }
-  statsRef.current = newData
-  setStats(newData)
   setMonthlyStats(
     [
       {
