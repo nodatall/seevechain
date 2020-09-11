@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect, useState, useRef } from 'preact/hooks'
 import { Suspense, lazy } from 'preact/compat'
-import Div100vh from 'react-div-100vh'
 import Cookies from 'js-cookie'
 import ioClient from 'socket.io-client'
 import moment from 'moment'
@@ -13,15 +12,15 @@ import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
 import DonateModal from 'components/DonateModal'
 import numberWithCommas from 'lib/numberWithCommas'
+import { onReturnToStaleApp } from 'lib/onReturnToStaleApp'
 import { KNOWN_CONTRACTS, KNOWN_ADDRESSES } from 'lib/knownAddresses'
 import donate from 'assets/donate.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp, faVolumeOff, faStar } from '@fortawesome/free-solid-svg-icons'
 import { faStar as emptyStar } from '@fortawesome/free-regular-svg-icons'
 const StatsModal = lazy(() => import('components/StatsModal'))
-// import { randomNumber } from 'lib/transactionHelpers'
 
-// import { getRandomTransactions } from 'lib/testData'
+import createUid from 'lib/createUid'
 import './index.sass'
 
 export default function Visualizer() {
@@ -59,13 +58,22 @@ export default function Visualizer() {
         setPrices,
       })
     })
+
+    onReturnToStaleApp(
+      () => {
+        socket.emit('clientAskForLatest', {
+          seeVechainUid: Cookies.get('seeVechainUid'),
+        })
+      },
+      10
+    )
   }, [])
 
   if (!stats.block) return <div className="Visualizer">
     <Spinner />
   </div>
 
-  return <Div100vh className="Visualizer">
+  return <div className="Visualizer">
     {!starsHidden && <Stars />}
     <div className="Visualizer-rightControls">
       <img
@@ -105,11 +113,11 @@ export default function Visualizer() {
       />
     </Suspense>
     }
-  </Div100vh>
+  </div>
 }
 
 function BlockNumber({stats}) {
-  const clausesInBlock = stats.transactions.reduce((clauses, tx) => clauses + tx.clauses, 0)
+  const clausesInBlock = stats.transactions.reduce((clauses, tx) => clauses + tx.clauses.length, 0)
   return <a
     href={`https://insight.vecha.in/#/main/blocks/${stats.block.id}`}
     target="_blank"
@@ -122,10 +130,6 @@ function BlockNumber({stats}) {
 function handleLatest({
   data, statsRef, initialized, setStats, setMonthlyStats, setServerTime, setPrices,
 }){
-  data.transactions = [
-    ...data.transactions,
-    // ...getRandomTransactions(randomNumber(5, 15)),
-  ]
   if (!initialized.current) {
     const lessData = getStatsBeforeBatchOfTransactions(data)
     document.title = `${numberWithCommas(+lessData.stats.dailyClauses)} Clauses | See VeChain`
@@ -155,20 +159,15 @@ function handleLatest({
   setPrices(data.prices)
 }
 
-function createUid() {
-  return (new Date().getUTCMilliseconds().toString() + new Date().getTime().toString()).toString()
-    + Math.random().toString(36).substr(2, 9)
-}
-
 function getStatsBeforeBatchOfTransactions(data) {
   let dailyVTHOBurn = data.stats.dailyVTHOBurn
   let dailyTransactions = data.stats.dailyTransactions
-  let dailyClauses = +data.stats.dailyClauses
+  let dailyClauses = data.stats.dailyClauses
 
   data.transactions.forEach(transaction => {
     dailyTransactions -= 1
     dailyVTHOBurn -= transaction.vthoBurn
-    dailyClauses -= +transaction.clauses
+    dailyClauses -= transaction.clauses.length
   })
 
   return {

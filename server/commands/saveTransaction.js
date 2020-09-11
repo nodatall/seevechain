@@ -1,40 +1,9 @@
-const SORTED_TYPES = ['Data', 'Transfer', 'New Contract']
-
 const bigNumber = require('bignumber.js')
+const { TOKEN_CONTRACTS, ABI_SIGNATURES } = require('../lib/abiSignatures')
+const { abi } = require('thor-devkit')
+const knex = require ('../database/knex')
 
 module.exports = async function({ client, transaction, block, receipt }) {
-  const contracts = new Set()
-  const types = new Set()
-  const to = new Set()
-  const from = new Set()
-  let transfers = 0
-  transaction.clauses.forEach(clause => {
-    if (clause.to) {
-      if (clause.data === '0x') {
-        types.add('Transfer')
-        transfers += +(bigNumber(clause.value, 16).dividedBy(Math.pow(10, 18)).toFixed(0))
-        receipt.outputs.forEach(o => {
-          o.transfers.forEach(t => {
-            to.add(t.recipient)
-            from.add(t.sender)
-          })
-        })
-      } else {
-        types.add('Data')
-        contracts.add(clause.to)
-      }
-    } else {
-      types.add('New Contract')
-    }
-  })
-  const sortedTypes = []
-  SORTED_TYPES.forEach(type => {
-    if (types.has(type)) sortedTypes.push(type)
-  })
-  if (!sortedTypes.length) {
-    sortedTypes.push('Unknown')
-    contracts.add(transaction.origin)
-  }
 
   const vthoBurn = ((receipt.gasUsed + (receipt.gasUsed * ((transaction.gasPriceCoef || 0) / 255))) / 1000) * .7
 
@@ -45,51 +14,115 @@ module.exports = async function({ client, transaction, block, receipt }) {
           id,
           block_number,
           origin,
-          contracts,
           delegator,
           gas,
-          clauses,
           vtho_burn,
           gas_used,
           paid,
           reward,
-          types,
-          transfers,
-          transfer_to,
-          transfer_from
+          clauses
         )
       VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         ON CONFLICT (id) DO UPDATE
         SET
           block_number = EXCLUDED.block_number,
           origin = EXCLUDED.origin,
           delegator = EXCLUDED.delegator,
           gas = EXCLUDED.gas,
-          clauses = EXCLUDED.clauses,
           vtho_burn = EXCLUDED.vtho_burn,
           gas_used = EXCLUDED.gas_used,
           paid = EXCLUDED.paid,
           reward = EXCLUDED.reward,
-          types = EXCLUDED.types,
-          transfers = EXCLUDED.transfers;
+          clauses = EXCLUDED.clauses
     `,
     [
       transaction.id,
       block.number,
       transaction.origin,
-      [...contracts].join(', '),
       transaction.delegator,
       transaction.gas,
-      transaction.clauses.length,
       vthoBurn,
       receipt.gasUsed,
       receipt.paid,
       receipt.reward,
-      sortedTypes.join(', '),
-      transfers,
-      [...to].join(', '),
-      [...from].join(', '),
+      transaction.clauses.length,
     ]
   )
+
+  const exisingTransaction = await client.oneOrNone(`SELECT * FROM transactions WHERE id = $1`, [transaction.id])
+  if (exisingTransaction) {
+    await client.query(`DELETE FROM clauses WHERE transaction_id = $1`, [transaction.id])
+  }
+
+  const insertableClauses = []
+  for (const { contractAddress, events, transfers } of receipt.outputs) {
+    const clause = { transaction_id: transaction.id }
+    if (contractAddress) {
+      clause.contract = contractAddress
+      clause.type = 'New Contract'
+      insertableClauses.push(clause)
+      continue
+    }
+
+    const event = events[0]
+    const transfer = transfers[0]
+
+    if (event) {
+      const clauseMatchingEvent = transaction.clauses.find(clause => {
+        if (!clause.data) return false
+        return clause.data.indexOf(event.data.slice(2)) !== -1
+      })
+      if (TOKEN_CONTRACTS[event.address]) {
+        if (clauseMatchingEvent) {
+          const signature = clauseMatchingEvent.data.slice(0, 10)
+          if (ABI_SIGNATURES[signature]) {
+            const decoded = abi.decodeParameters(
+              ABI_SIGNATURES[signature],
+              '0x' + clauseMatchingEvent.data.slice(10)
+            )
+            clause.type = 'Transfer'
+            clause.transfer_recipient = decoded._to
+            clause.transfer_sender = transaction.origin
+            clause.transfer_token = TOKEN_CONTRACTS[event.address]
+            clause.transfer_amount = Number(
+              new bigNumber(decoded._amount).dividedBy(Math.pow(10, 18)).toFixed(2)
+            )
+            insertableClauses.push(clause)
+            continue
+          }
+        }
+      }
+
+      clause.type = 'Data'
+      clause.contract = event.address
+      if (events.length > 1 && TOKEN_CONTRACTS[event.address]) clause.contract = events[1].address
+      insertableClauses.push(clause)
+      continue
+    }
+
+    if (transfer) {
+      clause.type = 'Transfer'
+      clause.transfer_recipient = transfer.recipient
+      clause.transfer_sender = transfer.sender
+      clause.transfer_token = 'VET'
+      clause.transfer_amount = Number(
+        new bigNumber(transfer.amount, 16).dividedBy(Math.pow(10, 18)).toFixed(2)
+      )
+      insertableClauses.push(clause)
+    }
+  }
+
+  if (insertableClauses.length > 0) {
+    await client.query(`${knex('clauses').insert(insertableClauses)}`)
+  } else {
+    await client.query(
+      `
+      UPDATE transactions
+      SET reverted = true
+      WHERE id = $1;
+      `,
+      [transaction.id]
+    )
+  }
 }

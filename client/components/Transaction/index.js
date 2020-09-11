@@ -3,12 +3,13 @@ import { Fragment } from 'preact'
 
 import { useEffect, useState, useRef } from 'preact/hooks'
 import waitFor from 'delay'
+import numeral from 'numeral'
 
 import numberWithCommas from 'lib/numberWithCommas'
 import { KNOWN_CONTRACTS, KNOWN_ADDRESSES, TOKEN_CONTRACTS } from 'lib/knownAddresses'
 import lightenDarkenColor from 'lib/lightenDarkenColor'
 import { LIGHT_RANGE, BOX_SHADOWS } from 'lib/colors'
-import { lowDing, highDing } from 'lib/sounds'
+import { highDing, lowDing } from 'lib/sounds'
 import {
   calculateCoordinates, getTransactionColorIndex, getTransactionSize, randomNumber,
 } from '../../lib/transactionHelpers'
@@ -92,8 +93,8 @@ export default function Transaction({
       })
       await waitFor(delay)
       if (shouldPlaySound.current) {
-        if (VTHOBurn > 1000) lowDing.play()
-        else highDing.play()
+        if (VTHOBurn > 1000) highDing.play()
+        else lowDing.play()
       }
       const zIndex = txCount.count
       txCount.count += 1
@@ -117,12 +118,11 @@ export default function Transaction({
 
   if (!style) return
 
-  const contracts = []
-  transaction.contracts.split(', ').forEach(contract => {
-    contracts.push({...KNOWN_CONTRACTS, ...TOKEN_CONTRACTS}[contract] || formatAddress(contract))
+  const types = new Set()
+  transaction.clauses.forEach(clause => {
+    types.add(clause.type)
   })
 
-  const types = transaction.types
   return <div
     className="Transaction"
     style={style}
@@ -130,63 +130,73 @@ export default function Transaction({
   >
     <div className="Transaction-background" style={backgroundStyle} />
     <div className="Transaction-foreground" style={foregroundStyle}>
-      {types.indexOf('Transfer') !== -1
-        ? <TransferTransaction
-          transfers={transaction.transfers}
-          clauses={transaction.clauses}
-          types={types}
-          transferTo={transaction.transferTo}
-          transferFrom={transaction.transferFrom}
-        />
-        : <DataTransaction contracts={contracts} VTHOBurn={VTHOBurn} types={types} clauses={transaction.clauses} />
+      {types.has('Transfer') && types.size === 1
+        ? <TransferTransaction clauses={transaction.clauses} />
+        : <DataTransaction transaction={transaction} VTHOBurn={VTHOBurn} types={[...types]} />
       }
     </div>
   </div>
 }
 
-function TransferTransaction({transfers, types, transferTo = '', transferFrom = '', clauses }) {
-  const toArray = transferTo.split(', ')
-  const fromArray = transferFrom.split(', ')
+function TransferTransaction({ clauses }) {
+  const senders = []
+  const recipients = []
+  const amountsByToken = {}
+
+  clauses.forEach(clause => {
+    senders.push(clause.transfer_sender)
+    recipients.push(clause.transfer_recipient)
+    amountsByToken[clause.transfer_token] = amountsByToken[clause.transfer_token]
+      ? amountsByToken[clause.transfer_token] + clause.transfer_amount
+      : clause.transfer_amount
+  })
   let toExchangeLabel
   let toLabel
   let fromExchangeLabel
-  toArray.forEach(address => {
+  recipients.forEach(address => {
     if (KNOWN_ADDRESSES[address] && !toExchangeLabel) toExchangeLabel = KNOWN_ADDRESSES[address]
     else if (!toLabel) toLabel = formatAddress(address)
   })
-  fromArray.forEach(address => {
+  senders.forEach(address => {
     if (!fromExchangeLabel && KNOWN_ADDRESSES[address]) fromExchangeLabel = KNOWN_ADDRESSES[address]
   })
-
-  let type
+  let direction
   let label
   if (toExchangeLabel) {
-    type = 'to'
+    direction = 'to'
     label = toExchangeLabel
   } else if (fromExchangeLabel) {
-    type = 'from'
+    direction = 'from'
     label = fromExchangeLabel
   } else {
-    type = 'to'
+    direction = 'to'
     label = toLabel
   }
 
+  let transfers = ''
+  let justTokens = []
+  Object.entries(amountsByToken).forEach(([token, amount]) => {
+    transfers += `${numeral(amount).format('0.0a')} ${token}`
+    justTokens.push(token)
+  })
+  if (justTokens.length > 1) transfers = justTokens.join(', ')
+
   return <Fragment>
-    <TypeTag types={types} clauses={clauses}/>
-    {transfers === '0.00' ? '< 1' : transfers} VET
+    <TypeTag types={['Transfer']} clauses={clauses.length}/>
+    {transfers}
     <div className="Transaction-subText">
       <div>
-        {type === 'to' && <span>
+        {direction === 'to' && <span>
           <FontAwesomeIcon
-            color="green"
+            color="orange"
             icon={faArrowRight}
             size="13px"
           />&nbsp;
         </span>}
         {label}
-        {type === 'from' && <span>&nbsp;
+        {direction === 'from' && <span>&nbsp;
           <FontAwesomeIcon
-            color="red"
+            color="green"
             icon={faArrowRight}
             size="13px"
           />
@@ -196,12 +206,24 @@ function TransferTransaction({transfers, types, transferTo = '', transferFrom = 
   </Fragment>
 }
 
-function DataTransaction({contracts, VTHOBurn, types, clauses}) {
-  let contract = contracts[0]
-  if (contracts.includes('VIM Feeding')) contract = 'VIM Feeding'
-  if (contracts.includes('VIM Dispenser')) contract = 'VIM Dispenser'
+function DataTransaction({transaction, VTHOBurn, types}) {
+  const clauses = transaction.clauses
+  let contract = ''
+  if (transaction.reverted) {
+    types = 'Reverted'
+    contract = KNOWN_CONTRACTS[transaction.origin] || formatAddress(transaction.origin)
+  } else {
+    clauses.forEach(clause => {
+      if (!contract && KNOWN_CONTRACTS[clause.contract]) contract = KNOWN_CONTRACTS[clause.contract]
+    })
+    clauses.forEach(clause => {
+      if (!contract && TOKEN_CONTRACTS[clause.contract]) contract = TOKEN_CONTRACTS[clause.contract]
+    })
+    if (!contract) contract = formatAddress(clauses[0].contract)
+  }
+
   return <Fragment>
-    <TypeTag types={types} clauses={clauses}/>
+    <TypeTag types={types} clauses={clauses.length}/>
     {contract}
     <div className="Transaction-subText">
       {numberWithCommas(VTHOBurn)} Burn
@@ -211,7 +233,9 @@ function DataTransaction({contracts, VTHOBurn, types, clauses}) {
 
 function TypeTag({types, clauses}) {
   let className = 'Transaction-TypeTag'
-  if (types.indexOf('Data') === -1) className += ' Transaction-TypeTag-transfer'
+  if (types.indexOf('Reverted') !== -1) className += ' Transaction-TypeTag-reverted'
+  else if (types.indexOf('New Contract') !== -1) className += ' Transaction-TypeTag-newContract'
+  else if (types.indexOf('Data') === -1) className += ' Transaction-TypeTag-transfer'
   else className += ' Transaction-TypeTag-data'
   return <div className={className}>
     {types}{clauses > 1 ? <span className="Transaction-TypeTag-clauses"> {clauses}</span> : ''}
@@ -222,13 +246,13 @@ function updateStats({setStats, statsRef, transaction}) {
   statsRef.current = {
     ...statsRef.current,
     stats: {
-      dailyVTHOBurn: +statsRef.current.stats.dailyVTHOBurn + +transaction.vthoBurn,
+      dailyVTHOBurn: statsRef.current.stats.dailyVTHOBurn + transaction.vthoBurn,
       dailyTransactions: statsRef.current.stats.dailyTransactions + 1,
-      dailyClauses: +statsRef.current.stats.dailyClauses + +transaction.clauses,
+      dailyClauses: statsRef.current.stats.dailyClauses + transaction.clauses.length,
     },
   }
   setStats(statsRef.current)
-  document.title = `${numberWithCommas(+statsRef.current.stats.dailyClauses)} Clauses | See VeChain`
+  document.title = `${numberWithCommas(statsRef.current.stats.dailyClauses)} Clauses | See VeChain`
 }
 
 function getNumberInRange(min, max) {

@@ -26,6 +26,9 @@ async function getBlock(thor, number, client) {
     for (const txId of block.transactions) {
       await getTransaction(thor, txId, block, client)
     }
+    // for (const txId of testData) {
+    //   await getTransaction(thor, txId, block, client)
+    // }
   }
   return block
 }
@@ -52,3 +55,16 @@ module.exports = {
   getBlock,
   getTransaction,
 }
+
+const testData = [
+  // Multiple token transfer
+  '0x41df9604f7fc23d044cb2ca6afc2814eb33be74d83d6776722c068644c708901',
+  // SHA Transfer
+  '0xafb658f02456edff8c81fc697ffe4f3f3a56d339ba09dde0cb9052d529ad4480',
+  // EHrT Transfer
+  '0x9694221ce4d5b19a7fcea9e32c73650465e34af2f64c4d7eb59497ba08679387',
+  // New Contract
+  '0x4d05a8bf59aec8911de80d92d1a81e3f9a86216e20d5cb78f356ccb55597424a',
+  // Reverted
+  '0x76768c32144bda9d20ec652479683a4ae533f57bf6fa3944b40c8c029bff9cf2',
+]

@@ -14,6 +14,7 @@ const outputPath = `${ROOT}/client/dist`
 const production = process.env.NODE_ENV === 'production'
 
 const config = {
+  devtool: production ? undefined : 'sourcemap',
   mode: process.env.NODE_ENV || 'development',
   stats: {
     assets: true,
