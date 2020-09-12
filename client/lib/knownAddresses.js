@@ -18,6 +18,7 @@ const KNOWN_CONTRACTS = {
   '0x1Cc13a24b1F73288cc7791C2c8Fd428357405226': 'MyCare',
   '0xcd01241c39d2a503aa4ac083fd2563556af9fe56': 'Vulcan',
   '0x4a2d83a3d5b81566f1318d9e39fce6de5ee23bae': 'Vulcan',
+  '0xb1b9d40758cc3d90f1b2899dfb7a64e5d0235c61': 'Vulcan',
   '0x27b508dba99a05c7810d4956d74daa71bac0d969': 'VIMworld',
   '0xb81e9c5f9644dec9e5e3cac86b4461a222072302': 'VeChain Node',
   '0xe28ce32d637eb93cbda105f87fbb829e9ef8540b': 'VeChain Auction',

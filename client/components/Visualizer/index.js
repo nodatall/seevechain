@@ -61,6 +61,7 @@ export default function Visualizer() {
 
     onReturnToStaleApp(
       () => {
+        initialized.current = false
         socket.emit('clientAskForLatest', {
           seeVechainUid: Cookies.get('seeVechainUid'),
         })
