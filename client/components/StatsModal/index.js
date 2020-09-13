@@ -10,7 +10,7 @@ import Checkbox from 'components/Checkbox'
 import './index.sass'
 
 export default function StatsModal({ setVisibility, open, monthlyStats, serverTime, prices }) {
-  const [range, setRange] = useLocalStorage('statsRange')
+  const [range = 100, setRange] = useLocalStorage('statsRange')
   const [includeToday, setIncludeToday] = useLocalStorage('includeTodayInStats')
 
   const labels = []
