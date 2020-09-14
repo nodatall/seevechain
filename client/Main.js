@@ -9,7 +9,7 @@ import './index.sass'
 
 export default function Main() {
   if (window.location.pathname === '/analytics') {
-    return <Suspense fallback={<div style={{height: '100vh'}}><Spinner /></div>}>
+    return <Suspense fallback={<div style={{height: '100%'}}><Spinner /></div>}>
       <Analytics />
     </Suspense>
   }
