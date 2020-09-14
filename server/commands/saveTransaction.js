@@ -81,15 +81,17 @@ module.exports = async function({ client, transaction, block, receipt }) {
               ABI_SIGNATURES[signature],
               '0x' + clauseMatchingEvent.data.slice(10)
             )
-            clause.type = 'Transfer'
-            clause.transfer_recipient = decoded._to
-            clause.transfer_sender = transaction.origin
-            clause.transfer_token = TOKEN_CONTRACTS[event.address]
-            clause.transfer_amount = Number(
-              new bigNumber(decoded._amount).dividedBy(Math.pow(10, 18)).toFixed(2)
-            )
-            insertableClauses.push(clause)
-            continue
+            if (decoded) {
+              clause.type = 'Transfer'
+              clause.transfer_recipient = decoded._to
+              clause.transfer_sender = transaction.origin
+              clause.transfer_token = TOKEN_CONTRACTS[event.address]
+              clause.transfer_amount = Number(
+                new bigNumber(decoded._amount).dividedBy(Math.pow(10, 18)).toFixed(2)
+              )
+              insertableClauses.push(clause)
+              continue
+            }
           }
         }
       }

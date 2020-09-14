@@ -176,7 +176,8 @@ function TransferTransaction({ clauses }) {
   let transfers = ''
   let justTokens = []
   Object.entries(amountsByToken).forEach(([token, amount]) => {
-    transfers += `${numeral(amount).format('0.0a')} ${token}`
+    const quantity = amount === 0 ? '< 1' : numeral(amount).format('0.0a')
+    transfers += `${quantity} ${token}`
     justTokens.push(token)
   })
   if (justTokens.length > 1) transfers = justTokens.join(', ')
