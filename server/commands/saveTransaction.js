@@ -95,7 +95,7 @@ module.exports = async function({ client, transaction, block, receipt }) {
       }
 
       clause.type = 'Data'
-      clause.contract = event.address
+      clause.contract = clauseMatchingEvent ? clauseMatchingEvent.to : event.address
       if (events.length > 1 && TOKEN_CONTRACTS[event.address]) clause.contract = events[1].address
       insertableClauses.push(clause)
       continue
