@@ -34,7 +34,7 @@ Set up the database with:
 ### Start server
 
 ```
-yarn start:dev
+npm run start:dev
 ```
 
 Use a browser to navigate to `http://localhost:1337/`
