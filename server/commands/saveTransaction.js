@@ -115,9 +115,21 @@ module.exports = async function({ client, transaction, block, receipt }) {
     }
   }
 
-  if (insertableClauses.length > 0) {
-    await client.query(`${knex('clauses').insert(insertableClauses)}`)
-  } else {
+  const reverted = insertableClauses.length === 0
+  if (insertableClauses.length === 0) {
+    transaction.clauses.forEach(clause => {
+      if (clause.to && clause.data !== '0x') {
+        const insertableClause = { transaction_id: transaction.id }
+        insertableClause.type = 'Data'
+        insertableClause.contract = clause.to
+        insertableClause.reverted = true
+        insertableClauses.push(insertableClause)
+      }
+    })
+  }
+
+  if (insertableClauses.length > 0) await client.query(`${knex('clauses').insert(insertableClauses)}`)
+  if (reverted) {
     await client.query(
       `
       UPDATE transactions

@@ -212,15 +212,10 @@ function DataTransaction({transaction, VTHOBurn, types}) {
   let contract = ''
   if (transaction.reverted) {
     types = 'Reverted'
-    contract = KNOWN_CONTRACTS[transaction.origin] || formatAddress(transaction.origin)
+    if (clauses) contract = setContract(clauses)
+    else contract = KNOWN_CONTRACTS[transaction.origin] || formatAddress(transaction.origin)
   } else {
-    clauses.forEach(clause => {
-      if (!contract && KNOWN_CONTRACTS[clause.contract]) contract = KNOWN_CONTRACTS[clause.contract]
-    })
-    clauses.forEach(clause => {
-      if (!contract && TOKEN_CONTRACTS[clause.contract]) contract = TOKEN_CONTRACTS[clause.contract]
-    })
-    if (!contract) contract = formatAddress(clauses[0].contract)
+    contract = setContract(clauses)
   }
 
   return <Fragment>
@@ -230,6 +225,18 @@ function DataTransaction({transaction, VTHOBurn, types}) {
       {numberWithCommas(VTHOBurn)} Burn
     </div>
   </Fragment>
+}
+
+function setContract(clauses) {
+  let contract
+  clauses.forEach(clause => {
+    if (!contract && KNOWN_CONTRACTS[clause.contract]) contract = KNOWN_CONTRACTS[clause.contract]
+  })
+  clauses.forEach(clause => {
+    if (!contract && TOKEN_CONTRACTS[clause.contract]) contract = TOKEN_CONTRACTS[clause.contract]
+  })
+  if (!contract) contract = formatAddress(clauses[0].contract)
+  return contract
 }
 
 function TypeTag({types, clauses}) {
