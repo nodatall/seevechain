@@ -21,7 +21,7 @@ export default function TopContractsChart({ topContracts }) {
 
     ),
     datasets: [{
-      barThickness: 30,
+      barThickness: window.innerWidth > 760 ? 30 : 15,
       label: 'Clauses by Contract',
       backgroundColor: colorSet,
       data: topContracts.map(contract => contract.clauses),
