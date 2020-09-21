@@ -77,7 +77,7 @@ module.exports = async function(client) {
       ON
         transactions.block_number = blocks.number
       WHERE
-        type = 'Data'
+        contract IS NOT NULL
       AND
         blocks.timestamp > $1
       GROUP BY contract
