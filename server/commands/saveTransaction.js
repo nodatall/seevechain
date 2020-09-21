@@ -1,5 +1,5 @@
 const bigNumber = require('bignumber.js')
-const { TOKEN_CONTRACTS, ABI_SIGNATURES } = require('../lib/abiSignatures')
+const { TOKEN_CONTRACTS, ABI_SIGNATURES, KNOWN_CONTRACTS } = require('../lib/abiSignatures')
 const { abi } = require('thor-devkit')
 const knex = require ('../database/knex')
 
@@ -98,7 +98,10 @@ module.exports = async function({ client, transaction, block, receipt }) {
 
       clause.type = 'Data'
       clause.contract = clauseMatchingEvent ? clauseMatchingEvent.to : event.address
-      if (events.length > 1 && TOKEN_CONTRACTS[event.address]) clause.contract = events[1].address
+      if (events.length > 1 && TOKEN_CONTRACTS[event.address]) {
+        const eventMatchingKnownContract = events.find(event => KNOWN_CONTRACTS[event.address])
+        if (eventMatchingKnownContract) clause.contract = eventMatchingKnownContract.address
+      }
       insertableClauses.push(clause)
       continue
     }
