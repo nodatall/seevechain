@@ -235,7 +235,8 @@ function setContract(clauses) {
   clauses.forEach(clause => {
     if (!contract && TOKEN_CONTRACTS[clause.contract]) contract = TOKEN_CONTRACTS[clause.contract]
   })
-  if (!contract) contract = formatAddress(clauses[0].contract)
+  if (!contract && clauses[0]) contract = formatAddress(clauses[0].contract)
+  if (!contract && !clauses[0]) return 'No Clauses'
   return contract
 }
 
