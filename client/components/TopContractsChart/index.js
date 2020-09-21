@@ -22,7 +22,7 @@ export default function TopContractsChart({ topContracts }) {
     ),
     datasets: [{
       barThickness: 30,
-      label: 'Clauses Today',
+      label: 'Clauses by Contract',
       backgroundColor: colorSet,
       data: topContracts.map(contract => contract.clauses),
     }]
@@ -58,7 +58,7 @@ export default function TopContractsChart({ topContracts }) {
       borderColor: '#bfbfc9',
       borderWidth: .5,
       callbacks: {
-        label: () => 'Clauses',
+        label: () => '',
       },
     },
   }
