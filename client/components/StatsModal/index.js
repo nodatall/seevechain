@@ -32,7 +32,14 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
     locationToChartMap['/burn']
   ).component
 
-  return <Modal open={open} setVisibility={setVisibility} className="StatsModal">
+  return <Modal {...{
+    open,
+    setVisibility: value => {
+      if (!value) setPathname('/')
+      setVisibility(value)
+    },
+    className: "StatsModal",
+  }}>
     <span className="StatsModal-serverTime">
       Server time: {serverTime} (UTC+2)
     </span>
