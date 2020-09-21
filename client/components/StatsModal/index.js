@@ -4,7 +4,6 @@ import { useLocalStorage } from 'lib/storageHooks'
 
 import Modal from 'components/Modal'
 import Dropdown from 'components/Dropdown'
-import Spinner from 'components/Spinner'
 import { setPathname } from 'lib/location'
 import { locationToChartMap } from 'lib/chartHelpers'
 
@@ -13,7 +12,7 @@ import './index.sass'
 export default function StatsModal({ setVisibility, open, monthlyStats, serverTime, prices, topContracts }) {
   const [storedChartPath, setStoredChartPath] = useLocalStorage()
 
-  const matchingChart = locationToChartMap[window.location.pathname]
+  let matchingChart = locationToChartMap[window.location.pathname]
   useEffect(() => {
     if (open && !matchingChart) {
       setPathname(storedChartPath || '/burn')
@@ -25,9 +24,14 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
     ) {
       setStoredChartPath(window.location.pathname)
     }
-  }, [open, window.location.pathname, storedChartPath])
+  }, [open, window.location.pathname])
 
-  const CurrentChart = (matchingChart || {}).component
+  const CurrentChart = (
+    matchingChart ||
+    locationToChartMap[storedChartPath] ||
+    locationToChartMap['/burn']
+  ).component
+
   return <Modal open={open} setVisibility={setVisibility} className="StatsModal">
     <span className="StatsModal-serverTime">
       Server time: {serverTime} (UTC+2)
@@ -43,7 +47,7 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
       </span>
     </div>
     <Dropdown {...{
-      value: window.location.pathname,
+      value: storedChartPath || '/burn',
       options: Object.keys(locationToChartMap).map(key => ({
         value: key,
         display: locationToChartMap[key].title,
@@ -55,6 +59,5 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
       fullWidth: true,
     }} />
     {CurrentChart && <CurrentChart {...{ monthlyStats, topContracts }} />}
-    {!CurrentChart && <Spinner />}
   </Modal>
 }
