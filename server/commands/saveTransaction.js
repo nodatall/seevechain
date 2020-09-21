@@ -89,6 +89,7 @@ module.exports = async function({ client, transaction, block, receipt }) {
               clause.transfer_amount = Number(
                 new bigNumber(decoded._amount).dividedBy(Math.pow(10, 18)).toFixed(2)
               )
+              clause.contract = event.address
               insertableClauses.push(clause)
               continue
             }
