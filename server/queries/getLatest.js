@@ -61,6 +61,32 @@ module.exports = async function(client) {
     [before]
   )
 
+  const topContractsRecords = await client.query(
+    `
+      SELECT
+        contract,
+        count(clauses.*) AS totalclauses
+      FROM
+        clauses
+      JOIN
+        transactions
+      ON
+        clauses.transaction_id = transactions.id
+      JOIN
+        blocks
+      ON
+        transactions.block_number = blocks.number
+      WHERE
+        type = 'Data'
+      AND
+        blocks.timestamp > $1
+      GROUP BY contract
+      ORDER BY totalclauses DESC
+      LIMIT 20;
+    `,
+    [before]
+  )
+
   const monthlyStatsRecords = await client.query(`SELECT * FROM daily_stats ORDER BY day DESC LIMIT 100`)
 
   const now = moment()
@@ -103,6 +129,10 @@ module.exports = async function(client) {
     })),
     serverTime,
     prices: await getTokenPrices(),
+    topContracts: topContractsRecords.map(record => ({
+      contract: record.contract,
+      clauses: Number(record.totalclauses),
+    }))
   }
 
   return cache[1]

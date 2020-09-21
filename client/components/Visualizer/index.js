@@ -13,6 +13,7 @@ import Stars from 'components/Stars'
 import DonateModal from 'components/DonateModal'
 import numberWithCommas from 'lib/numberWithCommas'
 import { onReturnToStaleApp } from 'lib/onReturnToStaleApp'
+import { locationToChartMap } from 'lib/chartHelpers'
 import { KNOWN_CONTRACTS, KNOWN_ADDRESSES } from 'lib/knownAddresses'
 import donate from 'assets/donate.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -30,6 +31,7 @@ export default function Visualizer() {
   const [controlsModalVisible, toggleDonateModalVisibility] = useState(false)
   const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
   const [prices, setPrices] = useState()
+  const [topContracts, setTopContracts] = useState()
   const [soundOn, setSoundOn] = useState(false)
   const initialized = useRef()
   const statsRef = useRef()
@@ -56,6 +58,7 @@ export default function Visualizer() {
         setMonthlyStats,
         setServerTime,
         setPrices,
+        setTopContracts,
       })
     })
 
@@ -68,6 +71,8 @@ export default function Visualizer() {
       },
       10
     )
+
+    if (locationToChartMap[window.location.pathname]) toggleStatsModalVisibility(true)
   }, [])
 
   if (!stats.block) return <div className="Visualizer">
@@ -111,6 +116,7 @@ export default function Visualizer() {
         monthlyStats={monthlyStats}
         serverTime={serverTime}
         prices={prices}
+        topContracts={topContracts}
       />
     </Suspense>
     }
@@ -129,7 +135,7 @@ function BlockNumber({stats}) {
 }
 
 function handleLatest({
-  data, statsRef, initialized, setStats, setMonthlyStats, setServerTime, setPrices,
+  data, statsRef, initialized, setStats, setMonthlyStats, setServerTime, setPrices, setTopContracts,
 }){
   if (!initialized.current) {
     const lessData = getStatsBeforeBatchOfTransactions(data)
@@ -156,6 +162,7 @@ function handleLatest({
       ...data.monthlyStats,
     ]
   )
+  setTopContracts(data.topContracts)
   setServerTime(data.serverTime)
   setPrices(data.prices)
 }
