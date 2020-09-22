@@ -119,7 +119,7 @@ module.exports = async function({ client, transaction, block, receipt }) {
     }
   }
 
-  const reverted = insertableClauses.length === 0
+  const reverted = receipt.reverted
   if (insertableClauses.length === 0) {
     transaction.clauses.forEach(clause => {
       if (clause.to && clause.data !== '0x') {
