@@ -35,7 +35,7 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
   return <Modal {...{
     open,
     setVisibility: value => {
-      if (!value) setPathname('/')
+      if (open) setPathname('/')
       setVisibility(value)
     },
     className: "StatsModal",
