@@ -50,10 +50,8 @@ module.exports = async function({ client, transaction, block, receipt }) {
     ]
   )
 
-  const exisingTransaction = await client.oneOrNone(`SELECT * FROM transactions WHERE id = $1`, [transaction.id])
-  if (exisingTransaction) {
-    await client.query(`DELETE FROM clauses WHERE transaction_id = $1`, [transaction.id])
-  }
+  const existingClauses = await client.query(`SELECT * FROM clauses WHERE transaction_id = $1`, [transaction.id])
+  if (existingClauses.length > 0) await client.query(`DELETE FROM clauses WHERE transaction_id = $1`, [transaction.id])
 
   const insertableClauses = []
   for (const { contractAddress, events, transfers } of receipt.outputs) {
