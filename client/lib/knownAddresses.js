@@ -10,6 +10,8 @@ const KNOWN_CONTRACTS = {
   '0xecc159751f9aed21399d5e3ce72bc9d4fccb9ccc': 'MyStory',
   '0x9bcb81a9eadd1457ee9729365f9a77d190670ab2': 'Shanghai Gas',
   '0xf9f99f982f3ea9020f0a0afd4d4679dfee1b63cf': 'vexchange.io',
+  '0xdc391a5dbb89a3f768c41cfa0e85dcaaf3a91f91': 'vexchange.io',
+  '0xdc690f1a5de6108239d2d91cfdaa1d19e7ef7f82': 'vexchange.io',
   '0xf306dfc3c4a276ac4c1795c5896e9f4a967341b6': 'realitems.io',
   '0xa7f8b361060222b3aee75f4b457ba0353cf10998': 'E-HCert',
   '0xa9f3c1bd52c3a506cecbb8cbca562ef26c833175': 'Yuhongtai Foods',
