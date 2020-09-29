@@ -20,10 +20,11 @@ module.exports = async function({ client, transaction, block, receipt }) {
           gas_used,
           paid,
           reward,
-          clauses
+          clauses,
+          reverted
         )
       VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
         ON CONFLICT (id) DO UPDATE
         SET
           block_number = EXCLUDED.block_number,
@@ -34,7 +35,8 @@ module.exports = async function({ client, transaction, block, receipt }) {
           gas_used = EXCLUDED.gas_used,
           paid = EXCLUDED.paid,
           reward = EXCLUDED.reward,
-          clauses = EXCLUDED.clauses
+          clauses = EXCLUDED.clauses,
+          reverted = EXCLUDED.reverted
     `,
     [
       transaction.id,
@@ -47,11 +49,9 @@ module.exports = async function({ client, transaction, block, receipt }) {
       receipt.paid,
       receipt.reward,
       transaction.clauses.length,
+      receipt.reverted,
     ]
   )
-
-  const existingClauses = await client.query(`SELECT * FROM clauses WHERE transaction_id = $1`, [transaction.id])
-  if (existingClauses.length > 0) await client.query(`DELETE FROM clauses WHERE transaction_id = $1`, [transaction.id])
 
   const insertableClauses = []
   for (const { contractAddress, events, transfers } of receipt.outputs) {
@@ -130,7 +130,11 @@ module.exports = async function({ client, transaction, block, receipt }) {
     })
   }
 
-  if (insertableClauses.length > 0) await client.query(`${knex('clauses').insert(insertableClauses)}`)
+  if (insertableClauses.length > 0) {
+    const existingClauses = await client.query(`SELECT * FROM clauses WHERE transaction_id = $1`, [transaction.id])
+    if (existingClauses.length > 0) await client.query(`DELETE FROM clauses WHERE transaction_id = $1`, [transaction.id])
+    await client.query(`${knex('clauses').insert(insertableClauses)}`)
+  }
   if (reverted) {
     await client.query(
       `
