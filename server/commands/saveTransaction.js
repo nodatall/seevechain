@@ -130,8 +130,7 @@ module.exports = async function({ client, transaction, block, receipt }) {
   }
 
   if (insertableClauses.length > 0) {
-    const existingClauses = await client.query(`SELECT * FROM clauses WHERE transaction_id = $1`, [transaction.id])
-    if (existingClauses.length > 0) await client.query(`DELETE FROM clauses WHERE transaction_id = $1`, [transaction.id])
+    await client.query(`DELETE FROM clauses WHERE transaction_id = $1`, [transaction.id])
     await client.query(`${knex('clauses').insert(insertableClauses)}`)
   }
 }
