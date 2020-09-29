@@ -55,6 +55,8 @@ module.exports = {
 }
 
 const testData = [
+  // Burn > 2000
+  // '0x44253d806a073b7aacecf8707ae5ed8a2136f32d4829d5f618d8ea10ef714e65',
   // // VET Transfer
   // '0x779f09e2582a7d48e05282c3fd4fe101755d25a9026403b5c6c8e8f0e9faafbe',
   // // Failed VIM dispenser

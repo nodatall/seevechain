@@ -44,13 +44,7 @@ export default function Transaction({
     height: `${size}px`,
     transition: `transform ${transitionDuration}ms ease-out, opacity 500ms, box-shadow 850ms`,
   }
-  const backgroundStyle = {
-    width: `${size}px`,
-    height: `${size}px`,
-  }
-  const colorIndex = getTransactionColorIndex(transaction.vthoBurn)
-  const color = LIGHT_RANGE[Math.floor(colorIndex)]
-  backgroundStyle.background = `linear-gradient(90deg, ${lightenDarkenColor(color, 40)}, ${lightenDarkenColor(color, -60)})`
+  const backgroundStyle = getBackgroundStyle({ transaction, size })
 
   const [style, setStyle] = useState()
   const defaultForegroundStyle = {
@@ -275,6 +269,26 @@ function openInNewTab(href) {
       href,
     }
   ).click()
+}
+
+function getBackgroundStyle({ transaction, size }) {
+  const backgroundStyle = {
+    width: `${size}px`,
+    height: `${size}px`,
+  }
+  let background
+  if (transaction.vthoBurn < 2000) {
+    const colorIndex = getTransactionColorIndex(transaction.vthoBurn)
+    const color = LIGHT_RANGE[Math.floor(colorIndex)]
+    background = `linear-gradient(90deg, ${lightenDarkenColor(color, 40)}, ${lightenDarkenColor(color, -60)})`
+  } else {
+    background = `linear-gradient(#14ffe9, #ffeb3b, #ff00e0)`
+    backgroundStyle.width = `${size + 2}px`
+    backgroundStyle.height = `${size + 2}px`
+  }
+  backgroundStyle.background = background
+
+  return backgroundStyle
 }
 
 function formatAddress(address) {
