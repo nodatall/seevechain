@@ -117,7 +117,6 @@ module.exports = async function({ client, transaction, block, receipt }) {
     }
   }
 
-  const reverted = receipt.reverted
   if (insertableClauses.length === 0) {
     transaction.clauses.forEach(clause => {
       if (clause.to && clause.data !== '0x') {
@@ -134,15 +133,5 @@ module.exports = async function({ client, transaction, block, receipt }) {
     const existingClauses = await client.query(`SELECT * FROM clauses WHERE transaction_id = $1`, [transaction.id])
     if (existingClauses.length > 0) await client.query(`DELETE FROM clauses WHERE transaction_id = $1`, [transaction.id])
     await client.query(`${knex('clauses').insert(insertableClauses)}`)
-  }
-  if (reverted) {
-    await client.query(
-      `
-      UPDATE transactions
-      SET reverted = true
-      WHERE id = $1;
-      `,
-      [transaction.id]
-    )
   }
 }
