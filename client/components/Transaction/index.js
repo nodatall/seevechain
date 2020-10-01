@@ -6,7 +6,7 @@ import waitFor from 'delay'
 import numeral from 'numeral'
 
 import numberWithCommas from 'lib/numberWithCommas'
-import { KNOWN_CONTRACTS, KNOWN_ADDRESSES, TOKEN_CONTRACTS } from 'lib/knownAddresses'
+import { getShortKnownContract, KNOWN_ADDRESSES, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
 import lightenDarkenColor from 'lib/lightenDarkenColor'
 import { LIGHT_RANGE, BOX_SHADOWS } from 'lib/colors'
 import { highDing, lowDing } from 'lib/sounds'
@@ -207,7 +207,7 @@ function DataTransaction({transaction, VTHOBurn, types}) {
   if (transaction.reverted) {
     types = 'Reverted'
     if (clauses.length > 0) contract = setContract(clauses)
-    else contract = KNOWN_CONTRACTS[transaction.origin] || formatAddress(transaction.origin)
+    else contract = getShortKnownContract(clause.contract) || formatAddress(transaction.origin)
   } else {
     contract = setContract(clauses)
   }
@@ -224,7 +224,8 @@ function DataTransaction({transaction, VTHOBurn, types}) {
 function setContract(clauses) {
   let contract
   clauses.forEach(clause => {
-    if (!contract && KNOWN_CONTRACTS[clause.contract]) contract = KNOWN_CONTRACTS[clause.contract]
+    const matchingKnownContract = getShortKnownContract(clause.contract)
+    if (!contract && matchingKnownContract) contract = matchingKnownContract
   })
   clauses.forEach(clause => {
     if (!contract && TOKEN_CONTRACTS[clause.contract]) contract = TOKEN_CONTRACTS[clause.contract]

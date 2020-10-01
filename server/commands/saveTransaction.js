@@ -1,5 +1,6 @@
 const bigNumber = require('bignumber.js')
-const { TOKEN_CONTRACTS, ABI_SIGNATURES, KNOWN_CONTRACTS } = require('../lib/abiSignatures')
+const { ABI_SIGNATURES } = require('../lib/abiSignatures')
+const { TOKEN_CONTRACTS, KNOWN_CONTRACTS } = require('../../shared/knownAddresses')
 const { abi } = require('thor-devkit')
 const knex = require ('../database/knex')
 
@@ -83,7 +84,7 @@ module.exports = async function({ client, transaction, block, receipt }) {
               clause.type = 'Transfer'
               clause.transfer_recipient = decoded._to
               clause.transfer_sender = transaction.origin
-              clause.transfer_token = TOKEN_CONTRACTS[event.address]
+              clause.transfer_token = TOKEN_CONTRACTS[event.address].replace(' Token', '')
               clause.transfer_amount = Number(
                 new bigNumber(decoded._amount).dividedBy(Math.pow(10, 18)).toFixed(2)
               )
@@ -98,7 +99,7 @@ module.exports = async function({ client, transaction, block, receipt }) {
       clause.type = 'Data'
       clause.contract = clauseMatchingEvent ? clauseMatchingEvent.to : event.address
       if (events.length > 1 && TOKEN_CONTRACTS[event.address]) {
-        const eventMatchingKnownContract = events.find(event => KNOWN_CONTRACTS[event.address])
+        const eventMatchingKnownContract = events.find(event => !!KNOWN_CONTRACTS[event.address])
         if (eventMatchingKnownContract) clause.contract = eventMatchingKnownContract.address
       }
       insertableClauses.push(clause)

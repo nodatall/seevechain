@@ -14,7 +14,7 @@ import DonateModal from 'components/DonateModal'
 import numberWithCommas from 'lib/numberWithCommas'
 import { onReturnToStaleApp } from 'lib/onReturnToStaleApp'
 import { locationToChartMap } from 'lib/chartHelpers'
-import { KNOWN_CONTRACTS, KNOWN_ADDRESSES } from 'lib/knownAddresses'
+import { PRETTY_KNOWN_CONTRACTS, KNOWN_ADDRESSES } from '../../../shared/knownAddresses'
 import donate from 'assets/donate.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp, faVolumeOff, faStar } from '@fortawesome/free-solid-svg-icons'
@@ -193,7 +193,7 @@ window.getFriendlyNames = printFriendlyNames
 
 function printFriendlyNames() {
   console.log('Contracts')
-  console.table(KNOWN_CONTRACTS)
+  console.table(PRETTY_KNOWN_CONTRACTS)
   console.log('Addresses')
   console.table(KNOWN_ADDRESSES)
 }

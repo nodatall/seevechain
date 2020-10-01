@@ -2,7 +2,7 @@ import React from 'react'
 
 import { HorizontalBar } from 'react-chartjs-2'
 import numeral from 'numeral'
-import { KNOWN_CONTRACTS, TOKEN_CONTRACTS } from 'lib/knownAddresses'
+import { getLongKnownContract, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
 import numberWithCommas from 'lib/numberWithCommas'
 import { colorSet } from 'lib/chartHelpers'
 
@@ -11,8 +11,9 @@ import './index.sass'
 export default function TopContractsChart({ topContracts }) {
   const data = {
     labels: topContracts.map(({ contract, clauses }) => {
-      const label = KNOWN_CONTRACTS[contract]
-        ? KNOWN_CONTRACTS[contract]
+      const matchingKnownContract = getLongKnownContract(contract)
+      const label = matchingKnownContract
+        ? matchingKnownContract
         : TOKEN_CONTRACTS[contract]
           ? TOKEN_CONTRACTS[contract]
           : `${contract.slice(2,6)}..${contract.slice(-4)}`
