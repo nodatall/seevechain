@@ -42,6 +42,10 @@ const KNOWN_CONTRACTS = {
   '0xa7f8b361060222b3aee75f4b457ba0353cf10998': 'E-HCert',
   '0xa9f3c1bd52c3a506cecbb8cbca562ef26c833175': 'Yuhongtai Foods',
   '0x040093ab307f5acb4ae3afb0fb31de0ec46d62f9': 'safehaven.io',
+  '0x7196c6b28f5edac5d9134e44051635cc572fe07b': {
+    short: 'safehaven.io',
+    long: 'Safehaven Inheriti ',
+  },
   '0x1111111111111111111111111111111111111111': 've-name.web.app',
   '0x1Cc13a24b1F73288cc7791C2c8Fd428357405226': 'MyCare',
   '0xcd01241c39d2a503aa4ac083fd2563556af9fe56': {
