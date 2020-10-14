@@ -65,6 +65,7 @@ const KNOWN_CONTRACTS = {
   '0x05b866b65f3fbf118d45ca2157c43d888f001dd1': 'VIM Dispenser',
   '0xc96b1e1a436c5ecf150ac7a7de64c0eec73883e0': 'VIM Feeding',
   '0x46a7567f65c278b119ddeabf440f42ba2de949c0': 'VIM Minting',
+  '0x65f7ac9ece8ed59044768d53c0d44e3cb7f6ceff': 'Ubique',
 }
 
 const TOKEN_CONTRACTS = {
