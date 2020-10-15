@@ -207,7 +207,7 @@ function DataTransaction({transaction, VTHOBurn, types}) {
   if (transaction.reverted) {
     types = 'Reverted'
     if (clauses.length > 0) contract = setContract(clauses)
-    else contract = getShortKnownContract(clause.contract) || formatAddress(transaction.origin)
+    else contract = getShortKnownContract(transaction.origin) || formatAddress(transaction.origin)
   } else {
     contract = setContract(clauses)
   }
