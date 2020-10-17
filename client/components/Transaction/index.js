@@ -241,6 +241,7 @@ function TypeTag({types, clauses}) {
   else if (types.indexOf('New Contract') !== -1) className += ' Transaction-TypeTag-newContract'
   else if (types.indexOf('Data') === -1) className += ' Transaction-TypeTag-transfer'
   else className += ' Transaction-TypeTag-data'
+  if (!types.length) types = 'Unknown'
   return <div className={className}>
     {types}{clauses > 1 ? <span className="Transaction-TypeTag-clauses"> {clauses}</span> : ''}
   </div>
