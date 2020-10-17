@@ -9,6 +9,12 @@ import { colorSet } from 'lib/chartHelpers'
 import './index.sass'
 
 export default function TopContractsChart({ topContracts }) {
+  const barThickness = window.innerHeight < 650
+    ? 10
+    : window.innerWidth > 760
+      ? 30
+      : 15
+
   const data = {
     labels: topContracts.map(({ contract, clauses }) => {
       const matchingKnownContract = getLongKnownContract(contract)
@@ -22,7 +28,7 @@ export default function TopContractsChart({ topContracts }) {
 
     ),
     datasets: [{
-      barThickness: window.innerWidth > 760 ? 30 : 15,
+      barThickness,
       label: 'Clauses by Contract',
       backgroundColor: colorSet,
       data: topContracts.map(contract => contract.clauses),
