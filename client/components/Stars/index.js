@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'preact/hooks'
 import './index.sass'
 
 const sf = {
-  starDensity: .04,
+  starDensity: window.innerWidth < 500 ? .1 : .04,
   canvas: null,
   container: null,
   dy: 0.15, // horizontal velocity
