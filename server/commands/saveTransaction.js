@@ -64,7 +64,7 @@ module.exports = async function({ client, transaction, block, receipt }) {
       continue
     }
 
-    const event = events[0]
+    const event = events[events.length - 1]
     const transfer = transfers[0]
 
     if (event) {
