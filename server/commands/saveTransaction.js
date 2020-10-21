@@ -1,6 +1,6 @@
 const bigNumber = require('bignumber.js')
 const { ABI_SIGNATURES } = require('../lib/abiSignatures')
-const { TOKEN_CONTRACTS, KNOWN_CONTRACTS } = require('../../shared/knownAddresses')
+const { TOKEN_CONTRACTS } = require('../../shared/knownAddresses')
 const { abi } = require('thor-devkit')
 const knex = require ('../database/knex')
 
