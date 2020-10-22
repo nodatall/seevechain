@@ -1,6 +1,6 @@
 const bigNumber = require('bignumber.js')
 const { ABI_SIGNATURES } = require('../lib/abiSignatures')
-const { TOKEN_CONTRACTS } = require('../../shared/knownAddresses')
+const { TOKEN_CONTRACTS, KNOWN_CONTRACTS } = require('../../shared/knownAddresses')
 const { abi } = require('thor-devkit')
 const knex = require ('../database/knex')
 
@@ -68,11 +68,11 @@ module.exports = async function({ client, transaction, block, receipt }) {
     const transfer = transfers[0]
 
     if (event) {
+      const clauseMatchingEvent = transaction.clauses.find(clause => {
+        if (!clause.data) return false
+        return clause.data.indexOf(event.data.slice(2)) !== -1
+      })
       if (TOKEN_CONTRACTS[event.address]) {
-        const clauseMatchingEvent = transaction.clauses.find(clause => {
-          if (!clause.data) return false
-          return clause.data.indexOf(event.data.slice(2)) !== -1
-        })
         if (clauseMatchingEvent) {
           const signature = clauseMatchingEvent.data.slice(0, 10)
           if (ABI_SIGNATURES[signature]) {
@@ -97,7 +97,11 @@ module.exports = async function({ client, transaction, block, receipt }) {
       }
 
       clause.type = 'Data'
-      clause.contract = event.address
+      clause.contract = clauseMatchingEvent ? clauseMatchingEvent.to : event.address
+      if (events.length > 1) {
+        const eventMatchingKnownContract = events.find(event => !!KNOWN_CONTRACTS[event.address])
+        if (eventMatchingKnownContract) clause.contract = eventMatchingKnownContract.address
+      }
       insertableClauses.push(clause)
       continue
     }
