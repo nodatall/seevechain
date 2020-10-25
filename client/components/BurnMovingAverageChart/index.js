@@ -26,7 +26,7 @@ export default function BurnMovingAverageChart({ monthlyStats }) {
         {
           label: '25 Day Moving Average',
           data: twentyFiveDay,
-          borderColor: '#rgb(72, 143, 49)',
+          borderColor: 'rgb(72, 143, 49)',
           backgroundColor: 'rgb(72, 143, 49, .1)',
         },
       ]}
