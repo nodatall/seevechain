@@ -1,14 +1,19 @@
 import BurnTxsAndClausesCharts from 'components/BurnTxsAndClausesCharts'
 import TopContractsChart from 'components/TopContractsChart'
+import BurnMovingAverageChart from 'components/BurnMovingAverageChart'
 
 export const locationToChartMap = {
+  '/contracts': {
+    title: 'Today\'s Top Contracts',
+    component: TopContractsChart,
+  },
   '/burn': {
     title: 'VTHO Burn, Clauses & Txs',
     component: BurnTxsAndClausesCharts,
   },
-  '/contracts': {
-    title: 'Today\'s Top Contracts',
-    component: TopContractsChart,
+  '/burn-moving-averages': {
+    title: 'VTHO Burn Moving Averages',
+    component: BurnMovingAverageChart,
   }
 }
 

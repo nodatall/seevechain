@@ -87,7 +87,7 @@ module.exports = async function(client) {
     [before]
   )
 
-  const monthlyStatsRecords = await client.query(`SELECT * FROM daily_stats ORDER BY day DESC LIMIT 100`)
+  const monthlyStatsRecords = await client.query(`SELECT * FROM daily_stats ORDER BY day DESC LIMIT 170`)
 
   const now = moment()
   const serverTime = now.add((+process.env.TIME_DIFFERENCE), 'hours').format('HH:mm MM/DD/YY')
