@@ -41,7 +41,7 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
     className: "StatsModal",
   }}>
     <span className="StatsModal-serverTime">
-      Server time: {serverTime} (UTC+2)
+      Server time: {serverTime} (UTC+1)
     </span>
     <div className="StatsModal-prices">
       <span>
