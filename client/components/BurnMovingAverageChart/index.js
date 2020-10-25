@@ -48,8 +48,8 @@ export default function BurnMovingAverageChart({ monthlyStats }) {
         {
           label: '100 Day Moving Average',
           data: hundredDay,
-          borderColor: 'rgb(255, 213, 130)',
-          backgroundColor: 'rgb(255, 213, 130, .1)',
+          borderColor: 'rgb(255, 166, 0)',
+          backgroundColor: 'rgb(255, 166, 0, .1)',
         },
       ]}
     />
