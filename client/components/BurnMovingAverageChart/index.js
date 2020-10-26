@@ -15,11 +15,23 @@ export default function BurnMovingAverageChart({ monthlyStats }) {
     vthoBurnSeries.push(dayStat.vthoBurn)
   })
 
+  const sevenDay = sma(vthoBurnSeries, 7)
   const twentyFiveDay = sma(vthoBurnSeries, 25)
   const fiftyDay = sma(vthoBurnSeries, 50)
   const hundredDay = sma(vthoBurnSeries, 100)
 
   return <Fragment>
+    <LineChart
+      labels={labels.slice(6)}
+      datasets={[
+        {
+          label: '7 Day Moving Average',
+          data: sevenDay,
+          borderColor: 'rgb(222, 66, 91)',
+          backgroundColor: 'rgb(222, 66, 91, .1)',
+        },
+      ]}
+    />
     <LineChart
       labels={labels.slice(24)}
       datasets={[
