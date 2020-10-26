@@ -21,7 +21,7 @@ export default function BurnMovingAverageChart({ monthlyStats }) {
 
   return <Fragment>
     <LineChart
-      labels={labels.slice(50)}
+      labels={labels.slice(24)}
       datasets={[
         {
           label: '25 Day Moving Average',
@@ -32,7 +32,7 @@ export default function BurnMovingAverageChart({ monthlyStats }) {
       ]}
     />
     <LineChart
-      labels={labels.slice(50)}
+      labels={labels.slice(49)}
       datasets={[
         {
           label: '50 Day Moving Average',
@@ -43,7 +43,7 @@ export default function BurnMovingAverageChart({ monthlyStats }) {
       ]}
     />
     <LineChart
-      labels={labels.slice(100)}
+      labels={labels.slice(99)}
       datasets={[
         {
           label: '100 Day Moving Average',
