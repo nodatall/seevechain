@@ -48,6 +48,10 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
         VET
         <span className="StatsModal-prices-price">${prices.vet.usd.toFixed(5)}</span>
       </span>
+      <span className="StatsModal-prices-middle">
+        VTHO/VET
+        <span className="StatsModal-prices-price">{(prices.vtho.usd / prices.vet.usd).toFixed(3)}</span>
+      </span>
       <span>
         VTHO
         <span className="StatsModal-prices-price">${prices.vtho.usd.toFixed(5)}</span>
