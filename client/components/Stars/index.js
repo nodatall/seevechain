@@ -4,10 +4,10 @@ import { useEffect, useRef } from 'preact/hooks'
 import './index.sass'
 
 const sf = {
-  starDensity: window.innerWidth < 500 ? .1 : .04,
+  starDensity: window.innerWidth < 500 ? .04 : .02,
   canvas: null,
   container: null,
-  dy: 0.15, // horizontal velocity
+  dy: 0.06, // horizontal velocity
   cw: null, // canvasWidth
   ch: null, // canvasHeight
   ctx: null,  // context
@@ -55,7 +55,7 @@ function sfSetup({ starsRef, canvasRef }){
   sf.canvas.width = sf.cw
   sf.canvas.height = sf.ch
 
-  const area = (sf.cw * sf.ch) / (10 * 10)
+  const area = (sf.cw * sf.ch) / (6 * 6)
   sf.numStars = area * sf.starDensity
 
   const max = 3
@@ -121,15 +121,15 @@ function renderStars(size, bufferContext) {
     let color
     // big star color
     if (star.s == 3){
-      color = `rgba(${randomColor()}, 0.8)`
+      color = `rgba(${randomColor()}, 0.6)`
     }
     // med star color
     if (star.s == 2){
-      color = `rgba(${randomColor()}, 0.7)`
+      color = `rgba(${randomColor()}, 0.55)`
     }
     // small star color
     if (star.s == 1){
-      color = `rgba(${randomColor()}, 0.6)`
+      color = `rgba(${randomColor()}, 0.5)`
     }
 
     bufferContext.beginPath()
@@ -144,7 +144,7 @@ function animatePanel() {
   for (let i = 0; i < sf.layers.length; i++) {
     const layer = sf.layers[i]
     layer.x = 0
-    layer.y = (layer.y * -1) >= sf.ch ? 0 : layer.y - (layer.s * sf.dy)
+    layer.y = (layer.y * -1) >= sf.ch ? 0 : layer.y - ((layer.s * 2) * sf.dy)
     layer.y2 = layer.y + sf.ch
 
     sf.ctx.drawImage(layer.buffer, layer.x, layer.y)
