@@ -1,9 +1,10 @@
 import React from 'react'
 
-import qrCode from 'assets/donate_qr_code.jpg'
 import Header from 'components/Header'
 import CopyButton from 'components/CopyButton'
 import Modal from 'components/Modal'
+import QRCode from 'qrcode.react'
+import donate from 'assets/donate.png'
 
 import './index.sass'
 
@@ -14,13 +15,22 @@ export default function DonateModal({ setVisibility, open }) {
     <div>
       Contributions will keep this site running and fund the development of additional awesome VeChain apps. Thank you!
     </div>
-    <img className="DonateModal-qrCode" src={qrCode} />
+    <QRCode
+      className="DonateModal-qrCode"
+      value="0x3f5929c5741C726Ea3fE574790ca89a69f6Aa780"
+      size={128}
+      bgColor="#ffffff"
+      fgColor="#373737"
+      level="L"
+      includeMargin={false}
+      renderAs="svg"
+    />
     <div className="DonateModal-currencyMessage">
       VET, VTHO, or any VIP180 address:
     </div>
     <div className="DonateModal-address">
-      <input value="0x80F7FCd03083B520DC8FF2C04dbEe5697aBe2c1a" />
-      <CopyButton copyValue="0x80F7FCd03083B520DC8FF2C04dbEe5697aBe2c1a" />
+      <input value="0x3f5929c5741C726Ea3fE574790ca89a69f6Aa780" />
+      <CopyButton copyValue="0x3f5929c5741C726Ea3fE574790ca89a69f6Aa780" />
     </div>
   </Modal>
 }
