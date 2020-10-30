@@ -19,7 +19,7 @@ export default function DonateModal({ setVisibility, open }) {
       value="0x3f5929c5741C726Ea3fE574790ca89a69f6Aa780"
       size={128}
       bgColor="#ffffff"
-      fgColor="#373737"
+      fgColor="#182024"
       level="L"
       includeMargin={false}
       renderAs="svg"
