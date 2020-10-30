@@ -4,7 +4,6 @@ import Header from 'components/Header'
 import CopyButton from 'components/CopyButton'
 import Modal from 'components/Modal'
 import QRCode from 'qrcode.react'
-import donate from 'assets/donate.png'
 
 import './index.sass'
 
