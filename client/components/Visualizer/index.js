@@ -4,21 +4,17 @@ import { Suspense, lazy } from 'preact/compat'
 import Cookies from 'js-cookie'
 import ioClient from 'socket.io-client'
 import moment from 'moment'
-import { useLocalStorage } from 'lib/storageHooks'
 
 import Transactions from 'components/Transactions'
 import BottomBar from 'components/BottomBar'
 import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
-import DonateModal from 'components/DonateModal'
 import numberWithCommas from 'lib/numberWithCommas'
 import { onReturnToStaleApp } from 'lib/onReturnToStaleApp'
 import { locationToChartMap } from 'lib/chartHelpers'
 import { PRETTY_KNOWN_CONTRACTS, KNOWN_ADDRESSES } from '../../../shared/knownAddresses'
-import donate from 'assets/donate.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faVolumeUp, faVolumeOff, faStar } from '@fortawesome/free-solid-svg-icons'
-import { faStar as emptyStar } from '@fortawesome/free-regular-svg-icons'
+import { faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons'
 const StatsModal = lazy(() => import('components/StatsModal'))
 
 import createUid from 'lib/createUid'
@@ -28,14 +24,12 @@ export default function Visualizer() {
   const [stats, setStats] = useState({})
   const [monthlyStats, setMonthlyStats] = useState()
   const [serverTime, setServerTime] = useState()
-  const [controlsModalVisible, toggleDonateModalVisibility] = useState(false)
   const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
   const [prices, setPrices] = useState()
   const [topContracts, setTopContracts] = useState()
   const [soundOn, setSoundOn] = useState(false)
   const initialized = useRef()
   const statsRef = useRef()
-  const [starsHidden, setStarsHidden] = useLocalStorage('starsVisible')
 
   useEffect(() => {
     const vechainIdCookie = Cookies.get('seeVechainUid')
@@ -80,24 +74,13 @@ export default function Visualizer() {
   </div>
 
   return <div className="Visualizer">
-    {!starsHidden && <Stars />}
+    <Stars />
     <div className="Visualizer-rightControls">
-      <img
-        className="Visualizer-rightControls-donateIcon"
-        src={donate}
-        onClick={() => { toggleDonateModalVisibility(!controlsModalVisible) }}
-      />
       <FontAwesomeIcon
         color="#a1a1aa"
         icon={soundOn ? faVolumeUp : faVolumeOff}
         size="23px"
         onClick={() => { setSoundOn(!soundOn) }}
-      />
-      <FontAwesomeIcon
-        color="#a1a1aa"
-        icon={starsHidden ? emptyStar : faStar}
-        size="23px"
-        onClick={() => { setStarsHidden(!starsHidden) }}
       />
     </div>
     <BlockNumber stats={stats} />
@@ -108,7 +91,6 @@ export default function Visualizer() {
       statsRef={statsRef}
       soundOn={soundOn}
     />
-    <DonateModal open={controlsModalVisible} setVisibility={() => { toggleDonateModalVisibility(!controlsModalVisible) }} />
     {statsModalVisible && <Suspense fallback={<Spinner />}>
       <StatsModal
         open={statsModalVisible}
