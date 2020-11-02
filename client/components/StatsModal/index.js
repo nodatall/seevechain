@@ -15,7 +15,7 @@ import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons
 
 import './index.sass'
 
-export default function StatsModal({ setVisibility, open, monthlyStats, serverTime, prices, topContracts }) {
+export default function StatsModal({ setVisibility, open, serverTime, prices }) {
   const [storedChartPath, setStoredChartPath] = useLocalStorage()
   const [donateVisible, showDonate, hideDonate, toggleDonate] = useToggle(false) // eslint-disable-line
   const donateRef = useRef()
@@ -58,7 +58,9 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
       </span>
       <span className="StatsModal-prices-middle">
         VTHO/VET
-        <span className="StatsModal-prices-price StatsModal-prices-middle-price">{(prices.vtho.usd / prices.vet.usd).toFixed(3)}</span>
+        <span className="StatsModal-prices-price StatsModal-prices-middle-price">
+          {(prices.vtho.usd / prices.vet.usd).toFixed(3)}
+        </span>
       </span>
       <span>
         VTHO
@@ -77,7 +79,7 @@ export default function StatsModal({ setVisibility, open, monthlyStats, serverTi
       },
       fullWidth: true,
     }} />
-    {CurrentChart && <CurrentChart {...{ monthlyStats, topContracts }} />}
+    {CurrentChart && <CurrentChart />}
     <div  {...{
       className: 'StatsModal-donate',
       ref: donateRef,

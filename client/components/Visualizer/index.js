@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import ioClient from 'socket.io-client'
 import moment from 'moment'
 
+import useAppState from 'lib/appState'
 import Transactions from 'components/Transactions'
 import BottomBar from 'components/BottomBar'
 import Spinner from 'components/Spinner'
@@ -22,11 +23,9 @@ import './index.sass'
 
 export default function Visualizer() {
   const [stats, setStats] = useState({})
-  const [monthlyStats, setMonthlyStats] = useState()
   const [serverTime, setServerTime] = useState()
   const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
   const [prices, setPrices] = useState()
-  const [topContracts, setTopContracts] = useState()
   const [soundOn, setSoundOn] = useState(false)
   const initialized = useRef()
   const statsRef = useRef()
@@ -49,10 +48,8 @@ export default function Visualizer() {
         statsRef,
         initialized,
         setStats,
-        setMonthlyStats,
         setServerTime,
         setPrices,
-        setTopContracts,
       })
     })
 
@@ -91,14 +88,12 @@ export default function Visualizer() {
       statsRef={statsRef}
       soundOn={soundOn}
     />
-    {statsModalVisible && <Suspense fallback={<Spinner />}>
+    {<Suspense fallback={<Spinner />}>
       <StatsModal
         open={statsModalVisible}
         setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
-        monthlyStats={monthlyStats}
         serverTime={serverTime}
         prices={prices}
-        topContracts={topContracts}
       />
     </Suspense>
     }
@@ -117,8 +112,11 @@ function BlockNumber({stats}) {
 }
 
 function handleLatest({
-  data, statsRef, initialized, setStats, setMonthlyStats, setServerTime, setPrices, setTopContracts,
+  data, statsRef, initialized, setStats, setServerTime, setPrices
 }){
+  const setTopContracts = useAppState(s => s.setTopContracts)
+  const setMonthlyStats = useAppState(s => s.setMonthlyStats)
+
   if (!initialized.current) {
     const lessData = getStatsBeforeBatchOfTransactions(data)
     document.title = `${numberWithCommas(+lessData.stats.dailyClauses)} Clauses | See VeChain`

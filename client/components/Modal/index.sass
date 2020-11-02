@@ -13,6 +13,7 @@
   background-color: rgba(0,0,0,0.5)
   z-index: 2147483601
   touch-action: auto
+  overscroll-behavior: contain
   &-window
     margin-top: -68px
     width: 100%
@@ -22,18 +23,17 @@
     @media only screen and (max-width: 760px)
       padding: 10px
       margin: 0 5px
-    display: flex
-    flex-direction: column
     box-shadow: 0 12px 30px 0 rgba(0,0,0,0.5), inset 0 1px 0 0 rgba(0,0,0,0.65)
     background-color: #182024
     border: 1px solid #3e4050
     border-radius: 3px
     font-size: 15px
     line-height: 20px
-    align-items: center
     overflow: hidden
     max-height: calc(100vh - 170px)
     overflow-y: scroll
+    min-height: 200px
+    min-width: 200px
     > div
       width: 100%
   &-close
@@ -46,26 +46,3 @@
     filter: invert(.8)
     &:hover
       filter: invert(1)
-  &-animation
-    &-enter
-      opacity: 0
-      transition: opacity 200ms ease-in-out
-      .Modal-window
-        transform: scale(0.90)
-        transition: transform 200ms ease-out 50ms
-    &-enter-active
-      opacity: 1
-      .Modal-window
-        transform: scale(1)
-    &-exit
-      opacity: 1
-      transition: opacity 200ms ease-in-out 100ms
-      .Modal-window
-        transform: scale(1)
-        opacity: 1
-        transition: transform 200ms ease-out, opacity 200ms
-    &-exit-active
-      opacity: 0
-      .Modal-window
-        opacity: 0
-        transform: scale(0.90)

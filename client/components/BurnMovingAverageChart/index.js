@@ -3,10 +3,12 @@ import sma from 'sma'
 
 import { Fragment } from 'preact'
 
+import useAppState from 'lib/appState'
 import moment from 'moment'
 import LineChart from 'components/LineChart'
 
-export default function BurnMovingAverageChart({ monthlyStats }) {
+export default function BurnMovingAverageChart() {
+  const monthlyStats = useAppState(s => s.monthlyStats)
   const labels = []
   const vthoBurnSeries = []
 

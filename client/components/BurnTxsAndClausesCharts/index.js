@@ -3,6 +3,7 @@ import React from 'react'
 import { Fragment } from 'preact'
 import { useLocalStorage } from 'lib/storageHooks'
 
+import useAppState from 'lib/appState'
 import moment from 'moment'
 import numberWithCommas from 'lib/numberWithCommas'
 import LineChart from 'components/LineChart'
@@ -10,7 +11,8 @@ import Checkbox from 'components/Checkbox'
 
 import './index.sass'
 
-export default function BurnTxsAndClausesCharts({ monthlyStats }) {
+export default function BurnTxsAndClausesCharts() {
+  const monthlyStats = useAppState(s => s.monthlyStats)
   const [range = 100, setRange] = useLocalStorage('statsRange')
   const [includeToday, setIncludeToday] = useLocalStorage('includeTodayInStats')
 

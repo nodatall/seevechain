@@ -1,5 +1,6 @@
 import React from 'react'
 
+import useAppState from 'lib/appState'
 import { HorizontalBar } from 'react-chartjs-2'
 import numeral from 'numeral'
 import { getLongKnownContract, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
@@ -8,7 +9,8 @@ import { colorSet } from 'lib/chartHelpers'
 
 import './index.sass'
 
-export default function TopContractsChart({ topContracts }) {
+export default function TopContractsChart({}) {
+  const topContracts = useAppState(s => s.topContracts)
   const barThickness = window.innerHeight < 650
     ? 10
     : window.innerWidth > 760
