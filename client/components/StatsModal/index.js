@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'preact/hooks'
 import { useLocalStorage } from 'lib/storageHooks'
 import { getVerticalScrollParent } from 'lib/DOMHelpers'
 
+import useAppState from 'lib/appState'
 import Modal from 'components/Modal'
 import Dropdown from 'components/Dropdown'
 import { setPathname } from 'lib/location'
@@ -15,7 +16,7 @@ import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons
 
 import './index.sass'
 
-export default function StatsModal({ setVisibility, open, serverTime, prices }) {
+export default function StatsModal({ setVisibility, open }) {
   const [storedChartPath, setStoredChartPath] = useLocalStorage()
   const [donateVisible, showDonate, hideDonate, toggleDonate] = useToggle(false) // eslint-disable-line
   const donateRef = useRef()
@@ -48,25 +49,8 @@ export default function StatsModal({ setVisibility, open, serverTime, prices }) 
     },
     className: "StatsModal",
   }}>
-    <span className="StatsModal-serverTime">
-      Server time: {serverTime} (UTC+1)
-    </span>
-    <div className="StatsModal-prices">
-      <span>
-        VET
-        <span className="StatsModal-prices-price">${prices.vet.usd.toFixed(5)}</span>
-      </span>
-      <span className="StatsModal-prices-middle">
-        VTHO/VET
-        <span className="StatsModal-prices-price StatsModal-prices-middle-price">
-          {(prices.vtho.usd / prices.vet.usd).toFixed(3)}
-        </span>
-      </span>
-      <span>
-        VTHO
-        <span className="StatsModal-prices-price">${prices.vtho.usd.toFixed(5)}</span>
-      </span>
-    </div>
+    <ServerTime />
+    <Prices />
     <Dropdown {...{
       value: storedChartPath || '/burn',
       options: Object.keys(locationToChartMap).map(key => ({
@@ -125,4 +109,31 @@ export default function StatsModal({ setVisibility, open, serverTime, prices }) 
       </div>
     }
   </Modal>
+}
+
+function Prices() {
+  const prices = useAppState(s => s.prices)
+  return <div className="StatsModal-prices">
+    <span>
+      VET
+      <span className="StatsModal-prices-price">${prices.vet.usd.toFixed(5)}</span>
+    </span>
+    <span className="StatsModal-prices-middle">
+      VTHO/VET
+      <span className="StatsModal-prices-price StatsModal-prices-middle-price">
+        {(prices.vtho.usd / prices.vet.usd).toFixed(3)}
+      </span>
+    </span>
+    <span>
+      VTHO
+      <span className="StatsModal-prices-price">${prices.vtho.usd.toFixed(5)}</span>
+    </span>
+  </div>
+}
+
+function ServerTime() {
+  const serverTime = useAppState(s => s.serverTime)
+  return <span className="StatsModal-serverTime">
+    Server time: {serverTime} (UTC+1)
+  </span>
 }

@@ -23,9 +23,7 @@ import './index.sass'
 
 export default function Visualizer() {
   const [stats, setStats] = useState({})
-  const [serverTime, setServerTime] = useState()
   const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
-  const [prices, setPrices] = useState()
   const [soundOn, setSoundOn] = useState(false)
   const initialized = useRef()
   const statsRef = useRef()
@@ -43,14 +41,7 @@ export default function Visualizer() {
       seeVechainUid: Cookies.get('seeVechainUid'),
     })
     socket.on('serverSendLatest', function(data) {
-      handleLatest({
-        data,
-        statsRef,
-        initialized,
-        setStats,
-        setServerTime,
-        setPrices,
-      })
+      handleLatest({ data, statsRef, initialized, setStats })
     })
 
     onReturnToStaleApp(
@@ -71,6 +62,13 @@ export default function Visualizer() {
   </div>
 
   return <div className="Visualizer">
+    {<Suspense fallback={<Spinner />}>
+      <StatsModal
+        open={statsModalVisible}
+        setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
+      />
+    </Suspense>
+    }
     <Stars />
     <div className="Visualizer-rightControls">
       <FontAwesomeIcon
@@ -88,15 +86,6 @@ export default function Visualizer() {
       statsRef={statsRef}
       soundOn={soundOn}
     />
-    {<Suspense fallback={<Spinner />}>
-      <StatsModal
-        open={statsModalVisible}
-        setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
-        serverTime={serverTime}
-        prices={prices}
-      />
-    </Suspense>
-    }
   </div>
 }
 
@@ -111,11 +100,11 @@ function BlockNumber({stats}) {
   </a>
 }
 
-function handleLatest({
-  data, statsRef, initialized, setStats, setServerTime, setPrices
-}){
+function handleLatest({ data, statsRef, initialized, setStats }){
   const setTopContracts = useAppState(s => s.setTopContracts)
   const setMonthlyStats = useAppState(s => s.setMonthlyStats)
+  const setServerTime = useAppState(s => s.setServerTime)
+  const setPrices = useAppState(s => s.setPrices)
 
   if (!initialized.current) {
     const lessData = getStatsBeforeBatchOfTransactions(data)
