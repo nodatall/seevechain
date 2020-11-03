@@ -72,7 +72,20 @@ export default function TopContractsChart({}) {
     },
   }
 
-  return <div className="TopContractsChart">
-    <HorizontalBar {...{ data, options }}/>
+  return <div
+    className="TopContractsChart"
+    onClick={event => {
+      const offsetY = event.offsetY
+      const segment = event.target.clientHeight / (topContracts.length + 2)
+      const index = Math.floor(offsetY / segment) - 1
+      window.open(
+        `http://www.vechainuniverse.com/Stalker/Stalk/${topContracts[index].contract}`, `_blank`
+      )
+    }}
+  >
+    <HorizontalBar {...{
+      data,
+      options,
+    }}/>
   </div>
 }
