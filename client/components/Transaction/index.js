@@ -5,7 +5,6 @@ import { useEffect, useState, useRef } from 'preact/hooks'
 import waitFor from 'delay'
 import numeral from 'numeral'
 
-import useAppState from 'lib/appState'
 import numberWithCommas from 'lib/numberWithCommas'
 import { getShortKnownContract, KNOWN_ADDRESSES, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
 import lightenDarkenColor from 'lib/lightenDarkenColor'
@@ -31,11 +30,11 @@ const txCount = { count: 1 }
 
 export default function Transaction({
   transaction,
+  setStats,
   statsRef,
   animationDuration,
   soundOn,
 }) {
-  const setStats = useAppState(s => s.setStats)
   const shouldPlaySound = useRef()
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)

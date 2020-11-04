@@ -22,9 +22,9 @@ import createUid from 'lib/createUid'
 import './index.sass'
 
 export default function Visualizer() {
+  const [stats, setStats] = useState({})
   const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
   const [soundOn, setSoundOn] = useState(false)
-  const [loaded, setLoaded] = useState(false)
   const initialized = useRef()
   const statsRef = useRef()
 
@@ -41,8 +41,7 @@ export default function Visualizer() {
       seeVechainUid: Cookies.get('seeVechainUid'),
     })
     socket.on('serverSendLatest', function(data) {
-      handleLatest({ data, statsRef, initialized })
-      setLoaded(true)
+      handleLatest({ data, statsRef, initialized, setStats })
     })
 
     onReturnToStaleApp(
@@ -58,7 +57,7 @@ export default function Visualizer() {
     if (locationToChartMap[window.location.pathname]) toggleStatsModalVisibility(true)
   }, [])
 
-  if (!loaded) return <div className="Visualizer">
+  if (!stats.block) return <div className="Visualizer">
     <Spinner />
   </div>
 
@@ -79,15 +78,18 @@ export default function Visualizer() {
         onClick={() => { setSoundOn(!soundOn) }}
       />
     </div>
-    <BlockNumber />
-    <BottomBar toggleStatsModalVisibility={toggleStatsModalVisibility} />
-    <Transactions statsRef={statsRef} soundOn={soundOn}
+    <BlockNumber stats={stats} />
+    <BottomBar stats={stats.stats} toggleStatsModalVisibility={toggleStatsModalVisibility} />
+    <Transactions
+      transactions={stats.transactions}
+      setStats={setStats}
+      statsRef={statsRef}
+      soundOn={soundOn}
     />
   </div>
 }
 
-function BlockNumber() {
-  const stats = useAppState(s => s.stats)
+function BlockNumber({stats}) {
   const clausesInBlock = stats.transactions.reduce((clauses, tx) => clauses + tx.clauses.length, 0)
   return <a
     href={`https://insight.vecha.in/#/main/blocks/${stats.block.id}`}
@@ -98,12 +100,11 @@ function BlockNumber() {
   </a>
 }
 
-function handleLatest({ data, statsRef, initialized }){
+function handleLatest({ data, statsRef, initialized, setStats }){
   const setTopContracts = useAppState(s => s.setTopContracts)
   const setMonthlyStats = useAppState(s => s.setMonthlyStats)
   const setServerTime = useAppState(s => s.setServerTime)
   const setPrices = useAppState(s => s.setPrices)
-  const setStats = useAppState(s => s.setStats)
 
   if (!initialized.current) {
     const lessData = getStatsBeforeBatchOfTransactions(data)
