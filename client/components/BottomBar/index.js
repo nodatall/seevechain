@@ -1,11 +1,13 @@
 import React from 'react'
 import { useEffect, useState } from 'preact/hooks'
 
+import useAppState from 'lib/appState'
 import numberWithCommas from 'lib/numberWithCommas'
 
 import './index.sass'
 
-export default function BottomBar({ stats, toggleStatsModalVisibility }) {
+export default function BottomBar({ toggleStatsModalVisibility }) {
+  const { stats } = useAppState(s => s.stats)
   const [numberClass, setNumberClass] = useState('BottomBar-number')
   const [initialState, setInitialState] = useState(0)
 

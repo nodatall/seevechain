@@ -1,77 +1,66 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { useState, useEffect } from 'preact/hooks'
 
+import useAppState from 'lib/appState'
 import Transaction from 'components/Transaction'
 import calculateInterval from 'lib/calculateInterval'
 import { randomNumber } from 'lib/transactionHelpers'
 
-export default class Transactions extends Component {
+export default function Transactions({ statsRef, soundOn }) {
+  const [renderableTransactions, setRenderableTransactions] = useState([])
+  const [transactionTimestamps, setTransactionTimestamps] = useState({}) //eslint-disable-line
+  const { transactions } = useAppState(s => s.stats)
 
-  state = {
-    renderableTransactions: [],
-    transactionTimestamps: {},
-  }
-
-  componentDidMount = () => {
-    this.setRenderableTransactions(this.props.transactions)
-  }
-
-  setRenderableTransactions = transactions => {
-    const oldTransactionTimestamps = {...this.state.transactionTimestamps}
-    Object.entries(oldTransactionTimestamps).forEach(([key, value]) => {
-      if (Date.now() - value > 20000) delete oldTransactionTimestamps[key]
-    })
-
-    let newTransactions = []
-    const transactionTimestamps = { ...oldTransactionTimestamps }
-    transactions.forEach(transaction => {
-      if (!transactionTimestamps[transaction.id]) {
-        transactionTimestamps[transaction.id] = Date.now()
-        newTransactions.push(transaction)
-      }
-    })
-
-    const intervals = getIntervals(newTransactions)
-    newTransactions = newTransactions
-      .map((transaction, index) => {
-        transaction.delay = intervals[index]
-        return transaction
+  useEffect(
+    () => {
+      const oldTransactionTimestamps = {...transactionTimestamps}
+      Object.entries(oldTransactionTimestamps).forEach(([key, value]) => {
+        if (Date.now() - value > 20000) delete oldTransactionTimestamps[key]
       })
 
-    const renderableTransactions = [
-      ...newTransactions,
-      ...this.state.renderableTransactions.filter(transaction => transactionTimestamps[transaction.id]),
-    ]
+      let newTransactions = []
+      const transactionTimestamps = { ...oldTransactionTimestamps }
+      transactions.forEach(transaction => {
+        if (!transactionTimestamps[transaction.id]) {
+          transactionTimestamps[transaction.id] = Date.now()
+          newTransactions.push(transaction)
+        }
+      })
 
-    this.setState({
-      transactionTimestamps,
-      renderableTransactions,
-    })
-  }
+      const intervals = getIntervals(newTransactions)
+      newTransactions = newTransactions
+        .map((transaction, index) => {
+          transaction.delay = intervals[index]
+          return transaction
+        })
 
-  componentWillReceiveProps = nextProps => {
-    this.setRenderableTransactions(nextProps.transactions)
-  }
+      const newRenderableTransactions = [
+        ...newTransactions,
+        ...renderableTransactions.filter(transaction => transactionTimestamps[transaction.id]),
+      ]
 
-  render() {
-    const { setStats, statsRef, soundOn } = this.props
-    const { renderableTransactions } = this.state
-    if (!renderableTransactions.length) return
-    const animationDuration = renderableTransactions.length < 5
-      ? [1800, 5475]
-      : renderableTransactions.length < 10
-        ? [1623, 4612]
-        : [1350, 3750]
-    return renderableTransactions.map(transaction => {
-      return <Transaction
-        animationDuration={animationDuration}
-        transaction={transaction}
-        key={transaction.id}
-        setStats={setStats}
-        statsRef={statsRef}
-        soundOn={soundOn}
-      />
-    })
-  }
+      setRenderableTransactions(newRenderableTransactions)
+      setTransactionTimestamps(transactionTimestamps)
+    },
+    [transactions]
+  )
+
+  if (!renderableTransactions.length) return
+  const animationDuration = renderableTransactions.length < 5
+    ? [1800, 5475]
+    : renderableTransactions.length < 10
+      ? [1623, 4612]
+      : [1350, 3750]
+
+  return renderableTransactions.map(transaction => {
+    return <Transaction
+      animationDuration={animationDuration}
+      transaction={transaction}
+      key={transaction.id}
+      statsRef={statsRef}
+      soundOn={soundOn}
+    />
+  })
 }
 
 function getIntervals(newTransactions) {
