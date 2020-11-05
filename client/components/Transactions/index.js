@@ -6,61 +6,73 @@ import Transaction from 'components/Transaction'
 import calculateInterval from 'lib/calculateInterval'
 import { randomNumber } from 'lib/transactionHelpers'
 
+import './index.sass'
+
 export default function Transactions({ statsRef, soundOn }) {
-  const [renderableTransactions, setRenderableTransactions] = useState([])
-  const [transactionTimestamps, setTransactionTimestamps] = useState({}) //eslint-disable-line
+  const [
+    { renderableTransactions },
+    setTransactionsState,
+  ] = useState({
+    renderableTransactions: [],
+    transactionTimestamps: {},
+  })
   const { transactions } = useAppState(s => s.stats)
 
   useEffect(
     () => {
-      const oldTransactionTimestamps = {...transactionTimestamps}
-      Object.entries(oldTransactionTimestamps).forEach(([key, value]) => {
-        if (Date.now() - value > 20000) delete oldTransactionTimestamps[key]
-      })
-
-      let newTransactions = []
-      const transactionTimestamps = { ...oldTransactionTimestamps }
-      transactions.forEach(transaction => {
-        if (!transactionTimestamps[transaction.id]) {
-          transactionTimestamps[transaction.id] = Date.now()
-          newTransactions.push(transaction)
-        }
-      })
-
-      const intervals = getIntervals(newTransactions)
-      newTransactions = newTransactions
-        .map((transaction, index) => {
-          transaction.delay = intervals[index]
-          return transaction
+      setTransactionsState(({ renderableTransactions, transactionTimestamps }) => {
+        const oldTransactionTimestamps = {...transactionTimestamps}
+        Object.entries(oldTransactionTimestamps).forEach(([key, value]) => {
+          if (Date.now() - value > 20000) delete oldTransactionTimestamps[key]
         })
 
-      const newRenderableTransactions = [
-        ...newTransactions,
-        ...renderableTransactions.filter(transaction => transactionTimestamps[transaction.id]),
-      ]
+        let newTransactions = []
+        const newTransactionTimestamps = { ...oldTransactionTimestamps }
+        transactions.forEach(transaction => {
+          if (!newTransactionTimestamps[transaction.id]) {
+            newTransactionTimestamps[transaction.id] = Date.now()
+            newTransactions.push(transaction)
+          }
+        })
 
-      setRenderableTransactions(newRenderableTransactions)
-      setTransactionTimestamps(transactionTimestamps)
+        const intervals = getIntervals(newTransactions)
+        newTransactions = newTransactions
+          .map((transaction, index) => {
+            transaction.delay = intervals[index]
+            return transaction
+          })
+
+        const newRenderableTransactions = [
+          ...newTransactions,
+          ...renderableTransactions.filter(transaction => newTransactionTimestamps[transaction.id]),
+        ]
+
+        return {
+          renderableTransactions: newRenderableTransactions,
+          transactionTimestamps: newTransactionTimestamps,
+        }
+      })
     },
     [transactions]
   )
 
-  if (!renderableTransactions.length) return
   const animationDuration = renderableTransactions.length < 5
     ? [1800, 5475]
     : renderableTransactions.length < 10
       ? [1623, 4612]
       : [1350, 3750]
 
-  return renderableTransactions.map(transaction => {
-    return <Transaction
-      animationDuration={animationDuration}
-      transaction={transaction}
-      key={transaction.id}
-      statsRef={statsRef}
-      soundOn={soundOn}
-    />
-  })
+  return <div className="Transactions">
+    {renderableTransactions.map(transaction => {
+      return <Transaction
+        animationDuration={animationDuration}
+        transaction={transaction}
+        key={transaction.id}
+        statsRef={statsRef}
+        soundOn={soundOn}
+      />
+    })}
+  </div>
 }
 
 function getIntervals(newTransactions) {
