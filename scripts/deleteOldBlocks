@@ -5,14 +5,14 @@ const client = require('../server/database')
 
 ;(async function getBlocksForLastDay() {
 
-  const sixtyOneDaysAgo = moment()
+  const before = moment()
     .subtract(Number(process.argv[2]), 'days')
     .toDate()
     .toISOString()
 
   await client.query(
     `DELETE FROM blocks WHERE timestamp < $1`,
-    [sixtyOneDaysAgo]
+    [before]
   )
 
   process.exit(1)

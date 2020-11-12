@@ -67,6 +67,15 @@ const KNOWN_CONTRACTS = {
   '0xc96b1e1a436c5ecf150ac7a7de64c0eec73883e0': 'VIM Feeding',
   '0x46a7567f65c278b119ddeabf440f42ba2de949c0': 'VIM Minting',
   '0x65f7ac9ece8ed59044768d53c0d44e3cb7f6ceff': 'Ubique',
+  '0x4fe1ac0b38339a59682fea4ef970404cf989b09c': 'Indigiledger',
+  '0xe1fc8ecc13dc25db25fa4e7c756acbc87f965e60': {
+    short: 'FoodGates',
+    long: 'FoodGates 3',
+  },
+  '0x2dd241b93e435046d7264357d67eb58a9cea5857': {
+    short: 'FoodGates',
+    long: 'FoodGates 2',
+  },
 }
 
 const TOKEN_CONTRACTS = {
