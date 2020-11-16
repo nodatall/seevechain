@@ -76,6 +76,7 @@ const KNOWN_CONTRACTS = {
     short: 'FoodGates',
     long: 'FoodGates 2',
   },
+  '0x535Ab4a9fCE43dc71e9540534733bbeB0f494d5c': 'burntoken.io',
 }
 
 const TOKEN_CONTRACTS = {
