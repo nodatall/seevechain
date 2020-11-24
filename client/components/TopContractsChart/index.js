@@ -5,7 +5,7 @@ import { HorizontalBar } from 'react-chartjs-2'
 import numeral from 'numeral'
 import { getLongKnownContract, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
 import numberWithCommas from 'lib/numberWithCommas'
-import { colorSet } from 'lib/chartHelpers'
+import { colorSet, colorSet2 } from 'lib/chartHelpers'
 
 import './index.sass'
 
@@ -14,6 +14,7 @@ export default function TopContractsChart({}) {
     This chart is temporarily down for maintenance as the enormous number of clauses broke my badly optimized database query.
     It will be back soon!
   </div>
+
   const topContracts = useAppState(s => s.topContracts)
   const barThickness = window.innerHeight < 650
     ? 10
@@ -21,8 +22,30 @@ export default function TopContractsChart({}) {
       ? 30
       : 15
 
-  const data = {
-    labels: topContracts.map(({ contract, clauses }) => {
+  const sortedByVtho = [...topContracts].sort((a, b) => b.vthoBurn - a.vthoBurn)
+  const burnData = {
+    labels: sortedByVtho.map(({ contract, vthoBurn }) => {
+      const matchingKnownContract = getLongKnownContract(contract)
+      const label = matchingKnownContract
+        ? matchingKnownContract
+        : TOKEN_CONTRACTS[contract]
+          ? TOKEN_CONTRACTS[contract]
+          : `${contract.slice(2,6)}..${contract.slice(-4)}`
+      return `${label}: ${numberWithCommas(vthoBurn.toFixed(0))}`
+    }
+
+    ),
+    datasets: [{
+      barThickness,
+      label: 'VTHO Burn by Contract',
+      backgroundColor: colorSet,
+      data: sortedByVtho.map(contract => contract.vthoBurn),
+    }]
+  }
+
+  const sortedByClauses = [...topContracts].sort((a, b) => b.clauses - a.clauses)
+  const clausesData = {
+    labels: sortedByClauses.map(({ contract, clauses }) => {
       const matchingKnownContract = getLongKnownContract(contract)
       const label = matchingKnownContract
         ? matchingKnownContract
@@ -30,14 +53,12 @@ export default function TopContractsChart({}) {
           ? TOKEN_CONTRACTS[contract]
           : `${contract.slice(2,6)}..${contract.slice(-4)}`
       return `${label}: ${numberWithCommas(clauses)}`
-    }
-
-    ),
+    }),
     datasets: [{
       barThickness,
       label: 'Clauses by Contract',
-      backgroundColor: colorSet,
-      data: topContracts.map(contract => contract.clauses),
+      backgroundColor: colorSet2,
+      data: sortedByClauses.map(contract => contract.clauses),
     }]
   }
 
@@ -76,20 +97,38 @@ export default function TopContractsChart({}) {
     },
   }
 
-  return <div
-    className="TopContractsChart"
-    onClick={event => {
-      const offsetY = event.offsetY
-      const segment = event.target.clientHeight / (topContracts.length + 2)
-      const index = Math.floor(offsetY / segment) - 1
-      window.open(
-        `http://www.vechainuniverse.com/Stalker/Stalk/${topContracts[index].contract}`, `_blank`
-      )
-    }}
-  >
-    <HorizontalBar {...{
-      data,
-      options,
-    }}/>
+  return <div className="TopContractsCharts">
+    <div
+      className="TopContractsCharts-chart"
+      onClick={event => {
+        const offsetY = event.offsetY
+        const segment = event.target.clientHeight / (topContracts.length + 2)
+        const index = Math.floor(offsetY / segment) - 1
+        window.open(
+          `http://www.vechainuniverse.com/Stalker/Stalk/${topContracts[index].contract}`, `_blank`
+        )
+      }}
+    >
+      <HorizontalBar {...{
+        data: burnData,
+        options,
+      }}/>
+    </div>
+    <div
+      className="TopContractsCharts-chart"
+      onClick={event => {
+        const offsetY = event.offsetY
+        const segment = event.target.clientHeight / (topContracts.length + 2)
+        const index = Math.floor(offsetY / segment) - 1
+        window.open(
+          `http://www.vechainuniverse.com/Stalker/Stalk/${topContracts[index].contract}`, `_blank`
+        )
+      }}
+    >
+      <HorizontalBar {...{
+        data: clausesData,
+        options,
+      }}/>
+    </div>
   </div>
 }

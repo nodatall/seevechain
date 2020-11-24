@@ -126,14 +126,14 @@ export default function Transaction({
     <div className="Transaction-background" style={backgroundStyle} />
     <div className="Transaction-foreground" style={foregroundStyle}>
       {types.has('Transfer') && types.size === 1
-        ? <TransferTransaction clauses={transaction.clauses} />
+        ? <TransferTransaction clauses={transaction.clauses} transaction={transaction} />
         : <DataTransaction transaction={transaction} VTHOBurn={VTHOBurn} types={[...types]} />
       }
     </div>
   </div>
 }
 
-function TransferTransaction({ clauses }) {
+function TransferTransaction({ clauses, transaction }) {
   const senders = []
   const recipients = []
   const amountsByToken = {}
@@ -177,8 +177,9 @@ function TransferTransaction({ clauses }) {
   })
   if (justTokens.length > 1) transfers = justTokens.join(', ')
 
+  const types = transaction.reverted ? 'Reverted' : 'Transfer'
   return <Fragment>
-    <TypeTag types={['Transfer']} clauses={clauses.length}/>
+    <TypeTag types={types} clauses={clauses.length}/>
     {transfers}
     <div className="Transaction-subText">
       <div>

@@ -41,10 +41,10 @@ async function getTransaction(thor, txId, block, client) {
     if (!receipt || !transaction) {
       await getTransaction(thor, txId, block, client)
     } else {
-      await commands.saveTransaction({ client, transaction, receipt, block })
+      await commands.saveTransaction({ client, transaction, receipt, block, thor })
     }
   } catch(error) {
-    if (error.message.includes('head: leveldb: not found')) {
+    if (error.message.includes('leveldb: not found')) {
       await getTransaction(thor, txId, block, client)
     } else throw error
   }
@@ -57,6 +57,8 @@ module.exports = {
 }
 
 const testData = [
+  // // Reverted in explainer but ok in receipt
+  // '0xd1f241b171d97f400dfbb569f8d18c3040779fd930816c5ba1ae73a1745ae255',
   // // No clauses
   // '0xe48e7ca7ee0e4e6e6af71d65ca76011033baa0e060f6f3c9c2b23090730d7444',
   // // Burn > 2000
@@ -79,6 +81,6 @@ const testData = [
   // '0x9694221ce4d5b19a7fcea9e32c73650465e34af2f64c4d7eb59497ba08679387',
   // // New Contract
   // '0x4d05a8bf59aec8911de80d92d1a81e3f9a86216e20d5cb78f356ccb55597424a',
-  // // Reverted
+  // // Reverted transfer
   // '0x76768c32144bda9d20ec652479683a4ae533f57bf6fa3944b40c8c029bff9cf2',
 ]
