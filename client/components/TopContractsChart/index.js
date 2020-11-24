@@ -10,6 +10,10 @@ import { colorSet } from 'lib/chartHelpers'
 import './index.sass'
 
 export default function TopContractsChart({}) {
+  return <div>
+    This chart is temporarily down for maintenance as the enormous number of clauses broke my badly optimized database query.
+    It will be back soon!
+  </div>
   const topContracts = useAppState(s => s.topContracts)
   const barThickness = window.innerHeight < 650
     ? 10

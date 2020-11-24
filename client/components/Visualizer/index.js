@@ -99,7 +99,7 @@ function BlockNumber() {
 }
 
 function handleLatest({ data, statsRef, initialized }){
-  const setTopContracts = useAppState(s => s.setTopContracts)
+  // const setTopContracts = useAppState(s => s.setTopContracts)
   const setMonthlyStats = useAppState(s => s.setMonthlyStats)
   const setServerTime = useAppState(s => s.setServerTime)
   const setPrices = useAppState(s => s.setPrices)
@@ -130,7 +130,7 @@ function handleLatest({ data, statsRef, initialized }){
       ...data.monthlyStats,
     ]
   )
-  setTopContracts(data.topContracts)
+  // setTopContracts(data.topContracts)
   setServerTime(data.serverTime)
   setPrices(data.prices)
 }
