@@ -11,11 +11,6 @@ import Spinner from 'components/Spinner'
 import './index.sass'
 
 export default function TopContractsChart({}) {
-  return <div>
-    This chart is temporarily down for maintenance as the enormous number of clauses broke my badly optimized database query.
-    It will be back soon!
-  </div>
-
   const topContracts = useAppState(s => s.topContracts)
   if (!topContracts.length) return <div className="TopContractsCharts"><Spinner /></div>
 
