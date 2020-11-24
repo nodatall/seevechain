@@ -6,6 +6,7 @@ import numeral from 'numeral'
 import { getLongKnownContract, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
 import numberWithCommas from 'lib/numberWithCommas'
 import { colorSet, colorSet2 } from 'lib/chartHelpers'
+import Spinner from 'components/Spinner'
 
 import './index.sass'
 
@@ -16,6 +17,8 @@ export default function TopContractsChart({}) {
   </div>
 
   const topContracts = useAppState(s => s.topContracts)
+  if (!topContracts.length) return <div className="TopContractsCharts"><Spinner /></div>
+
   const barThickness = window.innerHeight < 650
     ? 10
     : window.innerWidth > 760

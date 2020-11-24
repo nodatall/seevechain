@@ -13,6 +13,7 @@ async function subscribeToVechainBlocks(io, client) {
     await getBlock(thor, head.number, client)
     setTimeout(async () => {
       io.emit('serverSendLatest', await actions.getLatest())
+      io.emit('serverSendTopContracts', await actions.getTopContracts())
     }, 500)
   }
 }

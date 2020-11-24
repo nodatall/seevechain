@@ -22,6 +22,7 @@ import createUid from 'lib/createUid'
 import './index.sass'
 
 export default function Visualizer() {
+  const setTopContracts = useAppState(s => s.setTopContracts)
   const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
   const [soundOn, setSoundOn] = useState(false)
   const [loaded, setLoaded] = useState(false)
@@ -43,6 +44,9 @@ export default function Visualizer() {
     socket.on('serverSendLatest', function(data) {
       handleLatest({ data, statsRef, initialized })
       setLoaded(true)
+    })
+    socket.on('serverSendTopContracts', function(data) {
+      setTopContracts(data.topContracts)
     })
 
     onReturnToStaleApp(
@@ -99,7 +103,6 @@ function BlockNumber() {
 }
 
 function handleLatest({ data, statsRef, initialized }){
-  const setTopContracts = useAppState(s => s.setTopContracts)
   const setMonthlyStats = useAppState(s => s.setMonthlyStats)
   const setServerTime = useAppState(s => s.setServerTime)
   const setPrices = useAppState(s => s.setPrices)
@@ -130,7 +133,6 @@ function handleLatest({ data, statsRef, initialized }){
       ...data.monthlyStats,
     ]
   )
-  setTopContracts(data.topContracts)
   setServerTime(data.serverTime)
   setPrices(data.prices)
 }

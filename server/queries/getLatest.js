@@ -61,24 +61,6 @@ module.exports = async function(client) {
     [before]
   )
 
-  const topContractRecords = await client.query(
-    `
-    SELECT
-      contract,
-      count(*) AS totalclauses,
-      SUM(vtho_burn) AS totalburn
-    FROM
-      clauses
-    WHERE
-      contract IS NOT NULL
-    AND
-      created_at > $1
-    GROUP BY contract
-    LIMIT 20;
-    `,
-    [before]
-  )
-
   const monthlyStatsRecords = await client.query(`SELECT * FROM daily_stats ORDER BY day DESC LIMIT 170`)
 
   const now = moment()
@@ -121,11 +103,6 @@ module.exports = async function(client) {
     })),
     serverTime,
     prices: await getTokenPrices(),
-    topContracts: topContractRecords.map(record => ({
-      contract: record.contract,
-      clauses: Number(record.totalclauses),
-      vthoBurn: Number(record.totalburn),
-    }))
   }
 
   return cache[1]
