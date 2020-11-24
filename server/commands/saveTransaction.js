@@ -3,10 +3,12 @@ const { ABI_SIGNATURES } = require('../lib/abiSignatures')
 const { TOKEN_CONTRACTS, KNOWN_CONTRACTS } = require('../../shared/knownAddresses')
 const { abi } = require('thor-devkit')
 const knex = require ('../database/knex')
+const moment = require('moment')
 
-module.exports = async function({ client, transaction, block, receipt }) {
+module.exports = async function({ client, transaction, block, receipt, thor }) {
 
   const vthoBurn = ((receipt.gasUsed + (receipt.gasUsed * ((transaction.gasPriceCoef || 0) / 255))) / 1000) * .7
+  const createdAt = moment.unix(block.timestamp).toDate().toISOString()
 
   await client.query(
     `
@@ -22,10 +24,11 @@ module.exports = async function({ client, transaction, block, receipt }) {
           paid,
           reward,
           clauses,
-          reverted
+          reverted,
+          created_at
         )
       VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
         ON CONFLICT (id) DO UPDATE
         SET
           block_number = EXCLUDED.block_number,
@@ -37,7 +40,8 @@ module.exports = async function({ client, transaction, block, receipt }) {
           paid = EXCLUDED.paid,
           reward = EXCLUDED.reward,
           clauses = EXCLUDED.clauses,
-          reverted = EXCLUDED.reverted
+          reverted = EXCLUDED.reverted,
+          created_at = EXCLUDED.created_at
     `,
     [
       transaction.id,
@@ -51,84 +55,79 @@ module.exports = async function({ client, transaction, block, receipt }) {
       receipt.reward,
       transaction.clauses.length,
       receipt.reverted,
+      createdAt,
     ]
   )
+  const clauseExplainer = thor.explain()
+    .gas(transaction.gas)
+    .caller(transaction.origin)
+  const explained = await clauseExplainer.execute(transaction.clauses)
 
-  const insertableClauses = []
-  for (const { contractAddress, events, transfers } of receipt.outputs) {
-    const clause = { transaction_id: transaction.id }
-    if (contractAddress) {
-      clause.contract = contractAddress
-      clause.type = 'New Contract'
-      insertableClauses.push(clause)
-      continue
-    }
+  const clauses = transaction.clauses.map((clause, index) => ({
+    ...clause,
+    explained: explained[index],
+  }))
 
+  let insertableClauses = []
+  let remainingVthoBurn = vthoBurn
+  clauses.forEach((clause, index) => {
+    const { transfers, events } = receipt.outputs.length > 0 && receipt.outputs[index] || clause.explained
+
+    const newContract = receipt.outputs.length > 0 && receipt.outputs[index].contractAddress
     const event = events[events.length - 1]
-    const transfer = transfers[0]
-
-    if (event) {
-      const clauseMatchingEvent = transaction.clauses.find(clause => {
-        if (!clause.data) return false
-        return clause.data.indexOf(event.data.slice(2)) !== -1
-      })
-      if (TOKEN_CONTRACTS[event.address]) {
-        if (clauseMatchingEvent) {
-          const signature = clauseMatchingEvent.data.slice(0, 10)
-          if (ABI_SIGNATURES[signature]) {
-            const decoded = abi.decodeParameters(
-              ABI_SIGNATURES[signature],
-              '0x' + clauseMatchingEvent.data.slice(10)
-            )
-            if (decoded) {
-              clause.type = 'Transfer'
-              clause.transfer_recipient = decoded._to
-              clause.transfer_sender = transaction.origin
-              clause.transfer_token = TOKEN_CONTRACTS[event.address].replace(' Token', '')
-              clause.transfer_amount = Number(
-                new bigNumber(decoded._amount).dividedBy(Math.pow(10, 18)).toFixed(2)
-              )
-              clause.contract = event.address
-              insertableClauses.push(clause)
-              continue
-            }
-          }
-        }
-      }
-
-      clause.type = 'Data'
-      clause.contract = clauseMatchingEvent ? clauseMatchingEvent.to : event.address
-      if (events.length > 1) {
-        const eventMatchingKnownContract = events.find(event => !!KNOWN_CONTRACTS[event.address])
-        if (eventMatchingKnownContract) clause.contract = eventMatchingKnownContract.address
-      }
-      insertableClauses.push(clause)
-      continue
+    const signature = clause.data.slice(0, 10)
+    const vtho_burn = clause.explained
+      ? (clause.explained.gasUsed / receipt.gasUsed) * vthoBurn
+      : 0
+    remainingVthoBurn -= vtho_burn
+    const clauseToInsert = {
+      transaction_id: transaction.id,
+      vtho_burn,
+      created_at: createdAt,
     }
-
-    if (transfer) {
-      clause.type = 'Transfer'
-      clause.transfer_recipient = transfer.recipient
-      clause.transfer_sender = transfer.sender
-      clause.transfer_token = 'VET'
-      clause.transfer_amount = Number(
+    if (newContract) {
+      clauseToInsert.type = 'New Contract'
+      clauseToInsert.contract = newContract
+    } else if (events.length > 0 && TOKEN_CONTRACTS[event.address] && ABI_SIGNATURES[signature]) {
+      const decoded = abi.decodeParameters(
+        ABI_SIGNATURES[signature],
+        '0x' + clause.data.slice(10)
+      )
+      clauseToInsert.type = 'Transfer'
+      clauseToInsert.transfer_recipient = decoded._to
+      clauseToInsert.transfer_sender = transaction.origin
+      clauseToInsert.transfer_token = TOKEN_CONTRACTS[event.address].replace(' Token', '')
+      clauseToInsert.transfer_amount = Number(
+        new bigNumber(decoded._amount).dividedBy(Math.pow(10, 18)).toFixed(2)
+      )
+      clauseToInsert.contract = event.address
+    } else if (transfers.length > 0) {
+      const transfer = transfers[transfers.length - 1] // TODO handle multiple transfers in a single clause
+      clauseToInsert.type = 'Transfer'
+      clauseToInsert.transfer_recipient = transfer.recipient
+      clauseToInsert.transfer_sender = transfer.sender
+      clauseToInsert.transfer_token = 'VET',
+      clauseToInsert.transfer_amount = Number(
         new bigNumber(transfer.amount, 16).dividedBy(Math.pow(10, 18)).toFixed(2)
       )
-      insertableClauses.push(clause)
+    } else if (clause.to && clause.data === '0x' && transfers.length === 0) {
+      return
+    } else {
+      clauseToInsert.type = 'Data'
+      clauseToInsert.contract = clause.to
+      const eventMatchingKnownContract = events.find(event => !!KNOWN_CONTRACTS[event.address])
+      if (eventMatchingKnownContract) clauseToInsert.contract = eventMatchingKnownContract.address
     }
-  }
+    if (receipt && receipt.reverted === true) clauseToInsert.reverted = true
+    if (Object.keys(clauseToInsert).length === 1) return
+    insertableClauses.push(clauseToInsert)
+  })
 
-  if (insertableClauses.length === 0) {
-    transaction.clauses.forEach(clause => {
-      if (clause.to && clause.data !== '0x') {
-        const insertableClause = { transaction_id: transaction.id }
-        insertableClause.type = 'Data'
-        insertableClause.contract = clause.to
-        insertableClause.reverted = true
-        insertableClauses.push(insertableClause)
-      }
-    })
-  }
+  const vthoBurnPart = remainingVthoBurn / insertableClauses.length
+  insertableClauses = insertableClauses.map(clause => ({
+    ...clause,
+    vtho_burn: clause.vtho_burn + vthoBurnPart,
+  }))
 
   if (insertableClauses.length > 0) {
     await client.query(`DELETE FROM clauses WHERE transaction_id = $1`, [transaction.id])
