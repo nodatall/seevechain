@@ -23,13 +23,15 @@ async function getBlock(thor, number, client) {
   if (!block) {
     return await getBlock(thor, number, client)
   } else {
-    await commands.saveBlock({ client, block })
-    for (const txId of block.transactions) {
-      await getTransaction(thor, txId, block, client)
-    }
-    for (const txId of testData) {
-      await getTransaction(thor, txId, block, client)
-    }
+    await client.tx('saveBlock and getTransactions', async client => {
+      await commands.saveBlock({ client, block })
+      for (const txId of block.transactions) {
+        await getTransaction(thor, txId, block, client)
+      }
+      for (const txId of testData) {
+        await getTransaction(thor, txId, block, client)
+      }
+    })
   }
   return block
 }
