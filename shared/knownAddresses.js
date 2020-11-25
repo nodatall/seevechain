@@ -56,6 +56,10 @@ const KNOWN_CONTRACTS = {
     short: 'Vulcan',
     long: 'Vulcan NFTs w/ editions',
   },
+  '0xbafd41ee54c2032433f98a430948048f627c7536': {
+    short: 'Vulcan',
+    long: 'Vulcan 2',
+  },
   '0xb1b9d40758cc3d90f1b2899dfb7a64e5d0235c61': 'Vulcan',
   '0x27b508dba99a05c7810d4956d74daa71bac0d969': 'VIMworld',
   '0xb81e9c5f9644dec9e5e3cac86b4461a222072302': 'VeChain Node',
