@@ -100,7 +100,7 @@ export default function TopContractsChart({}) {
       className="TopContractsCharts-chart"
       onClick={event => {
         const offsetY = event.offsetY
-        const segment = event.target.clientHeight / (topContracts.length + 2)
+        const segment = event.target.clientHeight / (sortedByVtho.length + 2)
         const index = Math.floor(offsetY / segment) - 1
         window.open(
           `http://www.vechainuniverse.com/Stalker/Stalk/${sortedByVtho[index].contract}`, `_blank`
@@ -116,7 +116,7 @@ export default function TopContractsChart({}) {
       className="TopContractsCharts-chart"
       onClick={event => {
         const offsetY = event.offsetY
-        const segment = event.target.clientHeight / (topContracts.length + 2)
+        const segment = event.target.clientHeight / (sortedByClauses.length + 2)
         const index = Math.floor(offsetY / segment) - 1
         window.open(
           `http://www.vechainuniverse.com/Stalker/Stalk/${sortedByClauses[index].contract}`, `_blank`
