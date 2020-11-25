@@ -11,10 +11,8 @@ async function subscribeToVechainBlocks(io, client) {
   while (true) {
     const head = await tick.next()
     await getBlock(thor, head.number, client)
-    setTimeout(async () => {
-      io.emit('serverSendLatest', await actions.getLatest())
-      io.emit('serverSendTopContracts', await actions.getTopContracts())
-    }, 500)
+    io.emit('serverSendLatest', await actions.getLatest())
+    io.emit('serverSendTopContracts', await actions.getTopContracts())
   }
 }
 

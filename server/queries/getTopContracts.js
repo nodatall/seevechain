@@ -29,7 +29,6 @@ module.exports = async function(client) {
     AND
       created_at > $1
     GROUP BY contract
-    LIMIT 20;
     `,
     [before]
   )

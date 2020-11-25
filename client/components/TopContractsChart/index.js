@@ -20,7 +20,7 @@ export default function TopContractsChart({}) {
       ? 30
       : 15
 
-  const sortedByVtho = [...topContracts].sort((a, b) => b.vthoBurn - a.vthoBurn)
+  const sortedByVtho = [...topContracts].sort((a, b) => b.vthoBurn - a.vthoBurn).slice(0, 20)
   const burnData = {
     labels: sortedByVtho.map(({ contract, vthoBurn }) => {
       const matchingKnownContract = getLongKnownContract(contract)
@@ -41,7 +41,7 @@ export default function TopContractsChart({}) {
     }]
   }
 
-  const sortedByClauses = [...topContracts].sort((a, b) => b.clauses - a.clauses)
+  const sortedByClauses = [...topContracts].sort((a, b) => b.clauses - a.clauses).slice(0, 20)
   const clausesData = {
     labels: sortedByClauses.map(({ contract, clauses }) => {
       const matchingKnownContract = getLongKnownContract(contract)
