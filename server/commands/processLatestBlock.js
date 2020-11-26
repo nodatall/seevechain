@@ -2,30 +2,15 @@ const moment = require('moment')
 const { oneDayAgo } = require('../lib/dateHelpers')
 const CoinGecko = require('coingecko-api')
 const CoinGeckoClient = new CoinGecko()
+const saveCache = require('./saveCache')
 
-const cache = []
-
-module.exports = async function(client) {
-  const blockRecord = await client.one(
-    `
-      SELECT * FROM blocks
-      ORDER BY number DESC
-      LIMIT 1;
-    `
-  )
-
-  if (!blockRecord) throw new Error('no block found')
-
-  if (cache[0] === blockRecord.number) {
-    return cache[1]
-  }
-
+module.exports = async function({ client, block }) {
   const transactionsRecords = await client.query(
     `
       SELECT * FROM transactions
       WHERE block_number = $1;
     `,
-    [blockRecord.number]
+    [block.number]
   )
 
   const transactionIds = transactionsRecords.map(transaction => transaction.id)
@@ -66,21 +51,15 @@ module.exports = async function(client) {
   const now = moment()
   const serverTime = now.add((+process.env.TIME_DIFFERENCE), 'hours').format('HH:mm MM/DD/YY')
 
-  cache[0] = blockRecord.number
-  cache[1] = {
+  const processed = {
     block: {
-      id: blockRecord.id,
-      number: Number(blockRecord.number),
-      parentId: blockRecord.parent_id,
-      timestamp: blockRecord.timestamp,
-      gasUsed: Number(blockRecord.gas_used),
-      signer: blockRecord.signer,
+      id: block.id,
+      number: Number(block.number),
     },
     transactions: transactionsRecords.map(transaction => ({
       id: transaction.id,
       blockNumber: Number(transaction.block_number),
       contracts: transaction.contracts,
-      delegator: transaction.delegator,
       origin: transaction.origin,
       gas: Number(transaction.gas),
       clauses: clausesByTransactionId[transaction.id] || [],
@@ -105,7 +84,13 @@ module.exports = async function(client) {
     prices: await getTokenPrices(),
   }
 
-  return cache[1]
+  await saveCache({
+    client,
+    cacheName: 'block',
+    cache: JSON.stringify(processed),
+  })
+
+  return processed
 }
 
 async function getTokenPrices() {

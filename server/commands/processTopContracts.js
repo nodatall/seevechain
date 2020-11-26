@@ -1,21 +1,8 @@
 const { oneDayAgo } = require('../lib/dateHelpers')
-
-const cache = []
+const saveCache = require('./saveCache')
 
 module.exports = async function(client) {
-  const blockRecord = await client.one(
-    `
-      SELECT * FROM blocks
-      ORDER BY number DESC
-      LIMIT 1;
-    `
-  )
-
-  if (!blockRecord) throw new Error('no block found')
-  if (cache[0] === blockRecord.number) return cache[1]
-
   const before = oneDayAgo()
-
   const topContractRecords = await client.query(
     `
     SELECT
@@ -33,8 +20,7 @@ module.exports = async function(client) {
     [before]
   )
 
-  cache[0] = blockRecord.number
-  cache[1] = {
+  const processed = {
     topContracts: topContractRecords.map(record => ({
       contract: record.contract,
       clauses: Number(record.totalclauses),
@@ -42,5 +28,11 @@ module.exports = async function(client) {
     }))
   }
 
-  return cache[1]
+  await saveCache({
+    client,
+    cacheName: 'topContracts',
+    cache: JSON.stringify(processed),
+  })
+
+  return processed
 }

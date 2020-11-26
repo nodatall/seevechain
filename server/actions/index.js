@@ -1,11 +1,11 @@
-const getLatest = require('./getLatest')
 const recordUniqueVisitor = require('./recordUniqueVisitor')
 const getAnalytics = require('./getAnalytics')
-const getTopContracts = require('./getTopContracts')
+const getLatestProcessedBlock = require('./getLatestProcessedBlock')
+const getLatestTopContracts = require('./getLatestTopContracts')
 
 module.exports = {
-  getLatest,
   recordUniqueVisitor,
   getAnalytics,
-  getTopContracts,
+  getLatestProcessedBlock,
+  getLatestTopContracts,
 }

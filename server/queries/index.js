@@ -1,9 +1,7 @@
-const getLatest = require('./getLatest')
 const getAnalytics = require('./getAnalytics')
-const getTopContracts = require('./getTopContracts')
+const getCache = require('./getCache')
 
 module.exports = {
-  getLatest,
   getAnalytics,
-  getTopContracts,
+  getCache,
 }

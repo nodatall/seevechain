@@ -20,8 +20,8 @@ module.exports = function(app, io) {
   io.on('connection', function (socket) {
     socket.on('clientAskForLatest', async function (data) {
       await actions.recordUniqueVisitor(data.seeVechainUid)
-      socket.emit('serverSendLatest', await actions.getLatest())
-      socket.emit('serverSendTopContracts', await actions.getTopContracts())
+      socket.emit('serverSendLatest', await actions.getLatestProcessedBlock())
+      socket.emit('serverSendTopContracts', await actions.getLatestTopContracts())
     })
   })
 }
