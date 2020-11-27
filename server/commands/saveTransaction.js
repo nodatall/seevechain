@@ -4,10 +4,13 @@ const { TOKEN_CONTRACTS, KNOWN_CONTRACTS } = require('../../shared/knownAddresse
 const { abi } = require('thor-devkit')
 const knex = require ('../database/knex')
 const moment = require('moment')
+const queries = require('../queries')
 
 module.exports = async function({ client, transaction, block, receipt, thor }) {
   await client.tx('saveTransaction', async client => {
+    const latestProcessedBlock = await queries.getCache({ client, cacheName: 'block' })
     const vthoBurn = ((receipt.gasUsed + (receipt.gasUsed * ((transaction.gasPriceCoef || 0) / 255))) / 1000) * .7
+    const vthoBurnUsd = (vthoBurn * latestProcessedBlock.prices.vtho.usd).toFixed(4)
     const createdAt = moment.unix(block.timestamp).toDate().toISOString()
 
     await client.query(
@@ -25,10 +28,11 @@ module.exports = async function({ client, transaction, block, receipt, thor }) {
             reward,
             clauses,
             reverted,
-            created_at
+            created_at,
+            vtho_burn_usd
           )
         VALUES
-          ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+          ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
           ON CONFLICT (id) DO UPDATE
           SET
             block_number = EXCLUDED.block_number,
@@ -41,7 +45,8 @@ module.exports = async function({ client, transaction, block, receipt, thor }) {
             reward = EXCLUDED.reward,
             clauses = EXCLUDED.clauses,
             reverted = EXCLUDED.reverted,
-            created_at = EXCLUDED.created_at
+            created_at = EXCLUDED.created_at,
+            vtho_burn_usd = EXCLUDED.vtho_burn_usd
       `,
       [
         transaction.id,
@@ -56,6 +61,7 @@ module.exports = async function({ client, transaction, block, receipt, thor }) {
         transaction.clauses.length,
         receipt.reverted,
         createdAt,
+        vthoBurnUsd,
       ]
     )
     const clauseExplainer = thor.explain()
@@ -124,10 +130,14 @@ module.exports = async function({ client, transaction, block, receipt, thor }) {
     })
 
     const vthoBurnPart = remainingVthoBurn / insertableClauses.length
-    insertableClauses = insertableClauses.map(clause => ({
-      ...clause,
-      vtho_burn: clause.vtho_burn + vthoBurnPart,
-    }))
+    insertableClauses = insertableClauses.map(clause => {
+      const vthoBurn = clause.vtho_burn + vthoBurnPart
+      return {
+        ...clause,
+        vtho_burn_usd: (vthoBurn * latestProcessedBlock.prices.vtho.usd).toFixed(4),
+        vtho_burn: vthoBurn,
+      }
+    })
 
     if (insertableClauses.length > 0) {
       await client.query(`DELETE FROM clauses WHERE transaction_id = $1`, [transaction.id])
