@@ -67,7 +67,7 @@ export default function Visualizer() {
   </div>
 
   return <div className="Visualizer">
-    {<Suspense fallback={<Spinner />}>
+    {statsModalVisible && <Suspense fallback={<Spinner />}>
       <StatsModal
         open={statsModalVisible}
         setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
