@@ -17,7 +17,7 @@ export const locationToChartMap = {
     component: BurnMovingAverageChart,
   },
   '/burn-usd': {
-    title: 'VTHO Burn USD',
+    title: 'USD VTHO Burn',
     component: UsdVthoBurnChart,
   }
 }
