@@ -9,11 +9,13 @@ const useAppState = create(set => ({
     vtho: { usd: 0 },
   },
   stats: {},
+  usdVthoBurn: {},
   setTopContracts: topContracts => set(() => ({ topContracts })),
   setMonthlyStats: monthlyStats => set(() => ({ monthlyStats })),
   setServerTime: serverTime => set(() => ({ serverTime })),
   setPrices: prices => set(() => ({ prices })),
   setStats: stats => set(() => ({ stats })),
+  setUsdVthoBurn: usdVthoBurn => set(() => ({ usdVthoBurn })),
 }))
 
 export default useAppState

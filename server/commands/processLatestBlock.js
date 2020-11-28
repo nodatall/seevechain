@@ -38,10 +38,8 @@ module.exports = async function({ client, block }) {
         sum(transactions.vtho_burn) AS dailyVTHOBurn,
         count(transactions.*) AS dailyTransactions,
         sum(transactions.clauses) AS dailyClauses
-      FROM blocks
-      JOIN transactions
-      ON blocks.number = transactions.block_number
-      WHERE blocks.timestamp > $1;
+      FROM transactions
+      WHERE created_at > $1;
     `,
     [before]
   )

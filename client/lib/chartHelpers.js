@@ -1,6 +1,7 @@
 import BurnTxsAndClausesCharts from 'components/BurnTxsAndClausesCharts'
 import TopContractsChart from 'components/TopContractsChart'
 import BurnMovingAverageChart from 'components/BurnMovingAverageChart'
+import UsdVthoBurnChart from 'components/UsdVthoBurnChart'
 
 export const locationToChartMap = {
   '/contracts': {
@@ -14,6 +15,10 @@ export const locationToChartMap = {
   '/burn-moving-averages': {
     title: 'VTHO Burn Moving Averages',
     component: BurnMovingAverageChart,
+  },
+  '/burn-usd': {
+    title: 'VTHO Burn USD',
+    component: UsdVthoBurnChart,
   }
 }
 

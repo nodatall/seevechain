@@ -23,6 +23,7 @@ import './index.sass'
 
 export default function Visualizer() {
   const setTopContracts = useAppState(s => s.setTopContracts)
+  const setUsdVthoBurn = useAppState(s => s.setUsdVthoBurn)
   const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
   const [soundOn, setSoundOn] = useState(false)
   const [loaded, setLoaded] = useState(false)
@@ -47,6 +48,9 @@ export default function Visualizer() {
     })
     socket.on('serverSendTopContracts', function(data) {
       setTopContracts(data.topContracts)
+    })
+    socket.on('serverSendUsdVthoBurn', function(data) {
+      setUsdVthoBurn(data)
     })
 
     onReturnToStaleApp(
