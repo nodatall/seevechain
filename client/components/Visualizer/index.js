@@ -47,9 +47,11 @@ export default function Visualizer() {
       setLoaded(true)
     })
     socket.on('serverSendTopContracts', function(data) {
+      if (!data) return
       setTopContracts(data.topContracts)
     })
     socket.on('serverSendUsdVthoBurn', function(data) {
+      if (!data) return
       setUsdVthoBurn(data)
     })
 
@@ -107,6 +109,7 @@ function BlockNumber() {
 }
 
 function handleLatest({ data, statsRef, initialized }){
+  if (!data) return
   const setMonthlyStats = useAppState(s => s.setMonthlyStats)
   const setServerTime = useAppState(s => s.setServerTime)
   const setPrices = useAppState(s => s.setPrices)

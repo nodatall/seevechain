@@ -5,6 +5,7 @@ import { HorizontalBar } from 'react-chartjs-2'
 import { getLongKnownContract, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
 import { colorSet2 } from 'lib/chartHelpers'
 import Spinner from 'components/Spinner'
+import numberWithCommas from 'lib/numberWithCommas'
 
 export default function TopContractsChart({}) {
   const usdVthoBurn = useAppState(s => s.usdVthoBurn)
@@ -65,9 +66,9 @@ export default function TopContractsChart({}) {
 
   return <div className="TopContractsCharts">
     <div className="BurnTxsAndClausesCharts-avgBurn">
-      USD VTHO Burn Today:
+      $USD VTHO Burn Today:
       <span>
-        &nbsp;${Number(usdVthoBurn.dailyBurnUsd).toFixed(2)}
+        &nbsp;${numberWithCommas(Number(usdVthoBurn.dailyBurnUsd).toFixed(2))}
       </span>
     </div>
     <div
