@@ -14,12 +14,6 @@ export default function TopContractsChart({}) {
   const topContracts = useAppState(s => s.topContracts)
   if (!topContracts.length) return <div className="TopContractsCharts"><Spinner /></div>
 
-  const barThickness = window.innerHeight < 650
-    ? 10
-    : window.innerWidth > 760
-      ? 30
-      : 15
-
   const sortedByVtho = [...topContracts].sort((a, b) => b.vthoBurn - a.vthoBurn).slice(0, 20)
   const burnData = {
     labels: sortedByVtho.map(({ contract, vthoBurn }) => {
@@ -34,7 +28,6 @@ export default function TopContractsChart({}) {
 
     ),
     datasets: [{
-      barThickness,
       label: 'VTHO Burn by Contract',
       backgroundColor: colorSet,
       data: sortedByVtho.map(contract => contract.vthoBurn),
@@ -53,7 +46,6 @@ export default function TopContractsChart({}) {
       return `${label}: ${numberWithCommas(clauses)}`
     }),
     datasets: [{
-      barThickness,
       label: 'Clauses by Contract',
       backgroundColor: colorSet2,
       data: sortedByClauses.map(contract => contract.clauses),
