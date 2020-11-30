@@ -10,7 +10,7 @@ export default function TopContractsChart({}) {
   const usdVthoBurn = useAppState(s => s.usdVthoBurn)
   if (!usdVthoBurn.topContracts) return <div className="TopContractsCharts"><Spinner /></div>
 
-  const usdVthoBurnTopContracts = usdVthoBurn.topContracts
+  const usdVthoBurnTopContracts = usdVthoBurn.topContracts.slice(0, 20)
   const topContractsData = {
     labels: usdVthoBurnTopContracts.map(({ contract, usdBurned }) => {
       const matchingKnownContract = getLongKnownContract(contract)
