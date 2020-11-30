@@ -3,7 +3,7 @@ import React from 'react'
 import useAppState from 'lib/appState'
 import { HorizontalBar } from 'react-chartjs-2'
 import { getLongKnownContract, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
-import { colorSet2 } from 'lib/chartHelpers'
+import { colorSet3 } from 'lib/chartHelpers'
 import Spinner from 'components/Spinner'
 import numberWithCommas from 'lib/numberWithCommas'
 
@@ -20,11 +20,11 @@ export default function TopContractsChart({}) {
         : TOKEN_CONTRACTS[contract]
           ? TOKEN_CONTRACTS[contract]
           : `${contract.slice(2,6)}..${contract.slice(-4)}`
-      return `${label}: $${usdBurned}`
+      return `${label}: $${numberWithCommas(Number(usdBurned))}`
     }),
     datasets: [{
       label: 'USD VTHO Burn by Contract',
-      backgroundColor: colorSet2,
+      backgroundColor: [...colorSet3].reverse(),
       data: usdVthoBurnTopContracts.map(contract => contract.usdBurned),
     }]
   }

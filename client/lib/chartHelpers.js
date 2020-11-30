@@ -67,3 +67,27 @@ export const colorSet2 = [
   '#5CC098',
   '#6ECA91',
 ]
+
+// http://tristen.ca/hcl-picker/#/hlc/20/1.05/EB82A4/E38953
+export const colorSet3 = [
+  '#EB82A4',
+  '#DD88B4',
+  '#CB8FC2',
+  '#B497CC',
+  '#9A9ED2',
+  '#7DA5D2',
+  '#60ABCE',
+  '#43AFC5',
+  '#2CB2B7',
+  '#28B4A7',
+  '#37B494',
+  '#4CB481',
+  '#63B26E',
+  '#78AF5C',
+  '#8EAB4E',
+  '#A2A643',
+  '#B6A03E',
+  '#C79940',
+  '#D79147',
+  '#E38953',
+]
