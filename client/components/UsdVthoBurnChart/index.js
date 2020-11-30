@@ -24,7 +24,7 @@ export default function TopContractsChart({}) {
     }),
     datasets: [{
       label: 'USD VTHO Burn by Contract',
-      backgroundColor: [...colorSet3].reverse(),
+      backgroundColor: colorSet3,
       data: usdVthoBurnTopContracts.map(contract => contract.usdBurned),
     }]
   }
