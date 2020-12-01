@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'preact/hooks'
 import './index.sass'
 
 const sf = {
-  starDensity: window.innerWidth < 500 ? .05 : .02,
+  starDensity: window.innerWidth < 500 ? .018 : .032,
   canvas: null,
   container: null,
   dy: 0.06, // horizontal velocity
@@ -55,7 +55,8 @@ function sfSetup({ starsRef, canvasRef }){
   sf.canvas.width = sf.cw
   sf.canvas.height = sf.ch
 
-  const area = (sf.cw * sf.ch) / (6 * 6)
+  const multiplier = window.innerWidth < 500 ? 3.2 : 6
+  const area = (sf.cw * sf.ch) / (multiplier * multiplier)
   sf.numStars = area * sf.starDensity
 
   const max = 3
@@ -178,7 +179,7 @@ const waitForFinalEvent = (function () {
 })()
 
 function randomColor(){
-  const min = 200
+  const min = 170
   const max = 255 - min
   const red = min + rand(0, max)
   const green = min + rand(0, max)
