@@ -5,6 +5,7 @@ import { HorizontalBar } from 'react-chartjs-2'
 import { getLongKnownContract, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
 import { colorSet3 } from 'lib/chartHelpers'
 import Spinner from 'components/Spinner'
+import numeral from 'numeral'
 import numberWithCommas from 'lib/numberWithCommas'
 
 export default function TopContractsChart({}) {
@@ -38,10 +39,9 @@ export default function TopContractsChart({}) {
         },
       }],
       xAxes: [{
-        barPercentage: 0.1,
         ticks: {
           fontColor: '#bfbfc9',
-          userCallback: num => `$${num}`,
+          userCallback: num => window.innerWidth > 760 ? numberWithCommas(num) : numeral(num).format('0.0a'),
         },
       }]
     },

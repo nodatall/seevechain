@@ -61,7 +61,6 @@ export default function TopContractsChart({}) {
         },
       }],
       xAxes: [{
-        barPercentage: 0.1,
         ticks: {
           fontColor: '#bfbfc9',
           userCallback: num => window.innerWidth > 760 ? numberWithCommas(num) : numeral(num).format('0.0a'),
