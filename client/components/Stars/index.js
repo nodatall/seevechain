@@ -122,15 +122,15 @@ function renderStars(size, bufferContext) {
     let color
     // big star color
     if (star.s == 3){
-      color = `rgba(${randomColor()}, ${rand(4, 6) / 10})`
+      color = `rgba(${randomColor()}, ${rand(4, 7) / 10})`
     }
     // med star color
     if (star.s == 2){
-      color = `rgba(${randomColor()}, ${rand(3, 5) / 10})`
+      color = `rgba(${randomColor()}, ${rand(3, 6) / 10})`
     }
     // small star color
     if (star.s == 1){
-      color = `rgba(${randomColor()}, ${rand(3, 4) / 10})`
+      color = `rgba(${randomColor()}, ${rand(3, 5) / 10})`
     }
 
     bufferContext.beginPath()
