@@ -66,7 +66,7 @@ export default function TopContractsChart({}) {
 
   return <div className="TopContractsCharts">
     <div className="BurnTxsAndClausesCharts-avgBurn">
-      $USD VTHO Burn Today:
+      USD VTHO Burn Today:
       <span>
         &nbsp;${numberWithCommas(Number(usdVthoBurn.dailyBurnUsd).toFixed(2))}
       </span>
