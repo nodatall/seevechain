@@ -12,7 +12,12 @@ import lightenDarkenColor from 'lib/lightenDarkenColor'
 import { LIGHT_RANGE, BOX_SHADOWS } from 'lib/colors'
 import { highDing, lowDing } from 'lib/sounds'
 import {
-  calculateCoordinates, getTransactionColorIndex, getTransactionSize, randomNumber,
+  calculateCoordinates,
+  getTransactionColorIndex,
+  getTransactionSize,
+  randomNumber,
+  getRangeEquivalent,
+  COLOR_BURN_RANGE,
 } from '../../lib/transactionHelpers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
@@ -276,9 +281,13 @@ function openInNewTab(href) {
 }
 
 function getBackgroundStyle({ transaction, size }) {
+  const rotationSpeedRange = [1, 2]
+  let rotationSpeed = getRangeEquivalent(COLOR_BURN_RANGE, rotationSpeedRange, transaction.vthoBurn)
+  rotationSpeed = rotationSpeed < 1 ? 1 : rotationSpeed > 2 ? 2 : rotationSpeed
   const backgroundStyle = {
     width: `${size}px`,
     height: `${size}px`,
+    animation: `spin ${Math.floor(6000 / rotationSpeed)}ms linear 0s infinite`,
   }
   let background
   if (transaction.vthoBurn < 2000) {

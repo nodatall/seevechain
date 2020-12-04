@@ -94,24 +94,24 @@ export function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min)) + min
 }
 
+
 export function getTransactionSize(burn) {
-  const TRANSACTION_VTHO_BURN_RANGE = [14, 1000]
   const TRANSACTION_SIZE_RANGE = [96, MAX_TRANSACTION_SIZE]
-  let size = getRangeEquivalent(TRANSACTION_VTHO_BURN_RANGE, TRANSACTION_SIZE_RANGE, burn)
+  let size = getRangeEquivalent([14, 1000], TRANSACTION_SIZE_RANGE, burn)
   if (size < TRANSACTION_SIZE_RANGE[0]) size = TRANSACTION_SIZE_RANGE[0]
   if (size > TRANSACTION_SIZE_RANGE[1]) size = TRANSACTION_SIZE_RANGE[1]
   return Math.floor(size)
 }
 
+export const COLOR_BURN_RANGE = [14, 1600]
 export function getTransactionColorIndex(burn) {
-  const BURN_RANGE = [14, 1600]
   const COLOR_RANGE = [0, LIGHT_RANGE.length - 1]
-  let colorIndex = getRangeEquivalent(BURN_RANGE, COLOR_RANGE, burn)
+  let colorIndex = getRangeEquivalent(COLOR_BURN_RANGE, COLOR_RANGE, burn)
   if (colorIndex > LIGHT_RANGE.length - 1) colorIndex = LIGHT_RANGE.length - 1
   return colorIndex
 }
 
-function getRangeEquivalent(r1, r2, num) {
+export function getRangeEquivalent(r1, r2, num) {
   const ratio = num / (r1[0] + r1[1])
   return (r2[0] + r2[1]) * ratio
 }
