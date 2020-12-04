@@ -68,6 +68,9 @@ export default function LineChart({ labels, datasets, options = {} }) {
         label: item => numberWithCommas(item.value),
       },
     },
+    animation: {
+      duration: 0,
+    },
     ...options,
   }
 
