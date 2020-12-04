@@ -298,6 +298,7 @@ function getBackgroundStyle({ transaction, size }) {
     background = `linear-gradient(#14ffe9, #ffeb3b, #ff00e0)`
     backgroundStyle.width = `${size + 2}px`
     backgroundStyle.height = `${size + 2}px`
+    backgroundStyle.animationDirection = 'reverse'
   }
   backgroundStyle.background = background
 
