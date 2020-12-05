@@ -105,12 +105,12 @@ export default function Transaction({
       updateStats({setStats, statsRef, transaction})
       updateStyle(maxScale, { zIndex })
       await waitFor(secondDelay)
-      updateStyle(maxScale, { transition: `transform 4s ease-out, opacity 300ms`, zIndex })
+      updateStyle(maxScale, { transition: `transform 4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both, opacity 300ms`, zIndex })
       await waitFor(thirdDelay)
       bubbleGrid.grid[row][col] = 0
       updateStyle(.7, { opacity: 0, zIndex })
       await waitFor(300)
-      updateStyle(0, { transition: `transform 1ms ease-out, opacity 500ms`, opacity: 0 })
+      updateStyle(0, { transition: `transform 1ms cubic-bezier(0.550, 0.085, 0.680, 0.530) both, opacity 500ms`, opacity: 0 })
     }
 
     animate(animationDuration)
