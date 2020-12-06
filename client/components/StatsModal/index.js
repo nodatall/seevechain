@@ -121,7 +121,7 @@ function Prices() {
     <span className="StatsModal-prices-middle">
       VTHO/VET
       <span className="StatsModal-prices-price StatsModal-prices-middle-price">
-        {(prices.vtho.usd / prices.vet.usd).toFixed(3)}
+        {(prices.vtho.usd / prices.vet.usd).toFixed(4)}
       </span>
     </span>
     <span>
