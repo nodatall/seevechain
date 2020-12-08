@@ -7,10 +7,12 @@ import { colorSet3 } from 'lib/chartHelpers'
 import Spinner from 'components/Spinner'
 import numeral from 'numeral'
 import numberWithCommas from 'lib/numberWithCommas'
+import LineChart from 'components/LineChart'
 
 export default function TopContractsChart({}) {
   const usdVthoBurn = useAppState(s => s.usdVthoBurn)
-  if (!usdVthoBurn.topContracts) return <div className="TopContractsCharts"><Spinner /></div>
+  const dailyStats = useAppState(s => s.dailyStats)
+  if (!usdVthoBurn.topContracts || !dailyStats.length) return <div className="TopContractsCharts"><Spinner /></div>
 
   const usdVthoBurnTopContracts = usdVthoBurn.topContracts.slice(0, 20)
   const topContractsData = {
@@ -64,6 +66,15 @@ export default function TopContractsChart({}) {
     },
   }
 
+  const labels = []
+  const usdBurnSeries = []
+  dailyStats.forEach(dayStat => {
+    if (dayStat.vthoBurnUsd) {
+      labels.unshift(dayStat.day)
+      usdBurnSeries.unshift(Number(dayStat.vthoBurnUsd).toFixed(2))
+    }
+  })
+
   return <div className="TopContractsCharts">
     <div className="BurnTxsAndClausesCharts-avgBurn">
       USD VTHO Burn Today:
@@ -87,5 +98,16 @@ export default function TopContractsChart({}) {
         options,
       }}/>
     </div>
+    <LineChart
+      labels={labels}
+      datasets={[
+        {
+          label: 'Daily USD VTHO BUrn',
+          data: usdBurnSeries,
+          borderColor: 'rgb(151, 83, 224)',
+          backgroundColor: 'rgb(151, 83, 224, .1)',
+        },
+      ]}
+    />
   </div>
 }

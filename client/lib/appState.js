@@ -2,7 +2,7 @@ import create from 'zustand'
 
 const useAppState = create(set => ({
   topContracts: [],
-  monthlyStats: [],
+  dailyStats: [],
   serverTime: '',
   prices: {
     vet: { usd: 0 },
@@ -11,7 +11,7 @@ const useAppState = create(set => ({
   stats: {},
   usdVthoBurn: {},
   setTopContracts: topContracts => set(() => ({ topContracts })),
-  setMonthlyStats: monthlyStats => set(() => ({ monthlyStats })),
+  setDailyStats: dailyStats => set(() => ({ dailyStats })),
   setServerTime: serverTime => set(() => ({ serverTime })),
   setPrices: prices => set(() => ({ prices })),
   setStats: stats => set(() => ({ stats })),

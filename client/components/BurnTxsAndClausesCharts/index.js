@@ -2,32 +2,42 @@ import React from 'react'
 
 import { Fragment } from 'preact'
 import { useLocalStorage } from 'lib/storageHooks'
+import { useMemo } from 'preact/hooks'
 
 import useAppState from 'lib/appState'
-import moment from 'moment'
 import numberWithCommas from 'lib/numberWithCommas'
 import LineChart from 'components/LineChart'
-import Checkbox from 'components/Checkbox'
+import Slider from '@material-ui/core/Slider'
 
 import './index.sass'
 
 export default function BurnTxsAndClausesCharts() {
-  const monthlyStats = useAppState(s => s.monthlyStats)
-  const [range = 100, setRange] = useLocalStorage('statsRange')
-  const [includeToday, setIncludeToday] = useLocalStorage('includeTodayInStats')
-
-  const labels = []
-  const vthoBurnSeries = []
-  const txSeries = []
-  const clauseSeries = []
-
-  const rangeStart = includeToday ? 0 : 1
-  ;[...monthlyStats].slice(rangeStart, Number(range) + 1).reverse().forEach(dayStat => {
-    labels.push(moment(dayStat.day).format('MM/DD'))
-    vthoBurnSeries.push(dayStat.vthoBurn)
-    txSeries.push(dayStat.transactionCount)
-    clauseSeries.push(dayStat.clauseCount)
-  })
+  const dailyStats = useAppState(s => s.dailyStats)
+  const [range = [0, dailyStats.length - 1], setRange] = useLocalStorage('dailyStatsRange')
+  const processedDailyStats = useMemo(
+    () => {
+      return dailyStats.reduce(
+        (acc, dayStat) => {
+          acc.labels.unshift(dayStat.day)
+          acc.vthoBurnSeries.unshift(dayStat.vthoBurn)
+          acc.txSeries.unshift(dayStat.transactionCount)
+          acc.clauseSeries.unshift(dayStat.clauseCount)
+          return acc
+        },
+        {
+          labels: [],
+          vthoBurnSeries: [],
+          txSeries: [],
+          clauseSeries: [],
+        },
+      )
+    },
+    [dailyStats],
+  )
+  const labels = reduceArrayToRange(processedDailyStats.labels, range)
+  const vthoBurnSeries = reduceArrayToRange(processedDailyStats.vthoBurnSeries, range)
+  const txSeries = reduceArrayToRange(processedDailyStats.txSeries, range)
+  const clauseSeries = reduceArrayToRange(processedDailyStats.clauseSeries, range)
 
   return <Fragment>
     <LineChart
@@ -50,15 +60,11 @@ export default function BurnTxsAndClausesCharts() {
     <div className="BurnTxsAndClausesCharts-sliderRow">
       <Slider
         name="BurnTxsAndClausesChartsSlider"
-        value={range || monthlyStats.length}
-        rangeStart={4}
-        rangeEnd={monthlyStats.length - 1}
-        onChange={setRange}
-      />
-      <Checkbox
-        label="Include Today"
-        checked={includeToday}
-        onChange={setIncludeToday}
+        value={range || processedDailyStats.length}
+        min={0}
+        max={dailyStats.length - 1}
+        onChange={(_, val) => setRange(val)}
+        step={range[1] - range[0] < 50 ? 1 : 5}
       />
     </div>
     <LineChart
@@ -81,17 +87,6 @@ export default function BurnTxsAndClausesCharts() {
   </Fragment>
 }
 
-function Slider({ name, className = '', value, rangeStart, rangeEnd, onChange }) {
-  return <div className={`Slider ${className}`}>
-    <input
-      type="range"
-      step={1}
-      name={name}
-      min={rangeStart}
-      max={rangeEnd}
-      onInput={e => { onChange(e.target.value) }}
-      value={value}
-    />
-    <label for={name}>{value} Days</label>
-  </div>
+function reduceArrayToRange(arr, range) {
+  return arr.slice(range[0], Number(range[1]) + 1)
 }

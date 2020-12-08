@@ -4,16 +4,15 @@ import sma from 'sma'
 import { Fragment } from 'preact'
 
 import useAppState from 'lib/appState'
-import moment from 'moment'
 import LineChart from 'components/LineChart'
 
 export default function BurnMovingAverageChart() {
-  const monthlyStats = useAppState(s => s.monthlyStats)
+  const dailyStats = useAppState(s => s.dailyStats)
   const labels = []
   const vthoBurnSeries = []
 
-  ;[...monthlyStats].slice(1, Number(170) + 1).reverse().forEach(dayStat => {
-    labels.push(moment(dayStat.day).format('MM/DD'))
+  ;[...dailyStats].slice(1, Number(170) + 1).reverse().forEach(dayStat => {
+    labels.push(dayStat.day)
     vthoBurnSeries.push(dayStat.vthoBurn)
   })
 

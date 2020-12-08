@@ -110,7 +110,7 @@ function BlockNumber() {
 
 function handleLatest({ data, statsRef, initialized }){
   if (!data) return
-  const setMonthlyStats = useAppState(s => s.setMonthlyStats)
+  const setDailyStats = useAppState(s => s.setDailyStats)
   const setServerTime = useAppState(s => s.setServerTime)
   const setPrices = useAppState(s => s.setPrices)
   const setStats = useAppState(s => s.setStats)
@@ -129,15 +129,15 @@ function handleLatest({ data, statsRef, initialized }){
     }
     setStats(statsRef.current)
   }
-  setMonthlyStats(
+  setDailyStats(
     [
       {
-        day: moment(data.monthlyStats[0].day).add(24, 'hours').format('YYYY-MM-DD'),
+        day: moment(data.dailyStats[0].day).add(24, 'hours').format('YYYY-MM-DD'),
         vthoBurn: Math.round(data.stats.dailyVTHOBurn),
         transactionCount: data.stats.dailyTransactions,
         clauseCount: data.stats.dailyClauses,
       },
-      ...data.monthlyStats,
+      ...data.dailyStats,
     ]
   )
   setServerTime(data.serverTime)

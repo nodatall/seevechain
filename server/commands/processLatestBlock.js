@@ -44,7 +44,7 @@ module.exports = async function({ client, block }) {
     [before]
   )
 
-  const monthlyStatsRecords = await client.query(`SELECT * FROM daily_stats ORDER BY day DESC LIMIT 210`)
+  const dailyStatsRecords = await client.query(`SELECT * FROM daily_stats ORDER BY day DESC LIMIT 210`)
 
   const now = moment()
   const serverTime = now.add((+process.env.TIME_DIFFERENCE), 'hours').format('HH:mm MM/DD/YY')
@@ -72,11 +72,12 @@ module.exports = async function({ client, block }) {
       dailyClauses: Number(todaysStatsRecord.dailyclauses),
       dailyVTHOBurn: Number(todaysStatsRecord.dailyvthoburn),
     },
-    monthlyStats: monthlyStatsRecords.map(record => ({
+    dailyStats: dailyStatsRecords.map(record => ({
       day: moment(record.day).format('YYYY-MM-DD'),
       vthoBurn: record.vtho_burn,
       transactionCount: record.transaction_count,
       clauseCount: record.clause_count,
+      vthoBurnUsd: record.vtho_burn_usd,
     })),
     serverTime,
     prices: await getTokenPrices(),

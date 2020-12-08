@@ -52,6 +52,14 @@ export default function LineChart({ labels, datasets, options = {} }) {
         ticks: {
           fontColor: '#bfbfc9',
         },
+        type: 'time',
+        time: {
+          parser: 'YYYY-MM-DD HH:mm:ss',
+          unit: labels.length > 32 ? 'month' : 'day',
+          displayFormats: {
+            day: 'MM/DD'
+          }
+        }
       }]
     },
     tooltips: {
