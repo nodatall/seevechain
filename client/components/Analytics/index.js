@@ -5,6 +5,7 @@ import Spinner from 'components/Spinner'
 import Header from 'components/Header'
 import LineChart from 'components/LineChart'
 import { useEffect, useState } from 'preact/hooks'
+import moment from 'moment'
 
 import './index.sass'
 
@@ -30,7 +31,7 @@ export default function Analytics() {
   const labels = []
   const series = []
   analytics.uniqueVisits.reverse().forEach(({ count, date }) => {
-    labels.push(date)
+    labels.push(moment(date).format('YYYY-MM-DD'))
     series.push(count)
   })
 
