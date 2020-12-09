@@ -102,7 +102,7 @@ export default function TopContractsChart({}) {
       labels={labels}
       datasets={[
         {
-          label: 'Daily USD VTHO BUrn',
+          label: 'Daily USD VTHO Burn',
           data: usdBurnSeries,
           borderColor: 'rgb(151, 83, 224)',
           backgroundColor: 'rgb(151, 83, 224, .1)',
