@@ -60,6 +60,10 @@ const KNOWN_CONTRACTS = {
     short: 'Vulcan',
     long: 'Vulcan 2',
   },
+  '0xdab45be2d501549d11b5712f4c804d793fae5d0b': {
+    short: 'Vulcan',
+    long: 'Vulcan 3',
+  },
   '0xb1b9d40758cc3d90f1b2899dfb7a64e5d0235c61': 'Vulcan',
   '0x27b508dba99a05c7810d4956d74daa71bac0d969': 'VIMworld',
   '0xb81e9c5f9644dec9e5e3cac86b4461a222072302': 'VeChain Node',
