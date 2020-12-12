@@ -70,10 +70,22 @@ const KNOWN_CONTRACTS = {
   '0xe28ce32d637eb93cbda105f87fbb829e9ef8540b': 'VeChain Auction',
   '0xdbaec4165a6cff07901c41d3561eefdcfbc20cb6': 'Steering Committee Vote',
   '0x0000000000000000000000417574686f72697479': 'VeChain Authority Node',
-  '0x05b866b65f3fbf118d45ca2157c43d888f001dd1': 'VIM Dispenser',
-  '0x9792bc3fe1d998af4f756d3db7fa017b05024ea9': 'VIM Dispenser',
-  '0xc96b1e1a436c5ecf150ac7a7de64c0eec73883e0': 'VIM Feeding',
-  '0x46a7567f65c278b119ddeabf440f42ba2de949c0': 'VIM Minting',
+  '0x05b866b65f3fbf118d45ca2157c43d888f001dd1': {
+    short: 'VIMworld',
+    long: 'VIMworld Dispenser',
+  },
+  '0x9792bc3fe1d998af4f756d3db7fa017b05024ea9': {
+    short: 'VIMworld',
+    long: 'VIMworld Dispenser 2',
+  },
+  '0xc96b1e1a436c5ecf150ac7a7de64c0eec73883e0': {
+    short: 'VIMworld',
+    long: 'VIMworld Feeding',
+  },
+  '0x46a7567f65c278b119ddeabf440f42ba2de949c0': {
+    short: 'VIMworld',
+    long: 'VIMworld Minting',
+  },
   '0x65f7ac9ece8ed59044768d53c0d44e3cb7f6ceff': 'Ubique',
   '0x4fe1ac0b38339a59682fea4ef970404cf989b09c': 'Indigiledger',
   '0xe1fc8ecc13dc25db25fa4e7c756acbc87f965e60': {
