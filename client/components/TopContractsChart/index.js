@@ -86,14 +86,7 @@ export default function TopContractsChart({}) {
   return <div className="TopContractsCharts">
     <div
       className="TopContractsCharts-chart"
-      onClick={event => {
-        const offsetY = event.offsetY
-        const segment = event.target.clientHeight / (sortedByVtho.length + 2)
-        const index = Math.floor(offsetY / segment) - 1
-        window.open(
-          `http://www.vechainuniverse.com/Stalker/Stalk/${sortedByVtho[index].contract}`, `_blank`
-        )
-      }}
+      onClick={onContractClick({ contracts: sortedByVtho, groups, setCurrentGroup })}
     >
       <HorizontalBar {...{
         data: burnData,
@@ -102,21 +95,7 @@ export default function TopContractsChart({}) {
     </div>
     <div
       className="TopContractsCharts-chart"
-      onClick={event => {
-        const offsetY = event.offsetY
-        const segment = event.target.clientHeight / (sortedByClauses.length + 2)
-        const index = Math.floor(offsetY / segment) - 1
-        const group = groups[sortedByClauses[index].contract]
-        if (group) {
-          setCurrentGroup({
-            [sortedByClauses[index].contract]: group,
-          })
-          return
-        }
-        window.open(
-          `http://www.vechainuniverse.com/Stalker/Stalk/${sortedByClauses[index].contract}`, `_blank`
-        )
-      }}
+      onClick={onContractClick({ contracts: sortedByClauses, groups, setCurrentGroup })}
     >
       <HorizontalBar {...{
         data: clausesData,
@@ -124,6 +103,23 @@ export default function TopContractsChart({}) {
       }}/>
     </div>
   </div>
+}
+
+const onContractClick = ({ contracts, groups, setCurrentGroup }) => event => {
+  const offsetY = event.offsetY
+  const segment = event.target.clientHeight / (contracts.length + 2)
+  const index = Math.floor(offsetY / segment) - 1
+  if (!contracts[index]) return
+  const group = groups[contracts[index].contract]
+  if (group) {
+    setCurrentGroup({
+      [contracts[index].contract]: group,
+    })
+    return
+  }
+  window.open(
+    `http://www.vechainuniverse.com/Stalker/Stalk/${contracts[index].contract}`, `_blank`
+  )
 }
 
 function getGroupsAndFilteredContractsFromTopContracts(topContracts) {
