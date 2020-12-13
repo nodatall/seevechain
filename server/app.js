@@ -1,5 +1,6 @@
 require('../environment')
 
+const sslRedirect = require('heroku-ssl-redirect').default
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
@@ -10,6 +11,7 @@ const io = require('socket.io')(server)
 const logger = require('./lib/logger')
 
 app.use(compression())
+app.use(sslRedirect())
 app.use(express.static('client/dist'))
 
 app.use(cookieParser())

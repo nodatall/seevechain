@@ -53,6 +53,7 @@
     "eslint-plugin-react": "^7.19.0",
     "express": "^4.16.4",
     "file-loader": "^5.1.0",
+    "heroku-ssl-redirect": "^0.1.1",
     "howler": "^2.2.0",
     "html-webpack-plugin": "^4.3.0",
     "js-cookie": "^2.2.1",
