@@ -11,7 +11,7 @@ export default function Modal({ open, setVisibility, children, className = '' })
   }
 
   let modal
-  if (open) modal = <div className={`Modal ${className}`} ref={shroud} onClick={onShroudClick}>
+  if (open) modal = <div className={`Modal ${className}`} ref={shroud} onMouseDOwn={onShroudClick}>
     <div className="Modal-window">
       <img src={xIcon} className="Modal-close" onClick={setVisibility} />
       {children}

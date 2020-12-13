@@ -88,5 +88,5 @@ export default function BurnTxsAndClausesCharts() {
 }
 
 function reduceArrayToRange(arr, range) {
-  return arr.slice(range[0], Number(range[1]) + 1)
+  return arr.slice(range[0], range[1])
 }
