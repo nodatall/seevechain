@@ -77,7 +77,7 @@ module.exports = async function({ client, transaction, block, receipt, thor }) {
     let insertableClauses = []
     let remainingVthoBurn = vthoBurn
     clauses.forEach((clause, index) => {
-      const { transfers, events } = receipt.outputs.length > 0 && receipt.outputs[index] || clause.explained
+      const { transfers = [], events = [] } = (receipt.outputs.length > 0 && receipt.outputs[index] || clause.explained) || {}
 
       const newContract = receipt.outputs.length > 0 && receipt.outputs[index].contractAddress
       const event = events[events.length - 1]
