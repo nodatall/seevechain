@@ -9,6 +9,7 @@ import numberWithCommas from 'lib/numberWithCommas'
 import { colorSet, colorSet2 } from 'lib/chartHelpers'
 import { invertedContractGroupings } from 'lib/contractGroupings'
 import Spinner from 'components/Spinner'
+import vimworldLogo from 'assets/vimworld.jpg'
 
 import './index.sass'
 
@@ -46,6 +47,7 @@ export default function TopContractsChart({}) {
         ticks: {
           fontColor: '#bfbfc9',
         },
+        maxBarThickness: 50 // number (pixels)
       }],
       xAxes: [{
         ticks: {
@@ -73,20 +75,20 @@ export default function TopContractsChart({}) {
     },
   }
 
-  console.log(`currentGroup -->`, currentGroup)
   if (currentGroup) {
-    return <div>
-      In a group
-      <div onClick={() => {
+    return <ContractGroup {...{
+      goBack: () => {
         setCurrentGroup()
-      }}>back</div>
-    </div>
+      },
+      chartOptions: {...options},
+      ...currentGroup,
+    }}/>
   }
 
   return <div className="TopContractsCharts">
     <div
       className="TopContractsCharts-chart"
-      onClick={onContractClick({ contracts: sortedByVtho, groups, setCurrentGroup })}
+      onClick={onContractClick({ contracts: sortedByVtho, groups, setCurrentGroup, type: 'burn' })}
     >
       <HorizontalBar {...{
         data: burnData,
@@ -95,7 +97,7 @@ export default function TopContractsChart({}) {
     </div>
     <div
       className="TopContractsCharts-chart"
-      onClick={onContractClick({ contracts: sortedByClauses, groups, setCurrentGroup })}
+      onClick={onContractClick({ contracts: sortedByClauses, groups, setCurrentGroup, type: 'clauses' })}
     >
       <HorizontalBar {...{
         data: clausesData,
@@ -105,15 +107,62 @@ export default function TopContractsChart({}) {
   </div>
 }
 
-const onContractClick = ({ contracts, groups, setCurrentGroup }) => event => {
+function ContractGroup({ name, activeContracts, type, goBack, chartOptions }) {
+  chartOptions.maintainAspectRatio = true
+  let chartDataPoints
+  let contracts
+  if (type === 'clauses') {
+    contracts = [...activeContracts].sort((a, b) => b.vthoBurn - a.vthoBurn)
+    chartDataPoints = {
+      labels: getLabels(contracts, 'vthoBurn'),
+      datasets: [{
+        label: 'VTHO Burn by Contract',
+        backgroundColor: colorSet,
+        data: contracts.map(contract => contract.vthoBurn),
+      }]
+    }
+  } else if (type === 'burn') {
+    contracts = [...activeContracts].sort((a, b) => b.clauses - a.clauses)
+    chartDataPoints = {
+      labels: getLabels(contracts, 'clauses'),
+      datasets: [{
+        label: 'Clauses by Contract',
+        backgroundColor: colorSet2,
+        data: contracts.map(contract => contract.clauses),
+      }]
+    }
+  } else throw new Error(`invalid ContractGroup type ${type}`)
+
+  return <div className="TopContractsCharts-ContractGroup">
+    <div className="TopContractsCharts-ContractGroup-header">
+      {name} Contracts
+    </div>
+    <img src={vimworldLogo} />
+    <div
+      className="TopContractsCharts-chart"
+      onClick={onContractClick({ contracts, type })}
+    >
+      <HorizontalBar {...{
+        data: chartDataPoints,
+        options: chartOptions,
+      }}/>
+    </div>
+  </div>
+}
+
+const onContractClick = ({ contracts, groups, setCurrentGroup, type }) => event => {
   const offsetY = event.offsetY
   const segment = event.target.clientHeight / (contracts.length + 2)
   const index = Math.floor(offsetY / segment) - 1
   if (!contracts[index]) return
-  const group = groups[contracts[index].contract]
+  const group = groups && groups[contracts[index].contract]
   if (group) {
     setCurrentGroup({
-      [contracts[index].contract]: group,
+      name: contracts[index].contract,
+      totalClauses: group.totalClauses,
+      totalVthoBurn: group.totalVthoBurn,
+      activeContracts: group.activeContracts,
+      type,
     })
     return
   }
