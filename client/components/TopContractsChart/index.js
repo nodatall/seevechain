@@ -10,6 +10,9 @@ import { colorSet, colorSet2 } from 'lib/chartHelpers'
 import { invertedContractGroupings } from 'lib/contractGroupings'
 import Spinner from 'components/Spinner'
 import vimworldLogo from 'assets/vimworld.jpg'
+import vimworldBanner from 'assets/vimworld_banner.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import './index.sass'
 
@@ -107,11 +110,33 @@ export default function TopContractsChart({}) {
   </div>
 }
 
+const groupProfileProps = {
+  'VIMworld': {
+    banner: vimworldBanner,
+    logo: vimworldLogo,
+    url: 'https://vimworld.com/',
+    bio: 'VIMworld is a smart NFT platform for collectibles digital characters',
+  },
+}
+
+function GroupProfile({ banner, logo, url, bio }){
+  return <div className="TopContractsCharts-GroupProfile">
+    <img src={banner} className="TopContractsCharts-GroupProfile-banner"/>
+    <div className="TopContractsCharts-GroupProfile-logoContainer">
+      <img src={logo} className="TopContractsCharts-GroupProfile-logo"/>
+    </div>
+    <div className="TopContractsCharts-GroupProfile-bioAndUrl">
+      <div>{bio}</div>
+      <a href={url} target="_blank">{url}</a>
+    </div>
+  </div>
+}
+
 function ContractGroup({ name, activeContracts, type, goBack, chartOptions }) {
   chartOptions.maintainAspectRatio = true
   let chartDataPoints
   let contracts
-  if (type === 'clauses') {
+  if (type === 'burn') {
     contracts = [...activeContracts].sort((a, b) => b.vthoBurn - a.vthoBurn)
     chartDataPoints = {
       labels: getLabels(contracts, 'vthoBurn'),
@@ -121,7 +146,7 @@ function ContractGroup({ name, activeContracts, type, goBack, chartOptions }) {
         data: contracts.map(contract => contract.vthoBurn),
       }]
     }
-  } else if (type === 'burn') {
+  } else if (type === 'clauses') {
     contracts = [...activeContracts].sort((a, b) => b.clauses - a.clauses)
     chartDataPoints = {
       labels: getLabels(contracts, 'clauses'),
@@ -133,11 +158,21 @@ function ContractGroup({ name, activeContracts, type, goBack, chartOptions }) {
     }
   } else throw new Error(`invalid ContractGroup type ${type}`)
 
+  const profileProps = groupProfileProps[name]
+
   return <div className="TopContractsCharts-ContractGroup">
+    <div onClick={goBack}>
+      <FontAwesomeIcon
+        color="#a1a1aa"
+        icon={faArrowLeft}
+        size="23px"
+      />
+      &nbsp;Back
+    </div>
+    {profileProps && <GroupProfile {...{...profileProps}} />}
     <div className="TopContractsCharts-ContractGroup-header">
       {name} Contracts
     </div>
-    <img src={vimworldLogo} />
     <div
       className="TopContractsCharts-chart"
       onClick={onContractClick({ contracts, type })}
@@ -145,6 +180,7 @@ function ContractGroup({ name, activeContracts, type, goBack, chartOptions }) {
       <HorizontalBar {...{
         data: chartDataPoints,
         options: chartOptions,
+        height: contracts.length * 30,
       }}/>
     </div>
   </div>
