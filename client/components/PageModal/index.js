@@ -6,13 +6,12 @@ import { getVerticalScrollParent } from 'lib/DOMHelpers'
 import useAppState from 'lib/appState'
 import Modal from 'components/Modal'
 import Dropdown from 'components/Dropdown'
+import Icon from 'components/Icon'
 import { setPathname } from 'lib/location'
 import { locationToChartMap } from 'lib/chartHelpers'
 import useToggle from 'lib/useToggleHook'
 import CopyButton from 'components/CopyButton'
 import QRCode from 'qrcode.react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 import './index.sass'
 
@@ -81,11 +80,7 @@ export default function PageModal({ setVisibility, open }) {
       },
     }} >
       Support Seevechain&nbsp;
-      <FontAwesomeIcon
-        color="#a1a1aa"
-        icon={donateVisible ? faChevronDown : faChevronRight}
-        size="sm"
-      />
+      <Icon type={donateVisible ? 'down-chevron' : 'right-chevron'} />
     </div>
     {donateVisible &&
       <div className="PageModal-donateWrapper">

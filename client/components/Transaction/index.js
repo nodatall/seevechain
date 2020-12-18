@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'preact/hooks'
 import waitFor from 'delay'
 import numeral from 'numeral'
 
+import Icon from 'components/Icon'
 import useAppState from 'lib/appState'
 import numberWithCommas from 'lib/numberWithCommas'
 import { getShortKnownContract, KNOWN_ADDRESSES, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
@@ -19,8 +20,6 @@ import {
   getRangeEquivalent,
   COLOR_BURN_RANGE,
 } from '../../lib/transactionHelpers'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 import './index.sass'
 
@@ -189,19 +188,11 @@ function TransferTransaction({ clauses, transaction }) {
     <div className="Transaction-subText">
       <div>
         {direction === 'to' && <span>
-          <FontAwesomeIcon
-            color="orange"
-            icon={faArrowRight}
-            size="13px"
-          />&nbsp;
+          <Icon color="orange" type="right-arrow" size="md" />&nbsp;
         </span>}
         {label}
         {direction === 'from' && <span>&nbsp;
-          <FontAwesomeIcon
-            color="green"
-            icon={faArrowRight}
-            size="13px"
-          />
+          <Icon color="green" type="right-arrow" size="md" />
         </span>}
       </div>
     </div>

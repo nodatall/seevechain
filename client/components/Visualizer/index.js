@@ -10,12 +10,11 @@ import Transactions from 'components/Transactions'
 import BottomBar from 'components/BottomBar'
 import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
+import Icon from 'components/Icon'
 import numberWithCommas from 'lib/numberWithCommas'
 import { onReturnToStaleApp } from 'lib/onReturnToStaleApp'
 import { locationToChartMap } from 'lib/chartHelpers'
 import { PRETTY_KNOWN_CONTRACTS, KNOWN_ADDRESSES } from '../../../shared/knownAddresses'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons'
 const PageModal = lazy(() => import('components/PageModal'))
 
 import createUid from 'lib/createUid'
@@ -82,12 +81,7 @@ export default function Visualizer() {
     }
     <Stars />
     <div className="Visualizer-rightControls">
-      <FontAwesomeIcon
-        color="#a1a1aa"
-        icon={soundOn ? faVolumeUp : faVolumeOff}
-        size="23px"
-        onClick={() => { setSoundOn(!soundOn) }}
-      />
+      <Icon type={soundOn ? 'volume-up' : 'volume-off'} size="md" onClick={() => { setSoundOn(!soundOn) }} />
     </div>
     <BlockNumber />
     <BottomBar togglePageModalVisibility={togglePageModalVisibility} />
