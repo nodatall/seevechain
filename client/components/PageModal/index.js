@@ -16,7 +16,7 @@ import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons
 
 import './index.sass'
 
-export default function StatsModal({ setVisibility, open }) {
+export default function PageModal({ setVisibility, open }) {
   const [storedChartPath, setStoredChartPath] = useLocalStorage()
   const [donateVisible, showDonate, hideDonate, toggleDonate] = useToggle(false) // eslint-disable-line
   const donateRef = useRef()
@@ -47,7 +47,7 @@ export default function StatsModal({ setVisibility, open }) {
       if (open) setPathname('/')
       setVisibility(value)
     },
-    className: "StatsModal",
+    className: "PageModal",
   }}>
     <ServerTime />
     <Prices />
@@ -65,7 +65,7 @@ export default function StatsModal({ setVisibility, open }) {
     }} />
     {CurrentChart && <CurrentChart />}
     <div  {...{
-      className: 'StatsModal-donate',
+      className: 'PageModal-donate',
       ref: donateRef,
       onClick: () => {
         toggleDonate()
@@ -88,16 +88,16 @@ export default function StatsModal({ setVisibility, open }) {
       />
     </div>
     {donateVisible &&
-      <div className="StatsModal-donateWrapper">
-        <div className="StatsModal-address">
+      <div className="PageModal-donateWrapper">
+        <div className="PageModal-address">
           <input value="0x3f5929c5741C726Ea3fE574790ca89a69f6Aa780" />
           <CopyButton copyValue="0x3f5929c5741C726Ea3fE574790ca89a69f6Aa780" />
         </div>
-        <div className="StatsModal-currencyMessage">
+        <div className="PageModal-currencyMessage">
           Send VET, VTHO, or any VIP180 token
         </div>
         <QRCode
-          className="StatsModal-qrCode"
+          className="PageModal-qrCode"
           value="0x3f5929c5741C726Ea3fE574790ca89a69f6Aa780"
           size={128}
           bgColor="#ffffff"
@@ -113,27 +113,27 @@ export default function StatsModal({ setVisibility, open }) {
 
 function Prices() {
   const prices = useAppState(s => s.prices)
-  return <div className="StatsModal-prices">
+  return <div className="PageModal-prices">
     <span>
       VET
-      <span className="StatsModal-prices-price">${prices.vet.usd.toFixed(5)}</span>
+      <span className="PageModal-prices-price">${prices.vet.usd.toFixed(5)}</span>
     </span>
-    <span className="StatsModal-prices-middle">
+    <span className="PageModal-prices-middle">
       VTHO/VET
-      <span className="StatsModal-prices-price StatsModal-prices-middle-price">
+      <span className="PageModal-prices-price PageModal-prices-middle-price">
         {(prices.vtho.usd / prices.vet.usd).toFixed(4)}
       </span>
     </span>
     <span>
       VTHO
-      <span className="StatsModal-prices-price">${prices.vtho.usd.toFixed(5)}</span>
+      <span className="PageModal-prices-price">${prices.vtho.usd.toFixed(5)}</span>
     </span>
   </div>
 }
 
 function ServerTime() {
   const serverTime = useAppState(s => s.serverTime)
-  return <span className="StatsModal-serverTime">
+  return <span className="PageModal-serverTime">
     Server time: {serverTime} (UTC+1)
   </span>
 }

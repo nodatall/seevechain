@@ -16,7 +16,7 @@ import { locationToChartMap } from 'lib/chartHelpers'
 import { PRETTY_KNOWN_CONTRACTS, KNOWN_ADDRESSES } from '../../../shared/knownAddresses'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons'
-const StatsModal = lazy(() => import('components/StatsModal'))
+const PageModal = lazy(() => import('components/PageModal'))
 
 import createUid from 'lib/createUid'
 import './index.sass'
@@ -24,7 +24,7 @@ import './index.sass'
 export default function Visualizer() {
   const setTopContracts = useAppState(s => s.setTopContracts)
   const setUsdVthoBurn = useAppState(s => s.setUsdVthoBurn)
-  const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
+  const [pageModalVisible, togglePageModalVisibility] = useState(false)
   const [soundOn, setSoundOn] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const initialized = useRef()
@@ -65,7 +65,7 @@ export default function Visualizer() {
       10
     )
 
-    if (locationToChartMap[window.location.pathname]) toggleStatsModalVisibility(true)
+    if (locationToChartMap[window.location.pathname]) togglePageModalVisibility(true)
   }, [])
 
   if (!loaded) return <div className="Visualizer">
@@ -73,10 +73,10 @@ export default function Visualizer() {
   </div>
 
   return <div className="Visualizer">
-    {statsModalVisible && <Suspense fallback={<Spinner />}>
-      <StatsModal
-        open={statsModalVisible}
-        setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
+    {pageModalVisible && <Suspense fallback={<Spinner />}>
+      <PageModal
+        open={pageModalVisible}
+        setVisibility={() => { togglePageModalVisibility(!pageModalVisible) }}
       />
     </Suspense>
     }
@@ -90,7 +90,7 @@ export default function Visualizer() {
       />
     </div>
     <BlockNumber />
-    <BottomBar toggleStatsModalVisibility={toggleStatsModalVisibility} />
+    <BottomBar togglePageModalVisibility={togglePageModalVisibility} />
     <Transactions statsRef={statsRef} soundOn={soundOn}
     />
   </div>

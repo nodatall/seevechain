@@ -20,5 +20,6 @@ for (let key in contractGroupings) {
 }
 
 module.exports = {
+  contractGroupings,
   invertedContractGroupings,
 }

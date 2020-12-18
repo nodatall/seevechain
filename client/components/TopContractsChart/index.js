@@ -7,7 +7,7 @@ import numeral from 'numeral'
 import { getLongKnownContract, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
 import numberWithCommas from 'lib/numberWithCommas'
 import { colorSet, colorSet2 } from 'lib/chartHelpers'
-import { invertedContractGroupings } from 'lib/contractGroupings'
+import { invertedContractGroupings, contractGroupings } from 'lib/contractGroupings'
 import Spinner from 'components/Spinner'
 import vimworldLogo from 'assets/vimworld.jpg'
 import vimworldBanner from 'assets/vimworld_banner.png'
@@ -50,7 +50,7 @@ export default function TopContractsChart({}) {
         ticks: {
           fontColor: '#bfbfc9',
         },
-        maxBarThickness: 50 // number (pixels)
+        maxBarThickness: 50,
       }],
       xAxes: [{
         ticks: {
@@ -187,9 +187,10 @@ function ContractGroup({ name, activeContracts, type, goBack, chartOptions }) {
 }
 
 const onContractClick = ({ contracts, groups, setCurrentGroup, type }) => event => {
-  const offsetY = event.offsetY
-  const segment = event.target.clientHeight / (contracts.length + 2)
-  const index = Math.floor(offsetY / segment) - 1
+  const offsetY = event.offsetY - 35
+  if (offsetY < 0) return
+  const segment = (event.target.clientHeight - 35) / contracts.length
+  const index = Math.floor(offsetY / segment)
   if (!contracts[index]) return
   const group = groups && groups[contracts[index].contract]
   if (group) {
@@ -209,37 +210,40 @@ const onContractClick = ({ contracts, groups, setCurrentGroup, type }) => event 
 
 function getGroupsAndFilteredContractsFromTopContracts(topContracts) {
   const groups = {}
+  for (let group in contractGroupings) {
+    groups[group] = {
+      activeContracts: [],
+      totalClauses: 0,
+      totalVthoBurn: 0,
+    }
+  }
   const filteredContracts = []
   topContracts.forEach(contract => {
     if (invertedContractGroupings[contract.contract]) {
       const group = groups[invertedContractGroupings[contract.contract]]
-      if (!group) {
-        groups[invertedContractGroupings[contract.contract]] = {
-          activeContracts: [contract],
-          totalVthoBurn: contract.vthoBurn,
-          totalClauses: contract.clauses,
-        }
-      } else {
-        group.activeContracts.push(contract)
-        group.totalVthoBurn += contract.vthoBurn
-        group.totalClauses += contract.clauses
-      }
+      group.activeContracts.push(contract)
+      group.totalVthoBurn += contract.vthoBurn
+      group.totalClauses += contract.clauses
     } else filteredContracts.push(contract)
   })
   for (let key in groups) {
-    if (groups[key].activeContracts.length === 1) {
-      filteredContracts.push(groups[key].activeContracts[0])
-      delete groups[key]
-    } else {
-      const cur = groups[key]
+    const cur = groups[key]
+    Array.from(contractGroupings[key]).forEach(contract => {
+      if (!cur.activeContracts.some(c => c.contract === contract)) {
+        cur.activeContracts.push({
+          contract,
+          clauses: 0,
+          vthoBurn: 0,
+        })
+      }
+    })
+    if (cur.activeContracts.some(c => c.clauses > 0 || c.vthoBurn > 0))
       filteredContracts.push({
         contract: key,
         vthoBurn: cur.totalVthoBurn,
         clauses: cur.totalClauses,
       })
-    }
   }
-
   return { groups, filteredContracts }
 }
 
@@ -256,6 +260,6 @@ function getLabels(contracts, key) {
         : matches0x
           ? `${contract.slice(2,6)}..${contract.slice(-4)}`
           : `${contract}`
-    return `${label}: ${numberWithCommas(key === 'vthoBurn' ? value.toFixed(0) : value)}${matches0x ? '' : '**'}`
+    return `${label}: ${numberWithCommas(value.toFixed(0))}${matches0x ? '' : '**'}`
   })
 }
