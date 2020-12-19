@@ -189,7 +189,7 @@ function ContractGroup({ name, activeContracts, type, goBack, chartOptions }) {
 const onContractClick = ({ contracts, groups, setCurrentGroup, type }) => event => {
   const offsetY = event.offsetY - 35
   if (offsetY < 0) return
-  const segment = (event.target.clientHeight - 35) / contracts.length
+  const segment = (event.target.clientHeight - 35 - 25) / contracts.length
   const index = Math.floor(offsetY / segment)
   if (!contracts[index]) return
   const group = groups && groups[contracts[index].contract]

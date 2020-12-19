@@ -13,7 +13,7 @@ import Stars from 'components/Stars'
 import Icon from 'components/Icon'
 import numberWithCommas from 'lib/numberWithCommas'
 import { onReturnToStaleApp } from 'lib/onReturnToStaleApp'
-import { locationToChartMap } from 'lib/chartHelpers'
+import { locationToChartMap } from 'lib/router'
 import { PRETTY_KNOWN_CONTRACTS, KNOWN_ADDRESSES } from '../../../shared/knownAddresses'
 const PageModal = lazy(() => import('components/PageModal'))
 

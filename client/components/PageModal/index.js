@@ -1,44 +1,22 @@
 import React from 'react'
-import { useEffect, useRef } from 'preact/hooks'
-import { useLocalStorage } from 'lib/storageHooks'
+import { Fragment } from 'preact'
+import { useRef } from 'preact/hooks'
 import { getVerticalScrollParent } from 'lib/DOMHelpers'
 
 import useAppState from 'lib/appState'
 import Modal from 'components/Modal'
-import Dropdown from 'components/Dropdown'
 import Icon from 'components/Icon'
 import { setPathname } from 'lib/location'
-import { locationToChartMap } from 'lib/chartHelpers'
 import useToggle from 'lib/useToggleHook'
 import CopyButton from 'components/CopyButton'
+import Charts from 'components/Charts'
 import QRCode from 'qrcode.react'
 
 import './index.sass'
 
 export default function PageModal({ setVisibility, open }) {
-  const [storedChartPath, setStoredChartPath] = useLocalStorage()
   const [donateVisible, showDonate, hideDonate, toggleDonate] = useToggle(false) // eslint-disable-line
   const donateRef = useRef()
-
-  let matchingChart = locationToChartMap[window.location.pathname]
-  useEffect(() => {
-    if (open && !matchingChart) {
-      setPathname(storedChartPath || '/burn')
-    }
-    if (
-      open &&
-      matchingChart &&
-      window.location.pathname !== storedChartPath
-    ) {
-      setStoredChartPath(window.location.pathname)
-    }
-  }, [open, window.location.pathname])
-
-  const CurrentChart = (
-    matchingChart ||
-    locationToChartMap[storedChartPath] ||
-    locationToChartMap['/burn']
-  ).component
 
   return <Modal {...{
     open,
@@ -50,19 +28,13 @@ export default function PageModal({ setVisibility, open }) {
   }}>
     <ServerTime />
     <Prices />
-    <Dropdown {...{
-      value: storedChartPath || '/burn',
-      options: Object.keys(locationToChartMap).map(key => ({
-        value: key,
-        display: locationToChartMap[key].title,
-      })),
-      onChange: value => {
-        setStoredChartPath(value)
-        setPathname(value)
-      },
-      fullWidth: true,
-    }} />
-    {CurrentChart && <CurrentChart />}
+    {open && <Charts />}
+    <Donate {...{ toggleDonate, donateRef, donateVisible }} />
+  </Modal>
+}
+
+function Donate({ toggleDonate, donateRef, donateVisible }) {
+  return <Fragment>
     <div  {...{
       className: 'PageModal-donate',
       ref: donateRef,
@@ -103,7 +75,7 @@ export default function PageModal({ setVisibility, open }) {
         />
       </div>
     }
-  </Modal>
+  </Fragment>
 }
 
 function Prices() {
