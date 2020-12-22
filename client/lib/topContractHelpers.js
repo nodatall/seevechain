@@ -41,7 +41,7 @@ export function getGroupsAndFilteredContractsFromTopContracts(topContracts) {
         contract: key,
         vthoBurn: cur.totalVthoBurn,
         clauses: cur.totalClauses,
-        usdBurned: cur.totalUsdBurned,
+        usdBurned: cur.totalUsdBurn,
       })
   }
   return { groups, filteredContracts }
@@ -65,10 +65,11 @@ export const onContractClick = ({ contracts, groups, forcePageUpdate }) => event
   )
 }
 
-export function getLabels(contracts, key) {
+export function getLabels(contracts, key, prefix = '') {
   return contracts.map(cur => {
     const contract = cur.contract
     const value = cur[key]
+    const labelValue = typeof value === 'string' ? value : value.toFixed(0)
     const matchingKnownContract = getLongKnownContract(contract)
     const matches0x = contract.match(/^0x/)
     const label = matchingKnownContract
@@ -78,6 +79,6 @@ export function getLabels(contracts, key) {
         : matches0x
           ? `${contract.slice(2,6)}..${contract.slice(-4)}`
           : `${contract}`
-    return `${label}: ${numberWithCommas(value.toFixed(0))}${matches0x ? '' : '*'}`
+    return `${label}: ${prefix}${numberWithCommas(labelValue)}${matches0x ? '' : '*'}`
   })
 }

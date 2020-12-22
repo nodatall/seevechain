@@ -1,5 +1,4 @@
 import React from 'react'
-import { HorizontalBar } from 'react-chartjs-2'
 
 import useAppState from 'lib/appState'
 import { colorSet, colorSet2 } from 'lib/chartHelpers'
