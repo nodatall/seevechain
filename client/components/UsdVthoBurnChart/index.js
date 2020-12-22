@@ -68,6 +68,11 @@ export default function UsdVthoBurnChart({ forcePageUpdate }) {
           backgroundColor: 'rgb(151, 83, 224, .1)',
         },
       ]}
+      modifyOptions={options => {
+        options.scales.yAxes[0].ticks.userCallback = num => window.innerWidth > 760
+          ? `$${numberWithCommas(num)}`
+          : `$${numeral(num).format('0.0a')}`
+      }}
     />
   </div>
 }
