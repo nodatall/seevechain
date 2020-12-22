@@ -12,8 +12,8 @@ import Slider from '@material-ui/core/Slider'
 import './index.sass'
 
 export default function BurnTxsAndClausesCharts() {
-  const dailyStats = useAppState(s => s.dailyStats)
-  const [range = [0, dailyStats.length - 1], setRange] = useLocalStorage('dailyStatsRange')
+  let dailyStats = useAppState(s => s.dailyStats)
+  const [range = [0, dailyStats.length], setRange] = useLocalStorage('dailyStatsRange')
   const processedDailyStats = useMemo(
     () => {
       return dailyStats.reduce(

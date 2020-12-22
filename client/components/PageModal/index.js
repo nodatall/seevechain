@@ -1,18 +1,20 @@
 import React from 'react'
 import { Fragment } from 'preact'
-import { useRef } from 'preact/hooks'
+import { useRef, useEffect } from 'preact/hooks'
 import QRCode from 'qrcode.react'
+import { useLocalStorage } from 'lib/storageHooks'
 
 import { getVerticalScrollParent } from 'lib/DOMHelpers'
 import useAppState from 'lib/appState'
 import { setPathname } from 'lib/location'
 import useToggle from 'lib/useToggleHook'
 import { locationToGroupMap, allRoutes } from 'lib/router'
+import { locationToChartMap } from 'lib/router'
 
+import Dropdown from 'components/Dropdown'
 import CopyButton from 'components/CopyButton'
 import Modal from 'components/Modal'
 import Icon from 'components/Icon'
-import Charts from 'components/Charts'
 import ContractGroupPage from 'components/ContractGroupPage'
 import useForceUpdate from 'lib/useForceUpdateHook'
 import useWindowEventListener from 'lib/useWindowEventListenerHook'
@@ -29,6 +31,29 @@ export default function PageModal({ setVisibility, open }) {
     forcePageUpdate()
   })
 
+  const [storedChartPath, setStoredChartPath] = useLocalStorage()
+  let matchingChart = locationToChartMap[window.location.pathname]
+  const matchingGroup = locationToGroupMap[window.location.pathname]
+
+  useEffect(() => {
+    if (matchingGroup) return
+    if (!matchingChart) {
+      setPathname(storedChartPath || '/burn')
+    }
+    if (
+      matchingChart &&
+      window.location.pathname !== storedChartPath
+    ) {
+      setStoredChartPath(window.location.pathname)
+    }
+  }, [window.location.pathname, matchingGroup])
+
+  const CurrentChart = (
+    matchingChart ||
+    locationToChartMap[storedChartPath] ||
+    locationToChartMap['/burn']
+  ).component
+
   return <Modal {...{
     open,
     setVisibility: value => {
@@ -39,9 +64,23 @@ export default function PageModal({ setVisibility, open }) {
   }}>
     <ServerTime />
     <Prices />
+    <Dropdown {...{
+      placeholder: matchingGroup,
+      value: matchingGroup ? undefined : (storedChartPath || '/burn'),
+      options: Object.keys(locationToChartMap).map(key => ({
+        value: key,
+        display: locationToChartMap[key].title,
+      })),
+      onChange: value => {
+        setStoredChartPath(value)
+        setPathname(value)
+        forcePageUpdate()
+      },
+      fullWidth: true,
+    }} />
     {locationToGroupMap[window.location.pathname]
       ? <ContractGroupPage />
-      : <Charts {...{forcePageUpdate}}/>
+      : <CurrentChart {...{forcePageUpdate}}/>
     }
     <Donate {...{ toggleDonate, donateRef, donateVisible }} />
   </Modal>

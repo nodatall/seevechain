@@ -1,9 +1,7 @@
 import React from 'react'
 import { HorizontalBar } from 'react-chartjs-2'
-import numeral from 'numeral'
 
 import useAppState from 'lib/appState'
-import numberWithCommas from 'lib/numberWithCommas'
 import { colorSet, colorSet2 } from 'lib/chartHelpers'
 import {
   getGroupsAndFilteredContractsFromTopContracts,
@@ -12,6 +10,7 @@ import {
 } from 'lib/topContractHelpers'
 
 import Spinner from 'components/Spinner'
+import BarChart from 'components/BarChart'
 import vimworldLogo from 'assets/vimworld.jpg'
 import vimworldBanner from 'assets/vimworld_banner.png'
 
@@ -43,59 +42,18 @@ export default function TopContractsChart({ forcePageUpdate }) {
     }]
   }
 
-  const options = {
-    maintainAspectRatio: false,
-    scales: {
-      yAxes: [{
-        ticks: {
-          fontColor: '#bfbfc9',
-        },
-        maxBarThickness: 50,
-      }],
-      xAxes: [{
-        ticks: {
-          fontColor: '#bfbfc9',
-          userCallback: num => window.innerWidth > 760 ? numberWithCommas(num) : numeral(num).format('0.0a'),
-        },
-      }]
-    },
-    legend: {
-      onClick: () => {},
-    },
-    tooltips: {
-      titleFontSize: 16,
-      bodyFontSize: 14,
-      xPadding: 12,
-      yPadding: 12,
-      displayColors: false,
-      bodyAlign: 'center',
-      backgroundColor: '#182024',
-      borderColor: '#bfbfc9',
-      borderWidth: .5,
-      callbacks: {
-        label: () => '',
-      },
-    },
-  }
-
   return <div className="TopContractsCharts">
     <div
       className="TopContractsCharts-chart"
       onClick={onContractClick({ contracts: sortedByVtho, groups, forcePageUpdate })}
     >
-      <HorizontalBar {...{
-        data: burnData,
-        options,
-      }}/>
+      <BarChart {...{ data: burnData }}/>
     </div>
     <div
       className="TopContractsCharts-chart"
       onClick={onContractClick({ contracts: sortedByClauses, groups, forcePageUpdate })}
     >
-      <HorizontalBar {...{
-        data: clausesData,
-        options,
-      }}/>
+      <BarChart {...{ data: clausesData }}/>
     </div>
   </div>
 }
