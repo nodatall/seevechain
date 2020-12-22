@@ -8,7 +8,7 @@ import { locationToChartMap } from 'lib/router'
 
 import './index.sass'
 
-export default function PageModal() {
+export default function Charts({ forcePageUpdate }) {
   const [storedChartPath, setStoredChartPath] = useLocalStorage()
   let matchingChart = locationToChartMap[window.location.pathname]
 
@@ -43,6 +43,6 @@ export default function PageModal() {
       },
       fullWidth: true,
     }} />
-    {CurrentChart && <CurrentChart />}
+    {CurrentChart && <CurrentChart {...{forcePageUpdate}}/>}
   </div>
 }

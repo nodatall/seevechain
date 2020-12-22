@@ -6,18 +6,20 @@ import ioClient from 'socket.io-client'
 import moment from 'moment'
 
 import useAppState from 'lib/appState'
+import numberWithCommas from 'lib/numberWithCommas'
+import { onReturnToStaleApp } from 'lib/onReturnToStaleApp'
+import { allRoutes, } from 'lib/router'
+import createUid from 'lib/createUid'
+import useWindowEventListener from 'lib/useWindowEventListenerHook'
+
 import Transactions from 'components/Transactions'
 import BottomBar from 'components/BottomBar'
 import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
 import Icon from 'components/Icon'
-import numberWithCommas from 'lib/numberWithCommas'
-import { onReturnToStaleApp } from 'lib/onReturnToStaleApp'
-import { allRoutes, } from 'lib/router'
-import { PRETTY_KNOWN_CONTRACTS, KNOWN_ADDRESSES } from '../../../shared/knownAddresses'
 const PageModal = lazy(() => import('components/PageModal'))
+import { PRETTY_KNOWN_CONTRACTS, KNOWN_ADDRESSES } from '../../../shared/knownAddresses'
 
-import createUid from 'lib/createUid'
 import './index.sass'
 
 export default function Visualizer() {
@@ -61,6 +63,10 @@ export default function Visualizer() {
 
     if (allRoutes.includes(window.location.pathname)) togglePageModalVisibility(true)
   }, [])
+
+  useWindowEventListener('popstate', () => {
+    if (allRoutes.includes(window.location.pathname)) togglePageModalVisibility(true)
+  })
 
   if (!loaded) return <div className="Visualizer">
     <Spinner />

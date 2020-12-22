@@ -1,23 +1,22 @@
 import React from 'react'
+import { HorizontalBar } from 'react-chartjs-2'
+import numeral from 'numeral'
 
 import useAppState from 'lib/appState'
-import { HorizontalBar } from 'react-chartjs-2'
-import { useState } from 'preact/hooks'
-import numeral from 'numeral'
-import { getLongKnownContract, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
 import numberWithCommas from 'lib/numberWithCommas'
 import { colorSet, colorSet2 } from 'lib/chartHelpers'
 import { invertedContractGroupings, contractGroupings } from 'lib/contractGroupings'
+import { getLongKnownContract, TOKEN_CONTRACTS } from '../../../shared/knownAddresses'
+import { setPathname } from 'lib/location'
+import { locationToGroupMap } from 'lib/router'
+
 import Spinner from 'components/Spinner'
 import vimworldLogo from 'assets/vimworld.jpg'
 import vimworldBanner from 'assets/vimworld_banner.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import './index.sass'
 
-export default function TopContractsChart({}) {
-  const [currentGroup, setCurrentGroup] = useState()
+export default function TopContractsChart({ forcePageUpdate }) {
   const topContracts = useAppState(s => s.topContracts)
   if (!topContracts.length) return <div className="TopContractsCharts"><Spinner /></div>
 
@@ -78,20 +77,10 @@ export default function TopContractsChart({}) {
     },
   }
 
-  if (currentGroup) {
-    return <ContractGroup {...{
-      goBack: () => {
-        setCurrentGroup()
-      },
-      chartOptions: {...options},
-      ...currentGroup,
-    }}/>
-  }
-
   return <div className="TopContractsCharts">
     <div
       className="TopContractsCharts-chart"
-      onClick={onContractClick({ contracts: sortedByVtho, groups, setCurrentGroup, type: 'burn' })}
+      onClick={onContractClick({ contracts: sortedByVtho, groups, forcePageUpdate })}
     >
       <HorizontalBar {...{
         data: burnData,
@@ -100,7 +89,7 @@ export default function TopContractsChart({}) {
     </div>
     <div
       className="TopContractsCharts-chart"
-      onClick={onContractClick({ contracts: sortedByClauses, groups, setCurrentGroup, type: 'clauses' })}
+      onClick={onContractClick({ contracts: sortedByClauses, groups, forcePageUpdate })}
     >
       <HorizontalBar {...{
         data: clausesData,
@@ -132,7 +121,7 @@ function GroupProfile({ banner, logo, url, bio }){
   </div>
 }
 
-function ContractGroup({ name, activeContracts, type, goBack, chartOptions }) {
+function ContractGroup({ name, activeContracts, type, chartOptions }) {
   chartOptions.maintainAspectRatio = true
   let chartDataPoints
   let contracts
@@ -161,14 +150,6 @@ function ContractGroup({ name, activeContracts, type, goBack, chartOptions }) {
   const profileProps = groupProfileProps[name]
 
   return <div className="TopContractsCharts-ContractGroup">
-    <div onClick={goBack}>
-      <FontAwesomeIcon
-        color="#a1a1aa"
-        icon={faArrowLeft}
-        size="23px"
-      />
-      &nbsp;Back
-    </div>
     {profileProps && <GroupProfile {...{...profileProps}} />}
     <div className="TopContractsCharts-ContractGroup-header">
       {name} Contracts
@@ -186,7 +167,7 @@ function ContractGroup({ name, activeContracts, type, goBack, chartOptions }) {
   </div>
 }
 
-const onContractClick = ({ contracts, groups, setCurrentGroup, type }) => event => {
+const onContractClick = ({ contracts, groups, forcePageUpdate }) => event => {
   const offsetY = event.offsetY - 35
   if (offsetY < 0) return
   const segment = (event.target.clientHeight - 35 - 25) / contracts.length
@@ -194,13 +175,9 @@ const onContractClick = ({ contracts, groups, setCurrentGroup, type }) => event 
   if (!contracts[index]) return
   const group = groups && groups[contracts[index].contract]
   if (group) {
-    setCurrentGroup({
-      name: contracts[index].contract,
-      totalClauses: group.totalClauses,
-      totalVthoBurn: group.totalVthoBurn,
-      activeContracts: group.activeContracts,
-      type,
-    })
+    const [url] = Object.entries(locationToGroupMap).find(([_, val]) => val === contracts[index].contract) // eslint-disable-line
+    setPathname(url)
+    forcePageUpdate()
     return
   }
   window.open(

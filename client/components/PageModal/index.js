@@ -7,19 +7,27 @@ import { getVerticalScrollParent } from 'lib/DOMHelpers'
 import useAppState from 'lib/appState'
 import { setPathname } from 'lib/location'
 import useToggle from 'lib/useToggleHook'
-import { locationToGroupMap } from 'lib/router'
+import { locationToGroupMap, allRoutes } from 'lib/router'
 
 import CopyButton from 'components/CopyButton'
 import Modal from 'components/Modal'
 import Icon from 'components/Icon'
 import Charts from 'components/Charts'
 import ContractGroupPage from 'components/ContractGroupPage'
+import useForceUpdate from 'lib/useForceUpdateHook'
+import useWindowEventListener from 'lib/useWindowEventListenerHook'
 
 import './index.sass'
 
 export default function PageModal({ setVisibility, open }) {
   const [donateVisible, showDonate, hideDonate, toggleDonate] = useToggle(false) // eslint-disable-line
+  const forcePageUpdate = useForceUpdate()
   const donateRef = useRef()
+
+  useWindowEventListener('popstate', () => {
+    if (!allRoutes.includes(window.location.pathname)) setVisibility(false)
+    forcePageUpdate()
+  })
 
   return <Modal {...{
     open,
@@ -33,7 +41,7 @@ export default function PageModal({ setVisibility, open }) {
     <Prices />
     {locationToGroupMap[window.location.pathname]
       ? <ContractGroupPage />
-      : <Charts />
+      : <Charts {...{forcePageUpdate}}/>
     }
     <Donate {...{ toggleDonate, donateRef, donateVisible }} />
   </Modal>
