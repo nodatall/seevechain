@@ -1,20 +1,26 @@
 import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons'
-import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import {
+  faVolumeUp,
+  faVolumeOff,
+  faChevronDown,
+  faChevronRight,
+  faChevronLeft,
+  faArrowRight,
+} from '@fortawesome/free-solid-svg-icons'
 
 const typeToIconMap = {
   'volume-up': faVolumeUp,
   'volume-off': faVolumeOff,
   'down-chevron': faChevronDown,
   'right-chevron': faChevronRight,
+  'left-chevron': faChevronLeft,
   'right-arrow': faArrowRight,
 }
 
 export default function Icon({
-  className,
+  className = '',
   type,
   size = 'sm',
   color = '#a1a1aa',
@@ -24,7 +30,7 @@ export default function Icon({
     color,
     icon: typeToIconMap[type],
     size,
-    className,
+    className: `Icon ${className}`,
     ...props,
   }} />
 }

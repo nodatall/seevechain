@@ -72,6 +72,7 @@ export default function UsdVthoBurnChart({ forcePageUpdate }) {
         options.scales.yAxes[0].ticks.userCallback = num => window.innerWidth > 760
           ? `$${numberWithCommas(num)}`
           : `$${numeral(num).format('0.0a')}`
+        options.tooltips.callbacks.label = item => `$${numberWithCommas(item.value)}`
       }}
     />
   </div>

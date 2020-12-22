@@ -62,7 +62,9 @@ export default function PageModal({ setVisibility, open }) {
     },
     className: "PageModal",
   }}>
-    <ServerTime />
+    <div className="PageModal-topLeft">
+      <Icon size="2x" type="left-chevron" />
+    </div>
     <Prices />
     <Dropdown {...{
       placeholder: matchingGroup,
@@ -148,12 +150,13 @@ function Prices() {
       VTHO
       <span className="PageModal-prices-price">${prices.vtho.usd.toFixed(5)}</span>
     </span>
+    <ServerTime />
   </div>
 }
 
 function ServerTime() {
   const serverTime = useAppState(s => s.serverTime)
-  return <span className="PageModal-serverTime">
+  return <div>
     Server time: {serverTime} (UTC+1)
-  </span>
+  </div>
 }
