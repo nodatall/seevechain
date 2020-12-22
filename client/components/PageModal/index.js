@@ -1,16 +1,19 @@
 import React from 'react'
 import { Fragment } from 'preact'
 import { useRef } from 'preact/hooks'
-import { getVerticalScrollParent } from 'lib/DOMHelpers'
+import QRCode from 'qrcode.react'
 
+import { getVerticalScrollParent } from 'lib/DOMHelpers'
 import useAppState from 'lib/appState'
-import Modal from 'components/Modal'
-import Icon from 'components/Icon'
 import { setPathname } from 'lib/location'
 import useToggle from 'lib/useToggleHook'
+import { locationToGroupMap } from 'lib/router'
+
 import CopyButton from 'components/CopyButton'
+import Modal from 'components/Modal'
+import Icon from 'components/Icon'
 import Charts from 'components/Charts'
-import QRCode from 'qrcode.react'
+import ContractGroupPage from 'components/ContractGroupPage'
 
 import './index.sass'
 
@@ -28,7 +31,10 @@ export default function PageModal({ setVisibility, open }) {
   }}>
     <ServerTime />
     <Prices />
-    {open && <Charts />}
+    {locationToGroupMap[window.location.pathname]
+      ? <ContractGroupPage />
+      : <Charts />
+    }
     <Donate {...{ toggleDonate, donateRef, donateVisible }} />
   </Modal>
 }

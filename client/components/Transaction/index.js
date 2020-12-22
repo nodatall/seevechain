@@ -35,11 +35,11 @@ const txCount = { count: 1 }
 
 export default function Transaction({
   transaction,
-  statsRef,
+  currentBlockRef,
   animationDuration,
   soundOn,
 }) {
-  const setStats = useAppState(s => s.setStats)
+  const setCurrentBlock = useAppState(s => s.setCurrentBlock)
   const shouldPlaySound = useRef()
   const delay = transaction.delay
   const size = getTransactionSize(transaction.vthoBurn)
@@ -101,7 +101,7 @@ export default function Transaction({
         ...defaultForegroundStyle,
         background: '#182024',
       })
-      updateStats({setStats, statsRef, transaction})
+      updateStats({setCurrentBlock, currentBlockRef, transaction})
       updateStyle(maxScale, { zIndex })
       await waitFor(secondDelay)
       updateStyle(maxScale, { transition: `transform 4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both, opacity 300ms`, zIndex })
@@ -245,17 +245,17 @@ function TypeTag({types, clauses}) {
   </div>
 }
 
-function updateStats({setStats, statsRef, transaction}) {
-  statsRef.current = {
-    ...statsRef.current,
-    stats: {
-      dailyVTHOBurn: statsRef.current.stats.dailyVTHOBurn + transaction.vthoBurn,
-      dailyTransactions: statsRef.current.stats.dailyTransactions + 1,
-      dailyClauses: statsRef.current.stats.dailyClauses + transaction.clauses.length,
+function updateStats({setCurrentBlock, currentBlockRef, transaction}) {
+  currentBlockRef.current = {
+    ...currentBlockRef.current,
+    dailyTotals: {
+      dailyVTHOBurn: currentBlockRef.current.dailyTotals.dailyVTHOBurn + transaction.vthoBurn,
+      dailyTransactions: currentBlockRef.current.dailyTotals.dailyTransactions + 1,
+      dailyClauses: currentBlockRef.current.dailyTotals.dailyClauses + transaction.clauses.length,
     },
   }
-  setStats(statsRef.current)
-  document.title = `${numberWithCommas(statsRef.current.stats.dailyClauses)} Clauses | See VeChain`
+  setCurrentBlock(currentBlockRef.current)
+  document.title = `${numberWithCommas(currentBlockRef.current.dailyTotals.dailyClauses)} Clauses | See VeChain`
 }
 
 function getNumberInRange(min, max) {

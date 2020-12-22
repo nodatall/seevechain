@@ -2,7 +2,7 @@ import BurnTxsAndClausesCharts from 'components/BurnTxsAndClausesCharts'
 import TopContractsChart from 'components/TopContractsChart'
 import BurnMovingAverageChart from 'components/BurnMovingAverageChart'
 import UsdVthoBurnChart from 'components/UsdVthoBurnChart'
-import { invertedContractGroupings, contractGroupings } from 'lib/contractGroupings'
+import { contractGroupings } from 'lib/contractGroupings'
 
 export const locationToChartMap = {
   '/contracts': {
@@ -23,5 +23,12 @@ export const locationToChartMap = {
   }
 }
 
-console.log(`contractGroupings -->`, contractGroupings)
 export const locationToGroupMap = {}
+for (let key in contractGroupings) {
+  locationToGroupMap[`/${key.toLowerCase().replace(' ', '-')}`] = key
+}
+
+export const allRoutes = [
+  ...Object.keys(locationToChartMap),
+  ...Object.keys(locationToGroupMap),
+]

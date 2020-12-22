@@ -49,6 +49,15 @@ module.exports = async function({ client, block }) {
   const now = moment()
   const serverTime = now.add((+process.env.TIME_DIFFERENCE), 'hours').format('HH:mm MM/DD/YY')
 
+  const transactionsUsdBurnRecord = await client.one(
+    `
+      SELECT sum(transactions.vtho_burn_usd) AS usdburn
+      FROM transactions
+      WHERE created_at > $1;
+    `,
+    [before]
+  )
+
   const processed = {
     block: {
       id: block.id,
@@ -67,7 +76,7 @@ module.exports = async function({ client, block }) {
       reward: transaction.reward,
       reverted: transaction.reverted,
     })),
-    stats: {
+    dailyTotals: {
       dailyTransactions: Number(todaysStatsRecord.dailytransactions),
       dailyClauses: Number(todaysStatsRecord.dailyclauses),
       dailyVTHOBurn: Number(todaysStatsRecord.dailyvthoburn),
@@ -81,6 +90,7 @@ module.exports = async function({ client, block }) {
     })),
     serverTime,
     prices: await getTokenPrices(),
+    dailyBurnUsd: transactionsUsdBurnRecord.usdburn,
   }
 
   await saveCache({
