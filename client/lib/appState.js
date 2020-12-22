@@ -9,7 +9,6 @@ const useAppState = create(set => ({
     vtho: { usd: 0 },
   },
   currentBlock: {},
-  usdVthoBurn: {},
   setTopContracts: topContracts => set(() => ({ topContracts })),
   setDailyStats: dailyStats => set(() => ({ dailyStats })),
   setServerTime: serverTime => set(() => ({ serverTime })),

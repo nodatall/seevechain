@@ -9,12 +9,17 @@ import numeral from 'numeral'
 import numberWithCommas from 'lib/numberWithCommas'
 import LineChart from 'components/LineChart'
 
-export default function TopContractsChart({}) {
-  const usdVthoBurn = useAppState(s => s.usdVthoBurn)
+export default function UsdVthoBurnChart({}) {
+  const currentBlock = useAppState(s => s.currentBlock)
   const dailyStats = useAppState(s => s.dailyStats)
-  if (!usdVthoBurn.topContracts || !dailyStats.length) return <div className="TopContractsCharts"><Spinner /></div>
+  const topContracts = useAppState(s => s.topContracts)
+  if (
+    !currentBlock.dailyBurnUsd ||
+    !dailyStats.length ||
+    !topContracts.length
+  ) return <div className="TopContractsCharts"><Spinner /></div>
 
-  const usdVthoBurnTopContracts = usdVthoBurn.topContracts.slice(0, 20)
+  const usdVthoBurnTopContracts = topContracts.sort((a, b) => b.usdBurned - a.usdBurned).slice(0, 20)
   const topContractsData = {
     labels: usdVthoBurnTopContracts.map(({ contract, usdBurned }) => {
       const matchingKnownContract = getLongKnownContract(contract)
@@ -79,7 +84,7 @@ export default function TopContractsChart({}) {
     <div className="BurnTxsAndClausesCharts-avgBurn">
       USD VTHO Burn Today:
       <span>
-        &nbsp;${numberWithCommas(Number(usdVthoBurn.dailyBurnUsd).toFixed(2))}
+        &nbsp;${numberWithCommas(Number(currentBlock.dailyBurnUsd).toFixed(2))}
       </span>
     </div>
     <div
