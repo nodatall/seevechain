@@ -62,7 +62,7 @@ export default function PageModal({ setVisibility, open }) {
     },
     className: "PageModal",
   }}>
-    <Icon size="2x" type="left-chevron" className="PageModal-backButton"/>
+    <Icon size="xl" type="left-chevron" className="PageModal-backButton"/>
     <Prices />
     <Dropdown {...{
       placeholder: matchingGroup,

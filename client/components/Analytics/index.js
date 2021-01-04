@@ -30,7 +30,6 @@ export default function Analytics() {
 
   const labels = []
   const series = []
-  console.log(`analytics.uniqueVisits -->`, analytics.uniqueVisits)
   analytics.uniqueVisits.reverse().sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(({ count, date }) => {
     labels.push(moment(date).format('YYYY-MM-DD'))
     series.push(count)

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-
-import copyIcon from 'assets/copy_icon.png'
-import greenCheck from 'assets/green_check.png'
 import Clipboard from 'clipboard'
+
+import Icon from 'components/Icon'
 
 export default class CopyButton extends Component {
   componentDidMount() {
@@ -26,7 +25,10 @@ export default class CopyButton extends Component {
       ref={button => { this.copyButton = button }}
       className="CopyButton"
     >
-      {this.state.copied ? <img src={greenCheck} /> : <img src={copyIcon} />}
+      <Icon
+        type={this.state.copied ? 'check' : 'copy'}
+        color={this.state.copied && 'green'}
+      />
     </div>
   }
 }

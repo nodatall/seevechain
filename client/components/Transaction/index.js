@@ -188,11 +188,11 @@ function TransferTransaction({ clauses, transaction }) {
     <div className="Transaction-subText">
       <div>
         {direction === 'to' && <span>
-          <Icon color="orange" type="right-arrow" size="md" />&nbsp;
+          <Icon color="orange" type="right-arrow" size="xs" />&nbsp;
         </span>}
         {label}
         {direction === 'from' && <span>&nbsp;
-          <Icon color="green" type="right-arrow" size="md" />
+          <Icon color="green" type="right-arrow" size="xs" />
         </span>}
       </div>
     </div>
