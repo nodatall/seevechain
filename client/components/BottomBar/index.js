@@ -26,13 +26,11 @@ export default function BottomBar({ togglePageModalVisibility }) {
   if (!dailyTotals || Object.keys(dailyTotals).length === 0) return <div className="BottomBar" />
 
   return <div className="BottomBar" onClick={togglePageModalVisibility}>
-    { window.innerWidth > 500 &&
-      <svg height="37" width="33" xmlns="http://www.w3.org/2000/svg" version="1.1">
-        <circle cx="16" cy="10" r="2" fill="grey" />
-        <circle cx="16" cy="18" r="2" fill="grey" />
-        <circle cx="16" cy="26" r="2" fill="grey" />
-      </svg>
-    }
+    <svg height="37" width="33" xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <circle cx="16" cy="10" r="2" fill="grey" />
+      <circle cx="16" cy="18" r="2" fill="grey" />
+      <circle cx="16" cy="26" r="2" fill="grey" />
+    </svg>
     <div className="BottomBar-wrapper">
       <div>
         <span className="BottomBar-header">Txs </span>
