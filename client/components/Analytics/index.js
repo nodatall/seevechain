@@ -36,7 +36,7 @@ export default function Analytics() {
   })
 
   return <div className="Analytics">
-    <Header>Today: {analytics.uniqueVisits[analytics.uniqueVisits.length - 1].count}</Header>
+    <Header>Today: {analytics.uniqueVisits[0].count}</Header>
     <div className="Analytics-chartContainer">
       <LineChart
         labels={labels}
