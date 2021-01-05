@@ -44,7 +44,7 @@ const groupProfileProps = {
     banner: vulcanBanner,
     logo: vulcanIcon,
     url: 'https://vulcanverse.com/',
-    bio: 'VulcanVerse is a virtual world set in the Greco-Roman era utilizing blockchain to enable users to own land and assets. ',
+    bio: 'VulcanVerse is a virtual world set in the Greco-Roman era utilizing blockchain to enable users to own land and assets',
   },
 }
 
