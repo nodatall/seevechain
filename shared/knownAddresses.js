@@ -48,14 +48,6 @@ const KNOWN_CONTRACTS = {
   },
   '0x1111111111111111111111111111111111111111': 've-name.web.app',
   '0x1Cc13a24b1F73288cc7791C2c8Fd428357405226': 'MyCare',
-  '0xcd01241c39d2a503aa4ac083fd2563556af9fe56': {
-    short: 'Vulcan',
-    long: 'NFT transfers & auctions',
-  },
-  '0x4a2d83a3d5b81566f1318d9e39fce6de5ee23bae': {
-    short: 'Vulcan',
-    long: 'Vulcan NFTs w/ editions',
-  },
   '0xffa34bf5b1d7178bd9a9815c84bc64570d88560c': {
     short: 'Vulcan',
     long: 'Vulcan 2',
@@ -65,15 +57,30 @@ const KNOWN_CONTRACTS = {
     long: 'Vulcan 3',
   },
   '0xb1b9d40758cc3d90f1b2899dfb7a64e5d0235c61': 'Vulcan',
-  '0x27b508dba99a05c7810d4956d74daa71bac0d969': 'VIMworld',
   '0xb81e9c5f9644dec9e5e3cac86b4461a222072302': 'VeChain Node',
   '0xe28ce32d637eb93cbda105f87fbb829e9ef8540b': 'VeChain Auction',
   '0xdbaec4165a6cff07901c41d3561eefdcfbc20cb6': 'Steering Committee Vote',
   '0x0000000000000000000000417574686f72697479': 'VeChain Authority Node',
-  '0x05b866b65f3fbf118d45ca2157c43d888f001dd1': 'VIM Dispenser',
-  '0x9792bc3fe1d998af4f756d3db7fa017b05024ea9': 'VIM Dispenser',
-  '0xc96b1e1a436c5ecf150ac7a7de64c0eec73883e0': 'VIM Feeding',
-  '0x46a7567f65c278b119ddeabf440f42ba2de949c0': 'VIM Minting',
+  '0x27b508dba99a05c7810d4956d74daa71bac0d969': {
+    short: 'VIMworld',
+    long: 'VIM Transfer',
+  },
+  '0x05b866b65f3fbf118d45ca2157c43d888f001dd1': {
+    short: 'VIMworld',
+    long: 'VIM Dispenser',
+  },
+  '0x9792bc3fe1d998af4f756d3db7fa017b05024ea9': {
+    short: 'VIMworld',
+    long: 'VIM Dispenser 2',
+  },
+  '0xc96b1e1a436c5ecf150ac7a7de64c0eec73883e0': {
+    short: 'VIMworld',
+    long: 'VIM Feeding',
+  },
+  '0x46a7567f65c278b119ddeabf440f42ba2de949c0': {
+    short: 'VIMworld',
+    long: 'VIM Minting',
+  },
   '0x65f7ac9ece8ed59044768d53c0d44e3cb7f6ceff': 'Ubique',
   '0x4fe1ac0b38339a59682fea4ef970404cf989b09c': 'Indigiledger',
   '0xe1fc8ecc13dc25db25fa4e7c756acbc87f965e60': {
