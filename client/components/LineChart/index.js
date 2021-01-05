@@ -5,7 +5,7 @@ import numeral from 'numeral'
 
 import './index.sass'
 
-export default function LineChart({ labels, datasets, options = {} }) {
+export default function LineChart({ labels, datasets, options = {}, modifyOptions }) {
   const onMobile = window.innerWidth < 600
   const defaultDataset = {
     fill: true,
@@ -81,6 +81,7 @@ export default function LineChart({ labels, datasets, options = {} }) {
     },
     ...options,
   }
+  if (modifyOptions) modifyOptions(options)
 
   return <Line data={data} options={options} />
 }

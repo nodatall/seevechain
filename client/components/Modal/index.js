@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRef } from 'preact/hooks'
-import xIcon from 'assets/greyxicon.png'
+
+import Icon from 'components/Icon'
 
 import './index.sass'
 
@@ -11,9 +12,9 @@ export default function Modal({ open, setVisibility, children, className = '' })
   }
 
   let modal
-  if (open) modal = <div className={`Modal ${className}`} ref={shroud} onClick={onShroudClick}>
+  if (open) modal = <div className={`Modal ${className}`} ref={shroud} onMouseDOwn={onShroudClick}>
     <div className="Modal-window">
-      <img src={xIcon} className="Modal-close" onClick={setVisibility} />
+      <Icon size="lg" type='close' className="Modal-close" onClick={setVisibility} />
       {children}
     </div>
   </div>

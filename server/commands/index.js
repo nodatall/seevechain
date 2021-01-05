@@ -5,7 +5,6 @@ const saveDailyStats = require('./saveDailyStats')
 const saveCache = require('./saveCache')
 const processLatestBlock = require('./processLatestBlock')
 const processTopContracts = require('./processTopContracts')
-const processUsdVthoBurn = require('./processUsdVthoBurn')
 
 module.exports = {
   saveTransaction,
@@ -15,5 +14,4 @@ module.exports = {
   saveCache,
   processLatestBlock,
   processTopContracts,
-  processUsdVthoBurn,
 }

@@ -8,7 +8,8 @@ module.exports = async function(client) {
     SELECT
       contract,
       count(*) AS totalclauses,
-      SUM(vtho_burn) AS totalburn
+      SUM(vtho_burn) AS totalburn,
+      SUM(vtho_burn_usd) AS usdburned
     FROM
       clauses
     WHERE
@@ -25,6 +26,7 @@ module.exports = async function(client) {
       contract: record.contract,
       clauses: Number(record.totalclauses),
       vthoBurn: Number(record.totalburn),
+      usdBurned: Number(record.usdburned).toFixed(2),
     }))
   }
 

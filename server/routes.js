@@ -22,7 +22,6 @@ module.exports = function(app, io) {
       await actions.recordUniqueVisitor(data.seeVechainUid)
       socket.emit('serverSendLatest', await actions.getLatestProcessedBlock())
       socket.emit('serverSendTopContracts', await actions.getLatestTopContracts())
-      socket.emit('serverSendUsdVthoBurn', await actions.getLatestUsdVthoBurn())
     })
   })
 }

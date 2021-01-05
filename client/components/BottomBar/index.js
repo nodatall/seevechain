@@ -6,8 +6,8 @@ import numberWithCommas from 'lib/numberWithCommas'
 
 import './index.sass'
 
-export default function BottomBar({ toggleStatsModalVisibility }) {
-  const { stats } = useAppState(s => s.stats)
+export default function BottomBar({ togglePageModalVisibility }) {
+  const { dailyTotals } = useAppState(s => s.currentBlock)
   const [numberClass, setNumberClass] = useState('BottomBar-number')
   const [initialState, setInitialState] = useState(0)
 
@@ -21,11 +21,11 @@ export default function BottomBar({ toggleStatsModalVisibility }) {
       }, 300)
     }
 
-  }, [stats.dailyTransactions])
+  }, [dailyTotals.dailyTransactions])
 
-  if (!stats || Object.keys(stats).length === 0) return <div className="BottomBar" />
+  if (!dailyTotals || Object.keys(dailyTotals).length === 0) return <div className="BottomBar" />
 
-  return <div className="BottomBar" onClick={toggleStatsModalVisibility}>
+  return <div className="BottomBar" onClick={togglePageModalVisibility}>
     { window.innerWidth > 500 &&
       <svg height="37" width="33" xmlns="http://www.w3.org/2000/svg" version="1.1">
         <circle cx="16" cy="10" r="2" fill="grey" />
@@ -36,15 +36,15 @@ export default function BottomBar({ toggleStatsModalVisibility }) {
     <div className="BottomBar-wrapper">
       <div>
         <span className="BottomBar-header">Txs </span>
-        <span className={numberClass}>{numberWithCommas(stats.dailyTransactions) || 0}</span>
+        <span className={numberClass}>{numberWithCommas(dailyTotals.dailyTransactions) || 0}</span>
       </div>
       <div className="BottomBar-vtho">
         <span className="BottomBar-header">{window.innerWidth < 400 ? '🔥' : 'VTHO Burn'} </span>
-        <span className={numberClass}>{numberWithCommas(Math.floor(+stats.dailyVTHOBurn)) || 0}</span>
+        <span className={numberClass}>{numberWithCommas(Math.floor(+dailyTotals.dailyVTHOBurn)) || 0}</span>
       </div>
       <div>
         <span className="BottomBar-header">Clauses </span>
-        <span className={numberClass}>{numberWithCommas(stats.dailyClauses) || 0}</span>
+        <span className={numberClass}>{numberWithCommas(dailyTotals.dailyClauses) || 0}</span>
       </div>
     </div>
   </div>

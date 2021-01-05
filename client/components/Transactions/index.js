@@ -8,7 +8,7 @@ import { randomNumber } from 'lib/transactionHelpers'
 
 import './index.sass'
 
-export default function Transactions({ statsRef, soundOn }) {
+export default function Transactions({ currentBlockRef, soundOn }) {
   const [
     { renderableTransactions },
     setTransactionsState,
@@ -16,7 +16,7 @@ export default function Transactions({ statsRef, soundOn }) {
     renderableTransactions: [],
     transactionTimestamps: {},
   })
-  const { transactions } = useAppState(s => s.stats)
+  const { transactions } = useAppState(s => s.currentBlock)
 
   useEffect(
     () => {
@@ -68,7 +68,7 @@ export default function Transactions({ statsRef, soundOn }) {
         animationDuration={animationDuration}
         transaction={transaction}
         key={transaction.id}
-        statsRef={statsRef}
+        currentBlockRef={currentBlockRef}
         soundOn={soundOn}
       />
     })}

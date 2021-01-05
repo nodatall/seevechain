@@ -6,29 +6,29 @@ import ioClient from 'socket.io-client'
 import moment from 'moment'
 
 import useAppState from 'lib/appState'
+import numberWithCommas from 'lib/numberWithCommas'
+import { onReturnToStaleApp } from 'lib/onReturnToStaleApp'
+import { allRoutes, } from 'lib/router'
+import createUid from 'lib/createUid'
+import useWindowEventListener from 'lib/useWindowEventListenerHook'
+
 import Transactions from 'components/Transactions'
 import BottomBar from 'components/BottomBar'
 import Spinner from 'components/Spinner'
 import Stars from 'components/Stars'
-import numberWithCommas from 'lib/numberWithCommas'
-import { onReturnToStaleApp } from 'lib/onReturnToStaleApp'
-import { locationToChartMap } from 'lib/chartHelpers'
+import Icon from 'components/Icon'
+const PageModal = lazy(() => import('components/PageModal'))
 import { PRETTY_KNOWN_CONTRACTS, KNOWN_ADDRESSES } from '../../../shared/knownAddresses'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons'
-const StatsModal = lazy(() => import('components/StatsModal'))
 
-import createUid from 'lib/createUid'
 import './index.sass'
 
 export default function Visualizer() {
   const setTopContracts = useAppState(s => s.setTopContracts)
-  const setUsdVthoBurn = useAppState(s => s.setUsdVthoBurn)
-  const [statsModalVisible, toggleStatsModalVisibility] = useState(false)
+  const [pageModalVisible, togglePageModalVisibility] = useState(false)
   const [soundOn, setSoundOn] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const initialized = useRef()
-  const statsRef = useRef()
+  const currentBlockRef = useRef()
 
   useEffect(() => {
     const vechainIdCookie = Cookies.get('seeVechainUid')
@@ -43,16 +43,12 @@ export default function Visualizer() {
       seeVechainUid: Cookies.get('seeVechainUid'),
     })
     socket.on('serverSendLatest', function(data) {
-      handleLatest({ data, statsRef, initialized })
+      handleLatest({ data, currentBlockRef, initialized })
       setLoaded(true)
     })
     socket.on('serverSendTopContracts', function(data) {
       if (!data) return
       setTopContracts(data.topContracts)
-    })
-    socket.on('serverSendUsdVthoBurn', function(data) {
-      if (!data) return
-      setUsdVthoBurn(data)
     })
 
     onReturnToStaleApp(
@@ -65,77 +61,76 @@ export default function Visualizer() {
       10
     )
 
-    if (locationToChartMap[window.location.pathname]) toggleStatsModalVisibility(true)
+    if (allRoutes.includes(window.location.pathname)) togglePageModalVisibility(true)
   }, [])
+
+  useWindowEventListener('popstate', () => {
+    if (allRoutes.includes(window.location.pathname)) togglePageModalVisibility(true)
+  })
 
   if (!loaded) return <div className="Visualizer">
     <Spinner />
   </div>
 
   return <div className="Visualizer">
-    {statsModalVisible && <Suspense fallback={<Spinner />}>
-      <StatsModal
-        open={statsModalVisible}
-        setVisibility={() => { toggleStatsModalVisibility(!statsModalVisible) }}
+    {pageModalVisible && <Suspense fallback={<Spinner />}>
+      <PageModal
+        open={pageModalVisible}
+        setVisibility={() => { togglePageModalVisibility(!pageModalVisible) }}
       />
     </Suspense>
     }
     <Stars />
     <div className="Visualizer-rightControls">
-      <FontAwesomeIcon
-        color="#a1a1aa"
-        icon={soundOn ? faVolumeUp : faVolumeOff}
-        size="23px"
-        onClick={() => { setSoundOn(!soundOn) }}
-      />
+      <Icon type={soundOn ? 'volume-up' : 'volume-off'} size="md" onClick={() => { setSoundOn(!soundOn) }} />
     </div>
     <BlockNumber />
-    <BottomBar toggleStatsModalVisibility={toggleStatsModalVisibility} />
-    <Transactions statsRef={statsRef} soundOn={soundOn}
+    <BottomBar togglePageModalVisibility={togglePageModalVisibility} />
+    <Transactions currentBlockRef={currentBlockRef} soundOn={soundOn}
     />
   </div>
 }
 
 function BlockNumber() {
-  const stats = useAppState(s => s.stats)
-  const clausesInBlock = stats.transactions.reduce((clauses, tx) => clauses + tx.clauses.length, 0)
+  const currentBlock = useAppState(s => s.currentBlock)
+  const clausesInBlock = currentBlock.transactions.reduce((clauses, tx) => clauses + tx.clauses.length, 0)
   return <a
-    href={`https://insight.vecha.in/#/main/blocks/${stats.block.id}`}
+    href={`https://insight.vecha.in/#/main/blocks/${currentBlock.block.id}`}
     target="_blank"
     className="Visualizer-blockNumber"
   >
-    {numberWithCommas(stats.block.number)} – {clausesInBlock} {clausesInBlock === 1 ? 'clause' : 'clauses'}
+    {numberWithCommas(currentBlock.block.number)} – {clausesInBlock} {clausesInBlock === 1 ? 'clause' : 'clauses'}
   </a>
 }
 
-function handleLatest({ data, statsRef, initialized }){
+function handleLatest({ data, currentBlockRef, initialized }){
   if (!data) return
   const setDailyStats = useAppState(s => s.setDailyStats)
   const setServerTime = useAppState(s => s.setServerTime)
   const setPrices = useAppState(s => s.setPrices)
-  const setStats = useAppState(s => s.setStats)
+  const setCurrentBlock = useAppState(s => s.setCurrentBlock)
 
   if (!initialized.current) {
     const lessData = getStatsBeforeBatchOfTransactions(data)
-    document.title = `${numberWithCommas(+lessData.stats.dailyClauses)} Clauses | See VeChain`
+    document.title = `${numberWithCommas(+lessData.dailyTotals.dailyClauses)} Clauses | See VeChain`
     initialized.current = true
 
-    statsRef.current = lessData
-    setStats(statsRef.current)
+    currentBlockRef.current = lessData
+    setCurrentBlock(currentBlockRef.current)
   } else {
-    statsRef.current = {
+    currentBlockRef.current = {
       ...data,
-      stats: statsRef.current.stats,
+      dailyTotals: currentBlockRef.current.dailyTotals,
     }
-    setStats(statsRef.current)
+    setCurrentBlock(currentBlockRef.current)
   }
   setDailyStats(
     [
       {
         day: moment(data.dailyStats[0].day).add(24, 'hours').format('YYYY-MM-DD'),
-        vthoBurn: Math.round(data.stats.dailyVTHOBurn),
-        transactionCount: data.stats.dailyTransactions,
-        clauseCount: data.stats.dailyClauses,
+        vthoBurn: Math.round(data.dailyTotals.dailyVTHOBurn),
+        transactionCount: data.dailyTotals.dailyTransactions,
+        clauseCount: data.dailyTotals.dailyClauses,
       },
       ...data.dailyStats,
     ]
@@ -145,9 +140,9 @@ function handleLatest({ data, statsRef, initialized }){
 }
 
 function getStatsBeforeBatchOfTransactions(data) {
-  let dailyVTHOBurn = data.stats.dailyVTHOBurn
-  let dailyTransactions = data.stats.dailyTransactions
-  let dailyClauses = data.stats.dailyClauses
+  let dailyVTHOBurn = data.dailyTotals.dailyVTHOBurn
+  let dailyTransactions = data.dailyTotals.dailyTransactions
+  let dailyClauses = data.dailyTotals.dailyClauses
 
   data.transactions.forEach(transaction => {
     dailyTransactions -= 1
@@ -157,7 +152,7 @@ function getStatsBeforeBatchOfTransactions(data) {
 
   return {
     ...data,
-    stats: {
+    dailyTotals: {
       dailyVTHOBurn,
       dailyTransactions,
       dailyClauses,

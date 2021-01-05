@@ -8,14 +8,12 @@ const useAppState = create(set => ({
     vet: { usd: 0 },
     vtho: { usd: 0 },
   },
-  stats: {},
-  usdVthoBurn: {},
+  currentBlock: {},
   setTopContracts: topContracts => set(() => ({ topContracts })),
   setDailyStats: dailyStats => set(() => ({ dailyStats })),
   setServerTime: serverTime => set(() => ({ serverTime })),
   setPrices: prices => set(() => ({ prices })),
-  setStats: stats => set(() => ({ stats })),
-  setUsdVthoBurn: usdVthoBurn => set(() => ({ usdVthoBurn })),
+  setCurrentBlock: currentBlock => set(() => ({ currentBlock })),
 }))
 
 export default useAppState

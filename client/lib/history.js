@@ -1,18 +1,7 @@
-let subscribers = []
-
-const publish = function() {
-  subscribers.forEach(handler => {
-    handler(window.location)
-  })
-}
-
-window.addEventListener('popstate', publish)
-
 module.exports = {
   pushState(stateObject, title, href){
     if (this.hrefIsCurrentHref(href)) return
     window.history.pushState(stateObject, title, href)
-    publish()
     scrollToTop()
   },
   hrefIsCurrentHref(href){

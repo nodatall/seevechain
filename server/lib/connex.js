@@ -14,8 +14,6 @@ async function subscribeToVechainBlocks(io, client) {
     io.emit('serverSendLatest', processedBlock)
     const processedTopContracts = await commands.processTopContracts(client)
     io.emit('serverSendTopContracts', processedTopContracts)
-    const processedUsdVthoBurn = await commands.processUsdVthoBurn(client)
-    io.emit('serverSendUsdVthoBurn', processedUsdVthoBurn)
   }
 }
 
