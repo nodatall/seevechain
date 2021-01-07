@@ -11,7 +11,7 @@ export default function BurnMovingAverageChart() {
   const labels = []
   const vthoBurnSeries = []
 
-  ;[...dailyStats].slice(1, Number(170) + 1).reverse().forEach(dayStat => {
+  ;[...dailyStats].slice(1, Number(245) + 1).reverse().forEach(dayStat => {
     labels.push(dayStat.day)
     vthoBurnSeries.push(dayStat.vthoBurn)
   })
