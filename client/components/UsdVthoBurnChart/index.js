@@ -1,4 +1,5 @@
 import React from 'react'
+import numeral from 'numeral'
 
 import useAppState from 'lib/appState'
 import { colorSet3 } from 'lib/chartHelpers'
