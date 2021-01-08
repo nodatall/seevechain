@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'preact/hooks'
 
 import useAppState from 'lib/appState'
 import { locationToGroupMap } from 'lib/router'
@@ -19,6 +20,7 @@ import vulcanBanner from 'assets/vulcan_banner.png'
 import './index.sass'
 
 export default function ContractGroupPage({}) {
+  const [imageLoading, setImageLoading] = useState(true)
   const groupName = locationToGroupMap[window.location.pathname]
   const topContracts = useAppState(s => s.topContracts)
   if (!topContracts.length) return <div className="ContractGroupPage"><Spinner /></div>
@@ -26,11 +28,18 @@ export default function ContractGroupPage({}) {
   const { groups } = getGroupsAndFilteredContractsFromTopContracts(topContracts)
   const group = groups[groupName]
 
-  return <ContractGroup {...{
-    name: groupName,
-    activeContracts: group.activeContracts,
-    type: 'burn',
-  }} />
+  let className = 'ContractGroupPage'
+  if (imageLoading) className += ' ContractGroupPage-loading'
+
+  return <div className={className}>
+    {imageLoading && <Spinner />}
+    <ContractGroup {...{
+      name: groupName,
+      activeContracts: group.activeContracts,
+      type: 'burn',
+      setImageLoading,
+    }} />
+  </div>
 }
 
 const groupProfileProps = {
@@ -48,11 +57,14 @@ const groupProfileProps = {
   },
 }
 
-function GroupProfile({ banner, logo, url, bio }){
+function GroupProfile({ banner, logo, url, bio, setImageLoading }){
   return <div className="ContractGroupPage-GroupProfile">
-    <img src={banner} className="ContractGroupPage-GroupProfile-banner"/>
+    <img
+      src={banner} className="ContractGroupPage-GroupProfile-banner"
+      onLoad={() => { setImageLoading(false) }}
+    />
     <div className="ContractGroupPage-GroupProfile-logoContainer">
-      <img src={logo} className="ContractGroupPage-GroupProfile-logo"/>
+      <img src={logo} className="ContractGroupPage-GroupProfile-logo" />
     </div>
     <div className="ContractGroupPage-GroupProfile-bioAndUrl">
       <div>{bio}</div>
@@ -61,7 +73,7 @@ function GroupProfile({ banner, logo, url, bio }){
   </div>
 }
 
-function ContractGroup({ name, activeContracts }) {
+function ContractGroup({ name, activeContracts, setImageLoading }) {
   const burnContracts = [...activeContracts].sort((a, b) => b.vthoBurn - a.vthoBurn)
   const burnDataPoints = {
     labels: getLabels(burnContracts, 'vthoBurn'),
@@ -91,11 +103,10 @@ function ContractGroup({ name, activeContracts }) {
     }]
   }
 
-
   const profileProps = groupProfileProps[name]
 
   return <div className="ContractGroupPage-ContractGroup">
-    {profileProps && <GroupProfile {...{...profileProps}} />}
+    {profileProps && <GroupProfile {...{...profileProps, setImageLoading}} />}
     <div className="ContractGroupPage-ContractGroup-header">
       {name} Contracts
     </div>
