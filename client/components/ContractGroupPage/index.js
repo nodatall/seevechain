@@ -32,12 +32,12 @@ export default function ContractGroupPage({}) {
   if (imageLoading) className += ' ContractGroupPage-loading'
 
   return <div className={className}>
-    {imageLoading && <Spinner />}
     <ContractGroup {...{
       name: groupName,
       activeContracts: group.activeContracts,
       type: 'burn',
       setImageLoading,
+      imageLoading,
     }} />
   </div>
 }
@@ -73,7 +73,7 @@ function GroupProfile({ banner, logo, url, bio, setImageLoading }){
   </div>
 }
 
-function ContractGroup({ name, activeContracts, setImageLoading }) {
+function ContractGroup({ name, activeContracts, setImageLoading, imageLoading }) {
   const burnContracts = [...activeContracts].sort((a, b) => b.vthoBurn - a.vthoBurn)
   const burnDataPoints = {
     labels: getLabels(burnContracts, 'vthoBurn'),
@@ -106,6 +106,7 @@ function ContractGroup({ name, activeContracts, setImageLoading }) {
   const profileProps = groupProfileProps[name]
 
   return <div className="ContractGroupPage-ContractGroup">
+    {imageLoading && profileProps && <Spinner />}
     {profileProps && <GroupProfile {...{...profileProps, setImageLoading}} />}
     <div className="ContractGroupPage-ContractGroup-header">
       {name} Contracts
