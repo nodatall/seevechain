@@ -93,6 +93,7 @@ const KNOWN_CONTRACTS = {
   },
   '0x535ab4a9fce43dc71e9540534733bbeb0f494d5c': 'burntoken.io',
   '0x1a048cff120f3ebff9bb66459effa34445c8e87e': 'KnowSeafood',
+  '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
 }
 
 const TOKEN_CONTRACTS = {
