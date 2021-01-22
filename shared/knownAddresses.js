@@ -98,6 +98,7 @@ const KNOWN_CONTRACTS = {
     short: 'NSF Intl.',
     long: 'NSF International',
   },
+  '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
 }
 
 const TOKEN_CONTRACTS = {
