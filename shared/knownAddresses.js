@@ -100,6 +100,7 @@ const KNOWN_CONTRACTS = {
   },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
+  '0x81d5973a21c2dacf9e2a4abcce807338036a3954': 'Block Babies',
 }
 
 const TOKEN_CONTRACTS = {
