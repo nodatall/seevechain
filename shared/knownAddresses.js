@@ -39,6 +39,10 @@ const KNOWN_CONTRACTS = {
     long: 'vexchange.io EHrT',
   },
   '0xf306dfc3c4a276ac4c1795c5896e9f4a967341b6': 'realitems.io',
+  '0xbc90a27cef38c774717bf1dfd13ff9a906920215': {
+    short: 'realitems.io',
+    long: 'realitems.io 2',
+  },
   '0xa7f8b361060222b3aee75f4b457ba0353cf10998': 'E-HCert',
   '0xa9f3c1bd52c3a506cecbb8cbca562ef26c833175': 'Yuhongtai Foods',
   '0x040093ab307f5acb4ae3afb0fb31de0ec46d62f9': 'safehaven.io',
