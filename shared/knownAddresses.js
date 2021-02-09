@@ -60,6 +60,10 @@ const KNOWN_CONTRACTS = {
     short: 'Vulcan',
     long: 'Vulcan 3',
   },
+  '0x81d5973a21c2dacf9e2a4abcce807338036a3954': {
+    short: 'Vulcan',
+    long: 'Vulcan 4',
+  },
   '0xb1b9d40758cc3d90f1b2899dfb7a64e5d0235c61': 'Vulcan',
   '0xb81e9c5f9644dec9e5e3cac86b4461a222072302': 'VeChain Node',
   '0xe28ce32d637eb93cbda105f87fbb829e9ef8540b': 'VeChain Auction',
@@ -104,7 +108,6 @@ const KNOWN_CONTRACTS = {
   },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
-  '0x81d5973a21c2dacf9e2a4abcce807338036a3954': 'Block Babies',
 }
 
 const TOKEN_CONTRACTS = {
