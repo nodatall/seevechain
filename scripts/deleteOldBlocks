@@ -3,7 +3,7 @@
 const moment = require('moment')
 const client = require('../server/database')
 
-;(async function getBlocksForLastDay() {
+;(async function deleteOldBlocks() {
 
   const before = moment()
     .subtract(Number(process.argv[2]), 'days')

@@ -8,7 +8,7 @@ const { getBlock } = require('../server/lib/connex')
 const client = require('../server/database')
 const { oneDayAgo } = require('../server/lib/dateHelpers')
 
-;(async function getBlocksForLastDay() {
+;(async function getMissinBlocksAndTransactions() {
   const driver = await Driver.connect(new SimpleNet('https://vethor-node.vechain.com/'))
   const thor = new Framework(driver).thor
 

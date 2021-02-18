@@ -1,0 +1,80 @@
+#!/usr/bin/env node
+
+const { Framework } = require('@vechain/connex-framework')
+const { Driver, SimpleNet } = require('@vechain/connex.driver-nodejs')
+const moment = require('moment-timezone')
+
+const { getBlock } = require('../server/lib/connex')
+const client = require('../server/database')
+const CoinGecko = require('coingecko-api')
+const CoinGeckoClient = new CoinGecko()
+
+;(async function syncHistoricalData() {
+
+  // start from yesterday
+  // get blocks until date of newest block is day before previous block
+  // then save daily stats and contracts passing current date to them
+  // delete old blocks between current date and one day ahead
+
+  // const driver = await Driver.connect(new SimpleNet('https://vethor-node.vechain.com/'))
+  // const thor = new Framework(driver).thor
+
+  let startDate = moment()
+    .tz('Europe/Berlin')
+    .subtract(moment().tz('Europe/Berlin').format('HH') % 24, 'hours')
+    .subtract(+moment().tz('Europe/Berlin').format('mm'), 'minutes')
+    .subtract(+moment().tz('Europe/Berlin').format('ss'), 'seconds')
+    .subtract('1', 'days')
+  let endDate = moment(startDate).subtract('1', 'days')
+
+  // find block number for closest block before start date
+  console.log(`starDate.format() -->`, startDate.format())
+  const record = await client.query(
+    `
+      SELECT * FROM blocks WHERE timestamp < $1 ORDER BY timestamp DESC LIMIT 5
+    `,
+    [startDate.toDate()]
+  )
+  console.log(`record -->`, record)
+  // get blocks starting from that block until we find a block after end date
+  console.log(`startDate.format() -->`, startDate.format())
+  console.log(`endeDate.format() -->`, endDate.format())
+
+  let vthoPrice = await getVthoPriceForDate(startDate.format('DD-MM-YYYY'))
+  // const oneDayAgoMinusAMinute = moment(oneDayAgo)
+  //   .subtract(5, 'minutes')
+  //   .toDate()
+
+  // const recordsFromADayAgo = await client.any(
+  //   `
+  //     SELECT * FROM blocks WHERE timestamp BETWEEN $1 AND $2;
+  //   `,
+  //   [oneDayAgoMinusAMinute, oneDayAgo]
+  // )
+  // if (!recordsFromADayAgo.length) {
+  //   const oldestBlockNumber = await client.one(
+  //     `
+  //       SELECT number FROM blocks ORDER BY number LIMIT 1;
+  //     `
+  //   )
+  //   let blockNum = oldestBlockNumber.number - 1
+  //   while(true) {
+  //     console.log(`-:: getting block ${blockNum} ::-`)
+  //     const block = await getBlock(thor, blockNum--, client)
+  //     if (moment.unix(block.timestamp).toDate() < moment(oneDayAgoMinusAMinute).toDate()) break
+  //   }
+  // }
+
+  process.exit(1)
+})()
+
+async function getVthoPriceForDate(date) {
+  const { success, data } = await CoinGeckoClient.coins.fetchHistory(
+    'vethor-token',
+    {
+      date,
+      localization: 'en',
+    },
+  )
+  if (success) return data.market_data.current_price.usd
+}

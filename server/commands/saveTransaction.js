@@ -3,7 +3,7 @@ const { ABI_SIGNATURES } = require('../lib/abiSignatures')
 const { TOKEN_CONTRACTS, KNOWN_CONTRACTS } = require('../../shared/knownAddresses')
 const { abi } = require('thor-devkit')
 const knex = require ('../database/knex')
-const moment = require('moment')
+const moment = require('moment-timezone')
 const queries = require('../queries')
 
 module.exports = async function({ client, transaction, block, receipt, thor }) {
