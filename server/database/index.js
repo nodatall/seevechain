@@ -6,7 +6,7 @@ const db = pgp()
 const client = db({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: true,
+    rejectUnauthorized: false,
   },
 })
 module.exports = client
