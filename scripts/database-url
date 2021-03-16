@@ -2,5 +2,5 @@
 
 require('../environment.js')
 
-console.log(process.env.DATABASE_URL)
+console.log(process.env.DATABASE_URL || process.env.HEROKU_POSTGRESQL_MAUVE_URL)
 process.exit()
