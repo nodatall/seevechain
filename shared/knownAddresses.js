@@ -89,7 +89,7 @@ const KNOWN_CONTRACTS = {
     short: 'VIMworld',
     long: 'VIM Minting',
   },
-  '0xeddc51042586b66cf8fb75e971636c76ce2e9c35': {
+  '0x36ead69626aecfa792b1cb8a546d3c1b37ac8ee5': {
     short: 'VIMworld',
     long: 'VIM Market',
   },
