@@ -89,6 +89,10 @@ const KNOWN_CONTRACTS = {
     short: 'VIMworld',
     long: 'VIM Minting',
   },
+  '0xeddc51042586b66cf8fb75e971636c76ce2e9c35': {
+    short: 'VIMworld',
+    long: 'VIM Market',
+  },
   '0x65f7ac9ece8ed59044768d53c0d44e3cb7f6ceff': 'Ubique',
   '0x4fe1ac0b38339a59682fea4ef970404cf989b09c': 'Indigiledger',
   '0xe1fc8ecc13dc25db25fa4e7c756acbc87f965e60': {
