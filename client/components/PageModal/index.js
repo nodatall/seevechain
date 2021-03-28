@@ -160,6 +160,6 @@ function Prices() {
 function ServerTime() {
   const serverTime = useAppState(s => s.serverTime)
   return <div>
-    Server time: {serverTime} (UTC+1)
+    Server time: {serverTime} (UTC+2)
   </div>
 }
