@@ -1,5 +1,4 @@
 import React from 'react'
-import Cookies from 'js-cookie'
 import axios from 'axios'
 import Spinner from 'components/Spinner'
 import Header from 'components/Header'
@@ -25,7 +24,6 @@ export default function Analytics() {
       getAnalytics()
     }, 10000)
   }, [])
-  if (!Cookies.get('seeVechainAuthorized')) return <div className="Analytics">Unauthorized</div>
   if (!analytics) return <div className="Analytics"><Spinner /></div>
 
   const labels = []
