@@ -9,7 +9,7 @@ const queries = require('../queries')
 module.exports = async function({ client, transaction, block, receipt, thor }) {
   await client.tx('saveTransaction', async client => {
     const latestProcessedBlock = await queries.getCache({ client, cacheName: 'block' })
-    const vthoBurn = ((receipt.gasUsed + (receipt.gasUsed * ((transaction.gasPriceCoef || 0) / 255))) / 1000) * .7
+    const vthoBurn = ((receipt.gasUsed + (receipt.gasUsed * ((transaction.gasPriceCoef || 0) / 255))) / 100000) * .7
     const vthoBurnUsd = (vthoBurn * latestProcessedBlock.prices.vtho.usd).toFixed(4)
     const createdAt = moment.unix(block.timestamp).toDate().toISOString()
 
