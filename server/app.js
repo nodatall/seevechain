@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 const compression = require('compression')
 
 const app = express()
-const server = require('http').Server(app)
+const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const logger = require('./lib/logger')
 
