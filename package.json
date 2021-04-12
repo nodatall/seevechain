@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Real time visualizer for the VeChain public blockchain",
   "main": "index.js",
-  "engines": {
-    "node": "12.16.x"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --colors --progress --mode production",
