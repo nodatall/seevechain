@@ -12,11 +12,9 @@ const commands = require('../server/commands')
 let gettingMissingInProgress = false
 let savingDailyStats = false
 
-server.listen(port, () => {
+server.listen(port, async () => {
   console.log(`server started on port ${port}`)
-  setTimeout(() => {
-    startVechainConnection(io, client)
-  }, 1000)
+  await startVechainConnection(io, client)
 })
 
 async function startVechainConnection(io, client) {
