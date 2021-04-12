@@ -35,7 +35,7 @@ export default function Visualizer() {
     if (!vechainIdCookie) {
       Cookies.set('seeVechainUid', createUid())
     }
-    const socket = ioClient()
+    const socket = ioClient(process.env.ORIGIN || window.origin)
     socket.emit('clientAskForLatest', {
       seeVechainUid: Cookies.get('seeVechainUid'),
     })
