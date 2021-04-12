@@ -38,7 +38,7 @@ export default function BottomBar({ togglePageModalVisibility }) {
       </div>
       <div className="BottomBar-vtho">
         <span className="BottomBar-header">{window.innerWidth < 400 ? '🔥' : 'VTHO Burn'} </span>
-        <span className={numberClass}>{numberWithCommas(Math.floor(+dailyTotals.dailyVTHOBurn)) || 0}</span>
+        <span className={numberClass}>{numberWithCommas(Math.round(+dailyTotals.dailyVTHOBurn * 10) / 10) || 0}</span>
       </div>
       <div>
         <span className="BottomBar-header">Clauses </span>
