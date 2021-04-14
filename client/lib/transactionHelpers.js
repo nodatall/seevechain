@@ -97,7 +97,7 @@ export function randomNumber(min, max) {
 
 export function getTransactionSize(burn) {
   const TRANSACTION_SIZE_RANGE = [96, MAX_TRANSACTION_SIZE]
-  let size = getRangeEquivalent([14, 1000], TRANSACTION_SIZE_RANGE, burn)
+  let size = getRangeEquivalent([.14, 10], TRANSACTION_SIZE_RANGE, burn)
   if (size < TRANSACTION_SIZE_RANGE[0]) size = TRANSACTION_SIZE_RANGE[0]
   if (size > TRANSACTION_SIZE_RANGE[1]) size = TRANSACTION_SIZE_RANGE[1]
   return Math.floor(size)
