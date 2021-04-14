@@ -92,7 +92,7 @@ export default function Transaction({
       })
       await waitFor(delay)
       if (shouldPlaySound.current) {
-        if (VTHOBurn > 1000) highDing.play()
+        if (VTHOBurn > 10) highDing.play()
         else lowDing.play()
       }
       const zIndex = txCount.count
@@ -281,7 +281,7 @@ function getBackgroundStyle({ transaction, size }) {
     animation: `spin ${Math.floor(6000 / rotationSpeed)}ms linear 0s infinite`,
   }
   let background
-  if (transaction.vthoBurn < 2000) {
+  if (transaction.vthoBurn < 20) {
     const colorIndex = getTransactionColorIndex(transaction.vthoBurn)
     const color = LIGHT_RANGE[Math.floor(colorIndex)]
     background = `linear-gradient(90deg, ${lightenDarkenColor(color, 40)}, ${lightenDarkenColor(color, -60)})`

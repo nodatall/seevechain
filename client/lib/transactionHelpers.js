@@ -103,7 +103,7 @@ export function getTransactionSize(burn) {
   return Math.floor(size)
 }
 
-export const COLOR_BURN_RANGE = [14, 1600]
+export const COLOR_BURN_RANGE = [.14, 16]
 export function getTransactionColorIndex(burn) {
   const COLOR_RANGE = [0, LIGHT_RANGE.length - 1]
   let colorIndex = getRangeEquivalent(COLOR_BURN_RANGE, COLOR_RANGE, burn)
