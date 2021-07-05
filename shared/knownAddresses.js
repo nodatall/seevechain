@@ -81,7 +81,7 @@ const KNOWN_CONTRACTS = {
     short: 'VIMworld',
     long: 'VIM Dispenser 2',
   },
-  '0xc96b1e1a436c5ecf150ac7a7de64c0eec73883e0': {
+  '0xc6cd73941365c0e22d0eeaa8944aa9d0efe554d6': {
     short: 'VIMworld',
     long: 'VIM Feeding',
   },
@@ -112,6 +112,7 @@ const KNOWN_CONTRACTS = {
   },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
+  '0x66f36d228a5201419dff9895dcfb8bf45c3cf262': 'San Marino Covid',
 }
 
 const TOKEN_CONTRACTS = {
