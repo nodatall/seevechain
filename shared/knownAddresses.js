@@ -110,9 +110,16 @@ const KNOWN_CONTRACTS = {
     short: 'NSF Intl.',
     long: 'NSF International',
   },
+  '0x66f36d228a5201419dff9895dcfb8bf45c3cf262': {
+    short: 'San Marino Covid',
+    long: 'San Marino Covid NFT',
+  },
+  '0xdcaa96e264eb8514b130e1a97072b41c875bec7b': {
+    short: 'San Marino Covid',
+    long: 'San Marino Covid Data Upload',
+  },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
-  '0x66f36d228a5201419dff9895dcfb8bf45c3cf262': 'San Marino Covid',
 }
 
 const TOKEN_CONTRACTS = {
