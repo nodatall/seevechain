@@ -25,7 +25,7 @@ export const locationToChartMap = {
 
 export const locationToGroupMap = {}
 for (let key in contractGroupings) {
-  locationToGroupMap[`/${key.toLowerCase().replace(' ', '-')}`] = key
+  locationToGroupMap[`/${key.toLowerCase().replace(/ /g, '-')}`] = key
 }
 
 export const allRoutes = [
