@@ -118,6 +118,14 @@ const KNOWN_CONTRACTS = {
     short: 'San Marino Green Pass',
     long: 'San Marino Green Pass Data Upload',
   },
+  '0xe92fddd633008c1bca6e738725d2190cd46df4a1': {
+    short: 'VPunks',
+    long: 'VPunks VIP-181',
+  },
+  '0x31c71f4cd01fddd940a46dafd72d3291f52040a4': {
+    short: 'VPunks',
+    long: 'VPunks NFT Auction',
+  },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
 }
