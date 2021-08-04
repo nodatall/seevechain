@@ -61,7 +61,7 @@ export const onContractClick = ({ contracts, groups, forcePageUpdate }) => event
     return
   }
   window.open(
-    `http://www.vechainuniverse.com/Stalker/Stalk/${contracts[index].contract}`, `_blank`
+    `https://vechainstats.com/account/${contracts[index].contract}`, `_blank`
   )
 }
 
