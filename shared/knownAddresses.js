@@ -128,6 +128,7 @@ const KNOWN_CONTRACTS = {
   },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
+  '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
 }
 
 const TOKEN_CONTRACTS = {
@@ -149,6 +150,7 @@ const TOKEN_CONTRACTS = {
   '0x1b44a9718e12031530604137f854160759677192': 'MDN Token',
   '0x67fd63f6068962937ec81ab3ae3bf9871e524fc9': 'VEED Token',
   '0xb0821559723db89e0bd14fee81e13a3aae007e65': 'VPU Token',
+  '0x170f4ba8e7acf6510f55db26047c83d13498af8a': 'WOV Token',
 }
 
 const KNOWN_ADDRESSES = {
