@@ -17,11 +17,16 @@ const { oneDayAgo } = require('../server/lib/dateHelpers')
     .toDate()
     .toISOString()
 
+  const hoursAgo = Number(process.argv[2])
+  const before = hoursAgo
+    ? moment().subtract(hoursAgo, 'hours').toDate().toISOString()
+    : oneDayAgoMinusAMinute
+
   const blockRecords = await client.query(
     `
       SELECT * FROM blocks WHERE blocks.timestamp > $1 ORDER BY number;
     `,
-    [oneDayAgoMinusAMinute]
+    [before]
   )
 
   const missingBlocks = []
