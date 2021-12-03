@@ -130,7 +130,50 @@ const KNOWN_CONTRACTS = {
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
   '0x148442103eeadfaf8cffd593db80dcdeadda71c9': 'VeKingsNFT',
-  '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': 'VeSeaMarket',
+  '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket VeKings',
+   },
+  '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket VeKings v2',
+   },
+  '0x65b2fa1a0633fbb07e51aec325e2b8d85bbb0a3a': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket Honorary VeKings',
+   },
+  '0x948f629cd19bee09ede8475f028963848e504bb6': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket Veysarum',
+   },
+  '0x230a07439018c8fb691981727eaac9e10ae3dcdb': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket VeKongs',
+   },
+  '0x720ef33b0518614579025cc38297fecfd2dde92d': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket Galaxy Portraits',
+   },
+  '0xafb79de90b5711f61f6aba74bb5096f5a782e762': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket Vumanoids',
+   },
+  '0x643f03dd99f09db83c984eac548ec8bda97518d5': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket Undead VeKings',
+   },
+  '0x2ebaf17d7962f7e91d9819e6db96100ef4d28244': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket Sacrificed VeKings',
+   },
+  '0xbbfa98002adf880742c507b2d8cc8d70506310ff': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket Mad v-Apes',
+   },
+  '0x7437253c66cad34fd5f9d1863113f158f934ea44': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket universe',
+   },
 }
 
 const TOKEN_CONTRACTS = {
