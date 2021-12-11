@@ -174,6 +174,34 @@ const KNOWN_CONTRACTS = {
     short: 'VeSeaMarket',
     long: 'VeSeaMarket universe',
    },
+  '0x6f49ca0319fc902ed60e3f1f1b57b8e835a46fc1': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket AstroVETs',
+   },
+  '0x25d68cdc50141921b82745b499f450f40534924f': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket VeSkullz',
+   },
+  '0xd512751bdd7884192f7bca54a8e8b08b639fbd66': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket Warbands',
+   },
+  '0x062a557ff0d5d17e6fbb5fae1a186bc1ef3c4169': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket VeNerds',
+   }, 
+  '0x064ff744912ad88896d84b5c11de9ee3a3b00ef9': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket New Pigs Order',
+   },
+  'tbd': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket veLoot',
+   },
+    'tbd': {
+    short: 'VeSeaMarket',
+    long: 'VeSeaMarket Victs',
+   },
 }
 
 const TOKEN_CONTRACTS = {
@@ -196,6 +224,9 @@ const TOKEN_CONTRACTS = {
   '0x67fd63f6068962937ec81ab3ae3bf9871e524fc9': 'VEED Token',
   '0xb0821559723db89e0bd14fee81e13a3aae007e65': 'VPU Token',
   '0x170f4ba8e7acf6510f55db26047c83d13498af8a': 'WOV Token',
+  '0x0bd802635eb9ceb3fcbe60470d2857b86841aab6': 'VEX Token',
+  '0x28c61940bdcf5a67158d00657e8c3989e112eb38': 'GEMS Token',
+  '0x99763494a7b545f983ee9fe02a3b5441c7ef1396': 'MVG Token',
 }
 
 const KNOWN_ADDRESSES = {
