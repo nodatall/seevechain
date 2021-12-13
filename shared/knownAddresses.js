@@ -129,6 +129,7 @@ const KNOWN_CONTRACTS = {
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
+  '0x04edc606b0d60e843528422619c6d939be8a2fcf': 'NFT Paper Project',
   '0x148442103eeadfaf8cffd593db80dcdeadda71c9': 'VeKingsNFT',
   '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': {
     short: 'VeSeaMarket',
