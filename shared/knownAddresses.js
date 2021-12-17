@@ -131,147 +131,147 @@ const KNOWN_CONTRACTS = {
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
   '0x04edc606b0d60e843528422619c6d939be8a2fcf': 'NFT Paper Project',
   '0x148442103eeadfaf8cffd593db80dcdeadda71c9': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT VeKings',
    },
   '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT VeGhosts',
    },
-  'tbd': {
-    short: 'VeSeaNFT',
+  '0x997c61cd02b5f2c8826ebcaf26080c650cabdda2': {
+    short: 'VeSea',
     long: 'VeSeaNFT Honorary VeKings',
    },
   '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT Veysarum',
    },
   '0x9932690b32c4c0cd4d86a53eca948d33b1556ae7': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT VeKongs',
    },
   '0xc35d04f8783f85ede2f329eed3c1e8b036223a06': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT Galaxy Portraits',
    },
   '0x46db08ca72b205a8f9e746a9e33a30d2f379216b': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT Vumanoids',
    },
   '0x8b55d319b6cae4b9fd0b4517f29cf4a100818e38': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT Undead VeKings',
    },
   '0x8b55d319b6cae4b9fd0b4517f29cf4a100818e38': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT Sacrificed VeKings',
    },
   '0xffcc1c4492c3b49825712e9a8909e4fcebfe6c02': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT Mad v-Apes',
    },
   '0x60deca6baceb6258c8d718f9987acb17176f7f24': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT universe',
    },
   '0x436f0a9b45e85eb2f749aa67d3393c649ef4dff2': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT AstroVETs',
    },
   '0x01c10830feef88258e7a1ca998009ac19f7f087e': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT VeSkullz',
    },
   '0x6aa982158617d53c37f65d43eb9a156449adfff3': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT Warbands',
    },
   '0x14c7d5357da8a8ed7a3983bc5ffd249fee63192d': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT VeNerds',
    },
   '0x88d7e38af5bdb6e65a045c79c9ce70ed06e6569b': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT New Pigs Order',
    },
   '0x1f173256c08e557d0791bc6ef2ac1b1099f57ed5': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT veLoot',
    },
   '0xC2dE1fbB24d918a68923CFb24cC541aEA7a49450': {
-    short: 'VeSeaNFT',
+    short: 'VeSea',
     long: 'VeSeaNFT Victs',
    },
   '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket VeKings',
    },
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket VeKings v2',
    },
   '0x65b2fa1a0633fbb07e51aec325e2b8d85bbb0a3a': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket Honorary VeKings',
    },
   '0x948f629cd19bee09ede8475f028963848e504bb6': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket Veysarum',
    },
   '0x230a07439018c8fb691981727eaac9e10ae3dcdb': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket VeKongs',
    },
   '0x720ef33b0518614579025cc38297fecfd2dde92d': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket Galaxy Portraits',
    },
   '0xafb79de90b5711f61f6aba74bb5096f5a782e762': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket Vumanoids',
    },
   '0x643f03dd99f09db83c984eac548ec8bda97518d5': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket Undead VeKings',
    },
   '0x2ebaf17d7962f7e91d9819e6db96100ef4d28244': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket Sacrificed VeKings',
    },
   '0xbbfa98002adf880742c507b2d8cc8d70506310ff': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket Mad v-Apes',
    },
   '0x7437253c66cad34fd5f9d1863113f158f934ea44': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket universe',
    },
   '0x6f49ca0319fc902ed60e3f1f1b57b8e835a46fc1': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket AstroVETs',
    },
   '0x25d68cdc50141921b82745b499f450f40534924f': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket VeSkullz',
    },
   '0xd512751bdd7884192f7bca54a8e8b08b639fbd66': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket Warbands',
    },
   '0x062a557ff0d5d17e6fbb5fae1a186bc1ef3c4169': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket VeNerds',
    }, 
   '0x064ff744912ad88896d84b5c11de9ee3a3b00ef9': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket New Pigs Order',
    },
   '0x05bd0f2fdd941c3ac3bd3def66506171f591c1da': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket veLoot',
    },
     '0x0B68Eb96a273C224196896c383cbaCa6487a2Bd3': {
-    short: 'VeSeaMarket',
+    short: 'VeSea',
     long: 'VeSeaMarket Victs',
    },
 }
