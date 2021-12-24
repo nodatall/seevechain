@@ -105,6 +105,9 @@ const KNOWN_CONTRACTS = {
   },
   '0x535ab4a9fce43dc71e9540534733bbeb0f494d5c': 'burntoken.io',
   '0x1a048cff120f3ebff9bb66459effa34445c8e87e': 'KnowSeafood',
+  '0xC7FD71b05b3060FCE96E4B6cDc6eC353FA6F838e': 'World of V - Community Marketplace',
+  '0x5E6265680087520DC022d75f4C45F9CCD712BA97': 'World of V - NFT Marketplace',
+  '0x48908fD4B00B8e13bd172da9416B6fc40A6A737c': 'World of V Genesis Marketplace',
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'NSF Intl.',
@@ -117,6 +120,18 @@ const KNOWN_CONTRACTS = {
   '0xdcaa96e264eb8514b130e1a97072b41c875bec7b': {
     short: 'San Marino Green Pass',
     long: 'San Marino Green Pass Data Upload',
+  },
+  '0x8e1BF526c0E40e8abE6a34129a1f68c2D489Ac96': {
+    short: 'Inner Mongolia',
+    long: 'Inner Mongolia Traceability Platform',
+  },
+  '0x6c0A6e1d922E0e63901301573370b932AE20DAdB': {
+    short: 'Vexchange v2',
+    long: 'Vexchange v2 (Router)',
+  },
+  '0xD86bed355d9d6A4c951e96755Dd0c3cf004d6CD0': {
+    short: 'Vexchange v2',
+    long: 'Vexchange v2 (WoV)',
   },
   '0xe92fddd633008c1bca6e738725d2190cd46df4a1': {
     short: 'VPunks',
@@ -368,6 +383,7 @@ const KNOWN_ADDRESSES = {
   '0x17b6254c7324438b469a01ce80b67dd7c4d5eef8': 'Plair ICO',
   '0x48e8dace6a1976d4912f8b5dcc3f45651c3d4b73': 'Safe Haven Boost',
   '0x27942b0d71919c4aa81b7ae6ba951150faef5ae6': 'VIP-191 Sponsor',
+  '0x27942b0d71919c4aa81b7ae6ba951150faef5ae6': 'ToolChain Delegator',
 }
 
 function getKnownContract(address, shortOrLong) {
