@@ -383,7 +383,6 @@ const KNOWN_ADDRESSES = {
   '0x17b6254c7324438b469a01ce80b67dd7c4d5eef8': 'Plair ICO',
   '0x48e8dace6a1976d4912f8b5dcc3f45651c3d4b73': 'Safe Haven Boost',
   '0x27942b0d71919c4aa81b7ae6ba951150faef5ae6': 'VIP-191 Sponsor',
-  '0x27942b0d71919c4aa81b7ae6ba951150faef5ae6': 'ToolChain Delegator',
 }
 
 function getKnownContract(address, shortOrLong) {
