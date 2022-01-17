@@ -22,6 +22,26 @@ const KNOWN_CONTRACTS = {
     short: 'Shanghai Gas',
     long: 'Shanghai Gas 2',
   },
+  '0x0000000000000000000000000000456e65726779': {
+    short: 'Zumoswap',
+    long: 'Zumoswap VTHO',
+  },
+  '0x45429a2255e7248e57fce99e7239aed3f84b7a53': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET',
+  },
+  '0x576da7124c7bb65a692d95848276367e5a844d95': {
+    short: 'Zumoswap',
+    long: 'Router02',
+  },
+  '0xbdc2edaea65b51053ffce8bc0721753c7895e12f': {
+    short: 'Zumoswap',
+    long: 'Zumoswap Factory',
+  },
+  '0x29a996b0ebb7a77023d091c9f2ca34646bea6ede': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET/VTHO',
+  },
   '0xf9f99f982f3ea9020f0a0afd4d4679dfee1b63cf': {
     short: 'vexchange.io',
     long: 'vexchange.io VTHO',
