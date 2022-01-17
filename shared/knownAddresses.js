@@ -105,8 +105,8 @@ const KNOWN_CONTRACTS = {
   },
   '0x535ab4a9fce43dc71e9540534733bbeb0f494d5c': 'burntoken.io',
   '0x1a048cff120f3ebff9bb66459effa34445c8e87e': 'KnowSeafood',
-  '0xC7FD71b05b3060FCE96E4B6cDc6eC353FA6F838e': 'World of V - Community Marketplace',
-  '0x5E6265680087520DC022d75f4C45F9CCD712BA97': 'World of V - NFT Marketplace',
+  '0xc7fd71b05b3060fce96e4b6cdc6ec353fa6f838e': 'World of V - Community Marketplace',
+  '0x5e6265680087520dc022d75f4c45f9ccd712ba97': 'World of V - NFT Marketplace',
   '0x48908fD4B00B8e13bd172da9416B6fc40A6A737c': 'World of V Genesis Marketplace',
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
@@ -217,6 +217,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT Victs',
    },
+  '0x15e2f18feade6ccb990956050bf0c2990445cace': {
+    short: 'VeSea',
+    long: 'VeSeaNFT VeGnomes',
+   },
   '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': {
     short: 'VeSea',
     long: 'VeSeaMarket VeKings',
@@ -285,10 +289,14 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaMarket veLoot',
    },
-    '0x0B68Eb96a273C224196896c383cbaCa6487a2Bd3': {
+  '0x162eb3120a71cc2971275e33864c1dcbaff9f7e9': {
     short: 'VeSea',
     long: 'VeSeaMarket Victs',
    },
+  '0x07cfc0e26cb67fd543dae94e924eb19399190eea': {
+    short: 'VeSea',
+    long: 'VeSeaMarket VeGnomes',
+   },  
 }
 
 const TOKEN_CONTRACTS = {
