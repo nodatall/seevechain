@@ -42,6 +42,50 @@ const KNOWN_CONTRACTS = {
     short: 'Zumoswap',
     long: 'Zumoswap vVET/VTHO',
   },
+  '0x58108ba70902869f42eb12c5fdbc0cefab0ad13d': {
+    short: 'Zumoswap',
+    long: 'Zumoswap Router',
+  },
+  '0x7A3d485cC586d2c5543b0DF3B93043CFA8Aec6D6': {
+    short: 'Zumoswap',
+    long: 'Zumoswap VeUSD',
+  },
+  '0x1a8abd6d5627eb26ad71c0c7ae5224cdc640faf3': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET/SHA',
+  },
+  '0xfe778e3491ae917e76e85ba8d30426ee1cccba06': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET/MVG',
+  },
+  '0xc8c0b13f1152dbd825ecf67c245291aee215a109': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET/VEX',
+  },
+  '0x10ba14b7afec1f3ab701be127ab436de21cdd055': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET/VPU',
+  },
+  '0x94355b3079a38a265e6b7a825ab6a06495c2d419': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET/WOV',
+  },
+  '0x629965c25e1c5d57fb268b23a79c76520bca6698': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET/JUR',
+  },
+  '0x8f34a3764750feb71264e9a105cf07fc301d70d1': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET/HAI',
+  },
+  '0x72189e536dcb19bc6e1b4918a07b60ef8aca41d8': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET/VEED',
+  },
+  '0xc75668ce138dd65f4de37d986a84ebdef71cda02': {
+    short: 'Zumoswap',
+    long: 'Zumoswap vVET/OCE',
+  },
   '0xf9f99f982f3ea9020f0a0afd4d4679dfee1b63cf': {
     short: 'vexchange.io',
     long: 'vexchange.io VTHO',
