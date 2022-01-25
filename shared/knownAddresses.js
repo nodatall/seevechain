@@ -22,10 +22,6 @@ const KNOWN_CONTRACTS = {
     short: 'Shanghai Gas',
     long: 'Shanghai Gas 2',
   },
-  '0x0000000000000000000000000000456e65726779': {
-    short: 'Zumoswap',
-    long: 'Zumoswap VTHO',
-  },
   '0x45429a2255e7248e57fce99e7239aed3f84b7a53': {
     short: 'Zumoswap',
     long: 'Zumoswap vVET',
