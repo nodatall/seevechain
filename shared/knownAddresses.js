@@ -23,64 +23,64 @@ const KNOWN_CONTRACTS = {
     long: 'Shanghai Gas 2',
   },
   '0x45429a2255e7248e57fce99e7239aed3f84b7a53': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET',
+    short: 'VeRocket',
+    long: 'VeRocket vVET',
   },
   '0x576da7124c7bb65a692d95848276367e5a844d95': {
-    short: 'Zumoswap',
+    short: 'VeRocket',
     long: 'Router02',
   },
   '0xbdc2edaea65b51053ffce8bc0721753c7895e12f': {
-    short: 'Zumoswap',
-    long: 'Zumoswap Factory',
+    short: 'VeRocket',
+    long: 'VeRocket Factory',
   },
   '0x29a996b0ebb7a77023d091c9f2ca34646bea6ede': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET/VTHO',
+    short: 'VeRocket',
+    long: 'VeRocket vVET/VTHO',
   },
   '0x58108ba70902869f42eb12c5fdbc0cefab0ad13d': {
-    short: 'Zumoswap',
-    long: 'Zumoswap Router',
+    short: 'VeRocket',
+    long: 'VeRocket Router',
   },
   '0x7A3d485cC586d2c5543b0DF3B93043CFA8Aec6D6': {
-    short: 'Zumoswap',
+    short: 'VeRocket',
     long: 'Zumoswap VeUSD',
   },
   '0x1a8abd6d5627eb26ad71c0c7ae5224cdc640faf3': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET/SHA',
+    short: 'VeRocket',
+    long: 'VeRocket vVET/SHA',
   },
   '0xfe778e3491ae917e76e85ba8d30426ee1cccba06': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET/MVG',
+    short: 'VeRocket',
+    long: 'VeRocket vVET/MVG',
   },
   '0xc8c0b13f1152dbd825ecf67c245291aee215a109': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET/VEX',
+    short: 'VeRocket',
+    long: 'VeRocket vVET/VEX',
   },
   '0x10ba14b7afec1f3ab701be127ab436de21cdd055': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET/VPU',
+    short: 'VeRocket',
+    long: 'VeRocket vVET/VPU',
   },
   '0x94355b3079a38a265e6b7a825ab6a06495c2d419': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET/WOV',
+    short: 'VeRocket',
+    long: 'VeRocket vVET/WOV',
   },
   '0x629965c25e1c5d57fb268b23a79c76520bca6698': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET/JUR',
+    short: 'VeRocket',
+    long: 'VeRocket vVET/JUR',
   },
   '0x8f34a3764750feb71264e9a105cf07fc301d70d1': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET/HAI',
+    short: 'VeRocket',
+    long: 'VeRocket vVET/HAI',
   },
   '0x72189e536dcb19bc6e1b4918a07b60ef8aca41d8': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET/VEED',
+    short: 'VeRocket',
+    long: 'VeRocket vVET/VEED',
   },
   '0xc75668ce138dd65f4de37d986a84ebdef71cda02': {
-    short: 'Zumoswap',
-    long: 'Zumoswap vVET/OCE',
+    short: 'VeRocket',
+    long: 'VeRocket vVET/OCE',
   },
   '0xf9f99f982f3ea9020f0a0afd4d4679dfee1b63cf': {
     short: 'vexchange.io',
@@ -207,9 +207,14 @@ const KNOWN_CONTRACTS = {
   '0x04edc606b0d60e843528422619c6d939be8a2fcf': {
     short: 'Paper Project',
     long: 'Paper Marketplace',
+  },
   '0x69B6811473A7659e0B8f198c2ccc25da55Fef5Ea': {
     short: 'Paper Project',
     long: 'Paper NFT',
+  },
+  '0xa2c82ad2841C23A49fc2Ba1A23927D1FE835c7f9': {
+    short: 'Vales',
+    long: 'Vales NFT',
   },
   '0x148442103eeadfaf8cffd593db80dcdeadda71c9': {
     short: 'VeSea',
@@ -303,9 +308,17 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT VeNature',
    },
-  '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': {
+  'tbdtbdtbd': {
     short: 'VeSea',
-    long: 'VeSeaMarket VeKings',
+    long: 'VeSeaNFT Metaversials',
+   },
+  'tbdtbdtbd': {
+    short: 'VeSea',
+    long: 'VeSeaNFT VeeParrots',
+   },
+  'tbdtbdtbd': {
+    short: 'VeSea',
+    long: 'VeSeaNFT VeRocket',
    },
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
     short: 'VeSea',
@@ -394,7 +407,23 @@ const KNOWN_CONTRACTS = {
   '0x301f1049d6bc04e063651dda4a2c2b2bc1b359a9': {
     short: 'VeSea',
     long: 'VeSeaMarket VeNature',
-   },   
+   },
+  'tbdtbdtbd': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Vales',
+   },
+  'tbdtbdtbd': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Metaversials',
+   },
+  'tbdtbdtbd': {
+    short: 'VeSea',
+    long: 'VeSeaMarket VeeParrots',
+   },
+  'tbdtbdtbd': {
+    short: 'VeSea',
+    long: 'VeSeaMarket VeRocket',
+   }, 
 }
 
 const TOKEN_CONTRACTS = {
