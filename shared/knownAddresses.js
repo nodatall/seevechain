@@ -22,10 +22,6 @@ const KNOWN_CONTRACTS = {
     short: 'Shanghai Gas',
     long: 'Shanghai Gas 2',
   },
-  '0x45429a2255e7248e57fce99e7239aed3f84b7a53': {
-    short: 'VeRocket',
-    long: 'VeRocket vVET',
-  },
   '0x576da7124c7bb65a692d95848276367e5a844d95': {
     short: 'VeRocket',
     long: 'Router02',
@@ -204,7 +200,8 @@ const KNOWN_CONTRACTS = {
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
-  '0x04edc606b0d60e843528422619c6d939be8a2fcf': {
+  '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': 'Vesitors NFT',
+  '0x1F1D4B35302F9e0837b8Ee34E3968023fDE0122C': {
     short: 'Paper Project',
     long: 'Paper Marketplace',
   },
@@ -308,15 +305,11 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT VeNature',
    },
-  'tbdtbdtbd': {
+  '0x313d1fFf2664A2df5A12E99c8C57E50eFA715d73': {
     short: 'VeSea',
     long: 'VeSeaNFT Metaversials',
    },
-  'tbdtbdtbd': {
-    short: 'VeSea',
-    long: 'VeSeaNFT VeeParrots',
-   },
-  'tbdtbdtbd': {
+  '0x6354b35c510CaE41Cd45B568087BF767756B3589': {
     short: 'VeSea',
     long: 'VeSeaNFT VeRocket',
    },
@@ -408,25 +401,25 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaMarket VeNature',
    },
-  'tbdtbdtbd': {
+  '0xC6b3C4bbFDE3F7Ea48c85Fcf8f0e3bCC45739925': {
     short: 'VeSea',
     long: 'VeSeaMarket Vales',
    },
-  'tbdtbdtbd': {
+  '0x9e68D6c7daf2e010D8B8Ee157D81DE143a7C68EF': {
     short: 'VeSea',
     long: 'VeSeaMarket Metaversials',
    },
-  'tbdtbdtbd': {
-    short: 'VeSea',
-    long: 'VeSeaMarket VeeParrots',
-   },
-  'tbdtbdtbd': {
+  '0xE4DC078af2dac57a3118B0cF23c76E4B42362392': {
     short: 'VeSea',
     long: 'VeSeaMarket VeRocket',
    }, 
 }
 
 const TOKEN_CONTRACTS = {
+  '0x4e17357053da4b473e2daa2c65c2c949545724b8': 'VeUSD Token',
+  '0x45429a2255e7248e57fce99e7239aed3f84b7a53': 'vVET Token',
+  '0x8e57aadf0992afcc41f7843656c6c7129f738f7b': 'DHN Token',
+  '0x2F10726B240D7EFB08671f4d5F0a442dB6f29416': 'Paper Burn Token',
   '0x0000000000000000000000000000456e65726779': 'VTHO Token',
   '0x0ce6661b4ba86a0ea7ca2bd86a0de87b0b860f14': 'OCE Token',
   '0xf8e1faa0367298b55f57ed17f7a2ff3f5f1d1628': 'EHrT Token',
