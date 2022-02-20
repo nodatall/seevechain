@@ -217,7 +217,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT VeKings',
    },
-  '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': {
+  '0x588f2b0d4cbea48deb34c3d401cb995046edda81': {
     short: 'VeSea',
     long: 'VeSeaNFT VeGhosts',
    },
@@ -316,6 +316,10 @@ const KNOWN_CONTRACTS = {
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
     short: 'VeSea',
     long: 'VeSeaMarket VeKings v2',
+   },
+  '0x7e767246a904df60f692531bf04c63f8c0d8281b': {
+    short: 'VeSea',
+    long: 'VeSeaMarket VeGhosts',
    },
   '0x65b2fa1a0633fbb07e51aec325e2b8d85bbb0a3a': {
     short: 'VeSea',
