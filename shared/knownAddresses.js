@@ -201,6 +201,7 @@ const KNOWN_CONTRACTS = {
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
   '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': 'Vesitors NFT',
+  '0x2980f7A9BEc00ee6ffee21e5Fbac5e104578Bf13': 'Wall of Vame',
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'Paper Project',
     long: 'Paper Marketplace',
@@ -313,6 +314,18 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT VeRocket',
    },
+  '0x4e4faebf70e7c01bcd39adbfaa247f081819919a': {
+    short: 'VeSea',
+    long: 'VeSeaNFT VeeParrots',
+   },
+  '0x3427e769ae440ae8e18b77f49cc2d6a39e57f047': {
+    short: 'VeSea',
+    long: 'VeSeaNFT Frost Giant VeKings',
+   },
+  '0x78d4ba28c151501fa3f68927ea96304cab89b6f0': {
+    short: 'VeSea',
+    long: 'VeSeaNFT VFoxes',
+   },
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
     short: 'VeSea',
     long: 'VeSeaMarket VeKings v2',
@@ -416,6 +429,18 @@ const KNOWN_CONTRACTS = {
   '0xe4dc078af2dac57a3118b0cf23c76e4b42362392': {
     short: 'VeSea',
     long: 'VeSeaMarket VeRocket',
+   },
+  '0x6ec6747014b052269a27bab2b5e279aaf800b503': {
+    short: 'VeSea',
+    long: 'VeSeaMarket VeeParrots',
+   }, 
+  '0x4478afdd1d680b2569b6b25acfcc5b4181b7382b': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Frost Giant VeKings',
+   }, 
+  '0x45828a5b0b707ea48133ff1bbe84e4e7ea72575f': {
+    short: 'VeSea',
+    long: 'VeSeaMarket VFoxes',
    }, 
 }
 
