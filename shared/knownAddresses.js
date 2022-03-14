@@ -165,6 +165,7 @@ const KNOWN_CONTRACTS = {
   '0x5e6265680087520dc022d75f4c45f9ccd712ba97': 'World of V - NFT Marketplace',
   '0x48908fD4B00B8e13bd172da9416B6fc40A6A737c': 'World of V Genesis Marketplace',
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
+  '0xf72614024C9273320b2F82Dda3932785dF6B9208': 'Aretaeio Hospital',
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'NSF Intl.',
     long: 'NSF International',
