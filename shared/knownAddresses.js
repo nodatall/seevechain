@@ -166,46 +166,46 @@ const KNOWN_CONTRACTS = {
   '0x48908fD4B00B8e13bd172da9416B6fc40A6A737c': 'World of V Genesis Marketplace',
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
   '0xf72614024c9273320b2f82dda3932785df6b9208': {
-    short: 'ToolChain Partner',
+    short: 'ToolChain Partners',
     long: 'Aretaeio Hospital',
   },
   '0x54f14e2e4a204a8c1b734c1b73d6d7cb96894a61': {
-    short: 'ToolChain Partner',
+    short: 'ToolChain Partners',
     long: 'Undisclosed1',
   },
   '0x91ace4b91fc65ee930724deb580dfe80c135713e': {
-    short: 'ToolChain Partner',
+    short: 'ToolChain Partners',
     long: 'Undisclosed2',
   },
-  '0xc3c118c6fa5479244b9f0da0b0ba8f9aFa8dc33c': {
-    short: 'ToolChain Partner',
+  '0xc3c118c6fa5479244b9f0da0b0ba8f9afa8dc33c': {
+    short: 'ToolChain Partners',
     long: 'Undisclosed3',
   },
   '0xeddc51042586b66cf8fb75e971636c76ce2e9c35': {
-    short: 'ToolChain Partner',
+    short: 'ToolChain Partners',
     long: 'Undisclosed4',
   },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
-    short: 'NSF Intl.',
+    short: 'ToolChain Partners',
     long: 'NSF International',
   },
   '0x66f36d228a5201419dff9895dcfb8bf45c3cf262': {
-    short: 'San Marino Green Pass',
+    short: 'ToolChain Partners',
     long: 'San Marino Green Pass NFT',
   },
   '0xdcaa96e264eb8514b130e1a97072b41c875bec7b': {
-    short: 'San Marino Green Pass',
+    short: 'ToolChain Partners',
     long: 'San Marino Green Pass Data Upload',
   },
-  '0x8e1BF526c0E40e8abE6a34129a1f68c2D489Ac96': {
-    short: 'Inner Mongolia',
+  '0x8e1bf526c0e40e8abe6a34129a1f68c2d489ac96': {
+    short: 'ToolChain Partners',
     long: 'Inner Mongolia Traceability Platform',
   },
-  '0x6c0A6e1d922E0e63901301573370b932AE20DAdB': {
+  '0x6c0a6e1d922e0e63901301573370b932ae20dadb': {
     short: 'Vexchange v2',
     long: 'Vexchange v2 (Router)',
   },
-  '0xD86bed355d9d6A4c951e96755Dd0c3cf004d6CD0': {
+  '0xd86bed355d9d6a4c951e96755dd0c3cf004d6cd0': {
     short: 'Vexchange v2',
     long: 'Vexchange v2 (WoV)',
   },
@@ -221,7 +221,7 @@ const KNOWN_CONTRACTS = {
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
   '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': 'Vesitors NFT',
-  '0x2980f7A9bec00ee6ffee21e5fbac5e104578bf13': 'Wall of Vame',
+  '0x2980f7a9bec00ee6ffee21e5fbac5e104578bf13': 'Wall of Vame',
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'Paper Project',
     long: 'Paper Marketplace',
