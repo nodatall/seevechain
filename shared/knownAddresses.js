@@ -202,7 +202,7 @@ const KNOWN_CONTRACTS = {
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
   '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': 'Vesitors NFT',
-  '0x2980f7A9BEc00ee6ffee21e5Fbac5e104578Bf13': 'Wall of Vame',
+  '0x2980f7A9bec00ee6ffee21e5fbac5e104578bf13': 'Wall of Vame',
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'Paper Project',
     long: 'Paper Marketplace',
