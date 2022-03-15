@@ -165,7 +165,26 @@ const KNOWN_CONTRACTS = {
   '0x5e6265680087520dc022d75f4c45f9ccd712ba97': 'World of V - NFT Marketplace',
   '0x48908fD4B00B8e13bd172da9416B6fc40A6A737c': 'World of V Genesis Marketplace',
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
-  '0xf72614024C9273320b2F82Dda3932785dF6B9208': 'Aretaeio Hospital',
+  '0xf72614024c9273320b2f82dda3932785df6b9208': {
+    short: 'ToolChain Partner',
+    long: 'Aretaeio Hospital',
+  },
+  '0x54f14e2e4a204a8c1b734c1b73d6d7cb96894a61': {
+    short: 'ToolChain Partner',
+    long: 'Undisclosed1',
+  },
+  '0x91ace4b91fc65ee930724deb580dfe80c135713e': {
+    short: 'ToolChain Partner',
+    long: 'Undisclosed2',
+  },
+  '0xc3c118c6fa5479244b9f0da0b0ba8f9aFa8dc33c': {
+    short: 'ToolChain Partner',
+    long: 'Undisclosed3',
+  },
+  '0xeddc51042586b66cf8fb75e971636c76ce2e9c35': {
+    short: 'ToolChain Partner',
+    long: 'Undisclosed4',
+  },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'NSF Intl.',
     long: 'NSF International',
