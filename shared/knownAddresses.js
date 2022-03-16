@@ -165,6 +165,10 @@ const KNOWN_CONTRACTS = {
   '0x5e6265680087520dc022d75f4c45f9ccd712ba97': 'World of V - NFT Marketplace',
   '0x48908fD4B00B8e13bd172da9416B6fc40A6A737c': 'World of V Genesis Marketplace',
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
+  '0x955b48a46698b2b8330d75dc88ae5b95cd7ff9f4': {
+    short: 'MrProper & Datab4Dishonor',
+    long: 'MrProper & Datab4Dishonor Arb Bot',
+  },
   '0xf72614024c9273320b2f82dda3932785df6b9208': {
     short: 'ToolChain Partners',
     long: 'Aretaeio Hospital',
