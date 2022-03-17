@@ -166,8 +166,8 @@ const KNOWN_CONTRACTS = {
   '0x48908fD4B00B8e13bd172da9416B6fc40A6A737c': 'World of V Genesis Marketplace',
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
   '0x955b48a46698b2b8330d75dc88ae5b95cd7ff9f4': {
-    short: 'MrProper & Datab4Dishonor',
-    long: 'MrProper & Datab4Dishonor Arb Bot',
+    short: 'Yggdrasil',
+    long: 'Yggdrasil',
   },
   '0xf72614024c9273320b2f82dda3932785df6b9208': {
     short: 'ToolChain Partners',
@@ -350,6 +350,14 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT VFoxes',
    },
+  '0xd393c0dcccae49248862b462404b63a8546a888a': {
+    short: 'VeSea',
+    long: 'VeSeaNFT Guardians Leaders',
+   },
+  '0x850a2457975fd411f03a513c6f94cd7d378e7ec1': {
+    short: 'VeSea',
+    long: 'VeSeaNFT Ukraine',
+   },
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
     short: 'VeSea',
     long: 'VeSeaMarket VeKings v2',
@@ -466,6 +474,14 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaMarket VFoxes',
    }, 
+  '0xf45498362037caec767887f0d2540b6abceb46b8': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Guardians Leaders',
+   }, 
+  '0x40c3d13dff784d7f3cec6cd97967ba1d8aa66f8c': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Ukraine',
+   },   
 }
 
 const TOKEN_CONTRACTS = {
