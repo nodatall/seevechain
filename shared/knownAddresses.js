@@ -358,6 +358,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT Ukraine',
    },
+  '0xfd5e344798ceb51afd910fafae9768e4d093a725': {
+    short: 'VeSea',
+    long: 'VeSeaNFT Metaversials Alteregos',
+   },
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
     short: 'VeSea',
     long: 'VeSeaMarket VeKings v2',
@@ -481,7 +485,15 @@ const KNOWN_CONTRACTS = {
   '0x40c3d13dff784d7f3cec6cd97967ba1d8aa66f8c': {
     short: 'VeSea',
     long: 'VeSeaMarket Ukraine',
-   },   
+   }, 
+  '0xde3534833e513d9736288db85c4ba627b3c5df2f': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Metaversials Alteregos',
+   }, 
+  '0x54d44b2c4c65ede1b5c00066501f97586e7b7165': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Mad Ⓥ-Apes Elementals',
+   }, 
 }
 
 const TOKEN_CONTRACTS = {
