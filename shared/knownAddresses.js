@@ -493,7 +493,11 @@ const KNOWN_CONTRACTS = {
   '0x54d44b2c4c65ede1b5c00066501f97586e7b7165': {
     short: 'VeSea',
     long: 'VeSeaMarket Mad Ⓥ-Apes Elementals',
-   }, 
+   },
+  '0xf0450c9ee84579bc1453fa76edac910fa041e405': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Ukiyoe Warriors'
+  },
 }
 
 const TOKEN_CONTRACTS = {
