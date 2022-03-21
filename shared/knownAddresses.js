@@ -494,7 +494,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaMarket Mad Ⓥ-Apes Elementals',
    },
-  '0xf0450c9ee84579bc1453fa76edac910fa041e405': {
+  '0x41580ca46ef0991da022657c993c9d7f7eb49604': {
     short: 'VeSea',
     long: 'VeSeaMarket Ukiyoe Warriors'
   },
