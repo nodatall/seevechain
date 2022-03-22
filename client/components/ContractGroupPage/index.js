@@ -16,6 +16,8 @@ import vimworldIcon from 'assets/vimworld_icon.jpg'
 import vimworldBanner from 'assets/vimworld_banner.png'
 import vulcanIcon from 'assets/vulcan_icon.png'
 import vulcanBanner from 'assets/vulcan_banner.png'
+import veseaIcon from 'assets/vesea_icon.png'
+import veseaBanner from 'assets/vesea_banner.png'
 
 import './index.sass'
 
@@ -54,6 +56,12 @@ const groupProfileProps = {
     logo: vulcanIcon,
     url: 'https://vulcanverse.com/',
     bio: 'VulcanVerse is a virtual world set in the Greco-Roman era utilizing blockchain to enable users to own land and assets',
+  },
+  'VeSea': {
+    banner: veseaBanner,
+    logo: veseaIcon,
+    url: 'https://vesea.io/',
+    bio: 'VeSea is the most active NFT marketplace on the VeChainThor blockchain. Buy, sell and trade your favorites today ',
   },
 }
 
