@@ -189,6 +189,10 @@ const KNOWN_CONTRACTS = {
     short: 'ToolChain Partners',
     long: 'Undisclosed4',
   },
+  '0x7995bdbc94ab8bd33f77457416214a4abe0b8631': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed5',
+  },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'ToolChain Partners',
     long: 'NSF International',
@@ -220,6 +224,14 @@ const KNOWN_CONTRACTS = {
   '0x31c71f4cd01fddd940a46dafd72d3291f52040a4': {
     short: 'VPunks',
     long: 'VPunks NFT Auction',
+  },
+  '0x3473c5282057d7beda96c1ce0fe708e890764009': {
+    short: 'ExoWorlds',
+    long: 'ExoWorlds NFT',
+  },
+  '0xb2f12edde215e39186cc7653aeb551c8cf1f77e3': {
+    short: 'ExoWorlds',
+    long: 'ExoWorlds Marketplace',
   },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
