@@ -78,7 +78,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeRocket',
     long: 'VeRocket vVET/OCE',
   },
-  '0x538F8890a383c44e59dF4c7263D96Ca8048da2c7': {
+  '0x538f8890a383c44e59df4c7263d96ca8048da2c7': {
     short: 'vexchange.io',
     long: 'vexchange.io VEX',
   },
