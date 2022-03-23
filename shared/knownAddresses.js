@@ -78,6 +78,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeRocket',
     long: 'VeRocket vVET/OCE',
   },
+  '0x538F8890a383c44e59dF4c7263D96Ca8048da2c7': {
+    short: 'vexchange.io',
+    long: 'vexchange.io VEX',
+  },
   '0xf9f99f982f3ea9020f0a0afd4d4679dfee1b63cf': {
     short: 'vexchange.io',
     long: 'vexchange.io VTHO',
@@ -192,6 +196,10 @@ const KNOWN_CONTRACTS = {
   '0x7995bdbc94ab8bd33f77457416214a4abe0b8631': {
     short: 'ToolChain Partners',
     long: 'Undisclosed5',
+  },
+  '0xd9a43482cb6af1b7236cde4f7ec3201ac2a13d79': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed6',
   },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'ToolChain Partners',
