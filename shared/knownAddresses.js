@@ -382,6 +382,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT Metaversials Alteregos',
    },
+  '0x2571978545672fe7e4cced7409bdd0a57bc3c3d2': {
+    short: 'VeSea',
+    long: 'VeSeaNFT Doppelganger',
+   },
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
     short: 'VeSea',
     long: 'VeSeaMarket VeKings v2',
@@ -517,6 +521,22 @@ const KNOWN_CONTRACTS = {
   '0x41580ca46ef0991da022657c993c9d7f7eb49604': {
     short: 'VeSea',
     long: 'VeSeaMarket Ukiyoe Warriors'
+  },
+  'tbd': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Doppelganger'
+  },
+  '0x7255ff621e1785eb7a999f3df4b17b870023fa99': {
+    short: 'VeSea',
+    long: 'VeSeaMarket VPunks'
+  },
+  '0x7e6ed002fb29ed51ae5b0ff309a6a32add8f9a8e': {
+    short: 'VeSea',
+    long: 'VeSeaMarket NFT Paper Project'
+  },
+  '0x1c37c333886dbfb0aedf218a2f895e2c5bd01f1e': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Exoworlds'
   },
 }
 
