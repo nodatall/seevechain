@@ -538,6 +538,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaMarket Exoworlds'
   },
+  '0xae2e7072f26217b61fb1bb62d055dffbf7f49865': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Bored Flamingo'
+  },
 }
 
 const TOKEN_CONTRACTS = {
