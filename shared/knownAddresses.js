@@ -169,6 +169,30 @@ const KNOWN_CONTRACTS = {
   '0x5e6265680087520dc022d75f4c45f9ccd712ba97': 'World of V - NFT Marketplace',
   '0x48908fD4B00B8e13bd172da9416B6fc40A6A737c': 'World of V Genesis Marketplace',
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
+  '0x34109fc2a649965eecd953d31802c67dcc183d57': {
+    short: 'UNION Distribution',
+    long: 'Contract1',
+  },
+  '0x8bedc7840d41c13b1da0ea5924147c0d43efab10': {
+    short: 'UNION Distribution',
+    long: 'Contract2',
+  },
+  '0xda13870f5dcc40c739152cd9000b247b0ba0c1dd': {
+    short: 'UNION Distribution',
+    long: 'Contract3',
+  },
+  '0x9c1d497b54f2e4e58b1a81f7b3d3bc753bc525f9': {
+    short: 'UNION Distribution',
+    long: 'Contract4',
+  },
+  '0xb21253b726acc70b1d7bb7ca59966ae70b2342dd': {
+    short: 'UNION Distribution',
+    long: 'Contract5',
+  },
+  '0x5d0bea972f61192ff94a0d13b4346bdf5bb06c7f': {
+    short: 'UNION Distribution',
+    long: 'Contract6',
+  },
   '0x955b48a46698b2b8330d75dc88ae5b95cd7ff9f4': {
     short: 'Yggdrasil',
     long: 'Yggdrasil',
