@@ -257,6 +257,10 @@ const KNOWN_CONTRACTS = {
     short: 'VPunks',
     long: 'VPunks NFT Auction',
   },
+  '0xdf71fd02fa65767b2b61a6346d7998e25987731a': {
+    short: 'VPunks',
+    long: 'VPunks VPU Staking',
+  },
   '0x3473c5282057d7beda96c1ce0fe708e890764009': {
     short: 'ExoWorlds',
     long: 'ExoWorlds NFT',
