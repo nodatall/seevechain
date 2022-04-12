@@ -169,7 +169,14 @@ const KNOWN_CONTRACTS = {
   '0x5e6265680087520dc022d75f4c45f9ccd712ba97': 'World of V - NFT Marketplace',
   '0x48908fD4B00B8e13bd172da9416B6fc40A6A737c': 'World of V Genesis Marketplace',
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
-  '0x34109fc2a649965eecd953d31802c67dcc183d57': 'UNION Distribution',
+  '0x34109fc2a649965eecd953d31802c67dcc183d57': {
+    short: 'NO NERDS INC',
+    long: 'UNION Distribution',
+  },
+  '0x77fe6041fa5beb0172c9ab6014b4d8d5099f0a23': {
+    short: 'NO NERDS INC',
+    long: 'NO NERDS Tablet NFT',
+  },
   '0x955b48a46698b2b8330d75dc88ae5b95cd7ff9f4': {
     short: 'Yggdrasil',
     long: 'Yggdrasil',
