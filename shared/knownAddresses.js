@@ -402,6 +402,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT Doppelganger',
    },
+  '0x4e9eb6f6e04464eee33ae04bf430e20529482e60': {
+    short: 'VeSea',
+    long: 'VeSeaNFT Forest Nation Keepers',
+   },
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
     short: 'VeSea',
     long: 'VeSeaMarket VeKings v2',
@@ -557,6 +561,14 @@ const KNOWN_CONTRACTS = {
   '0xae2e7072f26217b61fb1bb62d055dffbf7f49865': {
     short: 'VeSea',
     long: 'VeSeaMarket Bored Flamingo'
+  },
+  '0x4e9eb6f6e04464eee33ae04bf430e20529482e60': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Forest Nation Keepers'
+  },
+  '0xaadf4db8e3569b16c0115d6586a6b330564a7d36': {
+    short: 'VeSea',
+    long: 'VeSeaMarket New Pigs Order Slaughterhouse'
   },
 }
 
