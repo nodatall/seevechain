@@ -213,6 +213,18 @@ const KNOWN_CONTRACTS = {
     short: 'ToolChain Partners',
     long: 'Undisclosed7',
   },
+  '0x11d27c2307c108990d3874b5b3dac3209bc7eee4': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed8',
+  },
+  '0x96fa20b2162cae29b3ccb7984d3b23459200722a': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed9',
+  },
+  '0x7977f06e9f1d7f5bf0d73cd8de24bd16ddea2cf2': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed10',
+  },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'ToolChain Partners',
     long: 'NSF International',
@@ -404,7 +416,7 @@ const KNOWN_CONTRACTS = {
    },
   '0x4e9eb6f6e04464eee33ae04bf430e20529482e60': {
     short: 'VeSea',
-    long: 'VeSeaNFT Forest Nation Keepers',
+    long: 'VeSeaNFT Forest Nation - Keepers',
    },
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
     short: 'VeSea',
@@ -564,11 +576,11 @@ const KNOWN_CONTRACTS = {
   },
   '0x4e9eb6f6e04464eee33ae04bf430e20529482e60': {
     short: 'VeSea',
-    long: 'VeSeaMarket Forest Nation Keepers'
+    long: 'VeSeaMarket Forest Nation - Keepers'
   },
   '0xaadf4db8e3569b16c0115d6586a6b330564a7d36': {
     short: 'VeSea',
-    long: 'VeSeaMarket New Pigs Order Slaughterhouse'
+    long: 'VeSeaMarket New Pigs Order - Slaughterhouse'
   },
 }
 
