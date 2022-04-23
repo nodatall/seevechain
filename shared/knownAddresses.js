@@ -422,6 +422,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT Phantom VeGhosts',
    },
+  '0x0c447c4311afecf8c14108fa962442444a8d3b06': {
+    short: 'VeSea',
+    long: 'VeSeaNFT Battle Mage V',
+   },
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
     short: 'VeSea',
     long: 'VeSeaMarket VeKings v2',
@@ -589,6 +593,10 @@ const KNOWN_CONTRACTS = {
   '0x322a244c62c3d7594b1f62930f58a8c79a618008': {
     short: 'VeSea',
     long: 'VeSeaMarket Phantom VeGhosts'
+  },
+  '0x0af14b7b44cf0aea638836463ba186a5a271302e': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Battle Mage V'
   },
 }
 
