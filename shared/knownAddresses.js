@@ -165,9 +165,42 @@ const KNOWN_CONTRACTS = {
   },
   '0x535ab4a9fce43dc71e9540534733bbeb0f494d5c': 'burntoken.io',
   '0x1a048cff120f3ebff9bb66459effa34445c8e87e': 'KnowSeafood',
-  '0xc7fd71b05b3060fce96e4b6cdc6ec353fa6f838e': 'World of V - Community Marketplace',
-  '0x5e6265680087520dc022d75f4c45f9ccd712ba97': 'World of V - NFT Marketplace',
-  '0x48908fD4B00B8e13bd172da9416B6fc40A6A737c': 'World of V Genesis Marketplace',
+  '0xc7fd71b05b3060fce96e4b6cdc6ec353fa6f838e':{
+    short: 'WorldOfV',
+    long: 'v1 - Marketplace Community NFT',
+  },
+  '0xc3F851F9f78c92573620582BF9002f0C4a114B67': {
+    short: 'WorldOfV',
+    long: 'v2 - Marketplace Community NFT',
+  },
+  '0xe01Cb06168f52B40fC60D5cE218346361A75efE7': {
+    short: 'WorldOfV',
+    long: 'Auction Marketplace',
+  },
+  '0xE56861c0bB8012EC955DA4E4122895ED2A46d229': {
+    short: 'WorldOfV',
+    long: 'Offer Marketplace',
+  },
+  '0x5e6265680087520dc022d75f4c45f9ccd712ba97': {
+    short: 'WorldOfV',
+    long: 'Open Mint Community NFT',
+  },
+  '0xc7592f90A6746E5D55e4a1543b6caE6D5b11d258': {
+    short: 'WorldOfV',
+    long: 'Account Registry Contract',
+  },
+  '0x93Ae8aab337E58A6978E166f8132F59652cA6C56': {
+    short: 'WorldOfV',
+    long: 'Genesis WoV Collection',
+  },
+  '0x9aaB6e4e017964ec7C0F092d431c314F0CAF6B4B': {
+    short: 'WorldOfV',
+    long: 'Special WoV Collection',
+  },
+  '0x2A7Bc6E39bCf51f5c55E7FC779E6b4DA30be30c3': {
+    short: 'WorldOfV',
+    long: 'VeHashes WoV Collection',
+  },
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
   '0x34109fc2a649965eecd953d31802c67dcc183d57': {
     short: 'NO NERDS INC',
