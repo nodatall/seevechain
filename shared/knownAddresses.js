@@ -169,15 +169,15 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'v1 - Marketplace Community NFT',
   },
-  '0xc3F851F9f78c92573620582BF9002f0C4a114B67': {
+  '0xc3f851f9f78c92573620582bf9002f0c4a114b67': {
     short: 'WorldOfV',
     long: 'v2 - Marketplace Community NFT',
   },
-  '0xe01Cb06168f52B40fC60D5cE218346361A75efE7': {
+  '0xe01cb06168f52b40fc60d5ce218346361a75efe7': {
     short: 'WorldOfV',
     long: 'Auction Marketplace',
   },
-  '0xE56861c0bB8012EC955DA4E4122895ED2A46d229': {
+  '0xe56861c0bb8012ec955da4e4122895ed2a46d229': {
     short: 'WorldOfV',
     long: 'Offer Marketplace',
   },
@@ -185,19 +185,19 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'Open Mint Community NFT',
   },
-  '0xc7592f90A6746E5D55e4a1543b6caE6D5b11d258': {
+  '0xc7592f90a6746e5d55e4a1543b6cae6d5b11d258': {
     short: 'WorldOfV',
     long: 'Account Registry Contract',
   },
-  '0x93Ae8aab337E58A6978E166f8132F59652cA6C56': {
+  '0x93ae8aab337e58a6978e166f8132f59652ca6c56': {
     short: 'WorldOfV',
     long: 'Genesis WoV Collection',
   },
-  '0x9aaB6e4e017964ec7C0F092d431c314F0CAF6B4B': {
+  '0x9aab6e4e017964ec7c0f092d431c314f0caf6b4b': {
     short: 'WorldOfV',
     long: 'Special WoV Collection',
   },
-  '0x2A7Bc6E39bCf51f5c55E7FC779E6b4DA30be30c3': {
+  '0x2a7bc6e39bcf51f5c55e7fc779e6b4da30be30c3': {
     short: 'WorldOfV',
     long: 'VeHashes WoV Collection',
   },
