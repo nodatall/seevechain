@@ -1,5 +1,5 @@
 const KNOWN_CONTRACTS = {
-  '0x505b95e128e403634fe6090472485341905fc0f9': `Yunnan Pu'er Tea`,
+  '0x505b95e128e403634fe6090472485341905fc0f9': 'Yunnan Pu`er Tea',
   '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': 'DNV',
   '0xbb763cea82127548c465f6ad83a297f292e5c2fb': 'Reebonz',
   '0xfbc5c4e371164e3f1dc5d1760a98f3d227ba7e3b': {
@@ -281,6 +281,22 @@ const KNOWN_CONTRACTS = {
   '0xd86bed355d9d6a4c951e96755dd0c3cf004d6cd0': {
     short: 'Vexchange v2',
     long: 'Vexchange v2 (WoV)',
+  },  
+  '0x08c73b33115cafda73371a23a98ee354598a4abe': {
+    short: 'Dohrnii Staking',
+    long: 'Dohrnii Staking (3mo)',
+  },  
+  '0x732c69e4cb74279e1a9a6f31764d2c4668e1cba1': {
+    short: 'Dohrnii Staking',
+    long: 'Dohrnii Staking (6mo)',
+  },  
+  '0xcd88063e5bdc4416370557987fc7d15baa447b1d': {
+    short: 'Dohrnii Staking',
+    long: 'Dohrnii Staking (1yr)',
+  },  
+  '0xa2bae9d627A29aE6914c7D18afCcb27664d1b436': {
+    short: 'Dohrnii Staking',
+    long: 'Dohrnii Staking (3yr)',
   },
   '0xe92fddd633008c1bca6e738725d2190cd46df4a1': {
     short: 'VPunks',
