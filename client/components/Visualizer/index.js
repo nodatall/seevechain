@@ -95,7 +95,7 @@ function BlockNumber() {
   const currentBlock = useAppState(s => s.currentBlock)
   const clausesInBlock = currentBlock.transactions.reduce((clauses, tx) => clauses + tx.clauses.length, 0)
   return <a
-    href={`https://insight.vecha.in/#/main/blocks/${currentBlock.block.id}`}
+    href={`https://vechainstats.com/block/${currentBlock.block.number}/`}
     target="_blank"
     className="Visualizer-blockNumber"
   >
