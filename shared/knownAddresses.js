@@ -335,7 +335,7 @@ const KNOWN_CONTRACTS = {
     short: 'Vales',
     long: 'Vales NFT',
   },
-  '0x242035f42C59119b9A22D4270506c07Fb792e55C': {
+  '0x242035f42c59119b9a22d4270506c07fb792e55c': {
     short: 'VeSea',
     long: 'VeSea Profiles',
    },
@@ -482,6 +482,10 @@ const KNOWN_CONTRACTS = {
   '0x0c447c4311afecf8c14108fa962442444a8d3b06': {
     short: 'VeSea',
     long: 'VeSeaNFT Battle Mage V',
+   },
+  '0x1d971ac972f671c19d1be00e4fbf3118d3861851': {
+    short: 'VeSea',
+    long: 'VeSeaNFT ForestNation - Guardians',
    },
   '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
     short: 'VeSea',
@@ -654,6 +658,14 @@ const KNOWN_CONTRACTS = {
   '0x0af14b7b44cf0aea638836463ba186a5a271302e': {
     short: 'VeSea',
     long: 'VeSeaMarket Battle Mage V'
+  },
+  '0x2844f79582698d2a8c39ec8ba359b889f88cdf97': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Shredderz'
+  },
+  '0x1d971ac972f671c19d1be00e4fbf3118d3861851': {
+    short: 'VeSea',
+    long: 'VeSeaMarket ForestNation - Guardians'
   },
 }
 
