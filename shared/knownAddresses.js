@@ -335,7 +335,7 @@ const KNOWN_CONTRACTS = {
     short: 'Vales',
     long: 'Vales NFT',
   },
-  '0xdaeda865296cee66dc6863f9e93751f00b3606fb': {
+  '0x242035f42C59119b9A22D4270506c07Fb792e55C': {
     short: 'VeSea',
     long: 'VeSea Profiles',
    },
