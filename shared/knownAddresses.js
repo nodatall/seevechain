@@ -343,6 +343,14 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea Messenger',
    },
+  '0xf02e1cf743fb36468f90c8daa2119313cd99db2d': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Offers'
+  },
+  '0xbecf72c58be308b961e3e7cda9e8611e19e87ba7': {
+    short: 'VeSea',
+    long: 'VeSeaMarket Listings'
+  },
   '0x148442103eeadfaf8cffd593db80dcdeadda71c9': {
     short: 'VeSea',
     long: 'VeSeaNFT VeKings',
@@ -487,190 +495,23 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT ForestNation - Guardians',
    },
-  '0x8db8b6a5985b3fba2f2e93fc5f29194cccb48ef9': {
+  '0x3759080b28604fd2851c215da71539bd8d5242ef': {
     short: 'VeSea',
-    long: 'VeSeaMarket VeKings v2',
+    long: 'VeSeaNFT Kickback Koalas',
    },
-  '0x7e767246a904df60f692531bf04c63f8c0d8281b': {
+  '0x3fdf191152684b417f4a55264158c2eab97a81b3': {
     short: 'VeSea',
-    long: 'VeSeaMarket VeGhosts',
+    long: 'VeSeaNFT VFox - ORIGINS',
    },
-  '0x65b2fa1a0633fbb07e51aec325e2b8d85bbb0a3a': {
+  '0x29af120f3d84d8eb76e518dd43c6e408a579f6bf': {
     short: 'VeSea',
-    long: 'VeSeaMarket Honorary VeKings',
+    long: 'VeSeaNFT VFox - Burn',
    },
-  '0x948f629cd19bee09ede8475f028963848e504bb6': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Veysarum',
-   },
-  '0x230a07439018c8fb691981727eaac9e10ae3dcdb': {
-    short: 'VeSea',
-    long: 'VeSeaMarket VeKongs',
-   },
-  '0x720ef33b0518614579025cc38297fecfd2dde92d': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Galaxy Portraits',
-   },
-  '0xafb79de90b5711f61f6aba74bb5096f5a782e762': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Vumanoids',
-   },
-  '0x643f03dd99f09db83c984eac548ec8bda97518d5': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Undead VeKings',
-   },
-  '0x2ebaf17d7962f7e91d9819e6db96100ef4d28244': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Sacrificed VeKings',
-   },
-  '0xbbfa98002adf880742c507b2d8cc8d70506310ff': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Mad Ⓥ-Apes',
-   },
-  '0xcc43c647d20d34a800d9d4cd77885a3f63d0304c': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Mad Ⓥ-Apes Fusion',
-   },
-  '0x7437253c66cad34fd5f9d1863113f158f934ea44': {
-    short: 'VeSea',
-    long: 'VeSeaMarket uniⓋerse',
-   },
-  '0x6f49ca0319fc902ed60e3f1f1b57b8e835a46fc1': {
-    short: 'VeSea',
-    long: 'VeSeaMarket AstroVETs',
-   },
-  '0x25d68cdc50141921b82745b499f450f40534924f': {
-    short: 'VeSea',
-    long: 'VeSeaMarket VeSkullz',
-   },
-  '0xd512751bdd7884192f7bca54a8e8b08b639fbd66': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Warbands',
-   },
-  '0x062a557ff0d5d17e6fbb5fae1a186bc1ef3c4169': {
-    short: 'VeSea',
-    long: 'VeSeaMarket VeNerds',
-   }, 
-  '0x064ff744912ad88896d84b5c11de9ee3a3b00ef9': {
-    short: 'VeSea',
-    long: 'VeSeaMarket New Pigs Order',
-   },
-  '0x05bd0f2fdd941c3ac3bd3def66506171f591c1da': {
-    short: 'VeSea',
-    long: 'VeSeaMarket veLoot',
-   },
-  '0x162eb3120a71cc2971275e33864c1dcbaff9f7e9': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Victs',
-   },
-  '0x07cfc0e26cb67fd543dae94e924eb19399190eea': {
-    short: 'VeSea',
-    long: 'VeSeaMarket VeGnomes',
-   },
-  '0x48a89d9d6ef6cce344214a6c43942096db14126b': {
-    short: 'VeSea',
-    long: 'VeSeaMarket uniⓋerse Expanse',
-   },
-  '0xb9f37e9bc77f6d18e4a88516de87f7e24daa4c57': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Guardians',
-   },
-  '0x301f1049d6bc04e063651dda4a2c2b2bc1b359a9': {
-    short: 'VeSea',
-    long: 'VeSeaMarket VeNature',
-   },
-  '0xc6b3c4bbfde3f7ea48c85fcf8f0e3bcc45739925': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Vales',
-   },
-  '0x9e68d6c7daf2e010d8b8ee157d81de143a7c68ef': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Metaversials',
-   },
-  '0xe4dc078af2dac57a3118b0cf23c76e4b42362392': {
-    short: 'VeSea',
-    long: 'VeSeaMarket VeRocket',
-   },
-  '0x6ec6747014b052269a27bab2b5e279aaf800b503': {
-    short: 'VeSea',
-    long: 'VeSeaMarket VeeParrots',
-   }, 
-  '0x4478afdd1d680b2569b6b25acfcc5b4181b7382b': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Frost Giant VeKings',
-   }, 
-  '0x45828a5b0b707ea48133ff1bbe84e4e7ea72575f': {
-    short: 'VeSea',
-    long: 'VeSeaMarket VFoxes',
-   }, 
-  '0xf45498362037caec767887f0d2540b6abceb46b8': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Guardians Leaders',
-   }, 
-  '0x40c3d13dff784d7f3cec6cd97967ba1d8aa66f8c': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Ukraine',
-   }, 
-  '0xde3534833e513d9736288db85c4ba627b3c5df2f': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Metaversials Alteregos',
-   }, 
-  '0x54d44b2c4c65ede1b5c00066501f97586e7b7165': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Mad Ⓥ-Apes Elementals',
-   },
-  '0x41580ca46ef0991da022657c993c9d7f7eb49604': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Ukiyoe Warriors'
-  },
-  'tbd': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Doppelganger'
-  },
-  '0x7255ff621e1785eb7a999f3df4b17b870023fa99': {
-    short: 'VeSea',
-    long: 'VeSeaMarket VPunks'
-  },
-  '0x7e6ed002fb29ed51ae5b0ff309a6a32add8f9a8e': {
-    short: 'VeSea',
-    long: 'VeSeaMarket NFT Paper Project'
-  },
-  '0x1c37c333886dbfb0aedf218a2f895e2c5bd01f1e': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Exoworlds'
-  },
-  '0xae2e7072f26217b61fb1bb62d055dffbf7f49865': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Bored Flamingo'
-  },
-  '0x4e9eb6f6e04464eee33ae04bf430e20529482e60': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Forest Nation - Keepers'
-  },
-  '0xaadf4db8e3569b16c0115d6586a6b330564a7d36': {
-    short: 'VeSea',
-    long: 'VeSeaMarket New Pigs Order - Slaughterhouse'
-  },
-  '0x322a244c62c3d7594b1f62930f58a8c79a618008': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Phantom VeGhosts'
-  },
-  '0x0af14b7b44cf0aea638836463ba186a5a271302e': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Battle Mage V'
-  },
-  '0x2844f79582698d2a8c39ec8ba359b889f88cdf97': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Shredderz'
-  },
-  '0x1d971ac972f671c19d1be00e4fbf3118d3861851': {
-    short: 'VeSea',
-    long: 'VeSeaMarket ForestNation - Guardians'
-  },
 }
 
 const TOKEN_CONTRACTS = {
   '0x4e17357053da4b473e2daa2c65c2c949545724b8': 'VeUSD Token',
+  '0xBc5D5d1e583941943003267e8756bBa7A6B48191': 'VSEA Token'
   '0x45429a2255e7248e57fce99e7239aed3f84b7a53': 'vVET Token',
   '0x8e57aadf0992afcc41f7843656c6c7129f738f7b': 'DHN Token',
   '0x2f10726b240d7efb08671f4d5f0a442db6f29416': 'Paper Burn Token',
