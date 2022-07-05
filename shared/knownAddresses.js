@@ -318,6 +318,14 @@ const KNOWN_CONTRACTS = {
     short: 'ExoWorlds',
     long: 'ExoWorlds Marketplace',
   },
+  '0xf99ea55a2bee3ee862d7cc61ad9e04fcb5991d5e': {
+    short: 'Black VeMarket',
+    long: 'Black VeMarket - Marketplace',
+  },
+  'tbd': {
+    short: 'Black VeMarket',
+    long: 'Black VeMarket - Art NFTs',
+  },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
@@ -414,6 +422,10 @@ const KNOWN_CONTRACTS = {
   '0x14c7d5357da8a8ed7a3983bc5ffd249fee63192d': {
     short: 'VeSea',
     long: 'VeSeaNFT VeNerds',
+   },
+  '0x5452c80cdfd31e175f62f6197e65adaf73ec84df': {
+    short: 'VeSea',
+    long: 'VeSeaNFT VeNerds Airdrops',
    },
   '0x88d7e38af5bdb6e65a045c79c9ce70ed06e6569b': {
     short: 'VeSea',
