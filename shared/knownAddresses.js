@@ -281,19 +281,19 @@ const KNOWN_CONTRACTS = {
   '0xd86bed355d9d6a4c951e96755dd0c3cf004d6cd0': {
     short: 'Vexchange v2',
     long: 'Vexchange v2 (WoV)',
-  },  
+  },
   '0x08c73b33115cafda73371a23a98ee354598a4abe': {
     short: 'Dohrnii Staking',
     long: 'Dohrnii Staking (3mo)',
-  },  
+  },
   '0x732c69e4cb74279e1a9a6f31764d2c4668e1cba1': {
     short: 'Dohrnii Staking',
     long: 'Dohrnii Staking (6mo)',
-  },  
+  },
   '0xcd88063e5bdc4416370557987fc7d15baa447b1d': {
     short: 'Dohrnii Staking',
     long: 'Dohrnii Staking (1yr)',
-  },  
+  },
   '0xa2bae9d627A29aE6914c7D18afCcb27664d1b436': {
     short: 'Dohrnii Staking',
     long: 'Dohrnii Staking (3yr)',
@@ -523,7 +523,7 @@ const KNOWN_CONTRACTS = {
 
 const TOKEN_CONTRACTS = {
   '0x4e17357053da4b473e2daa2c65c2c949545724b8': 'VeUSD Token',
-  '0xBc5D5d1e583941943003267e8756bBa7A6B48191': 'VSEA Token'
+  '0xBc5D5d1e583941943003267e8756bBa7A6B48191': 'VSEA Token',
   '0x45429a2255e7248e57fce99e7239aed3f84b7a53': 'vVET Token',
   '0x8e57aadf0992afcc41f7843656c6c7129f738f7b': 'DHN Token',
   '0x2f10726b240d7efb08671f4d5f0a442db6f29416': 'Paper Burn Token',
