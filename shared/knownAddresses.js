@@ -201,6 +201,46 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'VeHashes WoV Collection',
   },
+  '0xf92b2a2ff63ff09933c0ae797eff594ea3498c81': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Yokai',
+  },
+  '0xf19fe0f222e4f2a7587b817042fe58f4f330a009': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Psycho Beasts',
+  },
+  '0x41a03b04725c20f3902c67ee7416e5df4266df45': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - BFFC Ladies',
+  },
+  '0x167f6cc1e67a615b51b5a2deaba6b9feca7069df': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Shredderz',
+  },
+  '0xafb27146a60a3c71b723ebbaaf3823f12542d914': {
+    short: 'WorldOfV',
+    long: 'Yokai Staking',
+  },
+  '0x489f014285a0c45e5c82013d5c3f3b3e1274889e': {
+    short: 'WorldOfV',
+    long: 'Shredderz Staking',
+  },
+  '0x916a1b8bda7239d0336727bc821bb0a362179dac': {
+    short: 'WorldOfV',
+    long: 'Shredderz Staking',
+  },
+  '0x2459a3649b5240ae8d851e42e64e694321e975b9': {
+    short: 'WorldOfV',
+    long: 'Psycho Beast Staking',
+  },
+  '0xf700a72fbd62c6743c87639e7d0ed29e390ebb64': {
+    short: 'WorldOfV',
+    long: 'Shamanic Oracles Staking',
+  },
+  '0xf5e2d450881d8c3d466dd4ff4de8838c275bbc3c': {
+    short: 'WorldOfV',
+    long: 'Domination Staking',
+  },
   '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
   '0x34109fc2a649965eecd953d31802c67dcc183d57': {
     short: 'NO NERDS INC',
@@ -322,9 +362,9 @@ const KNOWN_CONTRACTS = {
     short: 'Black VeMarket',
     long: 'Black VeMarket - Marketplace',
   },
-  'tbd': {
+  '0x6368f744862abc4d70d0714180d6d1902a86aa9b': {
     short: 'Black VeMarket',
-    long: 'Black VeMarket - Art NFTs',
+    long: 'Singapura Dragons Staking',
   },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
@@ -351,11 +391,11 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea Messenger',
    },
-  '0xf02e1cf743fb36468f90c8daa2119313cd99db2d': {
+  '0xccd49465e94eb9e1488d23ad9a23bfbb72acfc74': {
     short: 'VeSea',
     long: 'VeSeaMarket Offers'
   },
-  '0xbecf72c58be308b961e3e7cda9e8611e19e87ba7': {
+  '0xdafca4a51ea97b3b5f21171a95dabf540894a55a': {
     short: 'VeSea',
     long: 'VeSeaMarket Listings'
   },
@@ -518,6 +558,14 @@ const KNOWN_CONTRACTS = {
   '0x29af120f3d84d8eb76e518dd43c6e408a579f6bf': {
     short: 'VeSea',
     long: 'VeSeaNFT VFox - Burn',
+   },
+  '0xf647e7b4fe7e0dc7ceddd038c6c004cc53163ca9': {
+    short: 'VeSea',
+    long: 'VeSeaNFT Shredderz Boardz',
+   },
+  '0x499be5332bfba0761650ae55b8d9c8443458f219': {
+    short: 'VeSea',
+    long: 'VeSeaNFT VVarriors',
    },
 }
 
