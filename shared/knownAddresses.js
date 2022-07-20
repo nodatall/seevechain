@@ -567,6 +567,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT VVarriors',
    },
+  '0xf4d82631be350c37d92ee816c2bd4d5adf9e6493': {
+    short: 'VeSea',
+    long: 'VeSeaNFT MinoMob',
+   },
 }
 
 const TOKEN_CONTRACTS = {
