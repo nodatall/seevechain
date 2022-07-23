@@ -103,6 +103,10 @@ const KNOWN_CONTRACTS = {
     short: 'realitems.io',
     long: 'realitems.io 2',
   },
+  '0xe860cef926e5e76e0e88fdc762417a582f849c27': {
+    short: 'XP Network',
+    long: 'XPN - Bridge',
+  },
   '0xa7f8b361060222b3aee75f4b457ba0353cf10998': 'E-HCert',
   '0xa9f3c1bd52c3a506cecbb8cbca562ef26c833175': 'Yuhongtai Foods',
   '0x040093ab307f5acb4ae3afb0fb31de0ec46d62f9': 'safehaven.io',
