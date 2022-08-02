@@ -149,9 +149,17 @@ const KNOWN_CONTRACTS = {
     short: 'VIMworld',
     long: 'VIM Feeding',
   },
+  '0xb3e9ab43306695dd7ab5a1c8a68db877206da298': {
+    short: 'VIMworld',
+    long: 'VIM Feeding',
+  },
   '0x46a7567f65c278b119ddeabf440f42ba2de949c0': {
     short: 'VIMworld',
     long: 'VIM Minting',
+  },
+  '0x36ead69626aecfa792b1cb8a546d3c1b37ac8ee5': {
+    short: 'VIMworld',
+    long: 'VIM Market',
   },
   '0x36ead69626aecfa792b1cb8a546d3c1b37ac8ee5': {
     short: 'VIMworld',
@@ -221,6 +229,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Shredderz',
   },
+  '0xda878be46f4a6ec013340fb985231ed67eb712d3': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Shamanic Oracles',
+  },
   '0xafb27146a60a3c71b723ebbaaf3823f12542d914': {
     short: 'WorldOfV',
     long: 'Yokai Staking',
@@ -264,43 +276,43 @@ const KNOWN_CONTRACTS = {
   },
   '0x54f14e2e4a204a8c1b734c1b73d6d7cb96894a61': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed1',
+    long: 'Undisclosed_1',
   },
   '0x91ace4b91fc65ee930724deb580dfe80c135713e': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed2',
+    long: 'Undisclosed_2',
   },
   '0xc3c118c6fa5479244b9f0da0b0ba8f9afa8dc33c': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed3',
+    long: 'Undisclosed_3',
   },
   '0xeddc51042586b66cf8fb75e971636c76ce2e9c35': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed4',
+    long: 'Undisclosed_4',
   },
   '0x7995bdbc94ab8bd33f77457416214a4abe0b8631': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed5',
+    long: 'Undisclosed_5',
   },
   '0xd9a43482cb6af1b7236cde4f7ec3201ac2a13d79': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed6',
+    long: 'Undisclosed_6',
   },
   '0xf41aab18649523a18de81042bd30da07b37b1ec1': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed7',
+    long: 'Undisclosed_7',
   },
   '0x11d27c2307c108990d3874b5b3dac3209bc7eee4': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed8',
+    long: 'Undisclosed_8',
   },
   '0x96fa20b2162cae29b3ccb7984d3b23459200722a': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed9',
+    long: 'Undisclosed_9',
   },
   '0x7977f06e9f1d7f5bf0d73cd8de24bd16ddea2cf2': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed10',
+    long: 'Undisclosed_10',
   },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'ToolChain Partners',
@@ -366,9 +378,17 @@ const KNOWN_CONTRACTS = {
     short: 'Black VeMarket',
     long: 'Black VeMarket - Marketplace',
   },
+  '0x87a4e53d6e65cdfada102818e9eab70d1230391f': {
+    short: 'Black VeMarket',
+    long: 'Black VeMarket - Art NFTs',
+  },
   '0x6368f744862abc4d70d0714180d6d1902a86aa9b': {
     short: 'Black VeMarket',
     long: 'Singapura Dragons Staking',
+  },
+  '0xd56340abb721b7c89c6ca3835efc490dfd66f9ae': {
+    short: 'Black VeMarket',
+    long: 'VeShawties NFTs',
   },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
@@ -574,6 +594,10 @@ const KNOWN_CONTRACTS = {
   '0xf4d82631be350c37d92ee816c2bd4d5adf9e6493': {
     short: 'VeSea',
     long: 'VeSeaNFT MinoMob',
+   },
+  '0xb757fc0906f08714315d2abd4b4f077521a21e34': {
+    short: 'VeSea',
+    long: 'VeSeaNFT VVAR DOGS',
    },
 }
 
