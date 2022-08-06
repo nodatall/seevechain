@@ -233,7 +233,7 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Shamanic Oracles',
   },
-  '0xafb27146a60a3c71b723ebbaaf3823f12542d914': {
+  '0xe8a6314ae7813ba8c55568551aea223a657cffbe': {
     short: 'WorldOfV',
     long: 'Yokai Staking',
   },
@@ -249,7 +249,7 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'Psycho Beast Staking',
   },
-  '0xf700a72fbd62c6743c87639e7d0ed29e390ebb64': {
+  '0xc9e7060bc92959d9d2ac6b2121e4268a6b5ee651': {
     short: 'WorldOfV',
     long: 'Shamanic Oracles Staking',
   },
@@ -422,6 +422,10 @@ const KNOWN_CONTRACTS = {
   '0xdafca4a51ea97b3b5f21171a95dabf540894a55a': {
     short: 'VeSea',
     long: 'VeSeaMarket Listings'
+  },
+  '0x6bdc82d901dc3940b41fd7a0823f5b7b9cad3bcc': {
+    short: 'VeSea',
+    long: 'VSEA Staking'
   },
   '0x148442103eeadfaf8cffd593db80dcdeadda71c9': {
     short: 'VeSea',
@@ -603,7 +607,7 @@ const KNOWN_CONTRACTS = {
 
 const TOKEN_CONTRACTS = {
   '0x4e17357053da4b473e2daa2c65c2c949545724b8': 'VeUSD Token',
-  '0xBc5D5d1e583941943003267e8756bBa7A6B48191': 'VSEA Token',
+  '0x23368c20c16f64ecbb30164a08666867be22f216': 'VSEA Token',
   '0x45429a2255e7248e57fce99e7239aed3f84b7a53': 'vVET Token',
   '0x8e57aadf0992afcc41f7843656c6c7129f738f7b': 'DHN Token',
   '0x2f10726b240d7efb08671f4d5f0a442db6f29416': 'Paper Burn Token',
