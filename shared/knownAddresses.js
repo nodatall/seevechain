@@ -423,7 +423,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaMarket Listings'
   },
-  '0x6bdc82d901dc3940b41fd7a0823f5b7b9cad3bcc': {
+  '0xf7c1a956122ac73c76ea3d085a0f674dbeea550c': {
     short: 'VeSea',
     long: 'VSEA Staking'
   },
