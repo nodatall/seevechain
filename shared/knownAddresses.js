@@ -603,6 +603,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT VVAR DOGS',
    },
+  '0xa19e999fce74ec6e9d8ce1380b4692e63e6c7cb1': {
+    short: 'VeSea',
+    long: 'VeSeaNFT Stardust Spectres',
+   },
 }
 
 const TOKEN_CONTRACTS = {
