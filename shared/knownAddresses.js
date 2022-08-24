@@ -66,6 +66,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeRocket',
     long: 'VeRocket vVET/JUR',
   },
+  '0x6b7e1aeff308d56f9a8ba1e57174ef97e6cde06d': {
+    short: 'VeRocket',
+    long: 'VeRocket vVET/VSEA',
+  },
   '0x8f34a3764750feb71264e9a105cf07fc301d70d1': {
     short: 'VeRocket',
     long: 'VeRocket vVET/HAI',
@@ -213,6 +217,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'VeHashes WoV Collection',
   },
+  '0x73f32592df5c0da73d56f34669d4ae28ae1afd9e': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - MVA Phoenix',
+  },
   '0xf92b2a2ff63ff09933c0ae797eff594ea3498c81': {
     short: 'WorldOfV',
     long: 'WoVNFT - Yokai',
@@ -257,7 +265,6 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'Domination Staking',
   },
-  '0x5e8078d59ed05b439508827569e47f9585c992d2': 'Madini Africa',
   '0x34109fc2a649965eecd953d31802c67dcc183d57': {
     short: 'NO NERDS INC',
     long: 'UNION Distribution',
@@ -395,6 +402,8 @@ const KNOWN_CONTRACTS = {
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
   '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': 'Vesitors NFT',
   '0x2980f7a9bec00ee6ffee21e5fbac5e104578bf13': 'Wall of Vame',
+  '0x2fd3d1e1a3f1e072c89d67301a86a5ba850ccd4e': 'Venonymous NFT',
+  '0x47cce813c986b4d982a192bf7d6831f4beaccbc0': 'YEET Crusaders NFT',
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'Paper Project',
     long: 'Paper Marketplace',
@@ -426,6 +435,10 @@ const KNOWN_CONTRACTS = {
   '0x09212be7a37a066d4707d9afbe09536656aff89b': {
     short: 'VeSea',
     long: 'VSEA Staking'
+  },
+  '0x09212be7a37a066d4707d9afbe09536656aff89b': {
+    short: 'VeSea',
+    long: 'VeSea Arcade - MV AE roll'
   },
   '0x148442103eeadfaf8cffd593db80dcdeadda71c9': {
     short: 'VeSea',
@@ -607,9 +620,14 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSeaNFT Stardust Spectres',
    },
+  '0xbcbf39013da096c97f0dc913f7ac1cdc42b9a721': {
+    short: 'VeSea',
+    long: 'VeSeaNFT Universal Inventory',
+   },
 }
 
 const TOKEN_CONTRACTS = {
+  '0x107a0b0faeb58c1fdef97f37f50e319833ad1b94': 'DRAGON Token',
   '0x4e17357053da4b473e2daa2c65c2c949545724b8': 'VeUSD Token',
   '0x23368c20c16f64ecbb30164a08666867be22f216': 'VSEA Token',
   '0x45429a2255e7248e57fce99e7239aed3f84b7a53': 'vVET Token',
