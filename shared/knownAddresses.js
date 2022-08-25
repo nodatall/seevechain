@@ -424,7 +424,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea Messenger',
    },
-  '0xccd49465e94eb9e1488d23ad9a23bfbb72acfc74': {
+  '0xd5b8344eeff22332de93413e53bbdbfe472eff89': {
     short: 'VeSea',
     long: 'VeSeaMarket Offers'
   },
