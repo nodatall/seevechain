@@ -241,6 +241,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Shamanic Oracles',
   },
+  '0xafb27146a60a3c71b723ebbaaf3823f12542d914': {
+    short: 'WorldOfV',
+    long: 'UW Staking',
+  },
   '0xe8a6314ae7813ba8c55568551aea223a657cffbe': {
     short: 'WorldOfV',
     long: 'Yokai Staking',
@@ -408,7 +412,7 @@ const KNOWN_CONTRACTS = {
     short: 'Paper Project',
     long: 'Paper Marketplace',
   },
-  '0x69b6811473a7659e0b8f198c2ccc25da55fef5ea': {
+  '0x04edc606b0d60e843528422619c6d939be8a2fcf': {
     short: 'Paper Project',
     long: 'Paper NFT',
   },
@@ -426,203 +430,207 @@ const KNOWN_CONTRACTS = {
    },
   '0xd5b8344eeff22332de93413e53bbdbfe472eff89': {
     short: 'VeSea',
-    long: 'VeSeaMarket Offers'
+    long: 'VeSea Market: Offers'
   },
   '0xdafca4a51ea97b3b5f21171a95dabf540894a55a': {
-    short: 'VeSea',
-    long: 'VeSeaMarket Listings'
+    short: 'VeSea NFT Market',
+    long: 'VeSea Market: Listings'
   },
   '0x09212be7a37a066d4707d9afbe09536656aff89b': {
     short: 'VeSea',
-    long: 'VSEA Staking'
+    long: '$VSEA Staking'
   },
   '0x09212be7a37a066d4707d9afbe09536656aff89b': {
     short: 'VeSea',
-    long: 'VeSea Arcade - MV AE roll'
+    long: 'VeSea Arcade: MV AE roll'
   },
+  '0x029b130f56dfb247b536c83a11add1f721b10531': {
+    short: 'VeSea',
+    long: 'VeSea Arcade: Satoshi Dice'
+  },
+  '0x29af120f3d84d8eb76e518dd43c6e408a579f6bf': {
+    short: 'VeSea',
+    long: 'VeSea Arcade: VFox Burn',
+   },
   '0x148442103eeadfaf8cffd593db80dcdeadda71c9': {
     short: 'VeSea',
-    long: 'VeSeaNFT VeKings',
+    long: 'VeSea NFT: VeKings',
    },
   '0x588f2b0d4cbea48deb34c3d401cb995046edda81': {
     short: 'VeSea',
-    long: 'VeSeaNFT VeGhosts',
+    long: 'VeSea NFT: VeGhosts',
    },
   '0x997c61cd02b5f2c8826ebcaf26080c650cabdda2': {
     short: 'VeSea',
-    long: 'VeSeaNFT Honorary VeKings',
+    long: 'VeSea NFT: Honorary VeKings',
    },
   '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': {
     short: 'VeSea',
-    long: 'VeSeaNFT Veysarum',
+    long: 'VeSea NFT: Veysarum',
    },
   '0x9932690b32c4c0cd4d86a53eca948d33b1556ae7': {
     short: 'VeSea',
-    long: 'VeSeaNFT VeKongs',
+    long: 'VeSea NFT: VeKongs',
    },
   '0xc35d04f8783f85ede2f329eed3c1e8b036223a06': {
     short: 'VeSea',
-    long: 'VeSeaNFT Galaxy Portraits',
+    long: 'VeSea NFT: Galaxy Portraits',
    },
   '0x46db08ca72b205a8f9e746a9e33a30d2f379216b': {
     short: 'VeSea',
-    long: 'VeSeaNFT Vumanoids',
+    long: 'VeSea NFT: Vumanoids',
    },
   '0x8b55d319b6cae4b9fd0b4517f29cf4a100818e38': {
     short: 'VeSea',
-    long: 'VeSeaNFT Undead VeKings',
+    long: 'VeSea NFT: Undead VeKings',
    },
   '0x8b55d319b6cae4b9fd0b4517f29cf4a100818e38': {
     short: 'VeSea',
-    long: 'VeSeaNFT Sacrificed VeKings',
+    long: 'VeSea NFT: Sacrificed VeKings',
    },
   '0xffcc1c4492c3b49825712e9a8909e4fcebfe6c02': {
     short: 'VeSea',
-    long: 'VeSeaNFT Mad Ⓥ-Apes',
+    long: 'VeSea NFT: Mad Ⓥ-Apes',
    },
   '0xb12d1d640f56173ef3a47e5e1a1fde96ba96ce14': {
     short: 'VeSea',
-    long: 'VeSeaNFT Mad Ⓥ-Apes Fusion',
+    long: 'VeSea NFT: Mad Ⓥ-Apes Fusion',
    },
   '0x60deca6baceb6258c8d718f9987acb17176f7f24': {
     short: 'VeSea',
-    long: 'VeSeaNFT universe',
+    long: 'VeSea NFT: universe',
    },
   '0x436f0a9b45e85eb2f749aa67d3393c649ef4dff2': {
     short: 'VeSea',
-    long: 'VeSeaNFT AstroVETs',
+    long: 'VeSea NFT: AstroVETs',
    },
   '0x01c10830feef88258e7a1ca998009ac19f7f087e': {
     short: 'VeSea',
-    long: 'VeSeaNFT VeSkullz',
+    long: 'VeSea NFT: VeSkullz',
    },
   '0x6aa982158617d53c37f65d43eb9a156449adfff3': {
     short: 'VeSea',
-    long: 'VeSeaNFT Warbands',
+    long: 'VeSea NFT: Warbands',
    },
   '0x14c7d5357da8a8ed7a3983bc5ffd249fee63192d': {
     short: 'VeSea',
-    long: 'VeSeaNFT VeNerds',
+    long: 'VeSea NFT: VeNerds',
    },
   '0x5452c80cdfd31e175f62f6197e65adaf73ec84df': {
     short: 'VeSea',
-    long: 'VeSeaNFT VeNerds Airdrops',
+    long: 'VeSea NFT: VeNerds Airdrops',
    },
   '0x88d7e38af5bdb6e65a045c79c9ce70ed06e6569b': {
     short: 'VeSea',
-    long: 'VeSeaNFT New Pigs Order',
+    long: 'VeSea NFT: New Pigs Order',
    },
   '0x1f173256c08e557d0791bc6ef2ac1b1099f57ed5': {
     short: 'VeSea',
-    long: 'VeSeaNFT veLoot',
+    long: 'VeSea NFT: veLoot',
    },
   '0xC2dE1fbB24d918a68923CFb24cC541aEA7a49450': {
     short: 'VeSea',
-    long: 'VeSeaNFT Victs',
+    long: 'VeSea NFT: Victs',
    },
   '0x15e2f18feade6ccb990956050bf0c2990445cace': {
     short: 'VeSea',
-    long: 'VeSeaNFT VeGnomes',
+    long: 'VeSea NFT: VeGnomes',
    },
   '0x207577649f08c87de98e9981712fc9aece07df79': {
     short: 'VeSea',
-    long: 'VeSeaNFT uniⓋerse Expanse',
+    long: 'VeSea NFT: uniⓋerse Expanse',
    },
   '0x0403745444204d1a0218cecbfe70b2ea42d654a6': {
     short: 'VeSea',
-    long: 'VeSeaNFT Guardians',
+    long: 'VeSea NFT: Guardians',
    },
   '0xbcfc59dcc2a0977ac1e9b465566ad071e5ec06aa': {
     short: 'VeSea',
-    long: 'VeSeaNFT VeNature',
+    long: 'VeSea NFT: VeNature',
    },
   '0x313d1fff2664a2df5a12e99c8c57e50efa715d73': {
     short: 'VeSea',
-    long: 'VeSeaNFT Metaversials',
+    long: 'VeSea NFT: Metaversials',
    },
   '0x6354b35c510cae41cd45b568087bf767756b3589': {
     short: 'VeSea',
-    long: 'VeSeaNFT VeRocket',
+    long: 'VeSea NFT: VeRocket',
    },
   '0x4e4faebf70e7c01bcd39adbfaa247f081819919a': {
     short: 'VeSea',
-    long: 'VeSeaNFT VeeParrots',
+    long: 'VeSea NFT: VeeParrots',
    },
   '0x3427e769ae440ae8e18b77f49cc2d6a39e57f047': {
     short: 'VeSea',
-    long: 'VeSeaNFT Frost Giant VeKings',
+    long: 'VeSea NFT: Frost Giant VeKings',
    },
   '0x78d4ba28c151501fa3f68927ea96304cab89b6f0': {
     short: 'VeSea',
-    long: 'VeSeaNFT VFoxes',
+    long: 'VeSea NFT: VFoxes',
    },
   '0xd393c0dcccae49248862b462404b63a8546a888a': {
     short: 'VeSea',
-    long: 'VeSeaNFT Guardians Leaders',
+    long: 'VeSea NFT: Guardians Leaders',
    },
   '0x850a2457975fd411f03a513c6f94cd7d378e7ec1': {
     short: 'VeSea',
-    long: 'VeSeaNFT Ukraine',
+    long: 'VeSea NFT: Ukraine',
    },
   '0xfd5e344798ceb51afd910fafae9768e4d093a725': {
     short: 'VeSea',
-    long: 'VeSeaNFT Metaversials Alteregos',
+    long: 'VeSea NFT: Metaversials Alteregos',
    },
   '0x2571978545672fe7e4cced7409bdd0a57bc3c3d2': {
     short: 'VeSea',
-    long: 'VeSeaNFT Doppelganger',
+    long: 'VeSea NFT: Doppelganger',
    },
   '0x4e9eb6f6e04464eee33ae04bf430e20529482e60': {
     short: 'VeSea',
-    long: 'VeSeaNFT Forest Nation - Keepers',
+    long: 'VeSea NFT: Forest Nation - Keepers',
    },
   '0x875d36b9760ffe7ce366d3ff700c1ad98bdee990': {
     short: 'VeSea',
-    long: 'VeSeaNFT Phantom VeGhosts',
+    long: 'VeSea NFT: Phantom VeGhosts',
    },
   '0x0c447c4311afecf8c14108fa962442444a8d3b06': {
     short: 'VeSea',
-    long: 'VeSeaNFT Battle Mage V',
+    long: 'VeSea NFT: Battle Mage V',
    },
   '0x1d971ac972f671c19d1be00e4fbf3118d3861851': {
     short: 'VeSea',
-    long: 'VeSeaNFT ForestNation - Guardians',
+    long: 'VeSea NFT: ForestNation - Guardians',
    },
   '0x3759080b28604fd2851c215da71539bd8d5242ef': {
     short: 'VeSea',
-    long: 'VeSeaNFT Kickback Koalas',
+    long: 'VeSea NFT: Kickback Koalas',
    },
   '0x3fdf191152684b417f4a55264158c2eab97a81b3': {
     short: 'VeSea',
-    long: 'VeSeaNFT VFox - ORIGINS',
-   },
-  '0x29af120f3d84d8eb76e518dd43c6e408a579f6bf': {
-    short: 'VeSea',
-    long: 'VeSeaNFT VFox - Burn',
+    long: 'VeSea NFT: VFox - ORIGINS',
    },
   '0xf647e7b4fe7e0dc7ceddd038c6c004cc53163ca9': {
     short: 'VeSea',
-    long: 'VeSeaNFT Shredderz Boardz',
+    long: 'VeSea NFT: Shredderz Boardz',
    },
   '0x499be5332bfba0761650ae55b8d9c8443458f219': {
     short: 'VeSea',
-    long: 'VeSeaNFT VVarriors',
+    long: 'VeSea NFT: VVarriors',
    },
   '0xf4d82631be350c37d92ee816c2bd4d5adf9e6493': {
     short: 'VeSea',
-    long: 'VeSeaNFT MinoMob',
+    long: 'VeSea NFT: MinoMob',
    },
   '0xb757fc0906f08714315d2abd4b4f077521a21e34': {
     short: 'VeSea',
-    long: 'VeSeaNFT VVAR DOGS',
+    long: 'VeSea NFT: VVAR DOGS',
    },
   '0xa19e999fce74ec6e9d8ce1380b4692e63e6c7cb1': {
     short: 'VeSea',
-    long: 'VeSeaNFT Stardust Spectres',
+    long: 'VeSea NFT: Stardust Spectres',
    },
   '0xbcbf39013da096c97f0dc913f7ac1cdc42b9a721': {
     short: 'VeSea',
-    long: 'VeSeaNFT Universal Inventory',
+    long: 'VeSea NFT: Universal Inventory',
    },
 }
 
