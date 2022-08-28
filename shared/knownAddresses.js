@@ -257,6 +257,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'Shredderz Staking',
   },
+  '0x9899a11ecc88b88117cd5195fe9db774b011de1d': {
+    short: 'WorldOfV',
+    long: 'Inka Staking',
+  },
   '0x2459a3649b5240ae8d851e42e64e694321e975b9': {
     short: 'WorldOfV',
     long: 'Psycho Beast Staking',
