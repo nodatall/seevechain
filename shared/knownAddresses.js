@@ -245,9 +245,13 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'UW Staking',
   },
-  '0xe8a6314ae7813ba8c55568551aea223a657cffbe': {
+  '0x602d006ed9da40144df3a8f3fc707d29cb651ed5': {
     short: 'WorldOfV',
-    long: 'Yokai Staking',
+    long: 'VeHash Staking',
+  },
+  '0x489f014285a0c45e5c82013d5c3f3b3e1274889e': {
+    short: 'WorldOfV',
+    long: 'Shredderz Staking',
   },
   '0x489f014285a0c45e5c82013d5c3f3b3e1274889e': {
     short: 'WorldOfV',
