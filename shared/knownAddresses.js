@@ -444,7 +444,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea Arcade: MV AE roll'
   },
-  '0x029b130f56dfb247b536c83a11add1f721b10531': {
+  '0x2ae9749952eeaa814850c90beb1e660880c5cd4b': {
     short: 'VeSea',
     long: 'VeSea Arcade: Satoshi Dice'
   },
