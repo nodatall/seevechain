@@ -441,7 +441,7 @@ const KNOWN_CONTRACTS = {
     long: 'VeSea Market: Offers'
   },
   '0xdafca4a51ea97b3b5f21171a95dabf540894a55a': {
-    short: 'VeSea NFT Market',
+    short: 'VeSea',
     long: 'VeSea Market: Listings'
   },
   '0x09212be7a37a066d4707d9afbe09536656aff89b': {
