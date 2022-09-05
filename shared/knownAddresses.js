@@ -225,6 +225,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Yokai',
   },
+  '0xb14baed957b8e58db10ec5ef37927d83b3bbf297': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Ukiyoe Warriors',
+  },
   '0xf19fe0f222e4f2a7587b817042fe58f4f330a009': {
     short: 'WorldOfV',
     long: 'WoVNFT - Psycho Beasts',
@@ -447,10 +451,6 @@ const KNOWN_CONTRACTS = {
   '0x09212be7a37a066d4707d9afbe09536656aff89b': {
     short: 'VeSea',
     long: '$VSEA Staking'
-  },
-  '0x09212be7a37a066d4707d9afbe09536656aff89b': {
-    short: 'VeSea',
-    long: 'VeSea Arcade: MV AE roll'
   },
   '0x2ae9749952eeaa814850c90beb1e660880c5cd4b': {
     short: 'VeSea',
