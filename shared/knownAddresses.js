@@ -83,24 +83,32 @@ const KNOWN_CONTRACTS = {
     long: 'VeRocket vVET/OCE',
   },
   '0x538f8890a383c44e59df4c7263d96ca8048da2c7': {
-    short: 'vexchange.io',
-    long: 'vexchange.io VEX',
+    short: 'Vexchange',
+    long: 'Vexchange (VEX/VET)',
   },
   '0xf9f99f982f3ea9020f0a0afd4d4679dfee1b63cf': {
-    short: 'vexchange.io',
-    long: 'vexchange.io VTHO',
+    short: 'Vexchange',
+    long: 'Vexchange (VTHO/VET)',
   },
   '0xdc391a5dbb89a3f768c41cfa0e85dcaaf3a91f91': {
-    short: 'vexchange.io',
-    long: 'vexchange.io OCE',
+    short: 'Vexchange',
+    long: 'Vexchange (OCE/VET)',
   },
   '0xdc690f1a5de6108239d2d91cfdaa1d19e7ef7f82': {
-    short: 'vexchange.io',
-    long: 'vexchange.io YEET',
+    short: 'Vexchange',
+    long: 'Vexchange (YEET/VET)',
   },
   '0x6d08d19dff533050f93eaaa0a009e2771d3598bc': {
-    short: 'vexchange.io',
-    long: 'vexchange.io EHrT',
+    short: 'Vexchange',
+    long: 'Vexchange (EHrT/VET)',
+  },
+  '0x6c0a6e1d922e0e63901301573370b932ae20dadb': {
+    short: 'Vexchange',
+    long: 'Vexchange (Router)',
+  },
+  '0xd86bed355d9d6a4c951e96755dd0c3cf004d6cd0': {
+    short: 'Vexchange',
+    long: 'Vexchange (WOV/VET)',
   },
   '0xf306dfc3c4a276ac4c1795c5896e9f4a967341b6': 'realitems.io',
   '0xbc90a27cef38c774717bf1dfd13ff9a906920215': {
@@ -245,6 +253,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Shamanic Oracles',
   },
+  '0x8639b5f52f0093789f2e0f5bd2d6b9f58e8b0efb': {
+    short: 'WorldOfV',
+    long: 'Genesis Staking',
+  },
   '0xafb27146a60a3c71b723ebbaaf3823f12542d914': {
     short: 'WorldOfV',
     long: 'UW Staking',
@@ -353,14 +365,6 @@ const KNOWN_CONTRACTS = {
     short: 'ToolChain Partners',
     long: 'Inner Mongolia Traceability Platform',
   },
-  '0x6c0a6e1d922e0e63901301573370b932ae20dadb': {
-    short: 'Vexchange v2',
-    long: 'Vexchange v2 (Router)',
-  },
-  '0xd86bed355d9d6a4c951e96755dd0c3cf004d6cd0': {
-    short: 'Vexchange v2',
-    long: 'Vexchange v2 (WoV)',
-  },
   '0x08c73b33115cafda73371a23a98ee354598a4abe': {
     short: 'Dohrnii Staking',
     long: 'Dohrnii Staking (3mo)',
@@ -420,6 +424,8 @@ const KNOWN_CONTRACTS = {
   '0x2980f7a9bec00ee6ffee21e5fbac5e104578bf13': 'Wall of Vame',
   '0x2fd3d1e1a3f1e072c89d67301a86a5ba850ccd4e': 'Venonymous NFT',
   '0x47cce813c986b4d982a192bf7d6831f4beaccbc0': 'YEET Crusaders NFT',
+  '0xa5e2ee50cb49ea4d0a3a520c15aa4cffaf5ea026': 'Gangster Gorillaz NFT',
+  '0xa2c82ad2841c23a49fc2ba1a23927d1fe835c7f9': 'Vales NFT',
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'Paper Project',
     long: 'Paper Marketplace',
@@ -427,10 +433,6 @@ const KNOWN_CONTRACTS = {
   '0x04edc606b0d60e843528422619c6d939be8a2fcf': {
     short: 'Paper Project',
     long: 'Paper NFT',
-  },
-  '0xa2c82ad2841c23a49fc2ba1a23927d1fe835c7f9': {
-    short: 'Vales',
-    long: 'Vales NFT',
   },
   '0x242035f42c59119b9a22d4270506c07fb792e55c': {
     short: 'VeSea',
@@ -472,7 +474,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea NFT: Honorary VeKings',
    },
-  '0x0809d6df5d8325bba4783ec4ba67d8c3ab817e99': {
+  '0x9992501f1ef16d4b900e9d316cf468959b8f9bcd': {
     short: 'VeSea',
     long: 'VeSea NFT: Veysarum',
    },
