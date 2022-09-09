@@ -454,10 +454,18 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: '$VSEA Staking'
   },
+  '0xabb89866a65efd45500ac9fe506179ebfb630c9b': {
+    short: 'VeSea',
+    long: 'VeSea Arcade: NFT Recycler'
+  },
   '0x2ae9749952eeaa814850c90beb1e660880c5cd4b': {
     short: 'VeSea',
     long: 'VeSea Arcade: Satoshi Dice'
   },
+  '0x6bce7068ba0e5830c87d785bc374817665cf1bd6': {
+    short: 'VeSea',
+    long: 'VeSea Arcade: Yokai Burn',
+   },
   '0x29af120f3d84d8eb76e518dd43c6e408a579f6bf': {
     short: 'VeSea',
     long: 'VeSea Arcade: VFox Burn',
