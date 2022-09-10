@@ -426,6 +426,7 @@ const KNOWN_CONTRACTS = {
   '0x47cce813c986b4d982a192bf7d6831f4beaccbc0': 'YEET Crusaders NFT',
   '0xa5e2ee50cb49ea4d0a3a520c15aa4cffaf5ea026': 'Gangster Gorillaz NFT',
   '0xa2c82ad2841c23a49fc2ba1a23927d1fe835c7f9': 'Vales NFT',
+  '0x2ae9749952eeaa814850c90beb1e660880c5cd4b': 'Satoshi Dice',
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'Paper Project',
     long: 'Paper Marketplace',
@@ -458,14 +459,6 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea Arcade: NFT Recycler'
   },
-  '0x2ae9749952eeaa814850c90beb1e660880c5cd4b': {
-    short: 'VeSea',
-    long: 'VeSea Arcade: Satoshi Dice'
-  },
-  '0x6bce7068ba0e5830c87d785bc374817665cf1bd6': {
-    short: 'VeSea',
-    long: 'VeSea Arcade: Yokai Burn',
-   },
   '0x29af120f3d84d8eb76e518dd43c6e408a579f6bf': {
     short: 'VeSea',
     long: 'VeSea Arcade: VFox Burn',
@@ -649,6 +642,22 @@ const KNOWN_CONTRACTS = {
   '0xbcbf39013da096c97f0dc913f7ac1cdc42b9a721': {
     short: 'VeSea',
     long: 'VeSea NFT: Universal Inventory',
+   },
+  '0x319f08fD7c97fe0010B1f6171Debc8DcE3738A0e': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Smuzzies',
+   },
+  '0x13ca388cca5e2d3c040f9d7befbc3bd20b51ae5f': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Baby Yeet Crusaders X',
+   },
+  '0x0ce0c940d11FBdD73561901DbCDeF84e73A511b9': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Stardust Spectres Access Cards',
+   },
+  '0xc17d84d2d19b45653abefed0b9678fcdbfc1b0b0': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Ukiyoe Yokai Masks',
    },
 }
 
