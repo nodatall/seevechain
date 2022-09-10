@@ -253,11 +253,15 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Shamanic Oracles',
   },
+  '0xa4bf5a32d0f1d1655eec3297023fd2136bd760a2': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Corgi Gang',
+  },
   '0x8639b5f52f0093789f2e0f5bd2d6b9f58e8b0efb': {
     short: 'WorldOfV',
     long: 'Genesis Staking',
   },
-  '0xafb27146a60a3c71b723ebbaaf3823f12542d914': {
+  '0xe8a6314ae7813ba8c55568551aea223a657cffbe': {
     short: 'WorldOfV',
     long: 'UW Staking',
   },
