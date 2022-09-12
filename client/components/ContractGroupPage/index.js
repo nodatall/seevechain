@@ -18,6 +18,8 @@ import vulcanIcon from 'assets/vulcan_icon.png'
 import vulcanBanner from 'assets/vulcan_banner.png'
 import veseaIcon from 'assets/vesea_icon.png'
 import veseaBanner from 'assets/vesea_banner.png'
+import vseaIcon from 'assets/vsea_icon.png'
+
 
 import './index.sass'
 
