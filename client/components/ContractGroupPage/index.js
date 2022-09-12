@@ -61,7 +61,13 @@ const groupProfileProps = {
     banner: veseaBanner,
     logo: veseaIcon,
     url: 'https://vesea.io/',
-    bio: 'VeSea is the most active NFT marketplace on the VeChainThor blockchain. Buy, sell and trade your favorites today ',
+    bio: 'VeSea is the most active NFT marketplace, Launchpad and NFT Event Ecosystem on VeChain. Buy, sell and interact with your favorite NFTs today ',
+  },
+  'VSEA Token': {
+    banner: veseaBanner,
+    logo: vseaIcon,
+    url: 'https://vesea.io/',
+    bio: 'VeSea is the most active NFT marketplace, Launchpad and NFT Event Ecosystem on VeChain. Buy, sell and interact with your favorite NFTs today ',
   },
 }
 
