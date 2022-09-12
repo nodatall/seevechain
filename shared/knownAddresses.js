@@ -257,6 +257,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Corgi Gang',
   },
+  '0x3b9521745ae47418c3c636ec1e76f135cdc961fc': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - VeKongs 2.0',
+  },
   '0x8639b5f52f0093789f2e0f5bd2d6b9f58e8b0efb': {
     short: 'WorldOfV',
     long: 'Genesis Staking',
@@ -543,7 +547,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea NFT: veLoot',
    },
-  '0xC2dE1fbB24d918a68923CFb24cC541aEA7a49450': {
+  '0xc2de1fbb24d918a68923cfb24cc541aea7a49450': {
     short: 'VeSea',
     long: 'VeSea NFT: Victs',
    },
@@ -630,6 +634,10 @@ const KNOWN_CONTRACTS = {
   '0x499be5332bfba0761650ae55b8d9c8443458f219': {
     short: 'VeSea',
     long: 'VeSea NFT: VVarriors',
+   },
+  '0x862b1cb1c75ca2e2529110a9d43564bd5cd83828': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Elixir',
    },
   '0xf4d82631be350c37d92ee816c2bd4d5adf9e6493': {
     short: 'VeSea',
