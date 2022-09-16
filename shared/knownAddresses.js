@@ -675,6 +675,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea NFT: Ukiyoe Yokai Masks',
    },
+  '0xdab185ca52b70e087ec0990ad59c612c3d7aab14': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Shreddiez',
+   },
 }
 
 const TOKEN_CONTRACTS = {
