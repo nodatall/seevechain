@@ -455,7 +455,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea Messenger',
    },
-  '0xd5b8344eeff22332de93413e53bbdbfe472eff89': {
+  '0xdab185ca52b70e087ec0990ad59c612c3d7aab14': {
     short: 'VeSea',
     long: 'VeSea Market: Offers'
   },
@@ -675,7 +675,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea NFT: Ukiyoe Yokai Masks',
    },
-  '0xdab185ca52b70e087ec0990ad59c612c3d7aab14': {
+  '0x428f6e43adc7649fe79f3a4341f0780cab059ffb': {
     short: 'VeSea',
     long: 'VeSea NFT: Shreddiez',
    },
