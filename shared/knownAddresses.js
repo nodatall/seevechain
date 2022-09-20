@@ -261,11 +261,23 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - VeKongs 2.0',
   },
+  '0x9c872e8420ec38f404402bea8f8f86d5d2c17782': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - MVA Fusion G2',
+  },
   '0x8639b5f52f0093789f2e0f5bd2d6b9f58e8b0efb': {
     short: 'WorldOfV',
     long: 'Genesis Staking',
   },
-  '0xe8a6314ae7813ba8c55568551aea223a657cffbe': {
+  '0x4ea989e8430c8d9c7fdd027f139be9067dc0483e': {
+    short: 'WorldOfV',
+    long: 'Inka Staking',
+  },
+  '0x52df0438edeecd03119d613629e2500cd1986f9f': {
+    short: 'WorldOfV',
+    long: 'VeKongs 2 Staking',
+  },
+  '0x0f8f7df03010eb629ac717557c82dca963571b72': {
     short: 'WorldOfV',
     long: 'UW Staking',
   },
@@ -438,7 +450,7 @@ const KNOWN_CONTRACTS = {
   '0x47cce813c986b4d982a192bf7d6831f4beaccbc0': 'YEET Crusaders NFT',
   '0xa5e2ee50cb49ea4d0a3a520c15aa4cffaf5ea026': 'Gangster Gorillaz NFT',
   '0xa2c82ad2841c23a49fc2ba1a23927d1fe835c7f9': 'Vales NFT',
-  '0x2ae9749952eeaa814850c90beb1e660880c5cd4b': 'Satoshi Dice',
+  '0xd6fdbeb6d0fbc690dabd352cf93b2f8d782a46b5': 'Satoshi Dice',
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'Paper Project',
     long: 'Paper Marketplace',
