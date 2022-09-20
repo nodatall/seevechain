@@ -98,6 +98,10 @@ const KNOWN_CONTRACTS = {
     short: 'Vexchange',
     long: 'Vexchange (YEET/VET)',
   },
+  '0xa8d1a1c88329320234581e203474fe19b99473d3': {
+    short: 'Vexchange',
+    long: 'Vexchange (WOV/VET)',
+  },
   '0x6d08d19dff533050f93eaaa0a009e2771d3598bc': {
     short: 'Vexchange',
     long: 'Vexchange (EHrT/VET)',
@@ -437,6 +441,10 @@ const KNOWN_CONTRACTS = {
     short: 'Black VeMarket',
     long: 'Singapura Dragons Staking',
   },
+  '0x6c693abe7183e4f1c93c89721ce2c5bb06408eab': {
+    short: 'Black VeMarket',
+    long: 'Warbands Staking',
+  },
   '0xd56340abb721b7c89c6ca3835efc490dfd66f9ae': {
     short: 'Black VeMarket',
     long: 'VeShawties NFTs',
@@ -450,6 +458,7 @@ const KNOWN_CONTRACTS = {
   '0x47cce813c986b4d982a192bf7d6831f4beaccbc0': 'YEET Crusaders NFT',
   '0xa5e2ee50cb49ea4d0a3a520c15aa4cffaf5ea026': 'Gangster Gorillaz NFT',
   '0xa2c82ad2841c23a49fc2ba1a23927d1fe835c7f9': 'Vales NFT',
+  '0x910607db19dce5651da4e68950705d6e49bc01a5': 'INKA Empire NFT',
   '0xd6fdbeb6d0fbc690dabd352cf93b2f8d782a46b5': 'Satoshi Dice',
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'Paper Project',
