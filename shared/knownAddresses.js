@@ -245,6 +245,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Psycho Beasts',
   },
+  '0xa723a21419181a9ddee6e3981d5854a05c9e90e1': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - BFFC',
+  },
   '0x41a03b04725c20f3902c67ee7416e5df4266df45': {
     short: 'WorldOfV',
     long: 'WoVNFT - BFFC Ladies',
@@ -316,14 +320,6 @@ const KNOWN_CONTRACTS = {
   '0xf5e2d450881d8c3d466dd4ff4de8838c275bbc3c': {
     short: 'WorldOfV',
     long: 'Domination Staking',
-  },
-  '0x34109fc2a649965eecd953d31802c67dcc183d57': {
-    short: 'NO NERDS INC',
-    long: 'UNION Distribution',
-  },
-  '0x77fe6041fa5beb0172c9ab6014b4d8d5099f0a23': {
-    short: 'NO NERDS INC',
-    long: 'NO NERDS Tablet NFT',
   },
   '0x955b48a46698b2b8330d75dc88ae5b95cd7ff9f4': {
     short: 'Yggdrasil',
@@ -441,6 +437,10 @@ const KNOWN_CONTRACTS = {
     short: 'Black VeMarket',
     long: 'Singapura Dragons Staking',
   },
+  '0xf0ce85c23e39b74fa73424e36fcaad55420a36b9': {
+    short: 'Black VeMarket',
+    long: 'Singapura Baby Dragons Staking',
+  },
   '0x6c693abe7183e4f1c93c89721ce2c5bb06408eab': {
     short: 'Black VeMarket',
     long: 'Warbands Staking',
@@ -449,14 +449,28 @@ const KNOWN_CONTRACTS = {
     short: 'Black VeMarket',
     long: 'VeShawties NFTs',
   },
+  '0xa5e2ee50cb49ea4d0a3a520c15aa4cffaf5ea026': {
+    short: 'Black VeMarket',
+    long: 'Gangster Gorillaz NFT',
+  },
+  '0x2fd3d1e1a3f1e072c89d67301a86a5ba850ccd4e': {
+    short: 'Black VeMarket',
+    long: 'Venonymous NFT',
+  },
+  '0x34109fc2a649965eecd953d31802c67dcc183d57': {
+    short: 'Black VeMarket',
+    long: 'UNION Distribution',
+  },
+  '0x77fe6041fa5beb0172c9ab6014b4d8d5099f0a23': {
+    short: 'Black VeMarket',
+    long: 'NO NERDS Tablet NFT',
+  },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
   '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': 'Vesitors NFT',
   '0x2980f7a9bec00ee6ffee21e5fbac5e104578bf13': 'Wall of Vame',
-  '0x2fd3d1e1a3f1e072c89d67301a86a5ba850ccd4e': 'Venonymous NFT',
   '0x47cce813c986b4d982a192bf7d6831f4beaccbc0': 'YEET Crusaders NFT',
-  '0xa5e2ee50cb49ea4d0a3a520c15aa4cffaf5ea026': 'Gangster Gorillaz NFT',
   '0xa2c82ad2841c23a49fc2ba1a23927d1fe835c7f9': 'Vales NFT',
   '0x910607db19dce5651da4e68950705d6e49bc01a5': 'INKA Empire NFT',
   '0xd6fdbeb6d0fbc690dabd352cf93b2f8d782a46b5': 'Satoshi Dice',
