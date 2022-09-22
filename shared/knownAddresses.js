@@ -301,7 +301,7 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'Shredderz Staking',
   },
-  '0x489f014285a0c45e5c82013d5c3f3b3e1274889e': {0x8bb4a3ec153c0aa1ed1c51788b1d49dd68c79b30
+  '0x489f014285a0c45e5c82013d5c3f3b3e1274889e': {
     short: 'WorldOfV',
     long: 'Shredderz Staking',
   },
