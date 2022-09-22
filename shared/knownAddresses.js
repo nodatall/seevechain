@@ -289,6 +289,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'UW Staking',
   },
+  '0xe8a6314ae7813ba8c55568551aea223a657cffbe': {
+    short: 'WorldOfV',
+    long: 'UY Staking',
+  },
   '0x602d006ed9da40144df3a8f3fc707d29cb651ed5': {
     short: 'WorldOfV',
     long: 'VeHash Staking',
