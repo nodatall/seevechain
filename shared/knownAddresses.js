@@ -277,6 +277,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'Genesis Staking',
   },
+  '0xfabce34bb0b1174f1e0127d69bb705c60c35e587': {
+    short: 'WorldOfV',
+    long: 'Special Card Staking',
+  },
   '0x4ea989e8430c8d9c7fdd027f139be9067dc0483e': {
     short: 'WorldOfV',
     long: 'Inka Staking',
@@ -380,6 +384,10 @@ const KNOWN_CONTRACTS = {
   '0x0eca11f7035fb0cdfa059796add7f6552560b968': {
     short: 'ToolChain Partners',
     long: 'Undisclosed_11',
+  },
+  '0xe5e83b13c4b4042bae5809b1c5d1bed4bb3836dc': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_12',
   },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'ToolChain Partners',
