@@ -269,6 +269,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - VeKongs 2.0',
   },
+  '0xd861be8e33ebd09764bfca242ca6a8c54dcf844a': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - MVA Elementals',
+  },
   '0x9c872e8420ec38f404402bea8f8f86d5d2c17782': {
     short: 'WorldOfV',
     long: 'WoVNFT - MVA Fusion G2',
