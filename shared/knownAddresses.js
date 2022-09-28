@@ -123,6 +123,18 @@ const KNOWN_CONTRACTS = {
     short: 'XP Network',
     long: 'XPN - Bridge',
   },
+  '0x06ff1e4b5e15d890e746dbefad3e2162a31c10b7': {
+    short: 'XP Network',
+    long: 'XPN - Tunnel',
+  },
+  '0xfc9a4759209e445f96cd17bc79b16b9cf7364799': {
+    short: 'XP Network',
+    long: 'XPN NFT - CryptoSpaceClub',
+  },
+  '0xf0e778bd5c4c2f219a2a5699e3afd2d82d50e271': {
+    short: 'XP Network',
+    long: 'XPN NFT - XPNetwork',
+  },
   '0xa7f8b361060222b3aee75f4b457ba0353cf10998': 'E-HCert',
   '0xa9f3c1bd52c3a506cecbb8cbca562ef26c833175': 'Yuhongtai Foods',
   '0x040093ab307f5acb4ae3afb0fb31de0ec46d62f9': 'safehaven.io',
