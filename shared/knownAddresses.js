@@ -277,6 +277,14 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - MVA Fusion G2',
   },
+  '0xb617fc2597f0eddfa07a5eb04c4c97006308517e': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Dancing Queenz',
+  },
+  '0x6a4fc1661e9d4ca8814be52d155e2f6353b2782a': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Singapura Elements',
+  },
   '0x8639b5f52f0093789f2e0f5bd2d6b9f58e8b0efb': {
     short: 'WorldOfV',
     long: 'Genesis Staking',
