@@ -738,7 +738,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea NFT: Smuzzies',
    },
-  '0x13ca388cca5e2d3c040f9d7befbc3bd20b51ae5f': {
+  '0x017d182c60e4f3c469156208b9f30a7fb80db214': {
     short: 'VeSea',
     long: 'VeSea NFT: Baby Yeet Crusaders X',
    },
@@ -753,6 +753,14 @@ const KNOWN_CONTRACTS = {
   '0x428f6e43adc7649fe79f3a4341f0780cab059ffb': {
     short: 'VeSea',
     long: 'VeSea NFT: Shreddiez',
+   },
+  '0x2e53f17aa7dcbd00ec3eb80388f509faf84edafa': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Bomber Coins',
+   },
+  '0x56b57cc14e10aae2769a9fb660d0d0c0d41a6aca': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Funky Salamanders',
    },
 }
 
