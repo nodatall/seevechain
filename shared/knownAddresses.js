@@ -388,6 +388,14 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Singapura Elements',
   },
+  '0x42ac6537c8d4d7c5c8a18984e5ac8d32efd35d96': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Baby Mingos',
+  },
+  '0x4a9e867c1809f7ffdf4dc5aa870faf8be911a805': {
+    short: 'WorldOfV',
+    long: 'VeHash Staking',
+  },
   '0x8639b5f52f0093789f2e0f5bd2d6b9f58e8b0efb': {
     short: 'WorldOfV',
     long: 'Genesis Staking',
