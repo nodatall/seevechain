@@ -19,7 +19,8 @@ import vulcanBanner from 'assets/vulcan_banner.png'
 import veseaIcon from 'assets/vesea_icon.png'
 import veseaBanner from 'assets/vesea_banner.png'
 import vseaIcon from 'assets/vsea_icon.png'
-
+import diceBanner from 'assets/dice_banner.png'
+import diceIcon from 'assets/dice_icon.png'
 
 import './index.sass'
 
@@ -70,6 +71,12 @@ const groupProfileProps = {
     logo: vseaIcon,
     url: 'https://vesea.io/',
     bio: 'VeSea is the most active NFT marketplace, Launchpad and NFT Event Ecosystem on VeChain. Buy, sell and interact with your favorite NFTs today ',
+  },
+  'Satoshi Dice': {
+    banner: diceBanner,
+    logo: diceIcon,
+    url: 'https://vechainnfts.shinyapps.io/Satoshi_Dice/',
+    bio: 'A fun game that serves as a mechanism for lowering the supply of $VSEA. Risk $VSEA to earn $VSEA!',
   },
 }
 
