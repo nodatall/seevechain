@@ -21,6 +21,8 @@ import veseaBanner from 'assets/vesea_banner.png'
 import vseaIcon from 'assets/vsea_icon.png'
 import diceBanner from 'assets/dice_banner.png'
 import diceIcon from 'assets/dice_icon.png'
+import vechainBanner from 'assets/vechain_banner.png'
+import vechainIcon from 'assets/vechain_icon.png'
 
 import './index.sass'
 
@@ -77,6 +79,12 @@ const groupProfileProps = {
     logo: diceIcon,
     url: 'https://vechainnfts.shinyapps.io/Satoshi_Dice/',
     bio: 'A fun game that serves as a mechanism for lowering the supply of $VSEA. Risk $VSEA to earn $VSEA!',
+  },
+  'ToolChain Partners': {
+    banner: vechainBanner,
+    logo: vechainIcon,
+    url: 'https://www.veworld.com/home',
+    bio: 'A lightweight and rapidly deployable sustainable traceability application that allows brands to record all their sustainable footprints throughout their supply chain.',
   },
 }
 
