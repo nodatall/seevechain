@@ -1,6 +1,104 @@
 const KNOWN_CONTRACTS = {
-  '0x505b95e128e403634fe6090472485341905fc0f9': 'Yunnan Pu`er Tea',
-  '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': 'DNV',
+  '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': {
+    short: 'ToolChain Partners',
+    long: 'DNV',
+  },
+  '0xf72614024c9273320b2f82dda3932785df6b9208': {
+    short: 'ToolChain Partners',
+    long: 'Aretaeio Hospital',
+  },
+  '0x54f14e2e4a204a8c1b734c1b73d6d7cb96894a61': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_1',
+  },
+  '0x91ace4b91fc65ee930724deb580dfe80c135713e': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_2',
+  },
+  '0xc3c118c6fa5479244b9f0da0b0ba8f9afa8dc33c': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_3',
+  },
+  '0xeddc51042586b66cf8fb75e971636c76ce2e9c35': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_4',
+  },
+  '0x7995bdbc94ab8bd33f77457416214a4abe0b8631': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_5',
+  },
+  '0xd9a43482cb6af1b7236cde4f7ec3201ac2a13d79': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_6',
+  },
+  '0xf41aab18649523a18de81042bd30da07b37b1ec1': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_7',
+  },
+  '0x11d27c2307c108990d3874b5b3dac3209bc7eee4': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_8',
+  },
+  '0x96fa20b2162cae29b3ccb7984d3b23459200722a': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_9',
+  },
+  '0x7977f06e9f1d7f5bf0d73cd8de24bd16ddea2cf2': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_10',
+  },
+  '0x0eca11f7035fb0cdfa059796add7f6552560b968': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_11',
+  },
+  '0xe5e83b13c4b4042bae5809b1c5d1bed4bb3836dc': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_12',
+  },
+  '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
+    short: 'ToolChain Partners',
+    long: 'NSF International',
+  },
+  '0x66f36d228a5201419dff9895dcfb8bf45c3cf262': {
+    short: 'ToolChain Partners',
+    long: 'San Marino Green Pass NFT',
+  },
+  '0xdcaa96e264eb8514b130e1a97072b41c875bec7b': {
+    short: 'ToolChain Partners',
+    long: 'San Marino Green Pass Data Upload',
+  },
+  '0x8e1bf526c0e40e8abe6a34129a1f68c2d489ac96': {
+    short: 'ToolChain Partners',
+    long: 'Inner Mongolia Traceability Platform',
+  },
+  '0xecc159751f9aed21399d5e3ce72bc9d4fccb9ccc': {
+    short: 'ToolChain Partners',
+    long: 'MyStory',
+  },
+  '0xbe7a61b0405fdfbaae28c1355cd53c8affc1c4b0': {
+    short: 'ToolChain Partners',
+    long: 'Walmart China',
+  },
+  '0x1a2f8fc8e821f46d6962bb0a4e06349a3ad4cf33': {
+    short: 'ToolChain Partners',
+    long: 'Walmart China 2',
+  },
+  '0x1Cc13a24b1F73288cc7791C2c8Fd428357405226': {
+    short: 'ToolChain Partners',
+    long: 'MyCare',
+  },
+  '0x1a048cff120f3ebff9bb66459effa34445c8e87e': {
+    short: 'ToolChain Partners',
+    long: 'KnowSeafood',
+  },
+  '0xa9f3c1bd52c3a506cecbb8cbca562ef26c833175': {
+    short: 'ToolChain Partners',
+    long: 'Yuhongtai Foods',
+  },
+  '0x505b95e128e403634fe6090472485341905fc0f9': {
+    short: 'ToolChain Partners',
+    long: 'Yunnan Pu`er Tea',
+  },
   '0xbb763cea82127548c465f6ad83a297f292e5c2fb': 'Reebonz',
   '0xfbc5c4e371164e3f1dc5d1760a98f3d227ba7e3b': {
     short: 'Reebonz',
@@ -10,14 +108,11 @@ const KNOWN_CONTRACTS = {
     short: 'Reebonz',
     long: 'Reebonz 3',
   },
-  '0xbe7a61b0405fdfbaae28c1355cd53c8affc1c4b0': 'Walmart China',
-  '0x1a2f8fc8e821f46d6962bb0a4e06349a3ad4cf33': {
-    short: 'Walmart China',
-    long: 'Walmart China 2',
-  },
   '0xc89dcd4b36b5182f974c556408681cd035be18e4': 'FoodGates',
-  '0xecc159751f9aed21399d5e3ce72bc9d4fccb9ccc': 'MyStory',
-  '0xbdccecf078f27cc9bf7a18b4cc2c25068a616fb4': 'Shanghai Gas',
+  '0xbdccecf078f27cc9bf7a18b4cc2c25068a616fb4': {
+    short: 'Shanghai Gas',
+    long: 'Shanghai Gas',
+  },
   '0x9bcb81a9eadd1457ee9729365f9a77d190670ab2': {
     short: 'Shanghai Gas',
     long: 'Shanghai Gas 2',
@@ -136,14 +231,11 @@ const KNOWN_CONTRACTS = {
     long: 'XPN NFT - XPNetwork',
   },
   '0xa7f8b361060222b3aee75f4b457ba0353cf10998': 'E-HCert',
-  '0xa9f3c1bd52c3a506cecbb8cbca562ef26c833175': 'Yuhongtai Foods',
   '0x040093ab307f5acb4ae3afb0fb31de0ec46d62f9': 'safehaven.io',
   '0x7196c6b28f5edac5d9134e44051635cc572fe07b': {
     short: 'safehaven.io',
     long: 'Safehaven Inheriti ',
   },
-  '0x1111111111111111111111111111111111111111': 've-name.web.app',
-  '0x1Cc13a24b1F73288cc7791C2c8Fd428357405226': 'MyCare',
   '0xffa34bf5b1d7178bd9a9815c84bc64570d88560c': {
     short: 'Vulcan',
     long: 'Vulcan 2',
@@ -204,7 +296,6 @@ const KNOWN_CONTRACTS = {
     long: 'FoodGates 2',
   },
   '0x535ab4a9fce43dc71e9540534733bbeb0f494d5c': 'burntoken.io',
-  '0x1a048cff120f3ebff9bb66459effa34445c8e87e': 'KnowSeafood',
   '0xc7fd71b05b3060fce96e4b6cdc6ec353fa6f838e':{
     short: 'WorldOfV',
     long: 'v1 - Marketplace Community NFT',
@@ -356,74 +447,6 @@ const KNOWN_CONTRACTS = {
   '0x8bb4a3ec153c0aa1ed1c51788b1d49dd68c79b30': {
     short: 'WorldOfV',
     long: 'Corgi Staking',
-  },
-  '0xf72614024c9273320b2f82dda3932785df6b9208': {
-    short: 'ToolChain Partners',
-    long: 'Aretaeio Hospital',
-  },
-  '0x54f14e2e4a204a8c1b734c1b73d6d7cb96894a61': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_1',
-  },
-  '0x91ace4b91fc65ee930724deb580dfe80c135713e': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_2',
-  },
-  '0xc3c118c6fa5479244b9f0da0b0ba8f9afa8dc33c': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_3',
-  },
-  '0xeddc51042586b66cf8fb75e971636c76ce2e9c35': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_4',
-  },
-  '0x7995bdbc94ab8bd33f77457416214a4abe0b8631': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_5',
-  },
-  '0xd9a43482cb6af1b7236cde4f7ec3201ac2a13d79': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_6',
-  },
-  '0xf41aab18649523a18de81042bd30da07b37b1ec1': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_7',
-  },
-  '0x11d27c2307c108990d3874b5b3dac3209bc7eee4': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_8',
-  },
-  '0x96fa20b2162cae29b3ccb7984d3b23459200722a': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_9',
-  },
-  '0x7977f06e9f1d7f5bf0d73cd8de24bd16ddea2cf2': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_10',
-  },
-  '0x0eca11f7035fb0cdfa059796add7f6552560b968': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_11',
-  },
-  '0xe5e83b13c4b4042bae5809b1c5d1bed4bb3836dc': {
-    short: 'ToolChain Partners',
-    long: 'Undisclosed_12',
-  },
-  '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
-    short: 'ToolChain Partners',
-    long: 'NSF International',
-  },
-  '0x66f36d228a5201419dff9895dcfb8bf45c3cf262': {
-    short: 'ToolChain Partners',
-    long: 'San Marino Green Pass NFT',
-  },
-  '0xdcaa96e264eb8514b130e1a97072b41c875bec7b': {
-    short: 'ToolChain Partners',
-    long: 'San Marino Green Pass Data Upload',
-  },
-  '0x8e1bf526c0e40e8abe6a34129a1f68c2d489ac96': {
-    short: 'ToolChain Partners',
-    long: 'Inner Mongolia Traceability Platform',
   },
   '0x08c73b33115cafda73371a23a98ee354598a4abe': {
     short: 'Dohrnii Staking',
