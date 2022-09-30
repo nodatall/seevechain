@@ -513,7 +513,10 @@ const KNOWN_CONTRACTS = {
   '0x47cce813c986b4d982a192bf7d6831f4beaccbc0': 'YEET Crusaders NFT',
   '0xa2c82ad2841c23a49fc2ba1a23927d1fe835c7f9': 'Vales NFT',
   '0x910607db19dce5651da4e68950705d6e49bc01a5': 'INKA Empire NFT',
-  '0xd6fdbeb6d0fbc690dabd352cf93b2f8d782a46b5': 'Satoshi Dice',
+  '0xd6fdbeb6d0fbc690dabd352cf93b2f8d782a46b5': {
+    short: 'Satoshi Dice',
+    long: 'Satoshi Dice',
+  },
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'Paper Project',
     long: 'Paper Marketplace',
