@@ -737,7 +737,7 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea NFT: Universal Inventory',
    },
-  '0x319f08fD7c97fe0010B1f6171Debc8DcE3738A0e': {
+  '0x319f08fd7c97fe0010b1f6171debc8dce3738a0e': {
     short: 'VeSea',
     long: 'VeSea NFT: Smuzzies',
    },
