@@ -357,10 +357,6 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'Corgi Staking',
   },
-  '0x955b48a46698b2b8330d75dc88ae5b95cd7ff9f4': {
-    short: 'Yggdrasil',
-    long: 'Yggdrasil',
-  },
   '0xf72614024c9273320b2f82dda3932785df6b9208': {
     short: 'ToolChain Partners',
     long: 'Aretaeio Hospital',
@@ -508,21 +504,37 @@ const KNOWN_CONTRACTS = {
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
-  '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': 'Vesitors NFT',
   '0x2980f7a9bec00ee6ffee21e5fbac5e104578bf13': 'Wall of Vame',
-  '0x47cce813c986b4d982a192bf7d6831f4beaccbc0': 'YEET Crusaders NFT',
-  '0xa2c82ad2841c23a49fc2ba1a23927d1fe835c7f9': 'Vales NFT',
-  '0x910607db19dce5651da4e68950705d6e49bc01a5': 'INKA Empire NFT',
+  '0x955b48a46698b2b8330d75dc88ae5b95cd7ff9f4': {
+    short: 'Satoshi Dice',
+    long: 'Yggdrasil',
+  },
   '0xd6fdbeb6d0fbc690dabd352cf93b2f8d782a46b5': {
     short: 'Satoshi Dice',
     long: 'Satoshi Dice',
   },
+  '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': {
+    short: 'Independent NFTs',
+    long: 'Vesitors NFT',
+  },
+  '0x47cce813c986b4d982a192bf7d6831f4beaccbc0': {
+    short: 'Independent NFTs',
+    long: 'YEET Crusaders NFT',
+  },
+  '0xa2c82ad2841c23a49fc2ba1a23927d1fe835c7f9': {
+    short: 'Independent NFTs',
+    long: 'Vales NFT',
+  },
+  '0x910607db19dce5651da4e68950705d6e49bc01a5': {
+    short: 'Independent NFTs',
+    long: 'INKA Empire NFT',
+  },
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
-    short: 'Paper Project',
+    short: 'VeSea',
     long: 'Paper Marketplace',
   },
   '0x04edc606b0d60e843528422619c6d939be8a2fcf': {
-    short: 'Paper Project',
+    short: 'VeSea',
     long: 'Paper NFT',
   },
   '0x242035f42c59119b9a22d4270506c07fb792e55c': {
