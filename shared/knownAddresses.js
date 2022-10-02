@@ -686,6 +686,10 @@ const KNOWN_CONTRACTS = {
    },
   '0x0403745444204d1a0218cecbfe70b2ea42d654a6': {
     short: 'VeSea',
+    long: 'VeSea NFT: Guardians (Old)',
+   },
+  '0x7f2445324b9aaaede83a0bde18a1d55caea8c18f': {
+    short: 'VeSea',
     long: 'VeSea NFT: Guardians',
    },
   '0xbcfc59dcc2a0977ac1e9b465566ad071e5ec06aa': {
@@ -722,6 +726,10 @@ const KNOWN_CONTRACTS = {
    },
   '0xfd5e344798ceb51afd910fafae9768e4d093a725': {
     short: 'VeSea',
+    long: 'VeSea NFT: Metaversials Alteregos (Old)',
+   },
+  '0x055faf8495067864bcb8e8e3edadc506d98af5b3': {
+    short: 'VeSea',
     long: 'VeSea NFT: Metaversials Alteregos',
    },
   '0x2571978545672fe7e4cced7409bdd0a57bc3c3d2': {
@@ -729,6 +737,10 @@ const KNOWN_CONTRACTS = {
     long: 'VeSea NFT: Doppelganger',
    },
   '0x4e9eb6f6e04464eee33ae04bf430e20529482e60': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Forest Nation - Keepers (Old)',
+   },
+  '0xf60b9aa0ab640c23b6dd6456a15d041a5f3a5f5e': {
     short: 'VeSea',
     long: 'VeSea NFT: Forest Nation - Keepers',
    },
@@ -773,6 +785,10 @@ const KNOWN_CONTRACTS = {
     long: 'VeSea NFT: VVAR DOGS',
    },
   '0xa19e999fce74ec6e9d8ce1380b4692e63e6c7cb1': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Stardust Spectres (Old)',
+   },
+  '0x8d831724414739846045e7bc07522058ff5f67d8': {
     short: 'VeSea',
     long: 'VeSea NFT: Stardust Spectres',
    },
