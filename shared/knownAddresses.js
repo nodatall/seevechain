@@ -235,6 +235,10 @@ const KNOWN_CONTRACTS = {
   '0x7196c6b28f5edac5d9134e44051635cc572fe07b': {
     short: 'safehaven.io',
     long: 'Safehaven Inheriti ',
+  },  
+  '0x1f711f78685b4a5b0899d26aebd590163cfcb7eb': {
+    short: 'Hacken',
+    long: 'Hacken Club Membership ',
   },
   '0xffa34bf5b1d7178bd9a9815c84bc64570d88560c': {
     short: 'Vulcan',
@@ -559,6 +563,10 @@ const KNOWN_CONTRACTS = {
   '0x910607db19dce5651da4e68950705d6e49bc01a5': {
     short: 'Independent NFTs',
     long: 'INKA Empire NFT',
+  },
+  '0xd6b93818ac38c936f51538e5e7832d7127b79622': {
+    short: 'Independent NFTs',
+    long: 'Metatun NFT',
   },
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'VeSea',
