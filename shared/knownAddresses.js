@@ -396,6 +396,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Baby Mingos',
   },
+  '0x00fbadb64941319d6cbdeaf7d356d8a73eb4ae5e': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Chakra NFT',
+  },
   '0x4a9e867c1809f7ffdf4dc5aa870faf8be911a805': {
     short: 'WorldOfV',
     long: 'VeHash Staking',
@@ -496,6 +500,10 @@ const KNOWN_CONTRACTS = {
     short: 'ExoWorlds',
     long: 'ExoWorlds Marketplace',
   },
+  '0xf02c9669d502ec0c0bf88c4e68f44dfe25a0114b': {
+    short: 'ExoWorlds',
+    long: 'ExoWorlds Coordinates Marketplace',
+  },
   '0xf99ea55a2bee3ee862d7cc61ad9e04fcb5991d5e': {
     short: 'Black VeMarket',
     long: 'Black VeMarket - Marketplace',
@@ -511,6 +519,10 @@ const KNOWN_CONTRACTS = {
   '0xf0ce85c23e39b74fa73424e36fcaad55420a36b9': {
     short: 'Black VeMarket',
     long: 'Singapura Baby Dragons Staking',
+  },
+  '0x766fa24fee03d6c20124280c23613e75c5601ee4': {
+    short: 'Black VeMarket',
+    long: 'Singapura Baby Dragons Staking 2',
   },
   '0x6c693abe7183e4f1c93c89721ce2c5bb06408eab': {
     short: 'Black VeMarket',
