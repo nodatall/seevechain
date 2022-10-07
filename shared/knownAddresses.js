@@ -844,6 +844,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea NFT: Funky Salamanders',
    },
+  '0x0ce0c940d11fbdd73561901dbcdef84e73a511b9': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Stardust Access Cards',
+   },
 }
 
 const TOKEN_CONTRACTS = {
