@@ -848,6 +848,10 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea NFT: Stardust Access Cards',
    },
+  '0x4acacfeaaaba51c488d429106184591856356b52': {
+    short: 'VeSea',
+    long: 'VeSea NFT: NPO - Sows',
+   }
 }
 
 const TOKEN_CONTRACTS = {
