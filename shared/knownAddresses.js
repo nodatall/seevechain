@@ -528,6 +528,10 @@ const KNOWN_CONTRACTS = {
     short: 'Black VeMarket',
     long: 'Warbands Staking',
   },
+  '0x3824f4288279089b22712afd60cb1d48e5b2c8cb': {
+    short: 'Black VeMarket',
+    long: 'VeBudz Staking',
+  },
   '0xd56340abb721b7c89c6ca3835efc490dfd66f9ae': {
     short: 'Black VeMarket',
     long: 'VeShawties NFTs',
