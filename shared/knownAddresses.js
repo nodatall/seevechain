@@ -540,6 +540,10 @@ const KNOWN_CONTRACTS = {
     short: 'Black VeMarket',
     long: 'VeShawties NFTs',
   },
+  '0xc22d8ca65bb9ee4a8b64406f3b0405cc1ebeec4e': {
+    short: 'Black VeMarket',
+    long: 'Singapura Baby Dragons NFTs',
+  },
   '0xa5e2ee50cb49ea4d0a3a520c15aa4cffaf5ea026': {
     short: 'Black VeMarket',
     long: 'Gangster Gorillaz NFT',
