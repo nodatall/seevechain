@@ -396,6 +396,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Baby Mingos',
   },
+  '0x55ce12bb1af513c44f2135ca0b52f1eec27203de': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - MVA Land Plot',
+  },
   '0x00fbadb64941319d6cbdeaf7d356d8a73eb4ae5e': {
     short: 'WorldOfV',
     long: 'WoVNFT - Chakra NFT',
