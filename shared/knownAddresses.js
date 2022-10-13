@@ -404,6 +404,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Chakra NFT',
   },
+  '0x09985f776ae2c175106d8febf5360f6b380db582': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Nemesis NFT',
+  },
   '0x4a9e867c1809f7ffdf4dc5aa870faf8be911a805': {
     short: 'WorldOfV',
     long: 'VeHash Staking',
