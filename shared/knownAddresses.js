@@ -209,6 +209,10 @@ const KNOWN_CONTRACTS = {
     short: 'Vexchange',
     long: 'Vexchange (WOV/VET)',
   },
+  '0xc19cf5dfb71374b920f786078d37b5225cfcf30e': {
+    short: 'Vexchange',
+    long: 'Vexchange (SHA/VET)',
+  },
   '0xf306dfc3c4a276ac4c1795c5896e9f4a967341b6': 'realitems.io',
   '0xbc90a27cef38c774717bf1dfd13ff9a906920215': {
     short: 'realitems.io',
@@ -408,6 +412,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Nemesis NFT',
   },
+  '0xe4538ddaaf68137a98448552c87f6910f1e3470d': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - Shark Gang NFT',
+  },
   '0x4a9e867c1809f7ffdf4dc5aa870faf8be911a805': {
     short: 'WorldOfV',
     long: 'VeHash Staking',
@@ -563,6 +571,10 @@ const KNOWN_CONTRACTS = {
   '0x77fe6041fa5beb0172c9ab6014b4d8d5099f0a23': {
     short: 'Black VeMarket',
     long: 'NO NERDS Tablet NFT',
+  },
+  '0xd4310196a56c5193811ae418b8729d82b34abdcc': {
+    short: 'Black VeMarket',
+    long: 'Dragon of Singapura Weapons NFT',
   },
   '0x5a45edc6311017e6b12ebfb32c28a8d36ecf7686': 'Avery Dennison',
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
