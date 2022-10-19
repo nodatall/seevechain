@@ -460,6 +460,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'Shredderz Staking',
   },
+  '0x8af71cd53ad800d792e29a8c4b64e24070eb9307': {
+    short: 'WorldOfV',
+    long: 'Ratverse Staking',
+  },
   '0x9899a11ecc88b88117cd5195fe9db774b011de1d': {
     short: 'WorldOfV',
     long: 'Inka Staking',
@@ -615,6 +619,10 @@ const KNOWN_CONTRACTS = {
   '0x04edc606b0d60e843528422619c6d939be8a2fcf': {
     short: 'VeSea',
     long: 'Paper NFT',
+  },
+  '0x122209e8f89cf2c1f126c3195419b9e4ee9c81ae': {
+    short: 'VeSea',
+    long: 'Paper Community Canvas 2022',
   },
   '0x242035f42c59119b9a22d4270506c07fb792e55c': {
     short: 'VeSea',
