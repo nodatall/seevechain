@@ -1,7 +1,10 @@
 const KNOWN_CONTRACTS = {
-  '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': {
+  '0xa6416a72f816d3a69f33d0814700545c8e3fe4be': {
     short: 'ToolChain Partners',
     long: 'DNV',
+  },  '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': {
+    short: 'VeChain Foundation',
+    long: 'VeVote Contract',
   },
   '0xf72614024c9273320b2f82dda3932785df6b9208': {
     short: 'ToolChain Partners',
