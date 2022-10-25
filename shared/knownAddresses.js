@@ -419,6 +419,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - Shark Gang NFT',
   },
+  '0x8502a0bc9857a43fe7b5c700044fd6dce05619e4': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - VeBounce NFT',
+  },
   '0x4a9e867c1809f7ffdf4dc5aa870faf8be911a805': {
     short: 'WorldOfV',
     long: 'VeHash Staking',
