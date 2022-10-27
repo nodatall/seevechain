@@ -1,10 +1,15 @@
-const KNOWN_CONTRACTS = {
+const KNOWN_CONTRACTS = { 
+  '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': {
+    short: 'VeChain Foundation',
+    long: 'VeVote Contract',
+  },
   '0xa6416a72f816d3a69f33d0814700545c8e3fe4be': {
     short: 'ToolChain Partners',
     long: 'DNV',
-  },  '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': {
-    short: 'VeChain Foundation',
-    long: 'VeVote Contract',
+  },  
+  '0x20eb29a2f76021c4cb5bbd4ee359a6172ee2e30a': {
+    short: 'ToolChain Partners',
+    long: 'Supply@Me',
   },
   '0xf72614024c9273320b2f82dda3932785df6b9208': {
     short: 'ToolChain Partners',
@@ -57,6 +62,14 @@ const KNOWN_CONTRACTS = {
   '0xe5e83b13c4b4042bae5809b1c5d1bed4bb3836dc': {
     short: 'ToolChain Partners',
     long: 'Undisclosed_12',
+  },
+  '0x65e8d64bcb5b5e235626958ed116d4a9d7aea081': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_13',
+  },
+  '0x8f23de2ad8d4fc4955539fd6cd160eb25946237e': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_14',
   },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'ToolChain Partners',
@@ -422,6 +435,10 @@ const KNOWN_CONTRACTS = {
   '0x8502a0bc9857a43fe7b5c700044fd6dce05619e4': {
     short: 'WorldOfV',
     long: 'WoVNFT - VeBounce NFT',
+  },
+  '0x4167d527340afa546bb88d5d83afb6272e48b40e': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - VeBounce NFT (2)',
   },
   '0x4a9e867c1809f7ffdf4dc5aa870faf8be911a805': {
     short: 'WorldOfV',
