@@ -71,6 +71,10 @@ const KNOWN_CONTRACTS = {
     short: 'ToolChain Partners',
     long: 'Undisclosed_14',
   },
+  '0xcf4645cc606c48bfe63a3b4987628f1b2760db08': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_15',
+  },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'ToolChain Partners',
     long: 'NSF International',
@@ -439,6 +443,10 @@ const KNOWN_CONTRACTS = {
   '0x4167d527340afa546bb88d5d83afb6272e48b40e': {
     short: 'WorldOfV',
     long: 'WoVNFT - VeBounce NFT (2)',
+  },
+  '0x4c73b23fd7065becaf9a900cd475c19dee514d6e': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - VeBounce Claim',
   },
   '0x4a9e867c1809f7ffdf4dc5aa870faf8be911a805': {
     short: 'WorldOfV',
