@@ -1,4 +1,8 @@
 const KNOWN_CONTRACTS = { 
+  '0xb81e9c5f9644dec9e5e3cac86b4461a222072302': 'VeChain Node',
+  '0xe28ce32d637eb93cbda105f87fbb829e9ef8540b': 'VeChain Auction',
+  '0xdbaec4165a6cff07901c41d3561eefdcfbc20cb6': 'Steering Committee Vote',
+  '0x0000000000000000000000417574686f72697479': 'VeChain Authority Node',
   '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': {
     short: 'VeChain Foundation',
     long: 'VeVote Contract',
@@ -277,10 +281,6 @@ const KNOWN_CONTRACTS = {
     long: 'Vulcan 4',
   },
   '0xb1b9d40758cc3d90f1b2899dfb7a64e5d0235c61': 'Vulcan',
-  '0xb81e9c5f9644dec9e5e3cac86b4461a222072302': 'VeChain Node',
-  '0xe28ce32d637eb93cbda105f87fbb829e9ef8540b': 'VeChain Auction',
-  '0xdbaec4165a6cff07901c41d3561eefdcfbc20cb6': 'Steering Committee Vote',
-  '0x0000000000000000000000417574686f72697479': 'VeChain Authority Node',
   '0x27b508dba99a05c7810d4956d74daa71bac0d969': {
     short: 'VIMworld',
     long: 'VIM Transfer',
@@ -624,6 +624,14 @@ const KNOWN_CONTRACTS = {
     short: 'Satoshi Dice',
     long: 'Satoshi Dice',
   },
+  '0x57f4b5f456add260bf5193271f0bc7a5bed35d55': {
+    short: 'Arbs',
+    long: 'Arb Contract A',
+  },
+  '0xae51d373f105788a78208c7e3ca5167db1d33137': {
+    short: 'Arbs',
+    long: 'Arb Contract B',
+  },
   '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': {
     short: 'Independent NFTs',
     long: 'Vesitors NFT',
@@ -919,6 +927,10 @@ const KNOWN_CONTRACTS = {
   '0x4acacfeaaaba51c488d429106184591856356b52': {
     short: 'VeSea',
     long: 'VeSea NFT: NPO - Sows',
+   },
+  '0x13e13a662bf2a085bbab01f9b1f5c3319f434ed2': {
+    short: 'VeSea',
+    long: 'VeSea NFT: kBk - 3D',
    }
 }
 
