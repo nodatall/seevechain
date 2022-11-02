@@ -3,11 +3,11 @@ const KNOWN_CONTRACTS = {
   '0xe28ce32d637eb93cbda105f87fbb829e9ef8540b': 'VeChain Auction',
   '0xdbaec4165a6cff07901c41d3561eefdcfbc20cb6': 'Steering Committee Vote',
   '0x0000000000000000000000417574686f72697479': 'VeChain Authority Node',
-  '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': {
+  '0xa6416a72f816d3a69f33d0814700545c8e3fe4be': {
     short: 'VeChain Foundation',
     long: 'VeVote Contract',
   },
-  '0xa6416a72f816d3a69f33d0814700545c8e3fe4be': {
+  '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': {
     short: 'ToolChain Partners',
     long: 'DNV',
   },  
