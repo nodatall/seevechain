@@ -79,6 +79,10 @@ const KNOWN_CONTRACTS = {
     short: 'ToolChain Partners',
     long: 'Undisclosed_15',
   },
+  '0x9398648b907399bd0fcb5a8d0822e8daa66378ef': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_16',
+  },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'ToolChain Partners',
     long: 'NSF International',
@@ -515,6 +519,10 @@ const KNOWN_CONTRACTS = {
   '0x8bb4a3ec153c0aa1ed1c51788b1d49dd68c79b30': {
     short: 'WorldOfV',
     long: 'Corgi Staking',
+  },
+  '0xdd567517b958b6501a6388b4fa8cd2fd72ab72c4': {
+    short: 'WorldOfV',
+    long: 'VeKongs Staking',
   },
   '0x08c73b33115cafda73371a23a98ee354598a4abe': {
     short: 'Dohrnii Staking',
