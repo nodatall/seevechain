@@ -83,6 +83,10 @@ const KNOWN_CONTRACTS = {
     short: 'ToolChain Partners',
     long: 'Undisclosed_16',
   },
+  '0xea665486ba7d2d1904e9ea8694860e825d4beaf0': {
+    short: 'ToolChain Partners',
+    long: 'Undisclosed_17',
+  },
   '0xfee823ac958e34973d124218f8ddbe65a651a08b': {
     short: 'ToolChain Partners',
     long: 'NSF International',
