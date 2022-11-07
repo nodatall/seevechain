@@ -484,6 +484,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'VeHash Staking',
   },
+  '0xf4a6040c695b815b70713deff0793db1d33eb6b3': {
+    short: 'WorldOfV',
+    long: 'VeHash Staking 3',
+  },
   '0x489f014285a0c45e5c82013d5c3f3b3e1274889e': {
     short: 'WorldOfV',
     long: 'Shredderz Staking',
@@ -655,6 +659,10 @@ const KNOWN_CONTRACTS = {
   '0x910607db19dce5651da4e68950705d6e49bc01a5': {
     short: 'Independent NFTs',
     long: 'INKA Empire NFT',
+  },
+  '0x0b6f1e2220e7498111db0e56d972f93dd035da32': {
+    short: 'Independent NFTs',
+    long: 'Gods of Olympus NFT',
   },
   '0xd6b93818ac38c936f51538e5e7832d7127b79622': {
     short: 'Independent NFTs',
