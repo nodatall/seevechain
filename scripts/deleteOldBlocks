@@ -6,7 +6,7 @@ const client = require('../server/database')
 ;(async function getBlocksForLastDay() {
 
   const before = moment()
-    .subtract(Number(process.argv[2]), 'days')
+    .subtract(Number(4), 'days')
     .toDate()
     .toISOString()
 
@@ -15,7 +15,7 @@ const client = require('../server/database')
     [before]
   )
 
-  process.exit(1)
+  process.exit(0)
 })()
 
 
