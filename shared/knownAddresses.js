@@ -660,17 +660,17 @@ const KNOWN_CONTRACTS = {
     short: 'Independent NFTs',
     long: 'Vales NFT',
   },
-  '0x910607db19dce5651da4e68950705d6e49bc01a5': {
-    short: 'Independent NFTs',
-    long: 'INKA Empire NFT',
-  },
-  '0x0b6f1e2220e7498111db0e56d972f93dd035da32': {
-    short: 'Independent NFTs',
-    long: 'Gods of Olympus NFT',
-  },
   '0xd6b93818ac38c936f51538e5e7832d7127b79622': {
     short: 'Independent NFTs',
     long: 'Metatun NFT',
+  },
+  '0x910607db19dce5651da4e68950705d6e49bc01a5': {
+    short: 'Llama Digital Studios',
+    long: 'INKA Empire NFT',
+  },
+  '0x0b6f1e2220e7498111db0e56d972f93dd035da32': {
+    short: 'Llama Digital Studios',
+    long: 'Gods of Olympus NFT',
   },
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'VeSea',
