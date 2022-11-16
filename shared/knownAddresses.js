@@ -608,6 +608,10 @@ const KNOWN_CONTRACTS = {
     short: 'Black VeMarket',
     long: 'Singapura Baby Dragons NFTs',
   },
+  '0x3a07dec3477c7e1df69c671df95471eefcf86175': {
+    short: 'Black VeMarket',
+    long: 'Tribes NFTs',
+  },
   '0xa5e2ee50cb49ea4d0a3a520c15aa4cffaf5ea026': {
     short: 'Black VeMarket',
     long: 'Gangster Gorillaz NFT',
@@ -701,6 +705,10 @@ const KNOWN_CONTRACTS = {
     long: 'VeSea Market: Listings'
   },
   '0x09212be7a37a066d4707d9afbe09536656aff89b': {
+    short: 'VeSea',
+    long: '$VSEA Staking (old)'
+  },
+  '0x92f3bc40facd12504aeb64c86f06ee904acd37c5': {
     short: 'VeSea',
     long: '$VSEA Staking'
   },
