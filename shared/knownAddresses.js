@@ -61,7 +61,7 @@ const KNOWN_CONTRACTS = {
   },
   '0x0eca11f7035fb0cdfa059796add7f6552560b968': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed_11',
+    long: 'YONEX',
   },
   '0xe5e83b13c4b4042bae5809b1c5d1bed4bb3836dc': {
     short: 'ToolChain Partners',
