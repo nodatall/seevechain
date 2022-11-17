@@ -81,7 +81,7 @@ const KNOWN_CONTRACTS = {
   },
   '0x9398648b907399bd0fcb5a8d0822e8daa66378ef': {
     short: 'ToolChain Partners',
-    long: 'Undisclosed_16',
+    long: 'Yongpu Coffee',
   },
   '0xea665486ba7d2d1904e9ea8694860e825d4beaf0': {
     short: 'ToolChain Partners',
