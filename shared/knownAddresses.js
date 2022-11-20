@@ -706,9 +706,13 @@ const KNOWN_CONTRACTS = {
   },
   '0x09212be7a37a066d4707d9afbe09536656aff89b': {
     short: 'VeSea',
-    long: '$VSEA Staking (old)'
+    long: '$VSEA Staking (old 1)'
   },
   '0x92f3bc40facd12504aeb64c86f06ee904acd37c5': {
+    short: 'VeSea',
+    long: '$VSEA Staking (old 2)'
+  },
+  '0x85b2aae82762cd1232cff62f541c289bd349e3ff': {
     short: 'VeSea',
     long: '$VSEA Staking'
   },
