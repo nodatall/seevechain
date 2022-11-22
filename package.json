@@ -76,7 +76,7 @@
     "request-promise": "^4.2.4",
     "sass-loader": "^7.1.0",
     "sma": "^0.1.1",
-    "socket.io": "^4.0.1",
+    "socket.io": "^4.5.3",
     "socket.io-client": "^4.0.1",
     "thor-devkit": "^1.2.5",
     "webpack": "^4.29.6",
