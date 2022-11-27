@@ -532,6 +532,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'VeKongs Staking',
   },
+  '0xe827213802fcaf4b776fa0adbde8da7fdd5f4b91': {
+    short: 'WorldOfV',
+    long: 'Nemesis Staking',
+  },
   '0x08c73b33115cafda73371a23a98ee354598a4abe': {
     short: 'Dohrnii Staking',
     long: 'Dohrnii Staking (3mo)',
