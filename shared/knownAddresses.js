@@ -205,6 +205,14 @@ const KNOWN_CONTRACTS = {
     short: 'VeRocket',
     long: 'VeRocket vVET/VEED',
   },
+  '0xb79d201ec8c187e68dad902cc5a14b54b3a7df40': {
+    short: 'VeRocket',
+    long: 'VeRocket vVET/PLA',
+  },
+  '0x0bb35811213df1c6247041e456639b83dd4e4017': {
+    short: 'VeRocket',
+    long: 'VeRocket vVET/EHRT',
+  },
   '0xc75668ce138dd65f4de37d986a84ebdef71cda02': {
     short: 'VeRocket',
     long: 'VeRocket vVET/OCE',
@@ -934,7 +942,7 @@ const KNOWN_CONTRACTS = {
    },
   '0x8d831724414739846045e7bc07522058ff5f67d8': {
     short: 'VeSea',
-    long: 'VeSea NFT: Stardust Spectres',
+    long: 'VeSea NFT: SSV',
    },
   '0xbcbf39013da096c97f0dc913f7ac1cdc42b9a721': {
     short: 'VeSea',
@@ -947,10 +955,6 @@ const KNOWN_CONTRACTS = {
   '0x017d182c60e4f3c469156208b9f30a7fb80db214': {
     short: 'VeSea',
     long: 'VeSea NFT: Baby Yeet Crusaders X',
-   },
-  '0x0ce0c940d11FBdD73561901DbCDeF84e73A511b9': {
-    short: 'VeSea',
-    long: 'VeSea NFT: Stardust Spectres Access Cards',
    },
   '0xc17d84d2d19b45653abefed0b9678fcdbfc1b0b0': {
     short: 'VeSea',
@@ -970,7 +974,7 @@ const KNOWN_CONTRACTS = {
    },
   '0x0ce0c940d11fbdd73561901dbcdef84e73a511b9': {
     short: 'VeSea',
-    long: 'VeSea NFT: Stardust Access Cards',
+    long: 'VeSea NFT: SSV Access Cards',
    },
   '0x4acacfeaaaba51c488d429106184591856356b52': {
     short: 'VeSea',
@@ -983,6 +987,10 @@ const KNOWN_CONTRACTS = {
   '0xcb99479e30136d86f9d8a8e9a79a4ecc75e36066': {
     short: 'VeSea',
     long: 'VeSea NFT: VeCowboys',
+   }
+  '0x4eb966763294a77be85d1a1a56b7e15f59f45dbe': {
+    short: 'VeSea',
+    long: 'VeSea NFT: SSV Spectres',
    }
 }
 
