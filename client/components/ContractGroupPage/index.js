@@ -23,6 +23,8 @@ import diceBanner from 'assets/dice_banner.png'
 import diceIcon from 'assets/dice_icon.png'
 import vechainBanner from 'assets/vechain_banner.png'
 import vechainIcon from 'assets/vechain_icon.png'
+import threedablesBanner from 'assets/3dables_banner.png'
+import threedablesIcon from 'assets/3dables_icon.png'
 
 import './index.sass'
 
@@ -85,6 +87,12 @@ const groupProfileProps = {
     logo: vechainIcon,
     url: 'https://www.veworld.com/home',
     bio: 'A lightweight and rapidly deployable sustainable traceability application that allows brands to record all their sustainable footprints throughout their supply chain.',
+  },
+  '3DAbles': {
+    banner: threedablesBanner,
+    logo: threedablesIcon,
+    url: 'https://3dables.smuzzies.com/',
+    bio: '3DAbles is a dApp that allows a collection holder in the VeChain Thor blockchain to create prestaged artwork using the NFTs the holder owns. No longer does your NFT have to remain dormant in your wallet.',
   },
 }
 
