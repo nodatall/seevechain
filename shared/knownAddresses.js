@@ -702,7 +702,11 @@ const KNOWN_CONTRACTS = {
   },
   '0xbdf2b45bd428bba31c46b8d8d1f50615ee0e1416': {
     short: '3DAbles',
-    long: '3DAbles: NFT Mint ',
+    long: '3DAbles: Generated NFT',
+  },
+  '0x319f08fd7c97fe0010b1f6171debc8dce3738a0e': {
+    short: '3DAbles',
+    long: '3DAbles: Smuzzies NFT',
   },
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'VeSea',
@@ -955,10 +959,6 @@ const KNOWN_CONTRACTS = {
   '0xbcbf39013da096c97f0dc913f7ac1cdc42b9a721': {
     short: 'VeSea',
     long: 'VeSea NFT: Universal Inventory',
-   },
-  '0x319f08fd7c97fe0010b1f6171debc8dce3738a0e': {
-    short: 'VeSea',
-    long: 'VeSea NFT: Smuzzies',
    },
   '0x017d182c60e4f3c469156208b9f30a7fb80db214': {
     short: 'VeSea',
