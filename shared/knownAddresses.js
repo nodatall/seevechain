@@ -1045,7 +1045,6 @@ const TOKEN_CONTRACTS = {
 const KNOWN_ADDRESSES = {
   '0xa4adafaef9ec07bc4dc6de146934c7119341ee25': 'Binance',
   '0xd0d9cd5aa98efcaeee2e065ddb8538fa977bc8eb': 'Binance Cold',
-  '0xff3bc357600885aaa97506ea6e24fb21aba88fbd': 'GOLD Token',
   '0x1263c741069eda8056534661256079d485e111eb': 'Binance Warm',
   '0xd7dd13a54755cb68859eec0cac24144aafb8c881': 'Huobi',
   '0xfe64e37dfc7d64743d9351260fa99073c840452b': 'Binance US',
