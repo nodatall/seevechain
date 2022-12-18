@@ -995,6 +995,10 @@ const KNOWN_CONTRACTS = {
   '0x4d4664aed6f645fb3defbbd668b2a4842c029187': {
     short: 'VeSea',
     long: 'VeSea NFT: Goatz Club',
+   },
+  '0xc766ddd21f14862ef426f15bfb28573fdad8bc51': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Mino Mob Multiverse',
    }
 }
 
