@@ -692,6 +692,14 @@ const KNOWN_CONTRACTS = {
     short: 'Llama Digital Studios',
     long: 'Gods of Olympus NFT',
   },
+  '0x5db9c11da68b346d7a1f38ec20868ab0ab5cac8d': {
+    short: 'Llama Digital Studios',
+    long: 'Inka Boss Battling',
+  },
+  '0xf639b215679d2411e0e2b25191dcc0ac38f1d798': {
+    short: 'Llama Digital Studios',
+    long: 'Gods Boss Battling',
+  },
   '0xbdf2b45bd428bba31c46b8d8d1f50615ee0e1416': {
     short: '3DAbles',
     long: '3DAbles',
@@ -1004,6 +1012,7 @@ const KNOWN_CONTRACTS = {
 
 const TOKEN_CONTRACTS = {
   '0x107a0b0faeb58c1fdef97f37f50e319833ad1b94': 'DRAGON Token',
+  '0xff3bc357600885aaa97506ea6e24fb21aba88fbd': 'GOLD Token'
   '0x4e17357053da4b473e2daa2c65c2c949545724b8': 'VeUSD Token',
   '0x23368c20c16f64ecbb30164a08666867be22f216': 'VSEA Token',
   '0x45429a2255e7248e57fce99e7239aed3f84b7a53': 'vVET Token',
