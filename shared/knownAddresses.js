@@ -702,7 +702,7 @@ const KNOWN_CONTRACTS = {
   },
   '0xbdf2b45bd428bba31c46b8d8d1f50615ee0e1416': {
     short: '3DAbles',
-    long: '3DAbles',
+    long: '3DAbles: NFT Mint ',
   },
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'VeSea',
