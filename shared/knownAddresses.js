@@ -692,7 +692,7 @@ const KNOWN_CONTRACTS = {
     short: 'Llama Digital Studios',
     long: 'Gods of Olympus NFT',
   },
-  '0x5db9c11da68b346d7a1f38ec20868ab0ab5cac8d': {
+  '0x4035dee4581deb866dc18c97696a5b78f393bcfe': {
     short: 'Llama Digital Studios',
     long: 'Inka Boss Battling',
   },
