@@ -464,6 +464,14 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'WoVNFT - VeBounce Claim',
   },
+  '0x1119e8f8d66e89d6b5e625dfdc45bab0f97de6a7': {
+    short: 'WorldOfV',
+    long: 'WoVNFT - EXPlus',
+  },
+  '0x45c1438c4f913fdef947e244f559eede40c31931': {
+    short: 'WorldOfV',
+    long: 'WoV Lottery',
+  },
   '0x4a9e867c1809f7ffdf4dc5aa870faf8be911a805': {
     short: 'WorldOfV',
     long: 'VeHash Staking',
