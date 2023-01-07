@@ -708,6 +708,10 @@ const KNOWN_CONTRACTS = {
     short: 'Llama Digital Studios',
     long: 'Gods Boss Battling',
   },
+  '0x4d66b90163bc1d73cdad3a7ab176cce354145bb3': {
+    short: 'Llama Digital Studios',
+    long: 'Gates of Hell',
+  },
   '0xbdf2b45bd428bba31c46b8d8d1f50615ee0e1416': {
     short: '3DAbles',
     long: '3DAbles: Generated NFT',
