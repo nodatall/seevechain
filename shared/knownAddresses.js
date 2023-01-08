@@ -1019,6 +1019,18 @@ const KNOWN_CONTRACTS = {
   '0xc766ddd21f14862ef426f15bfb28573fdad8bc51': {
     short: 'VeSea',
     long: 'VeSea NFT: Mino Mob Multiverse',
+   },
+  '0xe7af95411f611fbaf39bc91c17ca6179661a032e': {
+    short: 'VeSea',
+    long: 'VeSea NFT: VeKing Raiders',
+   },
+  '0x7b927025cd0e645c28924e2726ecc7372615df46': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Portal Passes',
+   },
+  '0xd9c10931402e9619135481969e62925520bcceeb': {
+    short: 'VeSea',
+    long: 'VeSea NFT: VVAR DOGS - Portal Davvgs',
    }
 }
 
