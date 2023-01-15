@@ -1,6 +1,7 @@
 const { Framework } = require('@vechain/connex-framework')
 const { Driver, SimpleNet } = require('@vechain/connex.driver-nodejs')
 const commands = require('../commands')
+const sleep = (time) =>new Promise(resolve => setTimeout(resolve, time)) 
 
 async function subscribeToVechainBlocks(io, client) {
   const driver = await Driver.connect(new SimpleNet('https://mainnet.veblocks.net/'))
@@ -18,21 +19,31 @@ async function subscribeToVechainBlocks(io, client) {
 }
 
 async function getBlock(thor, number, client) {
-  const block = await thor.block(number).get()
-  if (!block) {
-    return await getBlock(thor, number, client)
-  } else {
-    await client.tx('saveBlock and getTransactions', async client => {
-      await commands.saveBlock({ client, block })
-      for (const txId of block.transactions) {
-        await getTransaction(thor, txId, block, client)
-      }
-      for (const txId of testData) {
-        await getTransaction(thor, txId, block, client)
-      }
-    })
+  try {
+    const block = await thor.block(number).get()
+    if (!block) {
+      return await getBlock(thor, number, client)
+    } else {
+      await client.tx('saveBlock and getTransactions', async client => {
+        await commands.saveBlock({ client, block })
+        for (const txId of block.transactions) {
+          await getTransaction(thor, txId, block, client)
+        }
+        for (const txId of testData) {
+          await getTransaction(thor, txId, block, client)
+        }
+      })
+    }
+    return block
   }
-  return block
+  catch(error) {
+    if (error.message.includes('Internal Server Error')) {
+      console.log('retrying missing block -->', number)
+      console.log(error)
+      await sleep(5000)
+      return getBlock(thor, number, client)
+    } else throw error
+  }
 }
 
 async function getTransaction(thor, txId, block, client) {
