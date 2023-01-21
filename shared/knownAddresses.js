@@ -672,6 +672,10 @@ const KNOWN_CONTRACTS = {
     short: 'Arbs',
     long: 'Arb Contract B',
   },
+  '0xcfa5ec9df32a9c0a508aa8a6244e88d5ccc6b246': {
+    short: 'Arbs',
+    long: 'Arb Contract C',
+  },
   '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': {
     short: 'Independent NFTs',
     long: 'Vesitors NFT',
@@ -1031,7 +1035,11 @@ const KNOWN_CONTRACTS = {
   '0xd9c10931402e9619135481969e62925520bcceeb': {
     short: 'VeSea',
     long: 'VeSea NFT: VVAR DOGS - Portal Davvgs',
-   }
+   },
+  '0x8c41b27504c2ea059312c55122d07149a3363c31': {
+    short: 'VeSea',
+    long: 'VeSea NFT: VeKing Raiders',
+   } 
 }
 
 const TOKEN_CONTRACTS = {
