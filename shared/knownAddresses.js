@@ -1039,6 +1039,14 @@ const KNOWN_CONTRACTS = {
   '0x8c41b27504c2ea059312c55122d07149a3363c31': {
     short: 'VeSea',
     long: 'VeSea NFT: VeKing Raiders',
+   },
+  '0xe4be710b7553602a37126bd2bade15df18c957ff': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Zilly Zombies',
+   },
+  '0x7957c7685879f45db2642d5705b72bc9ad2d0899': {
+    short: 'VeSea',
+    long: 'VeSea NFT: VFA - Geckos',
    } 
 }
 
