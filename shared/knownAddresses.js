@@ -676,6 +676,10 @@ const KNOWN_CONTRACTS = {
     short: 'Arbs',
     long: 'Arb Contract C',
   },
+  '0xd850350d060ab629363386206df6486dcfa6ed68': {
+    short: 'Arbs',
+    long: 'Arb Contract D',
+  },
   '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': {
     short: 'Independent NFTs',
     long: 'Vesitors NFT',
@@ -712,9 +716,13 @@ const KNOWN_CONTRACTS = {
     short: 'Llama Digital Studios',
     long: 'Gods Boss Battling',
   },
-  '0x4d66b90163bc1d73cdad3a7ab176cce354145bb3': {
+  '0x54a343c40a6ee31b27ca98e4c814d5bd02065b20': {
     short: 'Llama Digital Studios',
-    long: 'Gates of Hell',
+    long: 'Gates of Hell1',
+  },
+  '0xf606d79a1e962b1291d1dcf1f7226ecfbd8c63fc': {
+    short: 'Llama Digital Studios',
+    long: 'Gates of Hell2',
   },
   '0xbdf2b45bd428bba31c46b8d8d1f50615ee0e1416': {
     short: '3DAbles',
