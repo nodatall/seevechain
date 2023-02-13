@@ -680,6 +680,10 @@ const KNOWN_CONTRACTS = {
     short: 'Arbs',
     long: 'Arb Contract D',
   },
+  '0xbfc4649a50b8fc1fb75706eb28f8b6c5b3978012': {
+    short: 'Arbs',
+    long: 'Arb Contract E',
+  },
   '0x9aa9f6472a5b415dbb7dd36dfb773e09b1369288': {
     short: 'Independent NFTs',
     long: 'Vesitors NFT',
