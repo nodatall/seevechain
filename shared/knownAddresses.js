@@ -492,6 +492,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'VeKongs 2 Staking',
   },
+  '0x20df04e8f8dacbca7c37f4f3233b6bbeac046bbe': {
+    short: 'WorldOfV',
+    long: 'VeKongs 2 Staking(2)',
+  },
   '0x0f8f7df03010eb629ac717557c82dca963571b72': {
     short: 'WorldOfV',
     long: 'UW Staking',
@@ -531,6 +535,10 @@ const KNOWN_CONTRACTS = {
   '0x2459a3649b5240ae8d851e42e64e694321e975b9': {
     short: 'WorldOfV',
     long: 'Psycho Beast Staking',
+  },
+  '0x9394ba5521201c334583701716d61ff54880084c': {
+    short: 'WorldOfV',
+    long: 'Psycho Beast Staking (2)',
   },
   '0xc9e7060bc92959d9d2ac6b2121e4268a6b5ee651': {
     short: 'WorldOfV',
@@ -1056,13 +1064,27 @@ const KNOWN_CONTRACTS = {
     short: 'VeSea',
     long: 'VeSea NFT: Zilly Zombies',
    },
-  '0x7957c7685879f45db2642d5705b72bc9ad2d0899': {
+  '0xb68f43cf91a2c9fa3f8ab369cb2fb23511eb7fb7': {
     short: 'VeSea',
-    long: 'VeSea NFT: VFA - Geckos',
-   } 
+    long: 'VeSea NFT: Tradze Town',
+   },
+  '0x8c810f79900d2b69f7043c7ff447f2eb3084606a': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Nonfungible Bookclub',
+   },
+  '0xfb3b2f8b4f8aae9e7a24ba0bcbb6a49d344f2ef3': {
+    short: 'VeSea',
+    long: 'VeSea NFT: VFA - HiVe POP 2023',
+   },
+  '0x6fd65c8ecafebbb505ab74f2e27025058bddc75d': {
+    short: 'VeSea',
+    long: 'VeSea NFT: VeTower - VeRooms',
+   }
 }
 
 const TOKEN_CONTRACTS = {
+  '0xb28a08d4e0fd0a7bdbe7461188f0ba5183f95298': 'Legacy Token',
+  '0xa4f95b1f1c9f4cf984b0a003c4303e8ea86302f6': 'VFA Token',
   '0x107a0b0faeb58c1fdef97f37f50e319833ad1b94': 'DRAGON Token',
   '0xff3bc357600885aaa97506ea6e24fb21aba88fbd': 'GOLD Token',
   '0x4e17357053da4b473e2daa2c65c2c949545724b8': 'VeUSD Token',
