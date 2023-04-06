@@ -744,6 +744,14 @@ const KNOWN_CONTRACTS = {
     short: '3DAbles',
     long: '3DAbles: Smuzzies NFT',
   },
+  '0x3564c224dcbc63779c50dca573b2bccef72a985b': {
+    short: '3DAbles',
+    long: '3DAbles: Utility',
+  },
+  '0x2f6c8031e0c63176a2d4c675f068e08487aac1dd': {
+    short: '3DAbles',
+    long: '3DAbles: Pawn Shop',
+  },
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'VeSea',
     long: 'Paper Marketplace',
@@ -1082,7 +1090,9 @@ const KNOWN_CONTRACTS = {
    }
 }
 
+    
 const TOKEN_CONTRACTS = {
+  '0x8fcddbb322b18d8bdaec9243e9f4c6eb8901e566': '3DAbles Token',
   '0xb28a08d4e0fd0a7bdbe7461188f0ba5183f95298': 'Legacy Token',
   '0xa4f95b1f1c9f4cf984b0a003c4303e8ea86302f6': 'VFA Token',
   '0x107a0b0faeb58c1fdef97f37f50e319833ad1b94': 'DRAGON Token',
