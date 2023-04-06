@@ -664,6 +664,7 @@ const KNOWN_CONTRACTS = {
   '0xd948e6cf79ab34b716350db4aee33cf0031cf7a1': 'XGG Black Tea',
   '0x3805c62f463f34b2f913bb09115aaa9460794d7c': 'WOV Clock Auction Genesis',
   '0x2980f7a9bec00ee6ffee21e5fbac5e104578bf13': 'Wall of Vame',
+  '0x49ba5e15899142ee2b192769e4abbc2cf13bfd6c': 'Voteos',
   '0x955b48a46698b2b8330d75dc88ae5b95cd7ff9f4': {
     short: 'Satoshi Dice',
     long: 'Yggdrasil',
@@ -1087,6 +1088,26 @@ const KNOWN_CONTRACTS = {
   '0x6fd65c8ecafebbb505ab74f2e27025058bddc75d': {
     short: 'VeSea',
     long: 'VeSea NFT: VeTower - VeRooms',
+   },
+  '0x2f0586faa4b51a678cf5d0f27ce414f3f6d08517': {
+    short: 'VeSea',
+    long: 'VeSea NFT: BFFC Eagles',
+   },
+  '0xdce5a78fe9cbba559c73a83ee40891b8a09516c2': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Pixel Outlaws',
+   },
+  '0x2c59dfa1d8d9a1f17855d1db0d071662aebe16be': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Blockbones',
+   },
+  '0x24520e0943b57ce3134238917309b903b181832a': {
+    short: 'VeSea',
+    long: 'VeSea NFT: INKA Mulligan',
+   },
+  '0x7d9fd924b15efe9e82093d51af9bcd875ad57428': {
+    short: 'VeSea',
+    long: 'VeSea NFT: Funky Incubators',
    }
 }
 
