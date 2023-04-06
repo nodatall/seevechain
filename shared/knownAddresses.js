@@ -1108,6 +1108,10 @@ const KNOWN_CONTRACTS = {
   '0x7d9fd924b15efe9e82093d51af9bcd875ad57428': {
     short: 'VeSea',
     long: 'VeSea NFT: Funky Incubators',
+   },
+  '0xb1e19aeaa5da5aba4b5591e548b5b6505c08909e': {
+    short: 'VeSea',
+    long: 'VeSea NFT: UkiDawgs',
    }
 }
 
