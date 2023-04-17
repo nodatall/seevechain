@@ -348,6 +348,10 @@ const KNOWN_CONTRACTS = {
     short: 'WorldOfV',
     long: 'v2 - Marketplace Community NFT',
   },
+  '0x058d4c951aa24ca012cef3408b259ac1c69d1258': {
+    short: 'WorldOfV',
+    long: 'Marketplace',
+  },
   '0xe01cb06168f52b40fc60d5ce218346361a75efe7': {
     short: 'WorldOfV',
     long: 'Auction Marketplace',
@@ -559,6 +563,10 @@ const KNOWN_CONTRACTS = {
   '0xe827213802fcaf4b776fa0adbde8da7fdd5f4b91': {
     short: 'WorldOfV',
     long: 'Nemesis Staking',
+  },
+  '0xe804784f0344def17ace6c7569f57b48be27813a': {
+    short: 'WorldOfV',
+    long: 'VeCorgi Staking',
   },
   '0x08c73b33115cafda73371a23a98ee354598a4abe': {
     short: 'Dohrnii Staking',
