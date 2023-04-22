@@ -757,9 +757,13 @@ const KNOWN_CONTRACTS = {
     short: '3DAbles',
     long: '3DAbles: Utility',
   },
-  '0x2f6c8031e0c63176a2d4c675f068e08487aac1dd': {
+  '0xafd5ff1c20d41a5f04eb3a82aa055ee5ecf9e331': {
     short: '3DAbles',
     long: '3DAbles: Pawn Shop',
+  },
+  '0x1a8c0ce14086f47c4c7cc5ec01b8b1e19bf7fb55': {
+    short: '3DAbles',
+    long: '3DAbles: Tradables',
   },
   '0x1f1d4b35302f9e0837b8ee34e3968023fde0122c': {
     short: 'VeSea',
