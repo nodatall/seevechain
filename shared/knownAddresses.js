@@ -9,7 +9,7 @@ const KNOWN_CONTRACTS = {
   },
   '0xf57a7cdee288ecc97dd90b56778acb724a1a1d59': {
     short: 'KaY',
-    long: 'Not Part of VeChain',
+    long: 'KaY - Not Part of VeChain',
   },  
   '0xba6b65f7a48636b3e533205d9070598b4faf6a0c': {
     short: 'ToolChain Partners',
