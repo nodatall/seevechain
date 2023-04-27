@@ -765,7 +765,7 @@ const KNOWN_CONTRACTS = {
     short: '3DAbles',
     long: '3DAbles: Pawn Shop',
   },
-  '0x08c2F23a4060e28Def34944C306A6A7771863667': {
+  '0x512547eEb6ceBf76210eA1e23588084AD3312C6e': {
     short: '3DAbles',
     long: '3DAbles: Tradables',
   },
