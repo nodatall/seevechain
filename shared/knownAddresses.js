@@ -171,7 +171,7 @@ const KNOWN_CONTRACTS = {
   },
   '0x7A3d485cC586d2c5543b0DF3B93043CFA8Aec6D6': {
     short: 'VeRocket',
-    long: 'Zumoswap VeUSD',
+    long: 'VeRocket VeUSD',
   },
   '0x1a8abd6d5627eb26ad71c0c7ae5224cdc640faf3': {
     short: 'VeRocket',
