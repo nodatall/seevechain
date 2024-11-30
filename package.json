@@ -27,7 +27,7 @@
     "@material-ui/icons": "^4.11.2",
     "@vechain/connex-framework": "^1.1.2",
     "@vechain/connex.driver-nodejs": "^1.2.0-beta6",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-imports": "^2.0.0",
