@@ -64,7 +64,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
     - output: `migrations/`
     - verify: `npm run db:migrate` against local disposable `hypersight` database when Postgres is available
     - done_when: New tables and indexes exist through db-migrate, including `feed_status_events`; configured default markets are seeded or ready for startup reconciliation; old VeChain tables are not required by new runtime code.
-  - [ ] 2.2 Implement Hyperliquid WebSocket service and parser/normalizer tests
+  - [x] 2.2 Implement Hyperliquid WebSocket service and parser/normalizer tests
     - covers_prd: `FR-002`, `FR-003`, `FR-004`, `FR-005`, `FR-013`
     - covers_tdd: `TDR-001`, `TDR-003`, `TDR-004`, `TDR-005`, `TDR-008`, `TDR-015`
     - output: `server/services/` or `server/lib/`, `server/test/`
