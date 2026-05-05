@@ -100,6 +100,7 @@ async function startHyperliquidService(io, client) {
 
     const service = createHyperliquidWsService({
       coins,
+      wsUrl: process.env.HYPERLIQUID_WS_URL,
       logger,
     })
 

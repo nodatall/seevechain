@@ -1,6 +1,7 @@
 const { expect } = require('chai')
 
 const {
+  buildPingMessage,
   buildSubscribeMessage,
   createInitialStatus,
   normalizeTrade,
@@ -13,6 +14,12 @@ describe('hyperliquid websocket helpers', () => {
     expect(buildSubscribeMessage('sol')).to.deep.equal({
       method: 'subscribe',
       subscription: { type: 'trades', coin: 'SOL' },
+    })
+  })
+
+  it('builds Hyperliquid application heartbeat messages', () => {
+    expect(buildPingMessage()).to.deep.equal({
+      method: 'ping',
     })
   })
 

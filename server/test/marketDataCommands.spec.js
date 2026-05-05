@@ -124,6 +124,42 @@ describe('market data commands', () => {
     expect(stats.latestTrades).to.have.length(2)
   })
 
+  it('filters stats and latest trades to configured markets', () => {
+    const stats = buildMarketStats({
+      trades: [
+        {
+          coin: 'BTC',
+          tid: 1,
+          time_ms: 1710000000000,
+          side: 'buy',
+          raw_side: 'B',
+          price: '60000',
+          size: '0.1',
+          notional: '6000',
+          hash: null,
+        },
+        {
+          coin: 'DOGE',
+          tid: 2,
+          time_ms: 1710000100000,
+          side: 'buy',
+          raw_side: 'B',
+          price: '1',
+          size: '999999',
+          notional: '999999',
+          hash: null,
+        },
+      ],
+      nowMs: 1710003600000,
+      configuredCoins: ['BTC'],
+    })
+
+    expect(stats.markets).to.have.keys(['BTC'])
+    expect(stats.topMarkets.map(market => market.coin)).to.deep.equal(['BTC'])
+    expect(stats.latestTrades.map(trade => trade.coin)).to.deep.equal(['BTC'])
+    expect(stats.markets.BTC.notional).to.equal('6000')
+  })
+
   it('returns empty stats for configured markets', () => {
     const stats = createEmptyMarketStats({ configuredCoins: ['BTC'], nowMs: 1710003600000 })
     expect(stats.markets.BTC.tradeCount).to.equal(0)

@@ -39,7 +39,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
 
 ## Tasks
 
-- [ ] 1.0 Bootstrap Hypersight project metadata, environment, and validation
+- [x] 1.0 Bootstrap Hypersight project metadata, environment, and validation
   - covers_prd: `FR-001`, `FR-014`
   - covers_tdd: `TDR-002`, `TDR-013`, `TDR-014`, `TDR-015`
   - [x] 1.1 Rename project/package/docs scaffolding to Hypersight and update Node target/env example
@@ -55,7 +55,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
     - verify: `npm install` and `npm test`
     - done_when: `ws` is installed, modern Node/test/build basics are viable, VeChain-only package removal is explicitly deferred until active imports are replaced, and `npm test` runs real Mocha tests instead of the placeholder failure.
 
-- [ ] 2.0 Add Hyperliquid data model and backend ingestion
+- [x] 2.0 Add Hyperliquid data model and backend ingestion
   - covers_prd: `FR-002`, `FR-003`, `FR-004`, `FR-005`, `FR-006`, `FR-007`, `FR-008`, `FR-009`, `FR-009a`, `FR-010`, `FR-013`
   - covers_tdd: `TDR-001`, `TDR-003`, `TDR-004`, `TDR-005`, `TDR-006`, `TDR-007`, `TDR-008`, `TDR-008a`, `TDR-009`, `TDR-010`, `TDR-010a`, `TDR-011`, `TDR-011a`, `TDR-015`
   - [x] 2.1 Add Hyperliquid migrations for markets, trades, feed status events, stats cache, and indexes
@@ -83,7 +83,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
     - verify: `npm test` plus `/api/health` local probe when DB/runtime is available
     - done_when: Startup initializes Hyperliquid ingestion, reconciles configured coins into markets, persists status events emitted by the WebSocket service, `clientAskForLatest` emits sanitized market stats/trades/status, `serverSendConnectionStatus` is emitted on status changes, REST endpoints use new actions, `/api/health` returns current ingestion status, `/api/markets` returns default coins on a fresh DB, old VeChain runtime subscription is not active, and server-only env values are not exposed to the client.
 
-- [ ] 3.0 Replace frontend with Hypersight live market experience
+- [x] 3.0 Replace frontend with Hypersight live market experience
   - covers_prd: `FR-001`, `FR-008`, `FR-009`, `FR-011`, `FR-012`, `FR-013`
   - covers_tdd: `TDR-012`, `TDR-014`, `TDR-015`
   - [x] 3.1 Replace client state and Socket.IO handling with trade/market state
@@ -105,7 +105,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
     - verify: `npm run build`, built/rendered UI text search for high-signal legacy terms, and active import/runtime graph search for VeChain modules/helpers
     - done_when: No active rendered UI or runtime import path contains old VeChain terminology; validation explicitly ignores benign CSS/browser substrings like `inline-block` or `window.origin` and intentionally retained inactive migration history; VeChain-only dependencies are removed when no active imports remain.
 
-- [ ] 4.0 Final documentation, runtime smoke, review, and cleanup
+- [x] 4.0 Final documentation, runtime smoke, review, and cleanup
   - covers_prd: `FR-014`, all acceptance criteria
   - covers_tdd: `TDR-014`, `TDR-015`
   - [x] 4.1 Complete README troubleshooting and MVP safety documentation

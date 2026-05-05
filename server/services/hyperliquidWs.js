@@ -27,6 +27,12 @@ function buildSubscribeMessage(coin){
   }
 }
 
+function buildPingMessage(){
+  return {
+    method: 'ping',
+  }
+}
+
 function normalizeDecimal(value){
   if (value === undefined || value === null) return null
   return String(value)
@@ -295,6 +301,12 @@ class HyperliquidWsService extends EventEmitter {
       return
     }
 
+    if (parsed.type === 'pong') {
+      this.handlePong()
+      this.scheduleStaleCheck()
+      return
+    }
+
     this.setStatus('message')
     this.scheduleStaleCheck()
 
@@ -345,8 +357,7 @@ class HyperliquidWsService extends EventEmitter {
     this.clearHeartbeatTimer()
 
     this.heartbeatTimer = this.setInterval(() => {
-      if (!this.socket || typeof this.socket.ping !== 'function') return
-      this.socket.ping()
+      this.send(buildPingMessage())
     }, this.heartbeatIntervalMs)
   }
 
@@ -432,6 +443,7 @@ function createHyperliquidWsService(options){
 
 module.exports = {
   HyperliquidWsService,
+  buildPingMessage,
   buildSubscribeMessage,
   createHyperliquidWsService,
   createInitialStatus,

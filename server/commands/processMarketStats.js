@@ -11,6 +11,10 @@ function getConfiguredCoins(configuredCoins){
   return source.map(coin => String(coin).trim().toUpperCase()).filter(Boolean)
 }
 
+function getConfiguredCoinSet(configuredCoins){
+  return new Set(getConfiguredCoins(configuredCoins))
+}
+
 function decimalString(value){
   return new BigNumber(value || 0).toFixed()
 }
@@ -79,6 +83,7 @@ function createEmptyMarketStats({ configuredCoins, nowMs }){
 function buildMarketStats({ trades, feedStatusEvents, nowMs, configuredCoins, latestTradeLimit }){
   const rows = (trades || []).slice().sort((left, right) => Number(left.time_ms) - Number(right.time_ms))
   const stats = createEmptyMarketStats({ configuredCoins, nowMs })
+  const configuredCoinSet = getConfiguredCoinSet(configuredCoins)
   const generatedAtMs = nowMs || Date.now()
   const windowStartMs = generatedAtMs - (DEFAULT_WINDOW_HOURS * 60 * 60 * 1000)
   const latestLimit = latestTradeLimit || DEFAULT_LATEST_TRADE_LIMIT
@@ -88,7 +93,7 @@ function buildMarketStats({ trades, feedStatusEvents, nowMs, configuredCoins, la
   rows.forEach(trade => {
     const coin = String(trade.coin || '').trim().toUpperCase()
     if (!coin) return
-    if (!stats.markets[coin]) stats.markets[coin] = createMarket(coin)
+    if (!configuredCoinSet.has(coin)) return
 
     const market = stats.markets[coin]
     const tradeTimeMs = Number(trade.time_ms === undefined ? trade.timeMs : trade.time_ms)
@@ -126,6 +131,7 @@ function buildMarketStats({ trades, feedStatusEvents, nowMs, configuredCoins, la
 
   stats.latestTrades = rows
     .slice()
+    .filter(trade => configuredCoinSet.has(String(trade.coin || '').trim().toUpperCase()))
     .sort((left, right) => Number(right.time_ms) - Number(left.time_ms))
     .slice(0, latestLimit)
     .map(toPublicTrade)
@@ -172,6 +178,7 @@ async function processMarketStats({
   const observedWindowHours = windowHours || DEFAULT_WINDOW_HOURS
   const windowStartMs = generatedAtMs - (observedWindowHours * 60 * 60 * 1000)
   const limit = latestTradeLimit || DEFAULT_LATEST_TRADE_LIMIT
+  const coins = getConfiguredCoins(configuredCoins)
 
   const trades = await client.query(
     `
@@ -187,9 +194,10 @@ async function processMarketStats({
         hash
       FROM trades
       WHERE time_ms >= $1
+        AND coin = ANY($2)
       ORDER BY time_ms DESC
     `,
-    [windowStartMs]
+    [windowStartMs, coins]
   )
 
   const feedStatusEvents = await client.query(
@@ -212,7 +220,7 @@ async function processMarketStats({
     trades,
     feedStatusEvents,
     nowMs: generatedAtMs,
-    configuredCoins,
+    configuredCoins: coins,
     latestTradeLimit: limit,
   })
 
