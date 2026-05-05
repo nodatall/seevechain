@@ -4,13 +4,14 @@ const sslRedirect = require('heroku-ssl-redirect').default
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
-const { exec } = require('child_process')
 
 const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 const logger = require('./lib/logger')
 const cron = require('./lib/cron')
+const commands = require('./commands')
+const client = require('./database')
 
 app.use(compression())
 app.use(sslRedirect())
@@ -78,7 +79,11 @@ app.use(function (err, req, res, next) {
 
 cron.schedule('0 0 * * *', async () => { // daily
   if (process.env.NODE_ENV === 'production') {
-    exec('node ./scripts/deleteOldBlocks', () => {})
+    try {
+      await commands.pruneOldTrades({ client })
+    } catch (error) {
+      logger.error(`[pruneOldTrades]: ${error.message}`)
+    }
   }
 })
 

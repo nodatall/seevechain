@@ -9,6 +9,31 @@ module.exports = function(app, io) {
     next()
   })
 
+  app.promiseRoute('get', '/api/health', async () => {
+    return await actions.getHealth()
+  })
+
+  app.promiseRoute('get', '/api/markets', async () => {
+    return {
+      markets: await actions.getMarkets(),
+    }
+  })
+
+  app.promiseRoute('get', '/api/trades', async ({ req }) => {
+    return {
+      trades: await actions.getLatestTrades({
+        coin: req.query.coin,
+        limit: req.query.limit,
+      }),
+    }
+  })
+
+  app.promiseRoute('get', '/api/market_stats', async () => {
+    return {
+      marketStats: await actions.getMarketStats(),
+    }
+  })
+
   app.promiseRoute('get', '/api/visitor_analytics', async () => {
     return await actions.getAnalytics()
   })
@@ -19,9 +44,13 @@ module.exports = function(app, io) {
 
   io.on('connection', function (socket) {
     socket.on('clientAskForLatest', async function (data) {
-      await actions.recordUniqueVisitor(data.seeVechainUid)
-      socket.emit('serverSendLatest', await actions.getLatestProcessedBlock())
-      socket.emit('serverSendTopContracts', await actions.getLatestTopContracts())
+      if (data && data.seeVechainUid) {
+        await actions.recordUniqueVisitor(data.seeVechainUid)
+      }
+
+      socket.emit('serverSendMarketStats', await actions.getMarketStats())
+      socket.emit('serverSendTrades', await actions.getLatestTrades())
+      socket.emit('serverSendConnectionStatus', actions.getCurrentConnectionStatus())
     })
   })
 }

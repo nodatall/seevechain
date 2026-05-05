@@ -76,7 +76,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
     - output: `server/commands/`, `server/actions/`, `server/test/`
     - verify: `npm test`
     - done_when: Trades insert with `ON CONFLICT DO NOTHING`, feed status events persist through command/action code, public payload builders omit buyer/seller/users values, stats compute observed up-to-24h volume/count/buy/sell/imbalance/latest price/recent trades plus coverage/gap metadata from feed status events, discontinuous feed events prevent continuous-coverage claims, `B` and `A` seed trades bucket into expected buy/sell notional, pruning respects `TRADE_RETENTION_HOURS` with a default of 48, and tests cover core processing.
-  - [ ] 2.4 Wire Express, Socket.IO, REST APIs, startup, and scheduled processing to Hyperliquid
+  - [x] 2.4 Wire Express, Socket.IO, REST APIs, startup, and scheduled processing to Hyperliquid
     - covers_prd: `FR-008`, `FR-009`, `FR-009a`, `FR-010`, `FR-013`
     - covers_tdd: `TDR-001`, `TDR-010`, `TDR-010a`, `TDR-011`, `TDR-011a`, `TDR-014`, `TDR-015`
     - output: `scripts/start`, `server/app.js`, `server/routes.js`, `server/actions/index.js`, `server/commands/index.js`
