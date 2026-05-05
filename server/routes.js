@@ -3,9 +3,6 @@ const path = require('path')
 
 module.exports = function(app, io) {
   app.use(function (req, res, next) {
-    if (req.cookies.seeVechainUid) {
-      actions.recordUniqueVisitor(req.cookies.seeVechainUid)
-    }
     next()
   })
 
@@ -43,13 +40,12 @@ module.exports = function(app, io) {
   })
 
   io.on('connection', function (socket) {
-    socket.on('clientAskForLatest', async function (data) {
-      if (data && data.seeVechainUid) {
-        await actions.recordUniqueVisitor(data.seeVechainUid)
-      }
-
+    socket.on('clientAskForLatest', async function () {
       socket.emit('serverSendMarketStats', await actions.getMarketStats())
-      socket.emit('serverSendTrades', await actions.getLatestTrades())
+      socket.emit('serverSendTrades', {
+        trades: await actions.getLatestTrades(),
+        receivedAt: Date.now(),
+      })
       socket.emit('serverSendConnectionStatus', actions.getCurrentConnectionStatus())
     })
   })

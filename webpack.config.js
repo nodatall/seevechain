@@ -28,7 +28,7 @@ const config = {
     errorDetails: true,
     hash: false,
   },
-  entry: ['@babel/polyfill', `${srcPath}/index.js`],
+  entry: [`${srcPath}/index.js`],
   output: {
     path: outputPath,
     filename: '[name].bundle.js',

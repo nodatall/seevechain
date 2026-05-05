@@ -110,7 +110,10 @@ async function startHyperliquidService(io, client) {
       try {
         const savedTrades = await commands.saveTrades({ client, trades })
         if (savedTrades.length) {
-          io.emit('serverSendTrades', savedTrades)
+          io.emit('serverSendTrades', {
+            trades: savedTrades,
+            receivedAt: Date.now(),
+          })
         }
         await processAndEmitMarketStats()
         io.emit('serverSendConnectionStatus', actions.getCurrentConnectionStatus(service.status))

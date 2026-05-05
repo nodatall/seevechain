@@ -86,7 +86,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
 - [ ] 3.0 Replace frontend with Hypersight live market experience
   - covers_prd: `FR-001`, `FR-008`, `FR-009`, `FR-011`, `FR-012`, `FR-013`
   - covers_tdd: `TDR-012`, `TDR-014`, `TDR-015`
-  - [ ] 3.1 Replace client state and Socket.IO handling with trade/market state
+  - [x] 3.1 Replace client state and Socket.IO handling with trade/market state
     - covers_prd: `FR-008`, `FR-009`, `FR-011`
     - covers_tdd: `TDR-012`
     - output: `client/Main.js`, `client/components/Visualizer/`, client state helpers
