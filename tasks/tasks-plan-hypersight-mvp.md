@@ -58,7 +58,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
 - [ ] 2.0 Add Hyperliquid data model and backend ingestion
   - covers_prd: `FR-002`, `FR-003`, `FR-004`, `FR-005`, `FR-006`, `FR-007`, `FR-008`, `FR-009`, `FR-009a`, `FR-010`, `FR-013`
   - covers_tdd: `TDR-001`, `TDR-003`, `TDR-004`, `TDR-005`, `TDR-006`, `TDR-007`, `TDR-008`, `TDR-008a`, `TDR-009`, `TDR-010`, `TDR-010a`, `TDR-011`, `TDR-011a`, `TDR-015`
-  - [ ] 2.1 Add Hyperliquid migrations for markets, trades, feed status events, stats cache, and indexes
+  - [x] 2.1 Add Hyperliquid migrations for markets, trades, feed status events, stats cache, and indexes
     - covers_prd: `FR-006`, `FR-007`
     - covers_tdd: `TDR-006`, `TDR-009`, `TDR-011a`
     - output: `migrations/`
