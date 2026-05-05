@@ -48,7 +48,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
     - output: `package.json`, `.node-version`, `.env.example`, `README.md`, `webpack.config.js`, `client/index.ejs`
     - verify: `rg -n "seevechain|SeeVeChain|VeChain public blockchain|postgresql://localhost/seevechain|12\\.16" package.json .node-version README.md webpack.config.js client/index.ejs`
     - done_when: Project metadata, docs setup, page metadata, and env example use Hypersight, Node 20, `DATABASE_URL=postgresql://localhost/hypersight`, `PORT=1337`, and `TRADE_RETENTION_HOURS=48`; runtime default port is changed from 5000 to 1337; frontend env injection is narrowed to explicit public values only.
-  - [ ] 1.2 Update dependencies and scripts for MVP validation on modern Node
+  - [x] 1.2 Update dependencies and scripts for MVP validation on modern Node
     - covers_prd: `FR-014`
     - covers_tdd: `TDR-013`, `TDR-014`
     - output: `package.json`, `package-lock.json`, server test config surface
