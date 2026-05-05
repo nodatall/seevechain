@@ -1,32 +1,417 @@
-@import "../../style"
-
 .Visualizer
   box-sizing: border-box
-  background: linear-gradient(to top, lighten($background-color, 2%), $background-color)
-  color: #CFD8DC
+  min-height: 100vh
+  width: 100%
+  background: #101214
+  color: #f2f0e8
+  padding: 24px
+  overflow-x: hidden
+  overflow-y: auto
+
+.Visualizer *,
+.Visualizer *::before,
+.Visualizer *::after
+  box-sizing: inherit
+
+.Visualizer-header
+  display: flex
+  align-items: flex-end
+  justify-content: space-between
+  gap: 18px
+  margin: 0 auto 18px
+  max-width: 1280px
+
+  h1
+    margin: 0 0 8px
+    font-size: 30px
+    line-height: 1
+    font-weight: 800
+    letter-spacing: 0
+
+.Visualizer-grid
+  display: grid
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr)
+  grid-template-areas: "visual stats" "visual top" "tape tape"
+  gap: 14px
+  margin: 0 auto
+  max-width: 1280px
+
+.LiveTradeVisualizer,
+.MarketStatsPanel,
+.TopMarkets,
+.TradeTape
+  border: 1px solid #2d3334
+  border-radius: 8px
+  background: #17191b
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22)
+
+.LiveTradeVisualizer
+  grid-area: visual
+  min-height: 520px
+  padding: 18px
+
+.MarketStatsPanel
+  grid-area: stats
+  min-height: 260px
+  padding: 18px
+
+.TopMarkets
+  grid-area: top
+  min-height: 238px
+  padding: 18px
+
+.TradeTape
+  grid-area: tape
+  min-height: 320px
+  padding: 18px
+
+.PanelHeader
+  display: flex
+  align-items: baseline
+  justify-content: space-between
+  gap: 12px
+  min-height: 28px
+  margin-bottom: 16px
+
+  h2
+    margin: 0
+    font-size: 16px
+    line-height: 1.2
+    font-weight: 800
+    letter-spacing: 0
+
+  span
+    color: #9ca39d
+    font-size: 12px
+    line-height: 1.2
+    text-align: right
+    white-space: nowrap
+    text-transform: uppercase
+
+.StatusBadge
+  display: inline-flex
+  align-items: center
+  gap: 8px
+  min-height: 28px
+  color: #aeb6b0
+  font-size: 13px
+  line-height: 1
+
+  span
+    width: 10px
+    height: 10px
+    border-radius: 50%
+    background: #a66752
+    box-shadow: 0 0 0 4px rgba(166, 103, 82, 0.12)
+
+  strong
+    color: #f2f0e8
+    font-size: 13px
+
+  em
+    color: #d7b765
+    font-style: normal
+
+.StatusBadge--live
+  span
+    background: #4cc38a
+    box-shadow: 0 0 0 4px rgba(76, 195, 138, 0.12)
+
+.CoinSelector
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-end
+  gap: 8px
+  max-width: 520px
+
+.CoinSelector-button
+  min-width: 66px
+  height: 38px
+  border: 1px solid #343b3d
+  border-radius: 8px
+  background: #181c1f
+  color: #c4cbc6
+  cursor: pointer
+  font-size: 13px
+  font-weight: 800
+  letter-spacing: 0
+
+  &:hover,
+  &:focus
+    border-color: #6db8c5
+    color: #f2f0e8
+    outline: none
+
+.CoinSelector-button--active
+  background: #d4b255
+  border-color: #d4b255
+  color: #111315
+
+.LiveTradeVisualizer-lanes
+  display: grid
+  gap: 12px
+
+.TradeLane
+  display: grid
+  grid-template-columns: 70px minmax(0, 1fr)
+  align-items: center
+  gap: 12px
+  min-height: 88px
+
+.TradeLane-label
+  color: #f2f0e8
+  font-size: 14px
+  font-weight: 800
+
+.TradeLane-track
   position: relative
+  height: 74px
   overflow: hidden
-  height: 100%
-  &-blockNumber
+  border: 1px solid #293033
+  border-radius: 8px
+  background: #111416
+
+  &::before
+    content: ""
     position: absolute
-    padding: 10px
+    top: 50%
+    left: 12px
+    right: 12px
+    height: 1px
+    background: #30383a
+
+.TradePulse
+  position: absolute
+  top: 50%
+  transform: translate(-50%, -50%)
+  border-radius: 50%
+  animation: tradePulse 1.4s ease-out both
+
+.TradePulse--buy
+  background: #4cc38a
+  box-shadow: 0 0 0 7px rgba(76, 195, 138, 0.12), 0 0 24px rgba(76, 195, 138, 0.4)
+
+.TradePulse--sell
+  background: #e16d5c
+  box-shadow: 0 0 0 7px rgba(225, 109, 92, 0.12), 0 0 24px rgba(225, 109, 92, 0.4)
+
+@keyframes tradePulse
+  0%
+    opacity: 0
+    transform: translate(-50%, -50%) scale(0.35)
+  18%
+    opacity: 1
+  100%
+    opacity: 0.74
+    transform: translate(-50%, -50%) scale(1)
+
+.MetricGrid
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 0 18px
+
+.Metric
+  min-height: 74px
+  padding: 14px 0
+  border-top: 1px solid #2b3334
+
+  span
+    display: block
+    margin-bottom: 8px
+    color: #9ca39d
+    font-size: 12px
+    line-height: 1.1
+    text-transform: uppercase
+
+  strong
+    display: block
+    max-width: 100%
+    overflow-wrap: anywhere
+    color: #f2f0e8
+    font-size: 22px
+    line-height: 1.1
+    font-weight: 850
+
+.Metric--buy strong
+  color: #6ed7a3
+
+.Metric--sell strong
+  color: #f08b7c
+
+.CoverageBar
+  position: relative
+  height: 8px
+  margin-top: 12px
+  overflow: hidden
+  border-radius: 8px
+  background: #252b2d
+
+  span
+    display: block
+    height: 100%
+    min-width: 4px
+    border-radius: inherit
+    background: #6db8c5
+
+.CoverageMeta
+  display: flex
+  justify-content: space-between
+  gap: 12px
+  margin-top: 10px
+  color: #9ca39d
+  font-size: 12px
+
+.TopMarkets-list
+  display: grid
+  gap: 8px
+
+.TopMarket
+  display: grid
+  grid-template-columns: 56px minmax(0, 1fr) 86px
+  align-items: center
+  gap: 10px
+  min-height: 44px
+  width: 100%
+  border: 0
+  border-top: 1px solid #2b3334
+  background: transparent
+  color: #c4cbc6
+  cursor: pointer
+  text-align: left
+
+  span
+    font-size: 13px
+    font-weight: 800
+
+  strong
+    overflow: hidden
+    color: #f2f0e8
     font-size: 14px
-    z-index: 2147483600
-    color: #CFD8DC
-    text-decoration: none
-  &-rightControls
-    position: absolute
-    right: -6px
-    top: -4px
-    padding: 10px
-    z-index: 2147483600
-    cursor: pointer
-    display: flex
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  em
+    color: #9ca39d
+    font-size: 12px
+    font-style: normal
+    text-align: right
+    white-space: nowrap
+
+  &:hover,
+  &:focus
+    color: #ffffff
+    outline: none
+
+.TopMarket--active span
+  color: #d4b255
+
+.TradeTape-rows
+  display: grid
+  gap: 2px
+  max-height: 440px
+  overflow-y: auto
+
+.TradeTape-empty
+  min-height: 180px
+  display: grid
+  place-items: center
+  border-top: 1px solid #2b3334
+  color: #9ca39d
+  font-size: 14px
+
+.TradeRow
+  display: grid
+  grid-template-columns: 60px 72px minmax(96px, 1fr) minmax(86px, 0.8fr) minmax(112px, 1fr) 88px
+  align-items: center
+  gap: 10px
+  min-height: 40px
+  border-top: 1px solid #242b2d
+  color: #c9d0cb
+  font-size: 13px
+
+  strong
+    overflow: hidden
+    color: #f2f0e8
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  time
+    color: #8c9691
+    text-align: right
+    white-space: nowrap
+
+.TradeRow-coin
+  font-weight: 800
+
+.TradeRow-side
+  width: 48px
+  padding: 5px 0
+  border-radius: 8px
+  font-size: 11px
+  font-weight: 900
+  line-height: 1
+  text-align: center
+  text-transform: uppercase
+
+.TradeRow-side--buy
+  background: rgba(76, 195, 138, 0.16)
+  color: #6ed7a3
+
+.TradeRow-side--sell
+  background: rgba(225, 109, 92, 0.16)
+  color: #f08b7c
+
+@media (max-width: 920px)
+  .Visualizer
+    padding: 18px
+
+  .Visualizer-header
+    align-items: flex-start
     flex-direction: column
-    align-items: center
-    &-donateIcon
-      height: 20px
-    > *
-      margin-bottom: 15px
-      &:hover
-        filter: brightness(125%)
+
+  .CoinSelector
+    justify-content: flex-start
+    max-width: none
+
+  .Visualizer-grid
+    grid-template-columns: 1fr
+    grid-template-areas: "stats" "visual" "top" "tape"
+
+  .LiveTradeVisualizer
+    min-height: 420px
+
+@media (max-width: 620px)
+  .Visualizer
+    padding: 14px
+
+  .Visualizer-header h1
+    font-size: 26px
+
+  .CoinSelector-button
+    min-width: 58px
+
+  .LiveTradeVisualizer,
+  .MarketStatsPanel,
+  .TopMarkets,
+  .TradeTape
+    padding: 14px
+
+  .TradeLane
+    grid-template-columns: 52px minmax(0, 1fr)
+    min-height: 72px
+
+  .TradeLane-track
+    height: 62px
+
+  .MetricGrid
+    grid-template-columns: 1fr
+
+  .TopMarket
+    grid-template-columns: 48px minmax(0, 1fr) 72px
+
+  .TradeRow
+    grid-template-columns: 44px 58px minmax(82px, 1fr) minmax(92px, 1fr)
+
+    span:nth-child(4),
+    time
+      display: none
