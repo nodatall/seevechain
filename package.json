@@ -1,10 +1,10 @@
 {
-  "name": "seevechain",
+  "name": "hypersight",
   "version": "1.0.0",
-  "description": "Real time visualizer for the VeChain public blockchain",
+  "description": "Hypersight public-data visualizer for Hyperliquid trades",
   "main": "index.js",
   "engines": {
-    "node": "12.16.x"
+    "node": "20.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

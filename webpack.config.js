@@ -3,7 +3,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const Dotenv = require('dotenv-webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const webpack = require('webpack')
 
@@ -12,6 +11,9 @@ const srcPath = `${ROOT}/client`
 const outputPath = `${ROOT}/client/dist`
 
 const production = process.env.NODE_ENV === 'production'
+const clientEnv = {
+  'process.env.ORIGIN': JSON.stringify(process.env.ORIGIN || ''),
+}
 
 const config = {
   devtool: production ? undefined : 'sourcemap',
@@ -79,7 +81,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'See Vechain',
+      title: 'Hypersight',
       inject: true,
       template: `${srcPath}/index.ejs`,
       favicon: `${srcPath}/assets/favicon.ico`,
@@ -96,7 +98,7 @@ const config = {
         minifyURLs: production,
       },
       meta: {
-        description: 'Real-time visualizer of the VeChain blockchain',
+        description: 'Hypersight real-time public-data visualizer for Hyperliquid trades',
       },
       cache: false,
     }),
@@ -105,7 +107,7 @@ const config = {
       chunkFilename: production ? '[id].[hash].css' :'[id].css',
     }),
     new CleanWebpackPlugin(),
-    new Dotenv(),
+    new webpack.DefinePlugin(clientEnv),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     // new BundleAnalyzerPlugin(),
   ],

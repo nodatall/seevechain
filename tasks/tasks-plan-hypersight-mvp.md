@@ -42,7 +42,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
 - [ ] 1.0 Bootstrap Hypersight project metadata, environment, and validation
   - covers_prd: `FR-001`, `FR-014`
   - covers_tdd: `TDR-002`, `TDR-013`, `TDR-014`, `TDR-015`
-  - [ ] 1.1 Rename project/package/docs scaffolding to Hypersight and update Node target/env example
+  - [x] 1.1 Rename project/package/docs scaffolding to Hypersight and update Node target/env example
     - covers_prd: `FR-001`, `FR-014`
     - covers_tdd: `TDR-002`, `TDR-015`
     - output: `package.json`, `.node-version`, `.env.example`, `README.md`, `webpack.config.js`, `client/index.ejs`
