@@ -17,7 +17,7 @@ status: remediated
 
 3. Finalization gate was dirty because parent task groups and temp artifacts still needed cleanup.
    - severity: P2
-   - remediation: pending final cleanup/archive step.
+   - remediation: planning, subtask, refinement, and review artifacts were archived under `tasks/archive/2026-05-05-hypersight-mvp/`; the temporary baseline file was removed.
 
 4. Heartbeat used WebSocket protocol ping instead of Hyperliquid's documented app heartbeat.
    - severity: P3
@@ -30,3 +30,4 @@ status: remediated
 - `npm run build`: passed.
 - Runtime smoke: `/api/health` returned `service=hypersight`, `connected=true`, and coins `BTC,ETH,SOL,HYPE`.
 - Prior final validation verified local migration, API responses, public payload sanitization, browser desktop/mobile live UI, reconnecting state, forbidden surface searches, and built client env safety.
+- Follow-up review found no product/runtime blockers after the remediations above.
