@@ -70,7 +70,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
     - output: `server/services/` or `server/lib/`, `server/test/`
     - verify: `npm test`
     - done_when: The service uses one WebSocket, subscribes to configured coins, parses single/array/reconnect trade payloads, normalizes sample trades with raw side plus buy/sell side mapping, tracks heartbeat/liveness/stale state, emits feed status/gap events for open/disconnect/stale/reconnect/gaps without direct DB writes, reconnects/resubscribes, and does not use private/authenticated trading behavior.
-  - [ ] 2.3 Implement trade persistence, market stats processing, pruning, and backend tests
+  - [x] 2.3 Implement trade persistence, market stats processing, pruning, and backend tests
     - covers_prd: `FR-006`, `FR-007`
     - covers_tdd: `TDR-006`, `TDR-007`, `TDR-009`, `TDR-013`
     - output: `server/commands/`, `server/actions/`, `server/test/`
