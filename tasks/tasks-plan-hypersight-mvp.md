@@ -108,7 +108,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
 - [ ] 4.0 Final documentation, runtime smoke, review, and cleanup
   - covers_prd: `FR-014`, all acceptance criteria
   - covers_tdd: `TDR-014`, `TDR-015`
-  - [ ] 4.1 Complete README troubleshooting and MVP safety documentation
+  - [x] 4.1 Complete README troubleshooting and MVP safety documentation
     - covers_prd: `FR-014`
     - covers_tdd: `TDR-002`, `TDR-015`
     - output: `README.md`, `.env.example`
