@@ -92,7 +92,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
     - output: `client/Main.js`, `client/components/Visualizer/`, client state helpers
     - verify: `npm run build`
     - done_when: Client asks for latest data, handles `serverSendTrades`, `serverSendMarketStats`, and `serverSendConnectionStatus`, tracks selected coin/enabled coins/live trades/market stats/connection status/coverage metadata, and no longer depends on currentBlock/topContracts state.
-  - [ ] 3.2 Build Hypersight visual components for live trades, stats, top markets, trade tape, and coin selection
+  - [x] 3.2 Build Hypersight visual components for live trades, stats, top markets, trade tape, and coin selection
     - covers_prd: `FR-001`, `FR-011`, `FR-012`, `FR-013`
     - covers_tdd: `TDR-012`, `TDR-014`
     - output: `client/components/`, `client/style/`, `client/index.sass`
@@ -114,7 +114,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
     - output: `README.md`, `.env.example`
     - verify: `rg -n "Hypersight|HYPERLIQUID_WS_URL|HYPERLIQUID_COINS|TRADE_RETENTION_HOURS|observed window|feed status|no private keys|no signing|no order" README.md .env.example`
     - done_when: Setup, env vars, DB creation, migration/start commands, troubleshooting, and public-data safety boundaries are documented.
-  - [ ] 4.2 Run final validation and forbidden-surface searches
+  - [x] 4.2 Run final validation and forbidden-surface searches
     - covers_prd: all acceptance criteria
     - covers_tdd: `TDR-014`, `TDR-015`
     - output: validation evidence in task/review logs

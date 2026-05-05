@@ -1,3 +1,10 @@
 #!/usr/bin/env bash
 
-DATABASE_URL=`./scripts/database-url` npx db-migrate $@
+if [ "$#" -eq 0 ] || [[ "$1" == --* ]]; then
+  command=up
+else
+  command=$1
+  shift
+fi
+
+DATABASE_URL=`./scripts/database-url` npx db-migrate "$command" "$@"
