@@ -98,7 +98,7 @@ See `skills/shared/references/execution/task-management.md` for execution workfl
     - output: `client/components/`, `client/style/`, `client/index.sass`
     - verify: `npm run build` and browser inspection of the rendered first screen
     - done_when: The first screen shows public market activity with trade pulses, observed-window stats, top markets, trade tape, coin selector, connection/stale status, no buyer/seller address display, and no wallet/trading controls.
-  - [ ] 3.3 Remove or bypass visible VeChain routes/components/assets/helpers from active UI
+  - [x] 3.3 Remove or bypass visible VeChain routes/components/assets/helpers from active UI
     - covers_prd: `FR-001`, `FR-011`, `FR-013`
     - covers_tdd: `TDR-012`, `TDR-015`
     - output: `client/components/`, `client/lib/`, `shared/`, active imports

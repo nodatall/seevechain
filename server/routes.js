@@ -31,10 +31,6 @@ module.exports = function(app, io) {
     }
   })
 
-  app.promiseRoute('get', '/api/visitor_analytics', async () => {
-    return await actions.getAnalytics()
-  })
-
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname + '/../client/dist/index.html'))
   })
