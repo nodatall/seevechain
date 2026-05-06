@@ -65,8 +65,8 @@ export default function Transaction({
         <strong>{formatCurrency(visualNotional)}</strong>
       </div>
       <div className="Transaction-subText">
-        {formatPrice(trade.price)}
-        <span>{formatSize(trade.size)}</span>
+        <span className="Transaction-price">{formatPrice(trade.price)}</span>
+        <span className="Transaction-size">{formatSize(trade.size)}</span>
       </div>
     </div>
   </div>
