@@ -4,6 +4,7 @@ const sslRedirect = require('heroku-ssl-redirect').default
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const compression = require('compression')
+const setupDevLiveReload = require('./lib/devLiveReload')
 
 const app = express()
 const server = require('http').createServer(app)
@@ -12,6 +13,8 @@ const logger = require('./lib/logger')
 const cron = require('./lib/cron')
 const commands = require('./commands')
 const client = require('./database')
+
+setupDevLiveReload(app)
 
 app.use(compression())
 app.use(sslRedirect())

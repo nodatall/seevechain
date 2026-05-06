@@ -8,9 +8,9 @@
   },
   "scripts": {
     "test": "mocha \"server/test/**/*.spec.js\"",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --colors --progress --mode production",
-    "build:dev": "NODE_OPTIONS=--openssl-legacy-provider webpack --colors --progress -w",
-    "start:dev": "npm run build:dev & nodemon ./scripts/start",
+    "build": "NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack --colors --progress --mode production",
+    "build:dev": "NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider webpack --colors --progress --mode development -w",
+    "start:dev": "npm run build:dev & NODE_ENV=development nodemon --ignore client/dist ./scripts/start",
     "start": "./scripts/start",
     "heroku-postbuild": "npm run build",
     "db:migrate": "./scripts/db-migrate"

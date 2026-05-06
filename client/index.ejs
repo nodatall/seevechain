@@ -10,6 +10,22 @@
     <meta http-equiv="Cache-control" content="no-cache">
   </head>
   <body>
+    <% if (htmlWebpackPlugin.options.devLiveReload) { %>
+      <script>
+        (function () {
+          if (typeof EventSource === 'undefined') return
+
+          window.__HYPERSIGHT_DEV_RELOAD__ = {
+            connectedAt: Date.now(),
+          }
+
+          var source = new EventSource('/__dev_reload')
+          source.addEventListener('reload', function () {
+            window.location.reload()
+          })
+        }())
+      </script>
+    <% } %>
     <noscript>
       <div class="noscript-error">
         <div class="main">

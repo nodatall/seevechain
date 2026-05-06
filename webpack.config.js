@@ -10,7 +10,9 @@ const ROOT = path.resolve(__dirname, '.')
 const srcPath = `${ROOT}/client`
 const outputPath = `${ROOT}/client/dist`
 
-const production = process.env.NODE_ENV === 'production'
+const modeArgIndex = process.argv.indexOf('--mode')
+const modeArg = modeArgIndex === -1 ? undefined : process.argv[modeArgIndex + 1]
+const production = (process.env.NODE_ENV || modeArg) === 'production'
 const clientEnv = {
   'process.env.ORIGIN': JSON.stringify(process.env.ORIGIN || ''),
 }
@@ -85,6 +87,7 @@ const config = {
       inject: true,
       template: `${srcPath}/index.ejs`,
       favicon: `${srcPath}/assets/favicon.ico`,
+      devLiveReload: !production,
       minify: {
         removeComments: production,
         collapseWhitespace: production,
