@@ -22,14 +22,16 @@
   -webkit-transform-style: preserve-3d
   -webkit-font-smoothing: subpixel-antialiased
   cursor: default
+  animation-fill-mode: both
   &:hover
     background: lighten($background-color, 2%)
     box-shadow: 0 0 1px 1px #fff, 0 0 2px 1px #0ff
   &-background
     border-radius: 50%
     position: absolute
+    box-shadow: 0 0 18px 7px rgba(0, 108, 255, .14), 0 0 2px 1px rgba(255, 255, 255, .5)
   &-foreground
-    background: $background-color
+    background: #182024
     border-radius: 50%
     position: absolute
     display: flex
@@ -92,3 +94,17 @@
     transform: rotate(0)
   to
     transform: rotate(359deg)
+
+@keyframes tradeBubble
+  0%
+    opacity: 0
+    transform: translate(var(--trade-x), var(--trade-y)) scale(0) perspective(1px) translate3d(0,0,0)
+  12%
+    opacity: 1
+    transform: translate(var(--trade-x), var(--trade-y)) scale(var(--trade-scale)) perspective(1px) translate3d(0,0,0)
+  78%
+    opacity: 1
+    transform: translate(var(--trade-x), var(--trade-y)) scale(var(--trade-scale)) perspective(1px) translate3d(0,0,0)
+  100%
+    opacity: 0
+    transform: translate(var(--trade-x), var(--trade-y)) scale(.7) perspective(1px) translate3d(0,0,0)

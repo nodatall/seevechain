@@ -1,11 +1,10 @@
 import React from 'react'
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect, useMemo } from 'preact/hooks'
 
 import lightenDarkenColor from 'lib/lightenDarkenColor'
-import { LIGHT_RANGE, BOX_SHADOWS } from 'lib/colors'
+import { LIGHT_RANGE } from 'lib/colors'
 import {
   calculateCoordinates,
-  randomNumber,
   getRangeEquivalent,
 } from '../../lib/transactionHelpers'
 
@@ -21,8 +20,6 @@ const MOBILE_RATIO = .7
 const TRADE_SIZE_RANGE = [78, 138]
 const TRADE_NOTIONAL_RANGE = [1000, 1500000]
 
-const txCount = { count: 1 }
-
 export default function Transaction({
   transaction,
   animationDuration,
@@ -30,85 +27,34 @@ export default function Transaction({
   const trade = transaction
   const delay = trade.delay || 0
   const size = getTradeSize(trade.notional)
-  const transitionDuration = getNumberInRange(900, 1100)
-  const defaultStyle = {
-    width: `${size}px`,
-    height: `${size}px`,
-    transition: `transform ${transitionDuration}ms ease-out, opacity 500ms, box-shadow 850ms`,
-  }
   const backgroundStyle = getBackgroundStyle({ trade, size })
-
-  const [style, setStyle] = useState()
-  const defaultForegroundStyle = {
+  const placement = useMemo(() => getTradePlacement({ size, delay }), [size, delay])
+  const foregroundStyle = {
     width: `${size - 3}px`,
     height: `${size - 3}px`,
   }
-  const [foregroundStyle, setForegroundStyle] = useState({
-    ...defaultForegroundStyle,
-    background: 'white',
-    transition: 'background-color 200ms linear',
-  })
-
-  const isMobile = window.innerWidth <= 760
-  const maxScale = isMobile ? MOBILE_RATIO : 1
 
   useEffect(() => {
-    const bottomBarHeight = (document.querySelector('.BottomBar') || {}).clientHeight || 0
-    const { xCoordinate, yCoordinate, row, col } = calculateCoordinates({
-      size,
-      bottomBarHeight,
-      isMobile,
-      bubbleGrid,
-      mobileRatio: MOBILE_RATIO,
-    })
+    document.title = `${trade.coin} ${formatCurrency(trade.notional)} | Hypersight`
+    const releaseTimeout = setTimeout(() => {
+      releaseGridPosition(placement.row, placement.col)
+    }, (getAnimationSeconds(animationDuration) * 1000) + delay)
 
-    function updateStyle(scale, style = {}) {
-      setStyle({
-        ...defaultStyle,
-        transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(${scale}) perspective(1px) translate3d(0,0,0)`,
-        ...style,
-      })
+    return () => {
+      clearTimeout(releaseTimeout)
+      releaseGridPosition(placement.row, placement.col)
     }
-
-    async function animate([secondDelay, thirdDelay]) {
-      updateStyle(0, {
-        transition: `transform ${delay}ms ease-out, box-shadow 800ms`,
-        boxShadow: BOX_SHADOWS[randomNumber(0, BOX_SHADOWS.length)],
-      })
-      await waitFor(delay)
-      const zIndex = txCount.count
-      txCount.count += 1
-      setForegroundStyle({
-        ...defaultForegroundStyle,
-        background: '#182024',
-      })
-      updateStyle(maxScale, { zIndex })
-      document.title = `${trade.coin} ${formatCurrency(trade.notional)} | Hypersight`
-      await waitFor(secondDelay)
-      updateStyle(maxScale, {
-        transition: `transform 4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both, opacity 300ms`,
-        zIndex,
-      })
-      await waitFor(thirdDelay)
-      if (bubbleGrid.grid[row] && bubbleGrid.grid[row][col]) bubbleGrid.grid[row][col] = 0
-      updateStyle(.7, { opacity: 0, zIndex })
-      await waitFor(300)
-      updateStyle(0, {
-        transition: `transform 1ms cubic-bezier(0.550, 0.085, 0.680, 0.530) both, opacity 500ms`,
-        opacity: 0,
-      })
-    }
-
-    animate(animationDuration)
   }, [])
 
-  if (!style) return null
-
   const side = trade.side === 'sell' ? 'Sell' : 'Buy'
+  const animationSeconds = getAnimationSeconds(animationDuration)
 
   return <div
     className="Transaction"
-    style={style}
+    style={{
+      ...placement.style,
+      animation: `tradeBubble ${animationSeconds}s ease-out ${delay}ms both`,
+    }}
     title={`${trade.coin} ${side} ${formatCurrency(trade.notional)} at ${formatPrice(trade.price)}`}
   >
     <div className="Transaction-background" style={backgroundStyle} />
@@ -124,6 +70,36 @@ export default function Transaction({
       </div>
     </div>
   </div>
+}
+
+function getTradePlacement({ size, delay }) {
+  const isMobile = window.innerWidth <= 760
+  const bottomBarHeight = (document.querySelector('.BottomBar') || {}).clientHeight || 0
+  const { xCoordinate, yCoordinate, row, col } = calculateCoordinates({
+    size,
+    bottomBarHeight,
+    isMobile,
+    bubbleGrid,
+    mobileRatio: MOBILE_RATIO,
+  })
+
+  return {
+    row,
+    col,
+    style: {
+      width: `${size}px`,
+      height: `${size}px`,
+      zIndex: getStableZIndex(delay),
+      transform: `translate(${xCoordinate}px, ${yCoordinate}px) scale(0) perspective(1px) translate3d(0,0,0)`,
+      '--trade-x': `${xCoordinate}px`,
+      '--trade-y': `${yCoordinate}px`,
+      '--trade-scale': isMobile ? MOBILE_RATIO : 1,
+    },
+  }
+}
+
+function releaseGridPosition(row, col) {
+  if (bubbleGrid.grid[row] && bubbleGrid.grid[row][col]) bubbleGrid.grid[row][col] = 0
 }
 
 function TypeTag({ side }) {
@@ -147,12 +123,9 @@ function getTradeSize(notional) {
   return Math.floor(Math.max(TRADE_SIZE_RANGE[0], Math.min(TRADE_SIZE_RANGE[1], size)))
 }
 
-function getNumberInRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
-function waitFor(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
+function getAnimationSeconds(animationDuration) {
+  const duration = (animationDuration || []).reduce((total, value) => total + Number(value || 0), 9000)
+  return Math.max(5.5, Math.min(9, duration / 1000))
 }
 
 function getBackgroundStyle({ trade, size }) {
@@ -179,6 +152,10 @@ function getBackgroundStyle({ trade, size }) {
   }
 
   return backgroundStyle
+}
+
+function getStableZIndex(delay) {
+  return 10 + Math.floor(Number(delay || 0))
 }
 
 function getTradeColorIndex(notional) {

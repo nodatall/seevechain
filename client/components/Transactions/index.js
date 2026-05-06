@@ -7,6 +7,9 @@ import { randomNumber } from 'lib/transactionHelpers'
 
 import './index.sass'
 
+const MAX_RENDERABLE_TRADES = 72
+const MAX_NEW_TRADES_PER_UPDATE = 24
+
 export default function Transactions({ trades }) {
   const [
     { renderableTransactions },
@@ -28,7 +31,7 @@ export default function Transactions({ trades }) {
         const newTransactionTimestamps = { ...oldTransactionTimestamps }
         trades.forEach(trade => {
           const key = tradeKey(trade)
-          if (!newTransactionTimestamps[key]) {
+          if (!newTransactionTimestamps[key] && newTransactions.length < MAX_NEW_TRADES_PER_UPDATE) {
             newTransactionTimestamps[key] = Date.now()
             newTransactions.push(trade)
           }
@@ -44,7 +47,7 @@ export default function Transactions({ trades }) {
         const newRenderableTransactions = [
           ...newTransactions,
           ...renderableTransactions.filter(trade => newTransactionTimestamps[tradeKey(trade)]),
-        ]
+        ].slice(0, MAX_RENDERABLE_TRADES)
 
         return {
           renderableTransactions: newRenderableTransactions,
