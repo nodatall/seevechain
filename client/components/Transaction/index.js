@@ -18,6 +18,7 @@ const bubbleGrid = {
 const MOBILE_RATIO = .7
 const TRADE_SIZE_RANGE = [78, 138]
 const VISUAL_NOTIONAL_RANGE = [10, 100000]
+const BORDER_RING_WIDTH = 7
 
 export default function Transaction({
   transaction,
@@ -30,8 +31,8 @@ export default function Transaction({
   const backgroundStyle = getBackgroundStyle({ notional: visualNotional, size })
   const placement = useMemo(() => getTradePlacement({ size, delay }), [size, delay])
   const foregroundStyle = {
-    width: `${size - 3}px`,
-    height: `${size - 3}px`,
+    width: `${size - BORDER_RING_WIDTH}px`,
+    height: `${size - BORDER_RING_WIDTH}px`,
   }
 
   useEffect(() => {
@@ -135,6 +136,7 @@ function getBackgroundStyle({ notional, size }) {
   const rotationSpeed = rotationSpeedRange[0] + ((rotationSpeedRange[1] - rotationSpeedRange[0]) * notionalRatio)
   const color = getTradeColor(value)
   const brightColor = lightenDarkenColor(color, 40)
+  const midColor = lightenDarkenColor(color, 12)
   const darkColor = lightenDarkenColor(color, -60)
 
   const backgroundStyle = {
@@ -145,9 +147,9 @@ function getBackgroundStyle({ notional, size }) {
   }
 
   if (value < VISUAL_NOTIONAL_RANGE[1]) {
-    backgroundStyle.background = `linear-gradient(90deg, ${brightColor}, ${darkColor})`
+    backgroundStyle.background = `conic-gradient(from 0deg, ${brightColor}, ${midColor}, ${darkColor}, ${midColor}, ${brightColor})`
   } else {
-    backgroundStyle.background = 'linear-gradient(#14ffe9, #ffeb3b, #ff00e0)'
+    backgroundStyle.background = 'conic-gradient(from 0deg, #14ffe9, #ffeb3b, #ff00e0, #14ffe9)'
     backgroundStyle.width = `${size + 2}px`
     backgroundStyle.height = `${size + 2}px`
     backgroundStyle.animationDirection = 'reverse'
