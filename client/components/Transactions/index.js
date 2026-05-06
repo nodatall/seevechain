@@ -9,6 +9,8 @@ import './index.sass'
 
 const MAX_RENDERABLE_TRADES = 72
 const MAX_NEW_TRADES_PER_UPDATE = 24
+const SEEN_TRADE_TTL_MS = 45000
+const ANIMATION_END_BUFFER_MS = 350
 
 export default function Transactions({ trades }) {
   const [
@@ -22,32 +24,46 @@ export default function Transactions({ trades }) {
   useEffect(
     () => {
       setTransactionsState(({ renderableTransactions, transactionTimestamps }) => {
+        const now = Date.now()
         const oldTransactionTimestamps = {...transactionTimestamps}
         Object.entries(oldTransactionTimestamps).forEach(([key, value]) => {
-          if (Date.now() - value > 20000) delete oldTransactionTimestamps[key]
+          if (now - value > SEEN_TRADE_TTL_MS) delete oldTransactionTimestamps[key]
         })
 
+        const activeRenderableTransactions = renderableTransactions
+          .filter(trade => !trade.removeAt || trade.removeAt > now)
+        const availableSlots = Math.max(0, MAX_RENDERABLE_TRADES - activeRenderableTransactions.length)
         let newTransactions = []
         const newTransactionTimestamps = { ...oldTransactionTimestamps }
         trades.forEach(trade => {
           const key = tradeKey(trade)
-          if (!newTransactionTimestamps[key] && newTransactions.length < MAX_NEW_TRADES_PER_UPDATE) {
-            newTransactionTimestamps[key] = Date.now()
+          if (
+            !newTransactionTimestamps[key] &&
+            newTransactions.length < MAX_NEW_TRADES_PER_UPDATE &&
+            newTransactions.length < availableSlots
+          ) {
+            newTransactionTimestamps[key] = now
             newTransactions.push(trade)
           }
         })
 
         const intervals = getIntervals(newTransactions)
+        const animationDuration = getAnimationDuration(
+          activeRenderableTransactions.length + newTransactions.length
+        )
+        const animationMs = getAnimationSeconds(animationDuration) * 1000
         newTransactions = newTransactions
           .map((trade, index) => ({
             ...trade,
             delay: intervals[index],
+            animationDuration,
+            removeAt: now + intervals[index] + animationMs + ANIMATION_END_BUFFER_MS,
           }))
 
         const newRenderableTransactions = [
           ...newTransactions,
-          ...renderableTransactions.filter(trade => newTransactionTimestamps[tradeKey(trade)]),
-        ].slice(0, MAX_RENDERABLE_TRADES)
+          ...activeRenderableTransactions,
+        ]
 
         return {
           renderableTransactions: newRenderableTransactions,
@@ -58,16 +74,12 @@ export default function Transactions({ trades }) {
     [trades]
   )
 
-  const animationDuration = renderableTransactions.length < 5
-    ? [1800, 5475]
-    : renderableTransactions.length < 10
-      ? [1623, 4612]
-      : [1350, 3750]
+  const animationDuration = getAnimationDuration(renderableTransactions.length)
 
   return <div className="Transactions">
     {renderableTransactions.map(transaction => {
       return <Transaction
-        animationDuration={animationDuration}
+        animationDuration={transaction.animationDuration || animationDuration}
         transaction={transaction}
         key={tradeKey(transaction)}
       />
@@ -84,6 +96,19 @@ function getIntervals(newTransactions) {
     intervals.push(tmpInterval)
   }
   return intervals
+}
+
+function getAnimationDuration(transactionCount) {
+  return transactionCount < 5
+    ? [1800, 5475]
+    : transactionCount < 10
+      ? [1623, 4612]
+      : [1350, 3750]
+}
+
+function getAnimationSeconds(animationDuration) {
+  const duration = (animationDuration || []).reduce((total, value) => total + Number(value || 0), 9000)
+  return Math.max(5.5, Math.min(9, duration / 1000))
 }
 
 function tradeKey(trade) {
