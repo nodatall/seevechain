@@ -7,11 +7,14 @@ import useAppState, {
   DEFAULT_CONNECTION_STATUS,
   DEFAULT_MARKET_STATS,
 } from 'lib/appState'
+import BottomBar from 'components/BottomBar'
+import Stars from 'components/Stars'
+import Transactions from 'components/Transactions'
 
 import './index.sass'
 
 const MAX_TAPE_TRADES = 80
-const MAX_LANE_TRADES = 14
+const MAX_VISUAL_TRADES = 140
 
 export default function Visualizer() {
   const selectedCoin = useAppState(state => state.selectedCoin)
@@ -108,8 +111,15 @@ export default function Visualizer() {
       .slice(0, MAX_TAPE_TRADES)
   }, [liveTrades, normalizedStats, selectedCoin])
   const topMarkets = useMemo(() => buildTopMarkets(coins, normalizedStats), [coins, normalizedStats])
+  const visualTrades = useMemo(() => {
+    return mergeTradeLists(liveTrades, normalizedStats.latestTrades || [])
+      .slice(0, MAX_VISUAL_TRADES)
+  }, [liveTrades, normalizedStats])
 
   return <main className="Visualizer">
+    <Stars />
+    <Transactions trades={visualTrades} />
+
     <header className="Visualizer-header">
       <div>
         <h1>Hypersight</h1>
@@ -122,11 +132,7 @@ export default function Visualizer() {
       />
     </header>
 
-    <section className="Visualizer-grid">
-      <LiveTradeVisualizer
-        coins={coins}
-        trades={mergeTradeLists(liveTrades, normalizedStats.latestTrades || [])}
-      />
+    <section className="Visualizer-grid" aria-label="Market details">
       <MarketStatsPanel
         coin={selectedCoin}
         market={selectedMarket}
@@ -139,6 +145,11 @@ export default function Visualizer() {
       />
       <TradeTape trades={latestTrades} />
     </section>
+
+    <BottomBar
+      marketStats={normalizedStats}
+      selectedMarket={selectedMarket}
+    />
   </main>
 }
 
@@ -255,39 +266,6 @@ function CoinSelector({ coins, selectedCoin, onSelect }) {
   </nav>
 }
 
-function LiveTradeVisualizer({ coins, trades }) {
-  return <section className="LiveTradeVisualizer" aria-label="Live public trades">
-    <div className="PanelHeader">
-      <h2>Live Activity</h2>
-      <span>{trades.length} recent</span>
-    </div>
-    <div className="LiveTradeVisualizer-lanes">
-      {coins.map(coin => {
-        const laneTrades = trades
-          .filter(trade => trade.coin === coin)
-          .slice(0, MAX_LANE_TRADES)
-
-        return <div className="TradeLane" key={coin}>
-          <div className="TradeLane-label">{coin}</div>
-          <div className="TradeLane-track">
-            {laneTrades.map((trade, index) => <span
-              key={tradeKey(trade)}
-              className={`TradePulse TradePulse--${trade.side === 'sell' ? 'sell' : 'buy'}`}
-              style={{
-                width: `${getPulseSize(trade.notional)}px`,
-                height: `${getPulseSize(trade.notional)}px`,
-                left: `${Math.max(4, 92 - (index * 7))}%`,
-                animationDelay: `${index * 90}ms`,
-              }}
-              title={`${trade.coin} ${trade.side} ${formatCurrency(trade.notional)}`}
-            />)}
-          </div>
-        </div>
-      })}
-    </div>
-  </section>
-}
-
 function MarketStatsPanel({ coin, market, coverage }) {
   const imbalance = Number(market.imbalance || 0)
 
@@ -364,11 +342,6 @@ function TradeTape({ trades }) {
       </div>)}
     </div>
   </section>
-}
-
-function getPulseSize(notional) {
-  const value = Math.max(0, Number(notional || 0))
-  return Math.max(9, Math.min(42, Math.log10(value + 10) * 8))
 }
 
 function getCoveragePercent(coverage) {

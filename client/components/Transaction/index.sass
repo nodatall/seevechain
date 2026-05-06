@@ -21,7 +21,7 @@
   -webkit-backface-visibility: hidden
   -webkit-transform-style: preserve-3d
   -webkit-font-smoothing: subpixel-antialiased
-  cursor: pointer
+  cursor: default
   &:hover
     background: lighten($background-color, 2%)
     box-shadow: 0 0 1px 1px #fff, 0 0 2px 1px #0ff
@@ -36,11 +36,27 @@
     justify-content: center
     align-items: center
     flex-direction: column
+    overflow: hidden
+    padding: 8px
+    text-align: center
+  &-primaryText
+    display: flex
+    flex-direction: column
+    line-height: 1.05
+    overflow: hidden
+    max-width: 96%
+    span
+      color: white
+    strong
+      color: $yellow-text
+      font-weight: 400
+      margin-top: 2px
   &-subText
-    font-size: 12px
+    font-size: 11px
     margin-top: 3px
     text-align: center
     color: $yellow-text
+    line-height: 1.05
     > div
       display: flex
       align-items: center
@@ -49,6 +65,8 @@
     span
       color: $grey-text
       font-size: 10px
+      display: block
+      margin-top: 2px
   &-TypeTag
     margin-top: -7px
     margin-bottom: 3px

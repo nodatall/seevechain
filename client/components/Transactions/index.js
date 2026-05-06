@@ -1,14 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'preact/hooks'
 
-import useAppState from 'lib/appState'
 import Transaction from 'components/Transaction'
 import calculateInterval from 'lib/calculateInterval'
 import { randomNumber } from 'lib/transactionHelpers'
 
 import './index.sass'
 
-export default function Transactions({ currentBlockRef, soundOn }) {
+export default function Transactions({ trades }) {
   const [
     { renderableTransactions },
     setTransactionsState,
@@ -16,7 +15,6 @@ export default function Transactions({ currentBlockRef, soundOn }) {
     renderableTransactions: [],
     transactionTimestamps: {},
   })
-  const { transactions } = useAppState(s => s.currentBlock)
 
   useEffect(
     () => {
@@ -28,23 +26,24 @@ export default function Transactions({ currentBlockRef, soundOn }) {
 
         let newTransactions = []
         const newTransactionTimestamps = { ...oldTransactionTimestamps }
-        transactions.forEach(transaction => {
-          if (!newTransactionTimestamps[transaction.id]) {
-            newTransactionTimestamps[transaction.id] = Date.now()
-            newTransactions.push(transaction)
+        trades.forEach(trade => {
+          const key = tradeKey(trade)
+          if (!newTransactionTimestamps[key]) {
+            newTransactionTimestamps[key] = Date.now()
+            newTransactions.push(trade)
           }
         })
 
         const intervals = getIntervals(newTransactions)
         newTransactions = newTransactions
-          .map((transaction, index) => {
-            transaction.delay = intervals[index]
-            return transaction
-          })
+          .map((trade, index) => ({
+            ...trade,
+            delay: intervals[index],
+          }))
 
         const newRenderableTransactions = [
           ...newTransactions,
-          ...renderableTransactions.filter(transaction => newTransactionTimestamps[transaction.id]),
+          ...renderableTransactions.filter(trade => newTransactionTimestamps[tradeKey(trade)]),
         ]
 
         return {
@@ -53,7 +52,7 @@ export default function Transactions({ currentBlockRef, soundOn }) {
         }
       })
     },
-    [transactions]
+    [trades]
   )
 
   const animationDuration = renderableTransactions.length < 5
@@ -67,15 +66,14 @@ export default function Transactions({ currentBlockRef, soundOn }) {
       return <Transaction
         animationDuration={animationDuration}
         transaction={transaction}
-        key={transaction.id}
-        currentBlockRef={currentBlockRef}
-        soundOn={soundOn}
+        key={tradeKey(transaction)}
       />
     })}
   </div>
 }
 
 function getIntervals(newTransactions) {
+  if (!newTransactions.length) return []
   const interval = calculateInterval(newTransactions.length)
   const intervals = []
   for (let i = 1; i <= newTransactions.length; i++) {
@@ -83,4 +81,8 @@ function getIntervals(newTransactions) {
     intervals.push(tmpInterval)
   }
   return intervals
+}
+
+function tradeKey(trade) {
+  return `${trade.coin}:${trade.timeMs}:${trade.tid}`
 }
