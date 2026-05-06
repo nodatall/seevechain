@@ -5,7 +5,6 @@ import lightenDarkenColor from 'lib/lightenDarkenColor'
 import { LIGHT_RANGE } from 'lib/colors'
 import {
   calculateCoordinates,
-  getRangeEquivalent,
 } from '../../lib/transactionHelpers'
 
 import './index.sass'
@@ -18,7 +17,7 @@ const bubbleGrid = {
 
 const MOBILE_RATIO = .7
 const TRADE_SIZE_RANGE = [78, 138]
-const TRADE_NOTIONAL_RANGE = [1000, 1500000]
+const VISUAL_NOTIONAL_RANGE = [10, 100000]
 
 export default function Transaction({
   transaction,
@@ -26,8 +25,9 @@ export default function Transaction({
 }) {
   const trade = transaction
   const delay = trade.delay || 0
-  const size = getTradeSize(trade.notional)
-  const backgroundStyle = getBackgroundStyle({ trade, size })
+  const visualNotional = getVisualNotional(trade)
+  const size = getTradeSize(visualNotional)
+  const backgroundStyle = getBackgroundStyle({ notional: visualNotional, size })
   const placement = useMemo(() => getTradePlacement({ size, delay }), [size, delay])
   const foregroundStyle = {
     width: `${size - 3}px`,
@@ -35,7 +35,7 @@ export default function Transaction({
   }
 
   useEffect(() => {
-    document.title = `${trade.coin} ${formatCurrency(trade.notional)} | Hypersight`
+    document.title = `${trade.coin} ${formatCurrency(visualNotional)} | Hypersight`
     const releaseTimeout = setTimeout(() => {
       releaseGridPosition(placement.row, placement.col)
     }, (getAnimationSeconds(animationDuration) * 1000) + delay)
@@ -55,14 +55,14 @@ export default function Transaction({
       ...placement.style,
       animation: `tradeBubble ${animationSeconds}s ease-out ${delay}ms both`,
     }}
-    title={`${trade.coin} ${side} ${formatCurrency(trade.notional)} at ${formatPrice(trade.price)}`}
+    title={`${trade.coin} ${side} ${formatCurrency(visualNotional)} at ${formatPrice(trade.price)}`}
   >
     <div className="Transaction-background" style={backgroundStyle} />
     <div className="Transaction-foreground" style={foregroundStyle}>
       <TypeTag side={side} />
       <div className="Transaction-primaryText">
         <span>{trade.coin}</span>
-        <strong>{formatCurrency(trade.notional)}</strong>
+        <strong>{formatCurrency(visualNotional)}</strong>
       </div>
       <div className="Transaction-subText">
         {formatPrice(trade.price)}
@@ -115,8 +115,8 @@ function TypeTag({ side }) {
 function getTradeSize(notional) {
   const value = Math.max(0, Number(notional || 0))
   const adjusted = Math.log10(value + 10)
-  const low = Math.log10(TRADE_NOTIONAL_RANGE[0] + 10)
-  const high = Math.log10(TRADE_NOTIONAL_RANGE[1] + 10)
+  const low = Math.log10(VISUAL_NOTIONAL_RANGE[0] + 10)
+  const high = Math.log10(VISUAL_NOTIONAL_RANGE[1] + 10)
   const ratio = (adjusted - low) / (high - low)
   const size = TRADE_SIZE_RANGE[0] + ((TRADE_SIZE_RANGE[1] - TRADE_SIZE_RANGE[0]) * ratio)
 
@@ -128,22 +128,24 @@ function getAnimationSeconds(animationDuration) {
   return Math.max(5.5, Math.min(9, duration / 1000))
 }
 
-function getBackgroundStyle({ trade, size }) {
-  const value = Math.max(0, Number(trade.notional || 0))
+function getBackgroundStyle({ notional, size }) {
+  const value = Math.max(0, Number(notional || 0))
   const rotationSpeedRange = [1, 2]
-  let rotationSpeed = getRangeEquivalent(TRADE_NOTIONAL_RANGE, rotationSpeedRange, value)
-  rotationSpeed = rotationSpeed < 1 ? 1 : rotationSpeed > 2 ? 2 : rotationSpeed
+  const notionalRatio = getLogRatio(value, VISUAL_NOTIONAL_RANGE)
+  const rotationSpeed = rotationSpeedRange[0] + ((rotationSpeedRange[1] - rotationSpeedRange[0]) * notionalRatio)
+  const color = getTradeColor(value)
+  const brightColor = lightenDarkenColor(color, 40)
+  const darkColor = lightenDarkenColor(color, -60)
 
   const backgroundStyle = {
     width: `${size}px`,
     height: `${size}px`,
     animation: `spin ${Math.floor(6000 / rotationSpeed)}ms linear 0s infinite`,
+    boxShadow: `0 0 ${Math.round(size * .16)}px ${Math.round(size * .06)}px ${hexToRgba(color, .48)}, 0 0 ${Math.round(size * .45)}px ${Math.round(size * .18)}px ${hexToRgba(color, .16)}, 0 0 2px 1px rgba(255, 255, 255, .55)`,
   }
 
-  if (value < TRADE_NOTIONAL_RANGE[1]) {
-    const colorIndex = getTradeColorIndex(value)
-    const color = LIGHT_RANGE[Math.floor(colorIndex)]
-    backgroundStyle.background = `linear-gradient(90deg, ${lightenDarkenColor(color, 40)}, ${lightenDarkenColor(color, -60)})`
+  if (value < VISUAL_NOTIONAL_RANGE[1]) {
+    backgroundStyle.background = `linear-gradient(90deg, ${brightColor}, ${darkColor})`
   } else {
     backgroundStyle.background = 'linear-gradient(#14ffe9, #ffeb3b, #ff00e0)'
     backgroundStyle.width = `${size + 2}px`
@@ -158,12 +160,38 @@ function getStableZIndex(delay) {
   return 10 + Math.floor(Number(delay || 0))
 }
 
-function getTradeColorIndex(notional) {
-  const colorRange = [0, LIGHT_RANGE.length - 1]
-  let colorIndex = getRangeEquivalent(TRADE_NOTIONAL_RANGE, colorRange, notional)
-  if (colorIndex < 0) colorIndex = 0
-  if (colorIndex > LIGHT_RANGE.length - 1) colorIndex = LIGHT_RANGE.length - 1
-  return colorIndex
+function getTradeColor(notional) {
+  const ratio = getLogRatio(notional, VISUAL_NOTIONAL_RANGE)
+  const index = Math.round(ratio * (LIGHT_RANGE.length - 1))
+  return LIGHT_RANGE[Math.max(0, Math.min(LIGHT_RANGE.length - 1, index))]
+}
+
+function getVisualNotional(trade) {
+  const price = Number(trade.price || 0)
+  const size = Number(trade.size || 0)
+  const computedNotional = price * size
+
+  if (Number.isFinite(computedNotional) && computedNotional > 0) return computedNotional
+
+  const notional = Number(trade.notional || 0)
+  return Number.isFinite(notional) ? notional : 0
+}
+
+function getLogRatio(value, range) {
+  const safeValue = Math.max(0, Number(value || 0))
+  const low = Math.log10(range[0] + 10)
+  const high = Math.log10(range[1] + 10)
+  const adjusted = Math.log10(safeValue + 10)
+  const ratio = (adjusted - low) / (high - low)
+  return Math.max(0, Math.min(1, ratio))
+}
+
+function hexToRgba(hex, alpha) {
+  const value = hex.replace('#', '')
+  const red = parseInt(value.slice(0, 2), 16)
+  const green = parseInt(value.slice(2, 4), 16)
+  const blue = parseInt(value.slice(4, 6), 16)
+  return `rgba(${red}, ${green}, ${blue}, ${alpha})`
 }
 
 function formatPrice(value) {
