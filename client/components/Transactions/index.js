@@ -30,8 +30,7 @@ export default function Transactions({ trades }) {
           if (now - value > SEEN_TRADE_TTL_MS) delete oldTransactionTimestamps[key]
         })
 
-        const activeRenderableTransactions = renderableTransactions
-          .filter(trade => !trade.removeAt || trade.removeAt > now)
+        const activeRenderableTransactions = pruneExpiredTransactions(renderableTransactions, now)
         const availableSlots = Math.max(0, MAX_RENDERABLE_TRADES - activeRenderableTransactions.length)
         let newTransactions = []
         const newTransactionTimestamps = { ...oldTransactionTimestamps }
@@ -74,6 +73,31 @@ export default function Transactions({ trades }) {
     [trades]
   )
 
+  useEffect(
+    () => {
+      const nextRemovalAt = renderableTransactions.reduce((next, trade) => {
+        if (!trade.removeAt) return next
+        if (trade.removeAt <= Date.now()) return next
+        return Math.min(next, trade.removeAt)
+      }, Number.POSITIVE_INFINITY)
+
+      if (!Number.isFinite(nextRemovalAt)) return undefined
+
+      const cleanupDelay = Math.max(0, nextRemovalAt - Date.now())
+      const cleanupTimeout = setTimeout(() => {
+        setTransactionsState(state => ({
+          ...state,
+          renderableTransactions: pruneExpiredTransactions(state.renderableTransactions),
+        }))
+      }, cleanupDelay)
+
+      return () => {
+        clearTimeout(cleanupTimeout)
+      }
+    },
+    [renderableTransactions]
+  )
+
   const animationDuration = getAnimationDuration(renderableTransactions.length)
 
   return <div className="Transactions">
@@ -109,6 +133,10 @@ function getAnimationDuration(transactionCount) {
 function getAnimationSeconds(animationDuration) {
   const duration = (animationDuration || []).reduce((total, value) => total + Number(value || 0), 9000)
   return Math.max(5.5, Math.min(9, duration / 1000))
+}
+
+function pruneExpiredTransactions(renderableTransactions, now = Date.now()) {
+  return renderableTransactions.filter(trade => !trade.removeAt || trade.removeAt > now)
 }
 
 function tradeKey(trade) {
