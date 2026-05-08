@@ -3,37 +3,42 @@ import { useEffect, useRef } from 'preact/hooks'
 
 import './index.sass'
 
-const sf = {
-  starDensity: window.innerWidth < 500 ? .018 : .032,
-  canvas: null,
-  container: null,
-  dy: 0.06, // horizontal velocity
-  cw: null, // canvasWidth
-  ch: null, // canvasHeight
-  ctx: null,  // context
-  numStars: null,
-  stars: [],
-  layers: [],
-}
+const STAR_DENSITY_DESKTOP = .028
+const STAR_DENSITY_MOBILE = .016
+const STAR_SPEED = .06
 
 export default function Stars() {
   const starsRef = useRef()
   const canvasRef = useRef()
+  const rafRef = useRef()
+  const resizeTimeoutRef = useRef()
+  const starfieldRef = useRef(createStarfield())
 
   useEffect(
     () => {
-      sfSetup({ starsRef, canvasRef })
-      requestAnimationFrame(starfieldAnimate)
+      const starfield = starfieldRef.current
+      setupStarfield({ starfield, starsRef, canvasRef })
 
-      window.addEventListener(
-        'resize',
-        function() {
-          waitForFinalEvent(
-            function(){ sfSetup({ starsRef, canvasRef }) }
-            ,400
-          )
-        }
-      )
+      function animate() {
+        drawStarfield(starfield)
+        rafRef.current = requestAnimationFrame(animate)
+      }
+
+      function handleResize() {
+        if (resizeTimeoutRef.current) clearTimeout(resizeTimeoutRef.current)
+        resizeTimeoutRef.current = setTimeout(() => {
+          setupStarfield({ starfield, starsRef, canvasRef })
+        }, 250)
+      }
+
+      rafRef.current = requestAnimationFrame(animate)
+      window.addEventListener('resize', handleResize)
+
+      return () => {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current)
+        if (resizeTimeoutRef.current) clearTimeout(resizeTimeoutRef.current)
+        window.removeEventListener('resize', handleResize)
+      }
     },
     []
   )
@@ -43,21 +48,39 @@ export default function Stars() {
   </div>
 }
 
-function sfSetup({ starsRef, canvasRef }){
-  sf.stars = []
-  sf.layers = []
-  sf.canvas = canvasRef.current
-  sf.container = starsRef.current
-  sf.ctx = sf.canvas.getContext("2d")
-  sf.cw = sf.container.getBoundingClientRect().width
-  sf.ch = sf.container.getBoundingClientRect().height
+function createStarfield() {
+  return {
+    canvas: null,
+    container: null,
+    cw: 0,
+    ch: 0,
+    ctx: null,
+    numStars: 0,
+    stars: [],
+    layers: [],
+  }
+}
 
-  sf.canvas.width = sf.cw
-  sf.canvas.height = sf.ch
+function setupStarfield({ starfield, starsRef, canvasRef }){
+  const canvas = canvasRef.current
+  const container = starsRef.current
+  if (!canvas || !container) return
+
+  starfield.stars = []
+  starfield.layers = []
+  starfield.canvas = canvas
+  starfield.container = container
+  starfield.ctx = canvas.getContext('2d')
+  starfield.cw = container.getBoundingClientRect().width
+  starfield.ch = container.getBoundingClientRect().height
+
+  canvas.width = starfield.cw
+  canvas.height = starfield.ch
 
   const multiplier = window.innerWidth < 500 ? 3.2 : 6
-  const area = (sf.cw * sf.ch) / (multiplier * multiplier)
-  sf.numStars = area * sf.starDensity
+  const starDensity = window.innerWidth < 500 ? STAR_DENSITY_MOBILE : STAR_DENSITY_DESKTOP
+  const area = (starfield.cw * starfield.ch) / (multiplier * multiplier)
+  starfield.numStars = area * starDensity
 
   const max = 3
   const med = 2
@@ -65,7 +88,7 @@ function sfSetup({ starsRef, canvasRef }){
 
   let starCount = 0
 
-  while(starCount <= sf.numStars) {
+  while(starCount <= starfield.numStars) {
     let size = rand(1, 3)
     let count
 
@@ -79,28 +102,26 @@ function sfSetup({ starsRef, canvasRef }){
       size = min
       count = 80
     }
-    createStar(size, count)
+    createStar(starfield, size, count)
     starCount += count
   }
 
-  // create a panel for each star set
-  for (let i = min; i <= max + 1; i++) {
+  for (let i = min; i <= max; i++) {
     const buffer = document.createElement('canvas')
-    buffer.width = sf.cw
-    buffer.height = sf.ch
+    buffer.width = starfield.cw
+    buffer.height = starfield.ch
     const bufferContext = buffer.getContext('2d')
-    renderStars(i, bufferContext)
-    sf.layers.push({ y: 0, s: i, buffer })
+    renderStars(starfield, i, bufferContext)
+    starfield.layers.push({ y: 0, s: i, buffer })
   }
 }
 
-
-function createStar(size, numberToCreate) {
+function createStar(starfield, size, numberToCreate) {
   for (let i = 0; i < numberToCreate; i++) {
-    const x = rand(4, sf.cw - 4)
-    const y = rand(4, sf.ch - 4)
+    const x = rand(4, starfield.cw - 4)
+    const y = rand(4, starfield.ch - 4)
 
-    sf.stars.push({
+    starfield.stars.push({
       x: x,
       y: y,
       s: size
@@ -108,15 +129,10 @@ function createStar(size, numberToCreate) {
   }
 }
 
-function starfieldAnimate() {
-  requestAnimationFrame(starfieldAnimate)
-  clearCanvas()
-  animatePanel()
-}
-
-function renderStars(size, bufferContext) {
-  for (var i = 0; i < sf.numStars; i++) {
-    const star = sf.stars[i]
+function renderStars(starfield, size, bufferContext) {
+  for (var i = 0; i < starfield.numStars; i++) {
+    const star = starfield.stars[i]
+    if (!star) continue
     if (star.s != size) continue
 
     let color
@@ -141,42 +157,24 @@ function renderStars(size, bufferContext) {
   }
 }
 
-function animatePanel() {
-  for (let i = 0; i < sf.layers.length; i++) {
-    const layer = sf.layers[i]
+function drawStarfield(starfield) {
+  if (!starfield.ctx) return
+  starfield.ctx.clearRect(0, 0, starfield.cw, starfield.ch)
+
+  for (let i = 0; i < starfield.layers.length; i++) {
+    const layer = starfield.layers[i]
     layer.x = 0
-    layer.y = (layer.y * -1) >= sf.ch ? 0 : layer.y - ((layer.s * 2) * sf.dy)
-    layer.y2 = layer.y + sf.ch
+    layer.y = (layer.y * -1) >= starfield.ch ? 0 : layer.y - ((layer.s * 2) * STAR_SPEED)
+    layer.y2 = layer.y + starfield.ch
 
-    sf.ctx.drawImage(layer.buffer, layer.x, layer.y)
-    sf.ctx.drawImage(layer.buffer, layer.x, layer.y2)
-
-    sf.ctx.drawImage(layer.buffer, layer.x + sf.cw, layer.y)
-    sf.ctx.drawImage(layer.buffer, layer.x + sf.cw, layer.y2)
+    starfield.ctx.drawImage(layer.buffer, layer.x, layer.y)
+    starfield.ctx.drawImage(layer.buffer, layer.x, layer.y2)
   }
-}
-
-function clearCanvas() {
-  sf.ctx.clearRect(0, 0, sf.cw, sf.ch)
 }
 
 function rand(from,to) {
   return Math.floor(Math.random() * (to - from + 1) + from)
 }
-
-let uniqueId //eslint-disable-line
-const waitForFinalEvent = (function () {
-  var timers = {}
-  return function (callback, ms, uniqueId) {
-    if (!uniqueId) {
-      uniqueId = "Don't call this twice without a uniqueId"
-    }
-    if (timers[uniqueId]) {
-      clearTimeout(timers[uniqueId])
-    }
-    timers[uniqueId] = setTimeout(callback, ms)
-  }
-})()
 
 function randomColor(){
   const min = 170

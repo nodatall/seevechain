@@ -21,7 +21,8 @@
   -webkit-backface-visibility: hidden
   -webkit-transform-style: preserve-3d
   -webkit-font-smoothing: subpixel-antialiased
-  cursor: pointer
+  cursor: default
+  animation-fill-mode: both
   &:hover
     background: lighten($background-color, 2%)
     box-shadow: 0 0 1px 1px #fff, 0 0 2px 1px #0ff
@@ -29,30 +30,60 @@
     border-radius: 50%
     position: absolute
   &-foreground
-    background: $background-color
+    background: #182024
     border-radius: 50%
     position: absolute
     display: flex
     justify-content: center
     align-items: center
     flex-direction: column
-  &-subText
-    font-size: 12px
-    margin-top: 3px
+    overflow: hidden
+    padding: 7px
     text-align: center
-    color: $yellow-text
+  &-primaryText
+    display: flex
+    flex-direction: column
+    line-height: 1.08
+    overflow: hidden
+    max-width: 96%
+    span
+      color: white
+      font-size: 14px
+    strong
+      color: $yellow-text
+      font-size: 13px
+      font-weight: 400
+      line-height: 1.05
+      margin-top: 1px
+  &-subText
+    display: flex
+    flex-direction: column
+    font-size: 9px
+    margin-top: 6px
+    text-align: center
+    color: $grey-text
+    line-height: 1.1
+    max-width: 92%
+    overflow: hidden
     > div
       display: flex
       align-items: center
     .Icon
       margin-bottom: -2px
-    span
+    .Transaction-price,
+    .Transaction-size
       color: $grey-text
-      font-size: 10px
+      font-size: 9px
+      display: block
+      line-height: 1.1
+      margin-top: 0
+      overflow: hidden
+      text-overflow: ellipsis
   &-TypeTag
-    margin-top: -7px
-    margin-bottom: 3px
-    font-size: 12px
+    margin-top: -5px
+    margin-bottom: 2px
+    font-size: 11px
+    line-height: 1
     padding: 2px 5px
     border-radius: 3px
     border: 1px solid #464646
@@ -74,3 +105,17 @@
     transform: rotate(0)
   to
     transform: rotate(359deg)
+
+@keyframes tradeBubble
+  0%
+    opacity: 0
+    transform: translate(var(--trade-x), var(--trade-y)) scale(0) perspective(1px) translate3d(0,0,0)
+  12%
+    opacity: 1
+    transform: translate(var(--trade-x), var(--trade-y)) scale(var(--trade-scale)) perspective(1px) translate3d(0,0,0)
+  89%
+    opacity: 1
+    transform: translate(var(--trade-x), var(--trade-y)) scale(var(--trade-scale)) perspective(1px) translate3d(0,0,0)
+  100%
+    opacity: 0
+    transform: translate(var(--trade-x), var(--trade-y)) scale(.7) perspective(1px) translate3d(0,0,0)

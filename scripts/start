@@ -1,41 +1,150 @@
 #!/usr/bin/env node
 
 const { server, io } = require('../server/app')
-const { subscribeToVechainBlocks } = require('../server/lib/connex')
-const port = process.env.PORT || 5000
-const path = require('path')
-const childProcess = require('child_process')
+const port = process.env.PORT || 1337
 const logger = require('../server/lib/logger')
 const client = require('../server/database')
 const commands = require('../server/commands')
+const actions = require('../server/actions')
+const { createHyperliquidWsService } = require('../server/services/hyperliquidWs')
 
-let gettingMissingInProgress = false
-let savingDailyStats = false
+const STATS_INTERVAL_MS = Number(process.env.MARKET_STATS_INTERVAL_MS) || 10000
+const PRUNE_INTERVAL_MS = Number(process.env.TRADE_PRUNE_INTERVAL_MS) || (60 * 60 * 1000)
+const PERSISTED_STATUS_EVENTS = [
+  'connected',
+  'disconnected',
+  'stale',
+  'reconnecting',
+  'error',
+  'subscriptionResponse',
+]
+
+let processingStats = false
+let pruningTrades = false
 
 server.listen(port, '0.0.0.0', async () => {
   console.log(`server started on port ${port}`)
-  await startVechainConnection(io, client)
+  await startHyperliquidService(io, client)
 })
 
-async function startVechainConnection(io, client) {
+async function emitMarketStats(){
+  const stats = await commands.processMarketStats({
+    client,
+    configuredCoins: actions.getConfiguredCoins(),
+  })
+  io.emit('serverSendMarketStats', stats)
+  return stats
+}
+
+async function processAndEmitMarketStats(){
+  if (processingStats) return null
+
+  processingStats = true
   try {
-    setInterval(async () => {
-      if (!gettingMissingInProgress) {
-        gettingMissingInProgress = true
-        childProcess.fork(path.join(__dirname, './getMissingBlocksAndTransactions'))
-          .on('exit', function() { gettingMissingInProgress = false })
-      }
-      if (!savingDailyStats) {
-        savingDailyStats = true
-        await commands.saveDailyStats({client})
-        savingDailyStats = false
-      }
-    }, 10000)
-    await subscribeToVechainBlocks(io, client)
+    return await emitMarketStats()
   } catch(error) {
-    logger.error(`[startVechainConnection]: ${error.message}`)
+    logger.error(`[processMarketStats]: ${error.message}`)
+    return null
+  } finally {
+    processingStats = false
+  }
+}
+
+async function pruneTrades(){
+  if (pruningTrades) return
+
+  pruningTrades = true
+  try {
+    await commands.pruneOldTrades({ client })
+  } catch(error) {
+    logger.error(`[pruneOldTrades]: ${error.message}`)
+  } finally {
+    pruningTrades = false
+  }
+}
+
+async function persistStatusEvent(event, eventType){
+  try {
+    await commands.saveFeedStatusEvent({
+      client,
+      event,
+      eventType: eventType || event.type,
+    })
+  } catch(error) {
+    logger.error(`[saveFeedStatusEvent]: ${error.message}`)
+  }
+}
+
+async function handleStatusEvent(event){
+  const status = actions.setCurrentConnectionStatus(event.status)
+  io.emit('serverSendConnectionStatus', status)
+
+  if (PERSISTED_STATUS_EVENTS.indexOf(event.type) !== -1) {
+    await persistStatusEvent(event)
+  }
+}
+
+async function handleGapEvent(event){
+  const status = actions.setCurrentConnectionStatus(event.status)
+  io.emit('serverSendConnectionStatus', status)
+  await persistStatusEvent(event, 'gap')
+  await processAndEmitMarketStats()
+}
+
+async function startHyperliquidService(io, client) {
+  try {
+    const coins = actions.getConfiguredCoins()
+    await actions.reconcileMarkets({ client, coins })
+    await processAndEmitMarketStats()
+    await pruneTrades()
+
+    const service = createHyperliquidWsService({
+      coins,
+      wsUrl: process.env.HYPERLIQUID_WS_URL,
+      logger,
+    })
+
+    actions.setCurrentConnectionStatus(service.status)
+    io.emit('serverSendConnectionStatus', actions.getCurrentConnectionStatus())
+
+    service.on('trades', async trades => {
+      try {
+        const savedTrades = await commands.saveTrades({ client, trades })
+        if (savedTrades.length) {
+          io.emit('serverSendTrades', {
+            trades: savedTrades,
+            receivedAt: Date.now(),
+          })
+        }
+        await processAndEmitMarketStats()
+        io.emit('serverSendConnectionStatus', actions.getCurrentConnectionStatus(service.status))
+      } catch(error) {
+        logger.error(`[saveTrades]: ${error.message}`)
+      }
+    })
+
+    service.on('status', event => {
+      handleStatusEvent(event)
+    })
+
+    service.on('gap', event => {
+      handleGapEvent(event)
+    })
+
+    service.on('error', error => {
+      logger.error(`[hyperliquidWs]: ${error.message}`)
+    })
+
+    setInterval(processAndEmitMarketStats, STATS_INTERVAL_MS)
+    setInterval(pruneTrades, PRUNE_INTERVAL_MS)
+
+    service.start()
+    return service
+  } catch(error) {
+    logger.error(`[startHyperliquidService]: ${error.message}`)
     setTimeout(async () => {
-      await startVechainConnection(io, client)
+      await startHyperliquidService(io, client)
     }, 500)
+    return null
   }
 }
